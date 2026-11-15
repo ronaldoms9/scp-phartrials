@@ -14,7 +14,7 @@
 		public function __construct($banco){
 			$this->user = env('DB_ROOT_USER', 'root');
 			if($this->teste==1){
-				$this->host = env('DB_REMOTE_HOST');
+				$this->host = env('DB_BANCOS_REMOTE_HOST');
 				$this->db = $banco;
 			}else{
 				$this->host = env('DB_HOST', 'localhost');

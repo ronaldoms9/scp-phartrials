@@ -1,0 +1,35 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - db_socket:/var/run/mysqld
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.5
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: pt_monitoria
+      MARIADB_USER: pt
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      TZ: America/Sao_Paulo
+    command: ["--character-set-server=latin1", "--collation-server=latin1_swedish_ci", "--sql_mode="]
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - db_socket:/var/run/mysqld
+      - ./docker/db-init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      retries: 20
+
+volumes:
+  db_data:
+  db_socket:

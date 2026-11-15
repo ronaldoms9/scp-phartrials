@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/usuario.class.php";		
 	include_once "class/centro.class.php";
@@ -30,7 +30,7 @@
 							</thead>
 							<tbody>
 								 
-								<?
+								<?php
 									$query = "select id from usu_usuario order by nome";
 									$resUsu= $conexao->pesquisa($query);
 									while($rowUsu = mysqli_fetch_assoc($resUsu)){
@@ -42,14 +42,14 @@
 											<td><font size="2px"><?=$varUsuario->nome;?></font></td>
 											<td><font size="2px"><?=$varUsuario->funcao;?></font></td>
 											<td><font size="2px">
-												<?
+												<?php
 													$varCentro = new CentroPesquisa($varUsuario->centro);
 													echo $varCentro->nome;
 												?></font>
 											</td>
 											<td><center><a href="usu_usuarios.php?id=<?=$varUsuario->id;?>"><i class="fa fa-hand-o-left" aria-hidden="true"></i></a></center></td>
 										</tr>
-									<?
+									<?php
 									}
 								?>
 								

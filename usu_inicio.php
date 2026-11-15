@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	include_once "class/conexao.class.php";
 	include "funcoes.php";
@@ -96,7 +96,7 @@
 					document.formulario.submit();
 				}
 			</script>
-			<?
+			<?php
 				if(isset($_GET['erro'])){
 				if($_GET['erro']>0){
 			?>
@@ -118,7 +118,7 @@
 						alert("<?=traduzir("Solicitação de acesso recebida com sucesso. Em breve seu acesso será enviado para seu email.", $_SESSION['lang']);?>!");
 					}
 				</script>
-				<?
+				<?php
 				}
 				}
 			?>

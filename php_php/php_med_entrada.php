@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	include_once "../class/conexao.class.php";
 	

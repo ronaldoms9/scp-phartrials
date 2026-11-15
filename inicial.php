@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once __DIR__."/seguranca.php";
 	include_once __DIR__."/class/projeto.class.php";
 	$varConexao = new Conexao();
@@ -8,7 +8,7 @@
 <head>
 	<script src="js/pace.js"></script>
 	<link href="css/pace.css" rel="stylesheet" />
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link href="assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
@@ -34,7 +34,7 @@
 </head>
     <body class="page-container-bg-solid page-header-menu-fixed page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include_once "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -56,7 +56,7 @@
 										if($varProjeto->dashproprio==1){
 											?>
 											<div class="row">
-											<?
+											<?php
 											include_once "dash_".$_SESSION['projeto'].".php";
 											echo "</div><hr><div class='row'>";
 										}else{
@@ -174,7 +174,7 @@
 															</div>
 															<div class="progress-info">
 																<div class="progress">
-																	<?
+																	<?php
 																		if($qtdTot>0){
 																			$porcMon = ($qtdMon*100)/$qtdTot;
 																		}else{
@@ -207,7 +207,7 @@
 															</div>
 															<div class="progress-info">
 																<div class="progress">
-																			<?
+																			<?php
 																				if($qtdTot>0){
 																					$porcErr = number_format((($qtdErr*100)/$qtdTot),2);
 																				}else{$porcErr = 0;}
@@ -239,7 +239,7 @@
 															</div>
 															<div class="progress-info">
 																<div class="progress">
-																			<?
+																			<?php
 																				if($qtdTot>0){
 																					$porcBra = number_format((($qtdBranco*100)/$qtdTot),2);
 																				}else{$porcBra = 0;}
@@ -270,7 +270,7 @@
 															</div>
 															<div class="progress-info">
 																<div class="progress">
-																			<?
+																			<?php
 																				if($qtdTot>0){
 																					$porcBra = number_format((($qtdRevAberto*100)/$qtdTot),2);
 																				}else{$porcBra=0;}
@@ -287,7 +287,7 @@
 														</div>
 													</div>
 													<!-- Itens com revisão de TMV aberto -->
-													<?
+													<?php
 														$query = "select
 																	count(*) as qtd
 																		from arq_arquivos
@@ -312,7 +312,7 @@
 															</div>
 															<div class="progress-info">
 																<div class="progress">
-																			<?
+																			<?php
 																				if($qtdTot>0){
 																					$porcBra = number_format((($qtdRevAberto*100)/$qtdTot),2);
 																				}else{$porcBra=0;}
@@ -330,7 +330,7 @@
 													</div>-->
 												</div>
 												<br><br>
-										<?
+										<?php
 										}
 										}
 
@@ -374,7 +374,7 @@
 																			</tr>
 																		</thead>
 																		<tbody>
-																			<?
+																			<?php
 																				include_once "class/tmf.class.php";
 																				$query = "select * from arq_tmf
 																							where pai = 0
@@ -462,7 +462,7 @@
 
 
 											<br><br>
-											<?
+											<?php
 											}
 											?>
 											<div class="row">
@@ -487,7 +487,7 @@
 																		</tr>
 																	</thead>
 																	<tbody>
-																		<?
+																		<?php
 																			//Centros
 																			if( ($_SESSION['centro']==40) || ($_SESSION['centro']==0) ){
 																				$query = "select * from cfg_centro where projeto = ".$_SESSION['projeto']." order by nome";
@@ -511,7 +511,7 @@
 																					<td><span class="conteudo"><?=traduzir("Desvio");?></span></td>
 																					<td> <!--# Geradas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -530,7 +530,7 @@
 																					</td>
 																					<td> <!--# Abertas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -551,7 +551,7 @@
 																					</td>
 																					<td> <!--# Resolvidas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -574,7 +574,7 @@
 																					<td><span class="conteudo"><?=traduzir("Achado");?></span></td>
 																					<td> <!--# Gerada -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -598,7 +598,7 @@
 																					</td>
 																					<td> <!--# Abertas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -620,7 +620,7 @@
 																					</td>
 																					<td> <!--# Resolvidas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -643,7 +643,7 @@
 																					<td><span class="conteudo"><?=traduzir("Desvio de GCP");?></span></td>
 																					<td> <!--# Gerada -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -663,7 +663,7 @@
 																					</td>
 																					<td> <!--# Abertas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -683,7 +683,7 @@
 																					</td>
 																					<td> <!--# Resolvidas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																									count(agenda_lista_pendencia.id) as qtd
 																									FROM agenda_lista_pendencia
@@ -706,7 +706,7 @@
 																					<td><span class="conteudo"><?=traduzir("Eventos adversos");?></span></td>
 																					<td> <!--# Gerada -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																											count(*) as qtd
 																												FROM adv_evento
@@ -725,7 +725,7 @@
 																					</td>
 																					<td> <!--# Abertas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																											count(*) as qtd
 																												FROM adv_evento
@@ -744,7 +744,7 @@
 																					</td>
 																					<td> <!--# Resolvidas -->
 																						<span class="conteudo"><center>
-																							<?
+																							<?php
 																								$query = "SELECT
 																											count(*) as qtd
 																												FROM adv_evento
@@ -763,7 +763,7 @@
 																						</center></span>
 																					</td>
 																				</tr>
-																		<?
+																		<?php
 																			}
 																		?>
 																	</tbody>
@@ -783,7 +783,7 @@
 												</div>
 
 											</div>
-										<?
+										<?php
 										}
 										}
 
@@ -800,11 +800,11 @@
             </div>
 			<iframe id="txtArea1" style="display:none"></iframe>
 
-			<?
+			<?php
 				include "rodape.php";
 			?>
         </div>
-        <?
+        <?php
 			include "global_js.php";
 		?>
 
@@ -871,7 +871,7 @@
 				document.location = entrada;
 			}
 		</script>
-		<?
+		<?php
 			if(isset($_SESSION['projeto'])){
 				if($_SESSION['projeto'] == "7"){
 			?>
@@ -884,7 +884,7 @@
 
 			// Add data
 			chart.data = [
-			<?
+			<?php
 			$query = "SELECT
 				substring(log_alteracoes.data_hora, 1, 10) as data,
 				count(crf_entrada_forms.paciente) as qtd
@@ -942,13 +942,13 @@
 
 
 
-			<?
+			<?php
 			}
 		}
 		?>
 
 </body>
-		<?
+		<?php
 	    	$query = "select * from usu_pagina_atual where sessao = " . $_SESSION['sessao'];
 	    	$res_se = $conexao->pesquisa($query);
 	    	if(mysqli_num_rows($res_se)<1) {

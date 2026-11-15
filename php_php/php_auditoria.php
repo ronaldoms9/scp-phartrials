@@ -33,7 +33,7 @@
                     class='lista_formularios'
                     style="cursor: pointer;">
                     <td>
-                        <?
+                        <?php
                             echo $nomeTabela;
                         ?>
                     </td>

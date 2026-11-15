@@ -1,4 +1,4 @@
-<?
+<?php
     /*TESTE DE ACENTUAÇÃO PARA RELATÓRIO */
     if(!isset($_SESSION)){  session_start();    }
 	/*

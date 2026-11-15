@@ -1,4 +1,4 @@
-<?
+<?php
 	include "seguranca.php";
 	$act = $_GET['act'];
 	$id_usuario = $_SESSION['user_id'];
@@ -45,7 +45,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<!--<link href="css/fullcalendar.min.css" rel="stylesheet" type="text/css">-->
@@ -120,7 +120,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
             ?>
             <div class="page-wrapper-row full-height">
                 <div class="page-wrapper-middle">
@@ -162,7 +162,7 @@
 																	</div>
 																</thead>
 																<tbody>
-																	<?
+																	<?php
 																		//Pego a data dessa visita
 																		$query = "select agenda.*, cfg_centro.nome as nome_centro from agenda inner join cfg_centro on agenda.centro = cfg_centro.id where agenda.id = " . $_GET['agendamento'];
 																		$resAgenda = pesquisa($query);
@@ -195,7 +195,7 @@
 																				<td><?=$row_pendencias['status'];?></td>
 																				<td><center><?=$row_pendencias['data_fechamento'];?></center></td>
 																			</tr>
-																		<?
+																		<?php
 																			}
 																		}
 																		?>
@@ -214,7 +214,7 @@
 			</div>
 		</div>
 	</body>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "class/conexao.class.php";
     include_once "funcoes.php";
     
@@ -53,7 +53,7 @@
         <link href="assets/pages/css/lock.min.css" rel="stylesheet" type="text/css" />
 		</head>
 	<script>
-		<?
+		<?php
 		if($msg!=""){echo "alert('".$msg."');";}
 		?>
 	</script>

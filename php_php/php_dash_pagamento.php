@@ -32,7 +32,7 @@ if($_GET['act']=="EXIBE"){
 					</tr>
 				</thead>
 				<tbody class="corpo">
-					<?
+					<?php
 						$query 		= "select id from proj_projeto
 											where id > 0 ";
                         if($varStatus==1){$query .= " and qsb_pago = 1";}
@@ -55,7 +55,7 @@ if($_GET['act']=="EXIBE"){
 									<td><span class="dados"><?=$varProjeto->centro;?></td>
                                     <td><span class="dados"><center><?=$varProjeto->data_recebimento;?></center></td>
                                     <td><span class="dados"><center><?=$varProjeto->data_finalizacao;?></center></td>
-                                    <td><span class="dados"><center><?
+                                    <td><span class="dados"><center><?php
                                         echo $varProjeto->qsb_total;
                                         $total = $total + $varProjeto->qsb_total;
                                         ?></center></td>
@@ -82,5 +82,5 @@ if($_GET['act']=="EXIBE"){
 						</tr>
 				</tbody>
 			</table>
-		<?
+		<?php
 	}

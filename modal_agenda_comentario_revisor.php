@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	$campo = $_GET['id'];
 	$query = "select
@@ -20,7 +20,7 @@
 			z-index: 99999 !important;
 		}
 	</style>
-<?
+<?php
 	include "global_css.php";
 ?>
 </head>
@@ -47,8 +47,8 @@
 								<br>
 
 								Status:<br><select class="form-control" id="form_modal_comentarios_status_revisor">
-									<option value="ABERTO" <? if($rowCom['comentario_revisor_status']=="ABERTO"){echo " selected ";}?>>Aberto</option>
-									<option value="FINALIZADO" <? if($rowCom['comentario_revisor_status']=="FINALIZADO"){echo " selected ";}?>>FINALIZADO</option>
+									<option value="ABERTO" <?php if($rowCom['comentario_revisor_status']=="ABERTO"){echo " selected ";}?>>Aberto</option>
+									<option value="FINALIZADO" <?php if($rowCom['comentario_revisor_status']=="FINALIZADO"){echo " selected ";}?>>FINALIZADO</option>
 								</select>
 
 						</div>
@@ -70,7 +70,7 @@
 
 	</div>
 </body>
-	<?
+	<?php
 		include "global_js.php";
 	?>
 	<script>

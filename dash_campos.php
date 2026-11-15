@@ -1,4 +1,4 @@
-<?
+<?php
   include_once "seguranca.php";
 
 
@@ -25,7 +25,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -34,7 +34,7 @@
 </head>
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -78,7 +78,7 @@
 																		<th><center>Ir</center></th>
 																</thead>
 																<tbody>
-																	<?
+																	<?php
 
 																		$query = "SELECT
 																						agenda.id,
@@ -111,8 +111,8 @@
 																					<td><font size="1px"><?=$row['form_nome'];?></font></td>
 																					<td><font size="1px"><?=$row['campo_nome'];?></font></td>
 																					<td><font size="1px"><?=$row['campo_valor'];?></font></td>
-																					<td><font size="1px"><center><?if($row['monitoria_status']=="1"){echo "SIM";}else{echo "NÃO";}?></font></center></td>
-																					<td><font size="1px"><center><?if($row['erro_status']=="1"){echo "SIM";}else{echo "NÃO";}?></centeR></font></td>
+																					<td><font size="1px"><center><?php if($row['monitoria_status']=="1"){echo "SIM";}else{echo "NÃO";}?></font></center></td>
+																					<td><font size="1px"><center><?php if($row['erro_status']=="1"){echo "SIM";}else{echo "NÃO";}?></centeR></font></td>
 																					<td><font size="1px"><?=$row['comentario_revisor'];?></font></td>
 																					<td>
 																						<center><font size="1px"><?=$row['comentario_revisor_status'];?></font>
@@ -120,7 +120,7 @@
 																					</td>
 																					<td>
 																						<font size="1px">
-																							<?
+																							<?php
 																								$agendamento = $row['id'];
 																								$formulario	 = $row['form_id'];
 
@@ -132,7 +132,7 @@
 																					</td>
 
 																				</tr>
-																			<?
+																			<?php
 																		}
 																	?>
 																</tbody>
@@ -149,7 +149,7 @@
 				</div>
 			</div>
         </div>
-		<?
+		<?php
 			include "rodape.php";
 			include "global_js.php";
 		?>

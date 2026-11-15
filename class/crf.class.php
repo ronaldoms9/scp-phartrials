@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once __DIR__."/../seguranca.php";
 	include_once __DIR__."/../funcoes.php";
 	include_once __DIR__."/log.class.php";
@@ -736,7 +736,7 @@
 			}
 			?>
 				<tr class="<?=$classForm?>"
-					<?
+					<?php
 						switch($this->tipoForm->acao){
 							case "MULTIPAGINAS":
 								echo ' style="font-family: Abel;font-size: 22px;background-color: #f4f4f4 !important"';
@@ -754,7 +754,7 @@
 					<td class="lista_formularios">
 						<a name="ANCORA_<?=$this->id;?>"></a>
 						<div name="formItem_<?=$this->id;?>">
-							<?
+							<?php
 							$quemVe = array(9999); //Aqui � o icone de status
 							if(in_array($_SESSION['user_tipo'], $quemVe)){
 								//Pegar o status de monitoria do formulario
@@ -777,7 +777,7 @@
 								}
 							}
 							?>
-							<?
+							<?php
 								if( ($this->tipoForm->acao=="CAMPOS")||($this->tipoForm->acao=="RANDOMIZACAO") ){
 									if($this->digitado=="0"){ echo '<span><i class="fa fa-square-o" title="Ainda não digitado"></i></span> '; }
 									if($this->digitado=="1"){ echo '<span><i class="fa fa-pencil-square-o" title="Já digitado"></i></span> '; }
@@ -796,7 +796,7 @@
 						</div>
 					</td>
 					<td>
-						<?
+						<?php
 							if($this->tipoForm->acao=="MULTIPAGINAS"){
 								//Quem NAO vai poder clicar no mais. Isso esta "manual" mas tem que ser automatico
 								$quem_nao = array(2,6,8,9,13,14,17,18,19,20,21,23,24,25);
@@ -804,14 +804,14 @@
 									if(($this->tipoForm->campo_depende=="")||($valorDoCampo!="")){
 									?>
 									 	<a href="javascript:javascript:addSubPage(<?=$this->tipoForm->id;?>);" class="btn btn-xs default"><i class="fa fa-plus"></i></a>
-									<?
+									<?php
 									}
 								}else{
 									$quem_ve = array(1,2,3,7,17);
 									if(in_array($_SESSION['user_tipo'], $quem_ve, false)){
 										?>
 											<a href="javascript:javascript:addSubPage(<?=$this->tipoForm->id;?>);" class="btn btn-xs default"><i class="fa fa-plus"></i></a>
-										<?
+										<?php
 									}
 								}
 
@@ -1284,7 +1284,7 @@
 		public function exibeNode($formularioClicado){
 			?>
 				<tr class="lista_formularios"
-					<?
+					<?php
 					if($this->tipoForm->acao!="MULTIPAGINAS"){
 						//Pego qual � o tipo de usu�rio.
 						$varTipo = $_SESSION['user_tipo'];
@@ -1304,7 +1304,7 @@
 					<td class="lista_formularios">
 						<a name="ANCORA_<?=$this->id;?>"></a>
 						<div name="formItem_<?=$this->id;?>">
-							<?
+							<?php
 								if( ($this->tipoForm->acao=="CAMPOS")||($this->tipoForm->acao=="RANDOMIZACAO") ){
 									if($this->digitado=="0"){ echo '<span><i class="fa fa-square-o" title="Ainda n�o digitado"></i></span> '; }
 									if($this->digitado=="1"){ echo '<span><i class="fa fa-pencil-square-o" title="J� digitado"></i></span> '; }
@@ -1319,14 +1319,14 @@
 						</div>
 					</td>
 					<td>
-						<?
+						<?php
 							if($this->tipoForm->acao=="MULTIPAGINAS"){
 								//Quem NAO vai poder clicar no mais. Isso esta "manual" mas tem que ser automatico
 								$quem_nao = array(2, 6, 7, 8, 9, 11, 12, 14, 15);
 								if(!in_array($_SESSION['user_tipo'], $quem_nao, false)){
 									?>
 									 <a href="javascript:javascript:addSubPage(<?=$this->tipoForm->id;?>);" class="btn btn-xs default"><i class="fa fa-plus"></i></a>
-									<?
+									<?php
 								}
 							}
 						?>

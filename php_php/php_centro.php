@@ -17,7 +17,7 @@
                     style="cursor: pointer";>
                     <td width="40"><center><b><?=$row['id'];?></center></b></td>
                     <td>
-                        <?
+                        <?php
                             echo $row['nome'];
                         ?>
                     </td>
@@ -36,7 +36,7 @@
                     style="cursor: pointer";>
                     <td width="40"><center><b><?=$row['numero'];?></center></b></td>
                     <td>
-                        <?
+                        <?php
                             echo $row['nome'];
                         ?>
                     </td>

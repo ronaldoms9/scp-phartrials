@@ -81,7 +81,7 @@
 					</tr>
 				</thead>
 				<tbody class="corpo">
-					<?
+					<?php
 						$query 		= "select id from proj_projeto
 											where id > 0 and tipo <> 'BIO' and tipo <> 'PESQ' ";
 
@@ -137,7 +137,7 @@
 									<td>
 										<center>
 											<div class="btn-group">
-												<?
+												<?php
 													if($varProjeto->rev_rc_status==1){
 														$btnCor 	= "red";
 														$btnLabel 	= "N/D";
@@ -154,7 +154,7 @@
 													<i class="fa fa-angle-down"></i>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-													<?
+													<?php
 														$query 		= "select * from dash_tab_status";
 														$varConexao = new Conexao();
 														$resStatus 	= $varConexao->pesquisa($query);
@@ -163,7 +163,7 @@
 																<li>
 																	<a href="javascript:mudaStatus('RC', <?=$varProjeto->id;?>, <?=$rowStatus["id"];?>);"> <?=$rowStatus["nome"];?> </a>
 																</li>
-															<?
+															<?php
 														}
 													?>
 												</ul>
@@ -173,7 +173,7 @@
 									<td>
 										<center>
 											<div class="btn-group">
-												<?
+												<?php
 													if($varProjeto->rev_ra_status==1){
 														$btnCor 	= "red";
 														$btnLabel 	= "N/D";
@@ -190,7 +190,7 @@
 													<i class="fa fa-angle-down"></i>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-													<?
+													<?php
 														$query 		= "select * from dash_tab_status";
 														$varConexao = new Conexao();
 														$resStatus 	= $varConexao->pesquisa($query);
@@ -199,7 +199,7 @@
 																<li>
 																	<a href="javascript:mudaStatus('RA', <?=$varProjeto->id;?>, <?=$rowStatus["id"];?>);"> <?=$rowStatus["nome"];?> </a>
 																</li>
-															<?
+															<?php
 														}
 													?>
 												</ul>
@@ -209,7 +209,7 @@
 									<td>
 										<center>
 											<div class="btn-group">
-												<?
+												<?php
 													if($varProjeto->rev_re_status==1){
 														$btnCor 	= "red";
 														$btnLabel 	= "N/D";
@@ -226,7 +226,7 @@
 													<i class="fa fa-angle-down"></i>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-													<?
+													<?php
 														$query 		= "select * from dash_tab_status";
 														$varConexao = new Conexao();
 														$resStatus 	= $varConexao->pesquisa($query);
@@ -235,7 +235,7 @@
 																<li>
 																	<a href="javascript:mudaStatus('RE', <?=$varProjeto->id;?>, <?=$rowStatus["id"];?>);"> <?=$rowStatus["nome"];?> </a>
 																</li>
-															<?
+															<?php
 														}
 													?>
 												</ul>
@@ -245,7 +245,7 @@
 									<td>
 										<center>
 											<div class="btn-group">
-												<?
+												<?php
 													if($varProjeto->rev_rf_status==1){
 														$btnCor 	= "red";
 														$btnLabel 	= "N/D";
@@ -262,7 +262,7 @@
 													<i class="fa fa-angle-down"></i>
 												</button>
 												<ul class="dropdown-menu" role="menu">
-													<?
+													<?php
 														$query 		= "select * from dash_tab_status";
 														$varConexao = new Conexao();
 														$resStatus 	= $varConexao->pesquisa($query);
@@ -271,7 +271,7 @@
 																<li>
 																	<a href="javascript:mudaStatus('RF', <?=$varProjeto->id;?>, <?=$rowStatus["id"];?>);"> <?=$rowStatus["nome"];?> </a>
 																</li>
-															<?
+															<?php
 														}
 													?>
 												</ul>
@@ -282,7 +282,7 @@
 
 									<td><span class="dados">
 										<center>
-											<?
+											<?php
 
 													echo $varProjeto->data_ult_atualizacao;
 
@@ -291,7 +291,7 @@
 									</td>
 									<td><span class="dados">
 										<center>
-											<?
+											<?php
 												$status = $varProjeto->status;
 												if($status==""){
 													echo "N/D";
@@ -315,7 +315,7 @@
 									<td><span class="dados"><center><?=$varProjeto->data_limite;?></center></td>
 									<td><span class="dados">
 										<center>
-											<?
+											<?php
 												if($varProjeto->data_finalizacao!=""){
 													echo '<span class="label label-sm label-success"> '.$varProjeto->data_finalizacao.' </span>';
 												}
@@ -327,7 +327,7 @@
 									<td>
 										<center>
 											<div class="btn-group dropleft">
-												<?$randomico = rand(1233,235423423); ?>
+												<?php $randomico = rand(1233,235423423); ?>
 												<button type="button" class="btn btn-default btn-circle-right dropdown-toggle font-green-sharp" data-toggle="modal" data-target="#modalDatas" href="agenda_edita_datas.php?rand=<?=$randomico;?>&id=<?=$varProjeto->id;?>">
 													<i class="fa fa-calendar"></i>
 												</button>
@@ -337,7 +337,7 @@
 									</td>
 								</tr>
 
-								<?
+								<?php
 									$query = "select id from agenda where projeto = ".$varProjeto->id." order by nro_visita";
 									$resAg = $varConexao->pesquisa($query);
 									if(mysqli_num_rows($resAg)>0){
@@ -360,7 +360,7 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<?
+																	<?php
 																		while($rowAg = mysqli_fetch_assoc($resAg)){
 																			$varAgendamento = new Agenda($rowAg['id']);
 																			?>
@@ -375,7 +375,7 @@
 																					<td valign="middle" style="valign: middle; font-size: 11px !important;"><center><?=$varAgendamento->getEnvRetornado();?></center></td>
 																					<td valign="middle" style="valign: middle; font-size: 11px !important;"><center><?=$varAgendamento->getEnvPatrocinador();?></center></td>
 																				</tr>
-																			<?
+																			<?php
 																		}
 																	?>
 																</tbody>
@@ -383,7 +383,7 @@
 														</div>
 													</td>
 												</tr>
-										<?
+										<?php
 
 									}
 								?>
@@ -402,5 +402,5 @@
 						</tr>
 				</tbody>
 			</table>
-		<?
+		<?php
 	}

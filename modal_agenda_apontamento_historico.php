@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	$campo = $_GET['id'];
@@ -15,7 +15,7 @@
 			z-index: 99999 !important;
 		}
 	</style>
-<?
+<?php
 	include "global_css.php";
 ?>
 </head>
@@ -40,7 +40,7 @@
 									  <th>Valor novo</th>
 							   </thead>
 							   <tbody>
-							   <?
+							   <?php
 									$id = $_GET['id'];
 									
 									$query = "select LA.id, LA.campo, UU.nome, LA.data_hora, LA.antigo, LA.novo, LA.motivo_alteracao, cfg_visitas_campos.texto as campo_nome, LA.campo as campo_alterado 
@@ -56,7 +56,7 @@
 										<tr>
 											<td><font size="2px"><?=$rowHist['nome'];?></font></td>
 											<td><font size="2px">
-											<?
+											<?php
 											   $data = quebra_linha($rowHist['data_hora']," ", 1);
 											   $hora = quebra_linha($rowHist['data_hora']," ", 2);
 											   $data = explode("-",$data);
@@ -67,7 +67,7 @@
 											<td><font size="2px"><?=$rowHist['antigo'];?></font></td>
 											<td><font size="2px"><b><?=$rowHist['novo'];?></b></font></td>
 										</tr>
-									<?
+									<?php
 									}
 							   ?>
 							   <tr><td colspan="5"></center></tr>
@@ -86,7 +86,7 @@
 
 	</div>	
 </body>
-	<?
+	<?php
 		include "global_js.php";				
 	?>
 </html>

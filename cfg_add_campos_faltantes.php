@@ -1,15 +1,15 @@
-<?
+<?php
 	include_once "seguranca.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
     <script>
-    <?
+    <?php
         if($msg==1){ echo "alert('Centro atualizado com sucesso');"; }
         if($msg==2){ echo "alert('Centro cadastrado com sucesso');"; }
         if($msg==3){ echo "alert('Centro deletado com sucesso');"; }
@@ -18,7 +18,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -47,7 +47,7 @@
                                 <div class="row">
                                         <div class="col-md-2"></div>                                            
                                         <div class="col-md-8" style="background-color:#FFF;height: 400px;overflow-y: scroll;">                        					
-											<?											
+											<?php											
 												//Formulário
 												$query = "select crf_forms.id as form_id_principal, crf_forms.nome, crf_entrada_forms.id, crf_entrada_forms.paciente, crf_entrada_forms.form_id, crf_entrada_forms.centro from crf_forms left join crf_entrada_forms on crf_forms.id = crf_entrada_forms.form_id where isnull(crf_entrada_forms.form_id)";
 												$res = $conexao->pesquisa($query);
@@ -80,13 +80,13 @@
                     </div>
                 </div>
             </div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
 </div>
 </div>
-        <?
+        <?php
 			include "global_js.php";
 		?>
 </body>

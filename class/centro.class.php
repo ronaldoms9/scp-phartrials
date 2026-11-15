@@ -1,4 +1,4 @@
-<?
+<?php
 	if(!isset($_SESSION)){  session_start();    }
 	include_once __DIR__."/conexao.class.php";
 	include_once __DIR__."/../funcoes.php";

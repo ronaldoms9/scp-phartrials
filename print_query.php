@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	$query = "select * from vw_query_completa where query_id = " . $_GET['cod'];
@@ -128,7 +128,7 @@ o\:*         { behavior: url(#default#VML) }
   normal">&nbsp;</p>
 		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
   normal"><centeR><b><?=$row['responsavel_questionamento'];?></b><br>
-	<?
+	<?php
 		$data = $row['query_data_hora'];
 		$data = substr($data, 8,2) . "/" . substr($data, 5,2). "/" . substr($data, 0,4);
 		echo $data;

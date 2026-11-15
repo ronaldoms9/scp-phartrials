@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/centro.class.php";
 ?>
@@ -7,7 +7,7 @@
 <head>
 	<script src="js/pace.js"></script>
 	<link href="css/pace.css" rel="stylesheet" />
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link href="assets/global/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
@@ -37,7 +37,7 @@
 </head>
     <body class="page-container-bg-solid page-header-menu-fixed page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -106,7 +106,7 @@
             </div>
 
         </div>
-        <?
+        <?php
 			include "global_js.php";
 			include "rodape.php";
 		?>
@@ -193,7 +193,7 @@
 
 
 </script>
-	<?
+	<?php
 
 	if(($_SESSION['tipo_usuario']==1)||($_SESSION['tipo_usuario']==8)){
 		include "dash_grafico1.php";

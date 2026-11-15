@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	
@@ -19,7 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <title>New Page 2</title>
 <meta http-equiv="Content-Language" content="pt-br">
-<?
+<?php
 	include "global_css.php";
 ?>
 </head>
@@ -30,7 +30,7 @@
 					<div class="portlet-title fixo">
 						<div class="caption font-blue-dark">
 							<span><i class="fa fa-th font-blue-dark" title="Formulários"></i></span>
-							<?
+							<?php
 								if($_GET['id']>0){$label = "Editar Pendência";}else{$label = "Nova Pendência";}
 								$acao = "php_php/php_agendamento_protocolo_edit.php?act=SALVA&registro=".$registroId;
 							?>
@@ -62,8 +62,8 @@
 										<td>
 											<select id="form_critico" name="form_critico" class="form-control">
 												<option value=""></option>											
-												<option value="Sim" <?if($rowReg['critico']=='Sim'){echo " selected ";}?>><?=traduzir("Sim", $_SESSION['lang']);?></option>
-												<option value="Nao" <?if($rowReg['critico']=='Nao'){echo " selected ";}?>><?=traduzir("Não", $_SESSION['lang']);?></option>												
+												<option value="Sim" <?php if($rowReg['critico']=='Sim'){echo " selected ";}?>><?=traduzir("Sim", $_SESSION['lang']);?></option>
+												<option value="Nao" <?php if($rowReg['critico']=='Nao'){echo " selected ";}?>><?=traduzir("Não", $_SESSION['lang']);?></option>												
 											</select>
 										</td>									
 									</tr>				
@@ -89,8 +89,8 @@
 										<td class="tabela-body"><?=traduzir("Finalizado?", $_SESSION['lang']);?></td>									
 										<td>
 											<select id="form_finalizado" name="form_finalizado" class="form-control">
-												<option value="Nao" <?if($rowReg['finalizado']=='Nao'){echo " selected ";}?>><?=traduzir("Não", $_SESSION['lang']);?></option>																							
-												<option value="Sim" <?if($rowReg['finalizado']=='Sim'){echo " selected ";}?>><?=traduzir("Sim", $_SESSION['lang']);?></option>
+												<option value="Nao" <?php if($rowReg['finalizado']=='Nao'){echo " selected ";}?>><?=traduzir("Não", $_SESSION['lang']);?></option>																							
+												<option value="Sim" <?php if($rowReg['finalizado']=='Sim'){echo " selected ";}?>><?=traduzir("Sim", $_SESSION['lang']);?></option>
 												
 											</select>
 										</td>									
@@ -110,7 +110,7 @@
 
 	</div>	
 </body>
-	<?
+	<?php
 		include "global_js.php";				
 	?>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

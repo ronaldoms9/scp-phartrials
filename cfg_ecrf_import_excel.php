@@ -1,10 +1,10 @@
-<?
+<?php
 	include_once "seguranca.php";
 ?>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
 <script>
@@ -15,7 +15,7 @@
 
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -101,11 +101,11 @@
             </div>   
 <br><br>                      
         </div>
-        <?
+        <?php
                 include "rodape.php";
         ?>
 </body>
-<?
+<?php
 	include "global_js.php";
 ?>
 </html>

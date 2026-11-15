@@ -6,7 +6,7 @@
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />	
-		<?		
+		<?php		
 			include "global_css.php";	
 		?>    
 
@@ -52,7 +52,7 @@
 	</head>    
 	<body class="page-container-bg-solid">        
 		<div class="page-wrapper">            
-			<?               
+			<?php               
 				include "menu_principal.php";            
 			?>            
 			<div class="page-wrapper-row full-height">                
@@ -88,7 +88,7 @@
 																			<div class="input-icon right">
 																				<select name="form_centro" id="form_patrocinador" class="form-control">
 																					<option value="">TODOS</option>
-																					<?
+																					<?php
 																						$query = "SELECT distinct proj_projeto.patrocinador, 
 																											cad_patrocinador.nome 	
 																											FROM proj_projeto     	
@@ -157,7 +157,7 @@
 		  </div>
 		</div>
 	</body>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

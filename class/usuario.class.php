@@ -1,4 +1,4 @@
-<?
+<?php
 	if(!isset($_SESSION)){  session_start();    }
 	include_once "conexao.class.php";
 	include_once "email.class.php";

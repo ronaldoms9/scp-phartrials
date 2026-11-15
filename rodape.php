@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-<?
+<?php
 	    	$query = "select * from usu_pagina_atual where sessao = " . $_SESSION['sessao'];
 	    	$res_se = $conexao->pesquisa($query);
 	    	if(mysqli_num_rows($res_se)<1) {

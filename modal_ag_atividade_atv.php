@@ -6,7 +6,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">

@@ -1,4 +1,4 @@
-<?
+<?php
 	/*Acentuação teste chão*/
 	session_start();
 	if($_SESSION['valido']<1){echo "<script>window.location.replace('expirado.php');</script>";};

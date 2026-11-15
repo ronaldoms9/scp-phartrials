@@ -144,7 +144,7 @@
 					<td style="font-size: 11px !important;"><?=$rowItens['fase'];?></td>
 					<td style="font-size: 11px !important;"><?=$rowItens['nomeCheck'];?></td>
 					<td style="font-size: 11px !important;"><center>R$
-					<?
+					<?php
 						if($rowItens['periodo']==6){
 							echo number_format($rowItens['valor6'],2);
 							$iTotal	= $iTotal + $rowItens['valor6'];
@@ -154,7 +154,7 @@
 						}
 					?></center></td>
 				</tr>
-			<?
+			<?php
 			$iCount++;
 		}
 		?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	if($_GET['act']=="CRF_EXIBE"){
 		$_SESSION['crfCentro'] = $_POST['varCentro'];

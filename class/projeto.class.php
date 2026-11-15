@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once __DIR__ . "/conexao.class.php";
 	include_once __DIR__ . "/log.class.php";
 	include_once __DIR__ . "/email.class.php";

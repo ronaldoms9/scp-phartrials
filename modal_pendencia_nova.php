@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	$campo = $_GET['id'];
 ?>
@@ -14,7 +14,7 @@
 			z-index: 99999 !important;
 		}
 	</style>
-<?
+<?php
 	include "global_css.php";
 ?>
 </head>
@@ -54,7 +54,7 @@
 										<td style="vertical-align:middle" >
 											<select id="form_centro" name="form_centro" class="form-control">
 												<option value=""></option>
-												<?
+												<?php
 													$query = "select * from cfg_centro where projeto = " . $_SESSION['projeto'];
 													$res_c = $conexao->pesquisa($query);
 													while($row_c = mysqli_fetch_assoc($res_c) ){
@@ -88,14 +88,14 @@
 										<td style="vertical-align:middle" >
 											<select id="form_monitora" name="form_monitora" class="form-control">
 												<option value=""></option>
-												<?
+												<?php
 													//$query 	  = "select id, nome from usu_usuario where tipo_usuario = 2 order by nome";
 													$query 	  = "select id, nome from usu_usuario where ativo = 'on' order by nome";
 													$res_moni = $conexao->pesquisa($query);
 													while($row_moni = mysqli_fetch_assoc($res_moni)){
 													?>
 														<option value="<?=$row_moni['id'];?>" ><?=$row_moni['nome'];?></option>
-													<?
+													<?php
 													}
 												?>
 											</select>
@@ -131,12 +131,12 @@
 										<td>
 											<select id="form_class_pendencia" name="form_class_pendencia" class="form-control">
 												<option value=""></option>
-												<option value="CRITICO"  <?if($row['class_pendencia']=="CRITICO"){echo " selected ";}?>>Crítico</option>
-												<option value="MAIOR"  <?if($row['class_pendencia']=="MAIOR"){echo " selected ";}?> >Maior</option>
-												<option value="MENOR"  <?if($row['class_pendencia']=="MENOR"){echo " selected ";}?> >Menor</option>
-												<option value="NÃO CONFORMIDADE"  <?if($row['class_pendencia']=="NÃO CONFORMIDADE"){echo " selected ";}?> >Não conformidade</option>
-												<option value="OBSERVAÇÃO"  <?if($row['class_pendencia']=="OBSERVAÇÃO"){echo " selected ";}?> >Observação</option>
-												<option value="OPORTUNIDADE DE MELHORIA"  <?if($row['class_pendencia']=="OPORTUNIDADE DE MELHORIA"){echo " selected ";}?> >Oportunidade de melhoria</option>
+												<option value="CRITICO"  <?php if($row['class_pendencia']=="CRITICO"){echo " selected ";}?>>Crítico</option>
+												<option value="MAIOR"  <?php if($row['class_pendencia']=="MAIOR"){echo " selected ";}?> >Maior</option>
+												<option value="MENOR"  <?php if($row['class_pendencia']=="MENOR"){echo " selected ";}?> >Menor</option>
+												<option value="NÃO CONFORMIDADE"  <?php if($row['class_pendencia']=="NÃO CONFORMIDADE"){echo " selected ";}?> >Não conformidade</option>
+												<option value="OBSERVAÇÃO"  <?php if($row['class_pendencia']=="OBSERVAÇÃO"){echo " selected ";}?> >Observação</option>
+												<option value="OPORTUNIDADE DE MELHORIA"  <?php if($row['class_pendencia']=="OPORTUNIDADE DE MELHORIA"){echo " selected ";}?> >Oportunidade de melhoria</option>
 											</select>
 										</td>
 									</tr>
@@ -175,12 +175,12 @@
 										<td style="vertical-align:middle" >
 											<select id="form_responsavel" name="form_responsavel" class="form-control">
 													<option value=""></option>
-													<option value="LABORATÓRIO EXAMES" <?if($row['responsavel']=="LABORATÓRIO EXAMES"){echo " selected ";}?>>LABORATÓRIO EXAMES</option>
-													<option value="CENTRO" <?if($row['responsavel']=="CENTRO"){echo " selected ";}?>>CENTRO</option>
-													<option value="MONITORA" <?if($row['responsavel']=="MONITORA"){echo " selected ";}?>>MONITORA</option>
-													<option value="PATROCINADOR" <?if($row['responsavel']=="PATROCINADOR"){echo " selected ";}?>>PATROCINADOR</option>
-													<option value="LABORATORIO" <?if($row['responsavel']=="LABORATORIO"){echo " selected ";}?>>Laboratório</option>
-													<option value="EDC" <?if($row['responsavel']=="EDC"){echo " selected ";}?>>EDC (Sistema)</option>
+													<option value="LABORATÓRIO EXAMES" <?php if($row['responsavel']=="LABORATÓRIO EXAMES"){echo " selected ";}?>>LABORATÓRIO EXAMES</option>
+													<option value="CENTRO" <?php if($row['responsavel']=="CENTRO"){echo " selected ";}?>>CENTRO</option>
+													<option value="MONITORA" <?php if($row['responsavel']=="MONITORA"){echo " selected ";}?>>MONITORA</option>
+													<option value="PATROCINADOR" <?php if($row['responsavel']=="PATROCINADOR"){echo " selected ";}?>>PATROCINADOR</option>
+													<option value="LABORATORIO" <?php if($row['responsavel']=="LABORATORIO"){echo " selected ";}?>>Laboratório</option>
+													<option value="EDC" <?php if($row['responsavel']=="EDC"){echo " selected ";}?>>EDC (Sistema)</option>
 
 												</select>
 										</td>
@@ -207,7 +207,7 @@
 
 	</div>
 </body>
-	<?
+	<?php
 		include "global_js.php";
 	?>
 	<script src="js/ui.datepicker-pt-BR.js" type="text/javascript"></script>

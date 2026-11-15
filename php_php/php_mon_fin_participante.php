@@ -51,7 +51,7 @@
 			<tr>
 				<!--<td></td>-->
 				<td style="font-size: 12px !important;"><?=$rowFin['item'];?></td>
-				<?
+				<?php
 				for($iVisita=1;$iVisita<=$varProjeto->fin_visitas;$iVisita++){				
 					/*$query = "SELECT fin_itens.id,
 								fin_itens.item,
@@ -78,7 +78,7 @@
 								<input 
 									type="checkbox" 
 									value="1" 
-									<?
+									<?php
 										if($rowItem['cobrado']==1){
 											echo " disabled ";
 										}
@@ -134,11 +134,11 @@
 								</div>
 							</center>
 						</td>
-					<?					
+					<?php					
 				}
 				?>
 			</tr>
-			<?			
+			<?php			
 		}		
 		echo $head . $html . $footer;		
 	}

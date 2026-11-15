@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	$id = $_GET[base64_encode('codigo')];
@@ -20,7 +20,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
         <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -28,7 +28,7 @@
 		<link href="assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
     <script>
-    <?
+    <?php
         if($msg==1){ echo "alert('Ítem atualizado com sucesso');"; }
         if($msg==2){ echo "alert('Ítem cadastrado com sucesso');"; }
         if($msg==3){ echo "alert('Ítem deletado com sucesso');"; }
@@ -56,7 +56,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -89,7 +89,7 @@
                                <ul>
                                    <li> Páginas
                                         <ul>
-                                            <?
+                                            <?php
                                                 $query = " select * from usu_usuario_paginas order by pagina";
                                                 $res_lista = $conexao->pesquisa($query);
                                                 $cont = 0;
@@ -106,7 +106,7 @@
                                             ?>
                                                     <a href="<?=$pagina.'?'.gera_parametro("codigo",$row_lista['id']);?>"><?=$row_lista['pagina'];?></a>                                                    
                                                 </li>
-                                            <?
+                                            <?php
                                                 $cont++;
                                                 }
                                             ?>
@@ -117,7 +117,7 @@
                      </div>
                     </div>
                     <div class="col-md-6">
-						<?
+						<?php
                              if($id>0){                   //Atualizacao
                                  $acao = $pagina."?".gera_parametro("codigo",$id)."&".gera_parametro("act","I");
                              }else{$acao = $pagina."?".gera_parametro("act","I");}
@@ -134,30 +134,30 @@
                                                     <th><center>Edita?</center></th>
                                                     <th><center>Deleta?</th>
                                                 </tr>
-                                                <?
+                                                <?php
                                                   $query = "select id, nome from usu_usuario_tipo order by nome";
                                                   $res   = $conexao->pesquisa($query);
                                                   while($row=mysqli_fetch_assoc($res)){
                                                   ?>
-                                                      <?
+                                                      <?php
                                                          $query = "select * from usu_usuario_tipo_pagina where grupo_id = " . $row['id'] . " and pagina = $id";
                                                          $res_usu = $conexao->pesquisa($query);
                                                          $row_usu = mysqli_fetch_assoc($res_usu);
                                                       ?>
                                                       <tr>
                                                           <td><?=$row['nome'];?></td>
-                                                          <td><center><input onchange="mudou(<?=$row['id'];?>, 'acessa', this);" type="checkbox" id="form_<?=$row['id'];?>_acessa" name="form_<?=$row['id'];?>_acessa" <?if(strtoupper($row_usu['acessa'])=="ON"){ echo " checked "; }?>></center></td>
-                                                          <td><center><input onchange="mudou(<?=$row['id'];?>, 'edita', this);" type="checkbox" id="form_<?=$row['id'];?>_edita" name="form_<?=$row['id'];?>_edita" <?if(strtoupper($row_usu['edita'])=="ON"){ echo " checked "; }?>></center></td>
-                                                          <td><center><input onchange="mudou(<?=$row['id'];?>, 'deleta', this);" type="checkbox" id="form_<?=$row['id'];?>_deleta" name="form_<?=$row['id'];?>_deleta" <?if(strtoupper($row_usu['deleta'])=="ON"){ echo " checked "; }?>></center></td>
+                                                          <td><center><input onchange="mudou(<?=$row['id'];?>, 'acessa', this);" type="checkbox" id="form_<?=$row['id'];?>_acessa" name="form_<?=$row['id'];?>_acessa" <?php if(strtoupper($row_usu['acessa'])=="ON"){ echo " checked "; }?>></center></td>
+                                                          <td><center><input onchange="mudou(<?=$row['id'];?>, 'edita', this);" type="checkbox" id="form_<?=$row['id'];?>_edita" name="form_<?=$row['id'];?>_edita" <?php if(strtoupper($row_usu['edita'])=="ON"){ echo " checked "; }?>></center></td>
+                                                          <td><center><input onchange="mudou(<?=$row['id'];?>, 'deleta', this);" type="checkbox" id="form_<?=$row['id'];?>_deleta" name="form_<?=$row['id'];?>_deleta" <?php if(strtoupper($row_usu['deleta'])=="ON"){ echo " checked "; }?>></center></td>
                                                       </tr>
-                                                  <?
+                                                  <?php
                                                   }
                                                 ?>
                                          </thead>
                                   </table>
                              </div>
                         </div>
-                      <?
+                      <?php
                       }
                       ?>
 					</div>
@@ -174,12 +174,12 @@
 	<!-- END WRAPPER -->
 	<!-- JAVASCRIPTS -->
 </body>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
         <div class="quick-nav-overlay"></div>
-        <?
+        <?php
 			include "global_js.php";
 		?>
         <script src="assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>

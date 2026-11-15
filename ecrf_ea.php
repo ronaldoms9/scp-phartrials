@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
 	$tabela = "adv_evento";
@@ -21,7 +21,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
     <style>
@@ -60,7 +60,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -88,13 +88,13 @@
 
 												<div class="actions">
 													<div class="btn-group">
-														<?
+														<?php
 															if($_SESSION['tipo_usuario']!=5){
 																?>
 																<a href="javascript:novoEvento();" class="btn btn-circle btn-default">
 																	<i class="fa fa-plus"></i> Novo Evento </a>
 
-																<?
+																<?php
 															}
 														?>
 														<a class="btn dark btn-outline btn-circle btn-sm" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="true"> Exportar
@@ -206,7 +206,7 @@
 												<hr>
 												<div class="row">
 													<div class="scroller" style="height:400px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
-														<?
+														<?php
 															$query = "select * from $tabela where projeto = ".$_SESSION['projeto']." order by cast(nro_paciente as int), nro_evento";
 															$res = $conexao->pesquisa($query);
 															if(mysqli_num_rows($res)<1){
@@ -265,7 +265,7 @@
 																<tbody id="divRetorno">
 																</tbody>
 														</table>
-														<?
+														<?php
 														}
 														?>
 													</div>
@@ -277,20 +277,20 @@
 								<div class="row">  <!-- Quadro de botões -->
 									 <div class="col-md-1"></div>
 									 <div class="col-md-10">
-										 <?
+										 <?php
 										 //if($_SESSION['user_tipo']<5){
 										 ?>
 										  <center>
-												  <?
+												  <?php
 												 if($_SESSION['tipo_usuario']!=5){
 												 ?>
 												  <button type="button" style="" class="btn btn-default" onclick="novoEvento();">  Cadastrar novo<br>evento </button>
-												 <?
+												 <?php
 												 }
 												 ?>
 												  <button type="button" style="" class="btn btn-default" onclick="imprimir();">  Imprimir<br>eventos </button>
 										  </center>
-										 <?
+										 <?php
 										 //}
 										 ?>
 									 </div>
@@ -299,11 +299,11 @@
 			</div>
 		</div>
 	</div></div></div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
-        <?
+        <?php
 			include "global_js.php";
 		?>
 		<div class="modal fade" id="modalEditarEA" tabindex="-1" role="dialog" aria-hidden="true">

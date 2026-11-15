@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/agenda.class.php";
 	if(isset($_GET[base64_encode('act')])){$act = strtoupper($_GET[base64_encode('act')]);}else{$act="";}
@@ -27,7 +27,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <script>var time = new Date().getTime();</script>
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
 		<link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Narrow|PT+Sans+Narrow:700|Pragati+Narrow" rel="stylesheet">
@@ -141,7 +141,7 @@
 		</style>
 		<script>
 			listaHTML = ""; //Aqui estou zerando o valor dessa variável. Pensar em como mudar o valor para não usar variável global
-			<?
+			<?php
 				if(isset($msg)){echo $msg;}
 				if($msg_retorno!=""){ echo "alert('".$msg_retorno."')";}
 			?>
@@ -151,7 +151,7 @@
     <body class="page-container-bg-solid">
     <a name="TOPO"></a>
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -165,7 +165,7 @@
 											<a href="javascript:volta_lista();" class="btn btn-circle blue-dark" title="Voltar para a lista de Monitorias" alt="Voltar para a lista de Monitorias"><i class="fa fa-arrow-circle-left"></i></a>
 											<?=traduzir("Monitoria", $_SESSION['lang']);?>
 											-
-											<?
+											<?php
 												echo " <b>Agendamento " . $varAgendamento->nro_visita . "</b> - " . $varAgendamento->getDataInicialDATA();
 											?>
 										</h1>
@@ -208,7 +208,7 @@
 			</div>
 		</div>
 	</body>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>
@@ -240,12 +240,12 @@
 					valor = "";
 					valor = decodeURIComponent("<?=$valorHTML[$countHTML];?>");
 					$('#<?=$listaHTML[$countHTML]?>').summernote('code', valor);
-				<?
+				<?php
 			}
 		}
 	?>
 
-	<?
+	<?php
 		if(isset($datas)){
 			if($datas!=""){
 			 for($i=0;$i<count($datas);$i++){
@@ -256,7 +256,7 @@
 						language: "pt-BR"
 					});
 				  });
-			 <?
+			 <?php
 			 }
 			}
 		}
@@ -652,14 +652,14 @@
 		xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
 		xmlhttp.send("comentario=" + encodeURIComponent(varComentario));
 	}
-	<?
+	<?php
 		if($_GET['formulario']>0){
 			?>
 				$( document ).ready(function() {
 					montaForm(<?=$_GET['formulario'];?>, <?=$_GET['campo'];?>);
 					UIToastr.init();
 				});
-			<?
+			<?php
 		}
 	?>
 

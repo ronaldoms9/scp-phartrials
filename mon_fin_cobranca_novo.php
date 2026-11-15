@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/projeto.class.php";
 	$varProjeto = new Projeto($_SESSION['projeto']);
@@ -8,7 +8,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link href="https://fonts.googleapis.com/css?family=Abel|Archivo+Narrow|PT+Sans+Narrow:700|Pragati+Narrow" rel="stylesheet">
@@ -40,7 +40,7 @@
 
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -126,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/projeto.class.php";
 	include_once "class/checklist.class.php";
@@ -12,7 +12,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
     <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -50,7 +50,7 @@
 
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -90,13 +90,13 @@
 																		<div class="input-icon right">
 																			<select id="centro" name="centro" class="form-control" onchange="mudouCentro(this.value)">
 																				<option value="">SELECIONE O CENTRO</option>
-																				<?
+																				<?php
 																				$query = "select * from cfg_centro where projeto = '".$_SESSION['projeto']."' order by nome";
 																				$res   = $conexao->pesquisa($query);
 																				while($row = mysqli_fetch_assoc($res)){
 																					?>
-																						<option value="<?=$row['id']?>" <?if($_GET['centro']==$row['id']){echo ' selected ';}?> ><?=$row['nome']?></option>
-																					<?
+																						<option value="<?=$row['id']?>" <?php if($_GET['centro']==$row['id']){echo ' selected ';}?> ><?=$row['nome']?></option>
+																					<?php
 																				}
 																				?>
 																			</select>
@@ -195,7 +195,7 @@
 				</div>
 			</div>
 		</div>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

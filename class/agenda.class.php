@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "conexao.class.php";
 	include_once "centro.class.php";
 	include_once "usuario.class.php";

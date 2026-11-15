@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	include_once __DIR__ . "/../class/conexao.class.php";
 	include_once __DIR__ . "/../class/usuario.class.php";

@@ -1,4 +1,4 @@
-<?
+<?php
 	include "seguranca.php";
 ?>
 <!DOCTYPE html>
@@ -47,7 +47,7 @@
                                 <th>Comentário do revisor</th>
                                 <th><center>Status</center></th>
                             </thead>
-                            <?
+                            <?php
                                 $query = "SELECT agenda.id,
                                             cfg_visitas.nome as form_nome,
                                             cfg_visitas_campos.texto as campo_nome,

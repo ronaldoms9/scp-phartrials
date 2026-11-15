@@ -171,7 +171,7 @@
 								<td class="headerTh" width="20%"><center><?=listoDATA($varQuery->datahora_abertura);?></center></td>
 								<td class="headerTh" width="*"><?=$varQuery->classUsuarioAbertura->nome;?></td>
 								<td class="headerTh" width="20%" style="text-align:right">[
-									<?
+									<?php
 										if($varQuery->status=="1"){
 											echo "PENDENTE";
 										}
@@ -183,7 +183,7 @@
 										}
 									?>]
 								</td>
-								<?
+								<?php
 									if( (($varSeguranca->monitora=="ON")||($varSeguranca->fechaquery=="ON")||($varSeguranca->fechaquery=="1"))&&(($varQuery->status=="1")||($varQuery->status=="2"))){
 									?>
 										<td class="headerTh" width="10%" style="text-align:left">
@@ -203,7 +203,7 @@
 							</tr>
 							<tr>
 								<td colspan="5" style="padding-top: 8px; padding-bottom: 15px;">
-									<?
+									<?php
 										$query = "SELECT
 													crf_entrada_campos_query_questionamentos.id
 														FROM crf_entrada_campos_query_questionamentos
@@ -231,11 +231,11 @@
 															</td>
 															<td width="50">
 																<center>
-																	<?
+																	<?php
 																		if( ($varQuery->status!=3)&&($varQueryItem->temResposta()==false)){
 																			?>
 																			<button class="btn green btn-sm" type="button" data-toggle="dropdown" onclick="novaResposta(<?=$varQueryItem->id;?>, <?=$varQueryItem->query_id;?>);"><i class="fa fa-reply" aria-hidden="true"></i> Responder</button>
-																			<?
+																			<?php
 																		}
 																	?>
 																</center>
@@ -243,7 +243,7 @@
 														</tr>
 													</tbody>
 												</table>
-												<?
+												<?php
 												if($varQueryItem->temResposta()==false){
 												?>
 													<div class="row" id="divResp_<?=$varQueryItem->id;?>" style="display: none">
@@ -265,7 +265,7 @@
 												<?php
 												}
 												?>
-											<?
+											<?php
 											if($varQueryItem->temResposta()==true){		//tem respostas.....
 												$query   = "select id from crf_entrada_campos_query_questionamentos where query_id = " . $varQueryItem->id . " and tipo = 2 order by id";
 												$resResp = $conexao->pesquisa($query);
@@ -292,11 +292,11 @@
 																	</td>
 																	<td width="50" style="padding-top: 10px; padding-bottom: 10px; border-top: 1px solid #C0C0C0">
 																		<center>
-																			<?
+																			<?php
 																				/*if( ($varQueryItemResp->status==0)&&($eUltimo==true)){
 																					?>
 																					<button class="btn green btn-sm" type="button" data-toggle="dropdown" onclick="novaResposta(<?=$varQueryItem->id;?>, <?=$varQueryItem->query_id;?>);"><i class="fa fa-reply" aria-hidden="true"></i> Responder</button>
-																					<?
+																					<?php
 																				}*/
 																			?>
 																		</center>
@@ -320,7 +320,7 @@
 															</div>
 															<br>
 														</div>
-													<?
+													<?php
 													$indResp++;
 												}
 											}
@@ -486,7 +486,7 @@
 		?>
 			<table width="100%" class="table table-hover table-condensed">
 				<tbody>
-					<?
+					<?php
 
 
 						foreach($varCRFParticipante->CRFs as $CRF){
@@ -499,7 +499,7 @@
 					?>
 				</tbody>
 			</table>
-		<?
+		<?php
 	}
 	if($_GET['act']=='FORM_CLICOU'){
 		if(!isset($_SESSION)){  session_start();    }
@@ -814,7 +814,7 @@
 			<div class="col-md-9 fundo_branco" style="overflow-y: scroll; height:680px !important">
 				<iframe frameborder="0"  src="<?=$varForm->tipoForm->pagina."?".gera_parametro("pac",$varParticipante->nro_triagem)."&".gera_parametro("cam",$formularioP)."&xxpt=".$varCentro->id;?>" style="width: 100%;height:150%"></iframe>
 			</div>
-			<?
+			<?php
 		}else{
 				$langLabel = "";
 				if($_SESSION['lang']=='p'){$langLabel = $varForm->tipoForm->texto_crf;}
@@ -855,7 +855,7 @@
 								   <th class="tabela-head" width="10%"><center></center></th>
 								</thead>
 							   <tbody>
-								<?
+								<?php
 									$query = "select
 												CEC.campo_id as tipocampo,
 												CEC.id as id_campo,
@@ -1120,7 +1120,7 @@
 																		<tr>
 																			<td class="tabela-body">
 																				<div id="divTexto_<?=$varCampo->TipoCampo->nome;?>">
-																					<?
+																					<?php
 																						$langLabel = "";
 																						if($_SESSION['lang']=='p'){$langLabel = $varCampo->TipoCampo->texto;}
 																						if($_SESSION['lang']=='i'){$langLabel = $varCampo->TipoCampo->texto_en;}
@@ -1134,11 +1134,11 @@
 																	  </table>
 																	</td>
 																	<!-- Início do campo de 1 digitação -->
-																	<?
+																	<?php
 																	if($_SESSION['user_tipo']!=5){   //Se não for 2 digitador, consegue ver o campo valor. Se não, nao exibe
 																	?>
 																		<td style="vertical-align:middle" width="22%">
-																		  <?
+																		  <?php
 																		  		switch(strtoupper($varCampo->TipoCampo->tipo)){
 																					case "BOTAO":
 																						$acao_botao = $rowItems['botao_acao'];
@@ -1185,7 +1185,7 @@
 																				if( $rowItems['tipo']=="modal" ){
 																					?>
 																					<div class="input-group">
-																					<?
+																					<?php
 																						echo '<input
 																								id="form_'.$varCampo->id.'"
 																								name="'.$nomeCampoAleatorio.'"
@@ -1395,18 +1395,18 @@
 
 																					echo "<center></center>";
 																					}
-																					?><center><span class="legenda"><?if($rowItems['legenda']!=""){ echo "(".$rowItems['legenda'].")";}?></span></center>
+																					?><center><span class="legenda"><?php if($rowItems['legenda']!=""){ echo "(".$rowItems['legenda'].")";}?></span></center>
 																					<div id="divMsg_<?=$rowItems['id_campo'];?>" class="divMsg"></div>
 
 																		</td>
-																  <?
+																  <?php
 																  }
 															if($varCampo->TipoCampo->senha!="on"){
 															?>
 																<!-- Coluna de botões -->
 
 																<td style="vertical-align:middle;align:right; text-align:right !important"><center>
-																<?
+																<?php
 																	$acao_mon = "javascript:monitora(".$varCampo->id.");";
 																	$acao_his = "javascript:muda_pagina('ecrf_formularios_historico.php?".gera_parametro("pac",$varParticipante->nro_triagem)."&".gera_parametro("cam",$formularioP)."&".gera_parametro("act","M")."&".gera_parametro("cod",$rowItems['id_campo'])."&xxpt=".$varCentro->id."');";
 																	$acao_com = "javascript:muda_pagina('ecrf_formularios_comentarios.php?".gera_parametro("pac",$varParticipante->nro_triagem)."&".gera_parametro("cam",$formularioP)."&".gera_parametro("act","M")."&".gera_parametro("cod",$rowItems['id_campo'])."&xxpt=". $varCentro->id."');";
@@ -1414,11 +1414,11 @@
 																?>
 																	<div class="btn-group" style="align:right; text-align:right !important">
 																		<!--Botão Monitora-->
-																		<?
+																		<?php
 																		/*if(($varSeguranca->monitora=="ON")&&($varCampo->TipoCampo->tem_sdv==1)){
 																		?>
 																			<button type="button" class="btn btn-default btn-sm"
-																			<?
+																			<?php
 																				if(($_SESSION['user_tipo']==15)||($_SESSION['user_tipo']==2)||($_SESSION['user_tipo']==1)){ echo 'onclick="'.$acao_mon.'" ';};
 																				echo " >";
 																				echo '<span id="divMonitora'.$rowItems['id_campo'].'" name="divMonitora'.$rowItems['id_campo'].'">';
@@ -1430,7 +1430,7 @@
 																				echo "</span>";
 																			?>
 																			</button>
-																		<?
+																		<?php
 																		}*/
 																		?>
 																		<!--Botão Histórico (Audit Trail)-->
@@ -1439,7 +1439,7 @@
 																				data-toggle="modal"
 																				data-target="#modalHistoricoNovo"
 																				href="modal_ecrf_historico.php?id=<?=$varCampo->id;?>"
-																			<?
+																			<?php
 																				echo " >";
 																				echo '<i class="fa fa-history fa-sm" title="'.traduzir("Histórico [AuditTrail]").'"></i>';
 																			?>
@@ -1451,7 +1451,7 @@
 																				data-toggle="modal"
 																				data-target="#modalComentarios"
 																				href="modal_ecrf_comentarios.php?id=<?=$varCampo->id;?>"
-																			<?
+																			<?php
 																				echo " >";
 																				if($varCampo->getQtdComentarios()==0){
 																					echo '<div id="divComentario_'.$varCampo->id.'"><i class="fa fa-commenting-o fa-sm " title="'.traduzir("Comentários").'"></i></div>';
@@ -1462,13 +1462,13 @@
 																		</button>
 																	</div>
 																</td>
-															<?
+															<?php
 															}
 														}
 
 														?>
 														</tr>
-													<?
+													<?php
 													}
 													if($incrementaInd==true){
 														$indItems++;
@@ -1492,7 +1492,7 @@
 												?>
 													<tr>
 														<td colspan="4" class="tabela-divisao">
-														<?
+														<?php
 														$langLabel = "";
 														if($_SESSION['lang']=='p'){$langLabel = $rowItems['texto'];}
 														if($_SESSION['lang']=='i'){$langLabel = $rowItems['texto_en'];}
@@ -1502,14 +1502,14 @@
 														?>
 														</td>
 													</tr>
-												<?
+												<?php
 													}
 												}
 												if($rowItems['tipo']=="divisao_mais"){    //SE for divisão de campo
 												?>
 													<tr>
 														<td colspan="2" class="tabela-divisao">
-															<?
+															<?php
 															$langLabel = "";
 															if($_SESSION['lang']=='p'){$langLabel = $rowItems['texto'];}
 															if($_SESSION['lang']=='i'){$langLabel = $rowItems['texto_en'];}
@@ -1529,7 +1529,7 @@
 															?>
 														</td>
 													</tr>
-												<?
+												<?php
 												}
 												if($rowItems['tipo']=="pagina"){    //SE o tipo for página
 												?>
@@ -1540,7 +1540,7 @@
 															</div>
 														</td>
 													</tr>
-												<?
+												<?php
 												}
 												if($rowItems['tipo']=="botao"){
 													$condicional = $rowItems['condicional'];
@@ -1551,7 +1551,7 @@
 															<button type="button" <?="id='form_".$rowItems['id_campo']."' name='form_".$rowItems['id_campo']."' "; echo $tagatt;?> class="btn btn-default" onclick="javascript:<?=$rowItems['botao_acao'];?>;"><?=$rowItems['texto'];?></button>
 														<td>
 													</tr>
-													<?
+													<?php
 												}
 											}
 										} //TIPO 0
@@ -1562,7 +1562,7 @@
 											<div class="col-md-4"></div>
 											<div class="col-md-3">
 												   <center>
-														<?
+														<?php
 
 															if ($varSeguranca->edita!="ON"){$btnDisable = " disabled ";}
 
@@ -1633,7 +1633,7 @@
 											<!--
 											<div class="col-md-3">
 												   <center>
-														   <?
+														   <?php
 																/*
 																$form_id = $formularioP;
 
@@ -1667,11 +1667,11 @@
 												   </center>
 											</div>
 											-->
-											<?
+											<?php
 												//Mostra o recibo de randomização!
 											?>
 											<div class="col-md-3">
-												<?
+												<?php
 													if( ($varParticipante->randomizado=="1")&&($varForm->tipoForm->acao=="RANDOMIZACAO") ){
 														echo '<button style="width:100px !important; padding: 3.0% 0;" type="button" class="btn btn-default " onclick="javascript:recibo('.$varParticipante->centro.','.$varParticipante->nro_triagem.');"><i class="fa fa-print"></i>&nbspRecibo</button>';
 													}
@@ -1691,7 +1691,7 @@
 												data-toggle="modal"
 												data-target="#modalHistoricoNovo"
 												href="modal_ecrf_historico_form.php?id=<?=$varCampo->form_id;?>"
-											<?
+											<?php
 												echo " >";
 												echo '<i class="fa fa-history fa-sm" title="Histórico"> Histórico de Modificações</i>';
 											?>

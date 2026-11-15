@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 ?>
 <!DOCTYPE html>
@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -107,7 +107,7 @@
 </head>
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -160,7 +160,7 @@
 																	<div class="col-md-7">
 																		<select name="form_pessoa_responsavel" id="form_pessoa_responsavel" class="form-control">
 																			<option value="">Selecione</option>
-																			<?
+																			<?php
 																			$query = "select patrocinador from proj_projeto where id = ".$_SESSION['projeto'];
 																			$res = $conexao->pesquisa($query);
 																			$row = mysqli_fetch_assoc($res);
@@ -170,7 +170,7 @@
 																			while($row = mysqli_fetch_assoc($res)){
 																				?>
 																					<option value="<?=$row['id'];?>"><?=$row['nome'];?></option>
-																				<?
+																				<?php
 																			}
 																			?>
 																		</select>
@@ -187,7 +187,7 @@
 																				while($row = mysqli_fetch_assoc($res)){
 																					?>
 																						<option value="<?=$row['id'];?>"><?=$row['nome'];?></option>
-																					<?
+																					<?php
 																				}
 																			?>
 
@@ -206,7 +206,7 @@
 																				while($row = mysqli_fetch_assoc($res)){
 																					?>
 																						<option value="<?=$row['id'];?>"><?=$row['nome'];?></option>
-																					<?
+																					<?php
 																				}
 																			?>
 
@@ -237,7 +237,7 @@
 	<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
 	<script src="js/funcoes.js" type="text/javascript"></script>
 
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	error_reporting(E_ALL);
 	ini_set("display_errors", 1);
 	
@@ -17,7 +17,7 @@
 <head>
 	<script src="js/pace.js"></script>
 	<link href="css/pace.css" rel="stylesheet" />
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -26,7 +26,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -134,7 +134,7 @@
 									<th width="20%">Selecionar</th>
 								</thead>
 								<tbody>
-									<?
+									<?php
 										$conexao = new Conexao();
 										$query 		= "select * from pesq_pesquisa order by nome";
 										$resPesq 	=  $conexao->pesquisa($query);
@@ -144,7 +144,7 @@
 												<td><?=$rowPesq['nome'];?></td>
 												<td><a href="javascript:cadastraPesquisaEXE(<?=$_GET['id'];?>, <?=$rowPesq['id'];?>);"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a></td>
 											</tr>
-											<?											
+											<?php											
 										}
 									?>
 								</tbody>
@@ -160,7 +160,7 @@
 			</div>
 		</div>
 	</div>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";				
 	?>

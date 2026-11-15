@@ -1,4 +1,4 @@
-<?
+<?php
 	//grupo_periodo
 	include_once "seguranca.php";	
 	
@@ -10,7 +10,7 @@
 <head>
 	<script src="js/pace.js"></script>
 	<link href="css/pace.css" rel="stylesheet" />
-	<?
+	<?php
 		include "global_css.php";
 	?>	
 	<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans" rel="stylesheet">
@@ -18,7 +18,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -150,7 +150,7 @@
 			</div>
 		</div>
 	</div>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";				
 	?>

@@ -61,14 +61,14 @@
                         <td colspan="2"><font size="2px">Nenhum ítem cadastrado no momento...</font></td>
                     </tr>
                 </table>
-                <?
+                <?php
             }else{
             ?>
                 <div class="row" style="text-align:center">
                 <center>
                 <div class="btn-toolbar margin-bottom-10" style="text-align:center">
                     <div class="btn-group" style="text-align:center">
-                        <?
+                        <?php
                             $indMed = 1;
                             $temp = explode("|", $row['valor']);
                             $qtd  = count($temp)-1;
@@ -87,7 +87,7 @@
                 </div><hr>
                 <div class="row">
                 <table width="100%">
-            <?
+            <?php
                 $query = "select * from cfg_visitas_campos where id = " .$tipo;
                 $res = $conexao->pesquisa($query);
                 $row_campo = mysqli_fetch_assoc($res);
@@ -130,7 +130,7 @@
                             <tr>
                                 <td class="classe_item"><span style="font-size: 0.7em"><?=formata_utf8_decode($colunas[$linha]->titulo_br);?></span></td>
                                 <td style="vertical-align:middle" class="item_json"><span style="font-size: 0.8em">
-                                <?
+                                <?php
                                     echo $row_campo['valor'] ."<br>";
 
                                     $campoID = $row_campo['id'];
@@ -219,7 +219,7 @@
                                 ?>
                                 </td>
                             </tr>
-                    <?
+                    <?php
                 }
                 ?>
                 </table>
@@ -229,12 +229,12 @@
                     <button type="button" class="btn btn-default red" onclick="javascript:deletar(<?=$row['id'];?>,<?=$nro;?>);">Deletar registro</button>
                 </div>
 
-                <?
+                <?php
             }
             ?>
                 </table>
                 </div>
-            <?
+            <?php
 
         break;
         case 'JSON_SAVE':

@@ -76,7 +76,7 @@
 										<li>
 											<div class="btn-group">
 												<button type="button" class="btn btn-link dropdown-toggle btn-xs" data-toggle="dropdown">
-												<?
+												<?php
 												   if(($_SESSION['lang']=="p")||($_SESSION['lang']=="")){ echo '<img src="assets_face/img/flags/brasil.png" alt="Brail"> Português <span class="caret"></span>';};
 												   if($_SESSION['lang']=="i"){ echo '<img src="assets_face/img/flags/eua.png" alt="Inglês"> Inglês <span class="caret"></span>';};
 												   if($_SESSION['lang']=="e"){ echo '<img src="assets_face/img/flags/espanha.gif" alt="Espanhol"> Espanhol <span class="caret"></span>';};
@@ -100,13 +100,13 @@
                                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                                 <img alt="" class="img-circle" src="imagens/ico_avatar.png">
                                                 <span class="username username-hide-mobile"><?=strtoupper($_SESSION['nome_usuario']);?><br><span class="cabecalho_funcao">[<?=traduzir($_SESSION['tipo_nome'], $_SESSION['lang']);?>]
-												<?
+												<?php
 												if($_SESSION['user_id']=="1"){echo "<br>[".$conexao->retornaNomeBanco()."]";}
 												?>
 												</span></span>
                                             </a>
                                             <ul class="dropdown-menu dropdown-menu-default">
-												<?
+												<?php
 													$randomico = rand(2342, 34634643);
 												?>
                                                 <li>
@@ -142,7 +142,7 @@
                                 </form>
                                 <div class="hor-menu  ">
                                     <ul class="nav navbar-nav">
-                                      <?
+                                      <?php
                                          //Montagem do MENU
                                          //Nível 1
                                          //$query = "select * from menu_itens where pai < 1 order by ordem";
@@ -163,32 +163,32 @@
                                          while($row_menu = mysqli_fetch_assoc($res_menu)){
                                          ?>
                                               <li aria-haspopup="true" class="menu-dropdown classic-menu-dropdown ">
-												<?
+												<?php
 												if($row_menu['nova_janela']==0){
 													if(substr($row_menu['link'],0,10)!="JAVASCRIPT"){
 														if($row_menu['link']!=""){
 														?>
 															<a href="javascript:muda_pagina('<?=$row_menu['link'];?>');"> <?=traduzir($row_menu['nome']);?>
-														<?
+														<?php
 														}else{
 														?>
 															<a href="#"> <?=traduzir($row_menu['nome']);?>
-														<?
+														<?php
 														}
 													}else{
 													?>
 													<a href="<?=$row_menu['link'];?>;void(0);"> <?=traduzir($row_menu['nome']);?>
-													<?
+													<?php
 													}
 												}else{
 													?>
 													  <a href="javascript:window.open('<?=$row_menu['link'];?>','popup')"><?=traduzir($row_menu['nome']);?>
-													<?
+													<?php
 												}
 												?>
                                                     <span class="arrow"></span>
                                                 </a>
-                                                <?
+                                                <?php
                                                      //Montagem do SEGUNDO nível
                                                      //$query = "select * from menu_itens where pai = " . $row_menu['id'] . " order by ordem ";
 													 $query = "select menu_itens.id, menu_itens.nome, menu_itens.link, menu_itens.ordem, usu_usuario_tipo_menu.acessa, menu_itens.nova_janela    ";
@@ -219,27 +219,27 @@
 																	 if($link!=""){
 																		 ?>
 																		 <a href="javascript:muda_pagina('<?=$row_2_nivel['link'];?>')"> <?=traduzir($row_2_nivel['nome']);?></a>
-																		 <?
+																		 <?php
 																	 }else{
 																		 ?>
 																		 <a href="#"> <?=traduzir($row_2_nivel['nome']);?></a>
-																		 <?
+																		 <?php
 																	 }
 
 																		}else{
 																		?>
 																		<a href="<?=$row_2_nivel['link'];?>;void(0);"> <?=traduzir($row_2_nivel['nome']);?>
-																		<?
+																		<?php
 																		}
 																	}else{
 																		?>
 																		  <a href="javascript:window.open('<?=$row_2_nivel['link'];?>','popup')"> <?=traduzir($row_2_nivel['nome']);?>
-																		<?
+																		<?php
 																	}
 																	?>
 
                                                                     </a>
-                                                                    <?
+                                                                    <?php
                                                                         //3 NIVEL
                                                                         //Montagem do SEGUNDO nível
                                                                          $query = "select * from menu_itens where pai = " . $row_2_nivel['id'] . " order by ordem ";
@@ -253,19 +253,19 @@
                                                                                             <span class="arrow"></span>
                                                                                         </a>
                                                                                      </li>
-                                                                                 <?
+                                                                                 <?php
                                                                              }
                                                                              echo '</ul>';
                                                                          }
                                                                     ?>
                                                                  </li>
-                                                             <?
+                                                             <?php
                                                          }
                                                          echo '</ul>';
                                                      }
                                                 ?>
                                               </li>
-                                         <?
+                                         <?php
                                          }
                                       ?>
                                     </ul>

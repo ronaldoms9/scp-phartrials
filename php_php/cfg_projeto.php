@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "../class/conexao.class.php";
 	include_once "../class/projeto.class.php";
 
@@ -96,7 +96,7 @@
 				 style="cursor: pointer";>
 				 <td width="40"><center><b><?=$row['numero'];?></center></b></td>
 				<td>
-					<?
+					<?php
 						echo $row['nome'];
 					?>
 				</td>

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/agenda.class.php";
     include_once "class/projeto.class.php";

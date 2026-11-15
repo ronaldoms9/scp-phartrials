@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	include_once "seguranca.php";
 
@@ -47,7 +47,7 @@
 <head>
 <meta http-equiv="Content-Language" content="pt-br">
 <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
-<?
+<?php
 	include "global_css.php";
 ?>
 <title>New Page 1</title>
@@ -165,7 +165,7 @@
 														</div>
 														<select name="form_centro" id="form_centro" class="form-control">
 															<option value=""></option>
-															<?
+															<?php
 															$query = "SELECT id, nome from cfg_centro where projeto = ".$_SESSION['projeto']." order by nome";
 															$resResp = $conexao->pesquisa($query);
 															while($rowResp = mysqli_fetch_assoc($resResp)){
@@ -182,7 +182,7 @@
 														</div>
 														<select name="form_paciente" id="form_paciente" class="form-control">
 															<option value=""></option>
-															<?
+															<?php
 															$query = "SELECT distinct paciente FROM agenda_lista_pendencia where projeto = ".$_SESSION['projeto']."  order by substr(paciente, 1,2), substr(paciente, 4,3)";
 															$resResp = $conexao->pesquisa($query);
 															while($rowResp = mysqli_fetch_assoc($resResp)){
@@ -203,7 +203,7 @@
 											<div class="input-icon right">
 												<select name="form_visita" id="form_visita" class="form-control">
 													<option value=""></option>
-													<?
+													<?php
 													$query = "SELECT nro_visita FROM agenda where projeto = " . $_SESSION['projeto'] . " order by nro_visita";
 													$resResp = $conexao->pesquisa($query);
 													while($rowResp = mysqli_fetch_assoc($resResp)){
@@ -367,7 +367,7 @@
 
 		</div>
 	</div>
-	<?
+	<?php
 		include "global_js.php";
 	?>
 </body>

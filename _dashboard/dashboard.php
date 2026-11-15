@@ -32,7 +32,7 @@ session_start();
                             <span style="padding-right: 5px;"></span>
                             <button id="btnEventosAdversos" type="button" class="waves-effect waves-light btn mb-5 btn-default" onclick="javascript:trocaDash('eventos_adversos')">EVENTOS ADVERSOS</button>
                             <span style="padding-right: 5px;"></span>
-                            <?
+                            <?php
                             $quemVe = array(1,2,8,20,23,24,25);
                             if(in_array($_SESSION['tipo_usuario'], $quemVe)){
                             ?>

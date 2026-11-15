@@ -1,4 +1,4 @@
-<?
+<?php
 	function traduzir($texto_entrada){
 		$conexao = new Conexao();
 		$texto = "";

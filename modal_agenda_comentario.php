@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";	
 	$campo = $_GET['id'];	
 	$query = "select
@@ -20,7 +20,7 @@
 			z-index: 99999 !important;
 		}
 	</style>
-<?
+<?php
 	include "global_css.php";
 ?>
 </head>
@@ -56,7 +56,7 @@
 
 	</div>	
 </body>
-	<?
+	<?php
 		include "global_js.php";				
 	?>
 	<script>

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	$id_usuario = $_SESSION['user_id'];
@@ -33,7 +33,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
     <script>
@@ -113,7 +113,7 @@
                     					</div>
                                         <div class="col-md-6" style="background-color: white">
                     						<br><br>
-                                            <? $acao = "alterar_senha.php?".gera_parametro("act","A"); ?>
+                                            <?php $acao = "alterar_senha.php?".gera_parametro("act","A"); ?>
                     						<form class="form-horizontal" role="form" action="<?=$acao;?>" method="post" id="form_info" name="form_info">
                                                 <div class="form-group">
                                                      <label class="col-md-4 control-label"><?=traduzir("Senha atual", $_SESSION['lang']);?></label>
@@ -153,7 +153,7 @@
                     </div>
                  </div>
             </div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
@@ -163,7 +163,7 @@
 <script src="assets/global/plugins/excanvas.min.js"></script>
 <script src="assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
-        <?
+        <?php
 			include "global_js.php";
 		?>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -171,7 +171,7 @@
 			$( function() {
 				$( document ).tooltip();
 			} );  	
-			<?
+			<?php
                 if($msg==1){echo "alert('Senha atual inválida');";}
                 if($msg==2){echo "alert('Senha alterada com sucesso');";}
 				if($msg==3){echo "alert('A nova senha não pode ser igual a senha anterior');";}

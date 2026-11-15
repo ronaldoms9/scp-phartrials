@@ -324,7 +324,7 @@
             })
         }));
         series.columns.template.setAll({ strokeOpacity: 0 });
-        <?
+        <?php
             echo "var data = [";
             $query = "SELECT CONCAT(SUBSTR(data_hora, 1, 4), SUBSTR(data_hora, 6, 2), SUBSTR(data_hora, 9, 2)) as data_lis,
                             SUBSTR(data_hora ,1, 10) as data_inc,

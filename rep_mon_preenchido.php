@@ -1,4 +1,4 @@
-<?
+<?php
 	/*		acentuação teste chão	*/
 
 	$encoding = 'UTF-8';

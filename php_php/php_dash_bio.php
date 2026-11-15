@@ -50,7 +50,7 @@
 					</tr>
 				</thead>
 				<tbody class="corpo">
-					<?
+					<?php
 						$query 		= "select proj_projeto.id, cad_patrocinador.nome from proj_projeto
 										inner join cad_patrocinador on proj_projeto.patrocinador = cad_patrocinador.id
 											where tipo = 'BIO' ";
@@ -76,7 +76,7 @@
 									<td style="valign: middle; font-size: 11px !important;"><center><center><?=$varProjeto->codigo;?></center></td>
 									<td style="valign: middle; font-size: 11px !important;"><?=$varProjeto->nome;?></td>
 									<td style="valign: middle; font-size: 11px !important;"><center><b><center>
-										<?
+										<?php
 											$qtd = intval($varProjeto->getStatusEnvCorrecao());
 											if($qtd>0){
 												echo '<span class="vermelho"> Pendentes: '.$qtd.' </span>';
@@ -86,7 +86,7 @@
 										?>
 									</td>
 									<td style="valign: middle; font-size: 11px !important;"><center><span class="dados"><b><center>
-										<?
+										<?php
 											$qtd = intval($varProjeto->getStatusEnvRetornado());
 											if($qtd>0){
 												echo '<span class="vermelho"> Pendentes: '.$qtd.' </span>';
@@ -96,7 +96,7 @@
 										?>
 									</td>
 									<td style="valign: middle; font-size: 11px !important;"><center><span class="dados"><b><center>
-										<?
+										<?php
 											$qtd = intval($varProjeto->getStatusEnvPatrocinador());
 											if($qtd>0){
 												echo '<span class="vermelho"> Pendentes: '.$qtd.' </span>';
@@ -106,7 +106,7 @@
 										?>
 									</td>
 									<td style="valign: middle; font-size: 11px !important;"><center><span class="dados"><b><center>
-										<?
+										<?php
 											$qtd = intval($varProjeto->getStatusAssPatrocinador());
 											if($qtd>0){
 												echo '<span class="vermelho"> Pendentes: '.$qtd.' </span>';
@@ -116,7 +116,7 @@
 										?>
 									</td>
 									<td style="valign: middle; font-size: 11px !important;"><center><span class="dados"><b><center>
-										<?
+										<?php
 											echo $varProjeto->getFinalizado();
 											if($varProjeto->getFinalizado()!="Sim"){
 												//echo '&nbsp;&nbsp;<i class="fa fa-exchange" aria-hidden="true"></i>';
@@ -140,7 +140,7 @@
 										</center>
 									</td>
 								</tr>
-								<?
+								<?php
 									$query = "select id from agenda where projeto = ".$varProjeto->id." order by nro_visita";
 									$resAg = $varConexao->pesquisa($query);
 									if(mysqli_num_rows($resAg)>0){
@@ -164,7 +164,7 @@
 																	</tr>
 																</thead>
 																<tbody>
-																	<?
+																	<?php
 																		while($rowAg = mysqli_fetch_assoc($resAg)){
 																			$varAgendamento = new Agenda($rowAg['id']);
 																			?>
@@ -180,7 +180,7 @@
 																					<td valign="middle" style="valign: middle; font-size: 11px !important;"><center><?=$varAgendamento->getEnvPatrocinador();?></center></td>
 																					<td valign="middle" style="valign: middle; font-size: 11px !important;"><center><?=$varAgendamento->getAssPatrocinador();?></center></td>
 																				</tr>
-																			<?
+																			<?php
 																		}
 																	?>
 																</tbody>
@@ -188,7 +188,7 @@
 														</div>
 													</td>
 												</tr>
-										<?
+										<?php
 
 									}
 								?>
@@ -198,5 +198,5 @@
 				</tbody>
 			</table>
 
-		<?
+		<?php
 	}

@@ -1,4 +1,4 @@
-<?
+<?php
 /*Acentuação teste chão*/
 ?>
 

@@ -1,4 +1,4 @@
-<?
+<?php
   include_once "class/conexao.class.php";
   include "funcoes.php";
 
@@ -128,7 +128,7 @@
 						<li>
 							<div class="btn-group">
 								<button type="button" class="btn btn-link dropdown-toggle btn-xs" data-toggle="dropdown">
-                                <?
+                                <?php
                                    if(($lang=="p")||($lang=="")){ echo '<img src="assets_face/img/flags/brasil.png" alt="Brail"> Português <span class="caret"></span>';};
                                    if($lang=="i"){ echo '<img src="assets_face/img/flags/eua.png" alt="Inglês"> Inglês <span class="caret"></span>';};
                                    if($lang=="e"){ echo '<img src="assets_face/img/flags/espanha.gif" alt="Espanhol"> Espanhol <span class="caret"></span>';};
@@ -175,9 +175,9 @@
 						<img src="assets_face/img/sliders/fundo3.jpg" alt="Slider Image">
 						<div class="carousel-caption">
 							<h2 class="hero-heading">
-                            <? if(($lang=="p")||($lang=="")){ echo "SISTEMA DE MONITORIA"; } ?>
-                            <? if($lang=="i"){ echo "SISTEMA DE MONITORIA"; } ?>
-                            <? if($lang=="e"){ echo "SISTEMA DE MONITORIA"; } ?>
+                            <?php if(($lang=="p")||($lang=="")){ echo "SISTEMA DE MONITORIA"; } ?>
+                            <?php if($lang=="i"){ echo "SISTEMA DE MONITORIA"; } ?>
+                            <?php if($lang=="e"){ echo "SISTEMA DE MONITORIA"; } ?>
                             </h2>
 							<button type="button" id="btnLogin" class="btn btn-primary btn-inverse" onclick="muda_pagina('login.php?<?=gera_parametro("lan", $lang);?>')">LOGIN</button>
 						</div>

@@ -59,13 +59,13 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
         <link href="assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
 		<link href="assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
     <script>
-    <?
+    <?php
         if($msg==1){ echo "alert('Ítem atualizado com sucesso');"; }
         if($msg==2){ echo "alert('Ítem cadastrado com sucesso');"; }
         if($msg==3){ echo "alert('Ítem deletado com sucesso');"; }
@@ -74,7 +74,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -133,7 +133,7 @@
 											  </div>
 										 </div>
 										</div>
-										<?
+										<?php
 											if($id>0){
 												$query = "select * from $tabela where id = " . $id;
 												$res   = $conexao->pesquisa($query);
@@ -168,10 +168,10 @@
 																		<?php
 																			if(!$projetoEspecifico){
 																				?>
-																				<option value="1" <?if($row['periodo']=="1"){echo " selected ";}?>>Inicial</option>
-																				<option value="2" <?if($row['periodo']=="2"){echo " selected ";}?>>Pré confinamento</option>
-																				<option value="3" <?if($row['periodo']=="3"){echo " selected ";}?>>Dieta</option>
-																				<option value="4" <?if($row['periodo']=="4"){echo " selected ";}?>>Pós Estudo</option>
+																				<option value="1" <?php if($row['periodo']=="1"){echo " selected ";}?>>Inicial</option>
+																				<option value="2" <?php if($row['periodo']=="2"){echo " selected ";}?>>Pré confinamento</option>
+																				<option value="3" <?php if($row['periodo']=="3"){echo " selected ";}?>>Dieta</option>
+																				<option value="4" <?php if($row['periodo']=="4"){echo " selected ";}?>>Pós Estudo</option>
 																				<?php
 																			}else{
 																				$query 		= "select * from agenda_check_fase where projeto = " . $projeto;
@@ -216,8 +216,8 @@
 																<div class="col-md-9">
 																	<select name="form_exporta" id="form_exporta" class="form-control">
 																		<option value=""></option>
-																		<option value="1" <?if($row['exporta']=="1"){echo " selected ";}?>>Sim</option>
-																		<option value="0" <?if($row['exporta']=="0"){echo " selected ";}?>>Não</option>
+																		<option value="1" <?php if($row['exporta']=="1"){echo " selected ";}?>>Sim</option>
+																		<option value="0" <?php if($row['exporta']=="0"){echo " selected ";}?>>Não</option>
 																	</select>
 																</div>
 															</div>
@@ -226,8 +226,8 @@
 																<div class="col-md-9">
 																	<select name="form_calculo" id="form_calculo" class="form-control">
 																		<option value=""></option>
-																		<option value="1" <?if($row['calculo']=="1"){echo " selected ";}?>>Sim</option>
-																		<option value="0" <?if($row['calculo']=="0"){echo " selected ";}?>>Não</option>
+																		<option value="1" <?php if($row['calculo']=="1"){echo " selected ";}?>>Sim</option>
+																		<option value="0" <?php if($row['calculo']=="0"){echo " selected ";}?>>Não</option>
 																	</select>
 																</div>
 															</div>
@@ -236,8 +236,8 @@
 																<div class="col-md-9">
 																	<select name="form_calculo_tipo" id="form_calculo_tipo" class="form-control">
 																		<option value=""></option>
-																		<option value="idade" <?if($row['calculo_tipo']=="idade"){echo " selected ";}?>>Idade</option>
-																		<option value="imc" <?if($row['calculo_tipo']=="imc"){echo " selected ";}?>>IMC</option>
+																		<option value="idade" <?php if($row['calculo_tipo']=="idade"){echo " selected ";}?>>Idade</option>
+																		<option value="imc" <?php if($row['calculo_tipo']=="imc"){echo " selected ";}?>>IMC</option>
 																	</select>
 																</div>
 															</div>
@@ -270,7 +270,7 @@
 																<div class="col-md-9">
 																	<select name="form_cobranca" id="form_cobranca" class="form-control">
 																		<option value=""></option>
-																		<option value="1" <?if($row['cobranca']=="1"){echo " selected ";}?>>Sim</option>
+																		<option value="1" <?php if($row['cobranca']=="1"){echo " selected ";}?>>Sim</option>
 																	</select>
 																</div>
 															</div>
@@ -304,12 +304,12 @@
 		</div>
 	</div>
 </body>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
         <div class="quick-nav-overlay"></div>
-        <?
+        <?php
 			include "global_js.php";
 		?>
         <script src="assets/global/plugins/jstree/dist/jstree.min.js" type="text/javascript"></script>

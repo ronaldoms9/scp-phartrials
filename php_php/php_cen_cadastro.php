@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();	
 	include "../class/conexao.class.php";
 	include "../class/pesq_centro.class.php";

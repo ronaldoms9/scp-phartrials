@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 ?>
 <!DOCTYPE html>
@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -107,7 +107,7 @@
 </head>
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -228,7 +228,7 @@
 	</body>
 	<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js" type="text/javascript"></script>
 	<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>
@@ -318,7 +318,7 @@
 		$(document).ready(function(){
 			varEstado = "NOVO";
 			iniciaLista();
-			<?
+			<?php
 			if($_GET['id'] != 0){
 				echo "selecionaEstudo(".$_GET['id'].");";
 			}

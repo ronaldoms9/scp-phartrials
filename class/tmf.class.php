@@ -1,4 +1,4 @@
-<?
+<?php
 	header('Content-Type:text/html; charset=ISO-8859-1');
 	header("Pragma: no-cache");
 	session_start();
@@ -287,14 +287,14 @@
 				<td>
 					<a href="javascript:abreRenomear(<?=$this->id;?>);" data-toggle="tooltip" class="btn btn-xs btn-outline black btn-xs green-seagreen" title="Renomear"> <i class="fa fa-exchange "></i></a>
 				</td>
-				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?if($this->status_id==2){echo '<strike>';}?><?=utf8_decode($this->nome);?><?if($this->status_id==2){echo '</strike>';}?></td>
-				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?if($this->status_id==2){echo '<strike>';}?><center><?=tamanhoArquivo($this->tamanho);?></center><?if($this->status_id==2){echo '</strike>';}?></td>
-				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?if($this->status_id==2){echo '<strike>';}?><center><?=$this->data;?> <?=$this->hora;?></center><?if($this->status_id==2){echo '</strike>';}?></td>
-				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?if($this->status_id==2){echo '<strike>';}?><center><?=$this->versao;?></center><?if($this->status_id==2){echo '</strike>';}?></td>
-				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?if($this->status_id==2){echo '<strike>';}?><?=$this->usuario->nome;?><?if($this->status_id==2){echo '</strike>';}?></td>
+				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?php if($this->status_id==2){echo '<strike>';}?><?=utf8_decode($this->nome);?><?php if($this->status_id==2){echo '</strike>';}?></td>
+				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?php if($this->status_id==2){echo '<strike>';}?><center><?=tamanhoArquivo($this->tamanho);?></center><?php if($this->status_id==2){echo '</strike>';}?></td>
+				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?php if($this->status_id==2){echo '<strike>';}?><center><?=$this->data;?> <?=$this->hora;?></center><?php if($this->status_id==2){echo '</strike>';}?></td>
+				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?php if($this->status_id==2){echo '<strike>';}?><center><?=$this->versao;?></center><?php if($this->status_id==2){echo '</strike>';}?></td>
+				<td style="<?=$formatacao;?>" class="<?=$classe;?>"><?php if($this->status_id==2){echo '<strike>';}?><?=$this->usuario->nome;?><?php if($this->status_id==2){echo '</strike>';}?></td>
 				<td style="<?=$formatacao;?>" class="<?=$classe;?>">
 					<center>
-						<?
+						<?php
 						if($this->status_id==0){
 						echo '<span class="label label-sm label-info" style="font-size: 8pt;"> Não conferido </span>';
 						}
@@ -314,34 +314,34 @@
 					</center>
 				</td>
 				<td style="text-align:right !important;<?=$formatacao;?>" ><right>
-					<?
+					<?php
 						if($this->status_id!=2){
 					?>
 						<a href="arq_action.php?act=D&acw=<?=$this->id."&aci=".$this->id;?>" data-toggle="tooltip" class="btn btn-xs  btn-outline btn-circle blue btn-sm blue" title="Download"> <i class="fa fa-download"></i></a>
-					<?
+					<?php
 					}
 					?>
-					<?
+					<?php
 						if($this->status_id!=2){
 					?>
 
 						<span class="btn btn-xs btn-outline btn-circle red btn-sm red" title="Deletar arquivo" data-toggle="modal" data-target="#static_modal" href="modal_deleta.php?id=<?=$this->id;?>"> <i class="fa fa-remove"></i></span>
-					<?
+					<?php
 					}
 					?>
 					<a href="javascript:abreHistorico(<?=$this->id;?>);" data-toggle="tooltip" class="btn btn-xs btn-outline btn-circle black btn-sm yellow" title="Histórico"> <i class="fa fa-history"></i></a>
-					<?if($this->status_id==0){?><a data-toggle="tooltip" href="javascript:validaSenha(<?=$this->id;?>, <?=$this->grupo_id;?>);"  class="btn btn-xs btn-outline btn-circle green btn-sm blue" title="Aprovar arquivo"> <i class="fa fa-thumbs-o-up"></i></a><?}?>
-					<?if($this->status_id==1){?><a data-toggle="tooltip" href="javascript:desvalidaSenha(<?=$this->id;?>, <?=$this->grupo_id;?>);"  class="btn btn-xs btn-outline btn-circle red btn-sm red" title="Desaprovar arquivo"> <i class="fa fa-thumbs-o-down"></i></a><?}?>
-					<?
+					<?php if($this->status_id==0){?><a data-toggle="tooltip" href="javascript:validaSenha(<?=$this->id;?>, <?=$this->grupo_id;?>);"  class="btn btn-xs btn-outline btn-circle green btn-sm blue" title="Aprovar arquivo"> <i class="fa fa-thumbs-o-up"></i></a><?php }?>
+					<?php if($this->status_id==1){?><a data-toggle="tooltip" href="javascript:desvalidaSenha(<?=$this->id;?>, <?=$this->grupo_id;?>);"  class="btn btn-xs btn-outline btn-circle red btn-sm red" title="Desaprovar arquivo"> <i class="fa fa-thumbs-o-down"></i></a><?php }?>
+					<?php
 						if(($this->status_id!=1)&&($this->status_id!=2)&&($this->status_id!=3)){
 					?>
 						<span class="btn btn-xs btn-outline btn-circle red btn-sm red" title="Rejeitar arquivo" data-toggle="modal" data-target="#static_modal" href="modal_negou.php?id=<?=$this->id;?>"> <i class="fa fa-thumbs-o-down"></i></span>
-					<?
+					<?php
 						}
 					?>
-					<?if($mostraNovaVersao==true){
-						if($this->status_id!=2){?><a href="javascript:novaVersao(<?=$this->id;?>, '<?=$this->nome;?>', <?=$this->versao;?>)" data-toggle="tooltip" class="btn btn-xs btn-outline btn-circle black btn-sm blue" title="Fazer upload de uma NOVA versão"> <i class="fa fa-database"></i></a><?}?>
-					<?
+					<?php if($mostraNovaVersao==true){
+						if($this->status_id!=2){?><a href="javascript:novaVersao(<?=$this->id;?>, '<?=$this->nome;?>', <?=$this->versao;?>)" data-toggle="tooltip" class="btn btn-xs btn-outline btn-circle black btn-sm blue" title="Fazer upload de uma NOVA versão"> <i class="fa fa-database"></i></a><?php }?>
+					<?php
 					}
 						$cor = $this->temComentarios();
 					?>
@@ -368,7 +368,7 @@
 				 </right>
 				</td>
 			</tr>
-		<?
+		<?php
 		}
 		function temRevisaoAberta(){
 			$varConexao = new Conexao();
@@ -417,7 +417,7 @@
 
 			</tr>
 			<div name="div_grupo_<?=$this->id;?>" id="" style="display:none;">
-				<?
+				<?php
 					$query = "select arq_arquivos.*
 									from arq_arquivos
 									where  ( (arq_arquivos.id = ".$this->id.") or ( versao_anterior = ".$this->id."))
@@ -439,7 +439,7 @@
 			<tr style="line-height: 0px; font-size: 1px;">
 				<td colspan="8" style="border-top:1pt solid black !important; line-height: 0px; font-size: 1px;"></td>
 			</tr>
-		<?
+		<?php
 		}
 		function deleta($arquivo, $motivo){
 			$conexao = new Conexao();
@@ -620,12 +620,12 @@
 										id="form_status_diretorio"
 										onchange="javascript:mudouStatusDir(this.value, <?=$this->nodeId;?>);"
 										style="text-align: center">
-										<option value="0" <?if($this->status==0){ echo "selected ";}?>>Vazio</option>
-										<option value="1" <?if($this->status==1){ echo "selected ";}?>>Incompleto</option>
-										<option value="2" <?if($this->status==2){ echo "selected ";}?>>OK</option>
-										<option value="5" <?if($this->status==5){ echo "selected ";}?>>Not OK</option>
-										<option value="3" <?if($this->status==3){ echo "selected ";}?>>Não aplicável</option>
-										<option value="4" <?if($this->status==4){ echo "selected ";}?>>not - ISO</option>
+										<option value="0" <?php if($this->status==0){ echo "selected ";}?>>Vazio</option>
+										<option value="1" <?php if($this->status==1){ echo "selected ";}?>>Incompleto</option>
+										<option value="2" <?php if($this->status==2){ echo "selected ";}?>>OK</option>
+										<option value="5" <?php if($this->status==5){ echo "selected ";}?>>Not OK</option>
+										<option value="3" <?php if($this->status==3){ echo "selected ";}?>>Não aplicável</option>
+										<option value="4" <?php if($this->status==4){ echo "selected ";}?>>not - ISO</option>
 								</select>
 							</div>
 						</div>
@@ -673,7 +673,7 @@
 										<th class="arquivos_cabecalho"><b><center><?=traduzir("Ações");?></b></center></th>
 									</thead>
 									<tbody>
-										<?
+										<?php
 											$varConexao = new Conexao();
 											//Listagem dos arquivos das versoes
 											$query 	= "select id from arq_arquivos
@@ -708,7 +708,7 @@
 						</div>
 					</div>
 			</div>
-		<?
+		<?php
 		}
 		function listaArquivosInd(){
 		?>
@@ -725,7 +725,7 @@
 										<th class="arquivos_cabecalho"><b><center><?=traduzir("Ações");?></b></center></th>
 									</thead>
 									<tbody>
-										<?
+										<?php
 											//Listagem dos arquivos das versoes
 											$query 	= "select id from arq_arquivos where versao = 1 and grupo_id = " . $this->nodeId . " order by status_id, data_lis ";
 											$resArq = $this->conexao->pesquisa($query);
@@ -754,7 +754,7 @@
 								</table>
 							</div>
 
-		<?
+		<?php
 		}
 	}
 	class Tmf{

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	$tabela = "lista_pendencias";
 	$pagina = "lista_pendencias.php";
@@ -7,7 +7,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
     <style>
@@ -36,7 +36,7 @@
 
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -66,11 +66,11 @@
 		</div>
 
 	</div></div></div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
-        <?
+        <?php
 			include "global_js.php";
 		?>
 </body>

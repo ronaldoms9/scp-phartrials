@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "../seguranca.php";
 	include_once "../class/conexao.class.php";
 	include_once "../class/projeto.class.php";
@@ -90,7 +90,7 @@
 	if($_GET['act']=="INICIA_PAGINA"){
 		?>
 		<br><br>
-		<? $acao = "inc_paciente.php?".gera_parametro("act","I");?>
+		<?php $acao = "inc_paciente.php?".gera_parametro("act","I");?>
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN Portlet PORTLET-->
@@ -108,7 +108,7 @@
 										 <label class="col-md-4 control-label"><?=traduzir("Centro", $_SESSION['lang']);?></label>
 										 <div class="col-sm-8">
 											  <select class="form-control" id="form_centro" name="form_centro">
-												<?
+												<?php
 													if( ($_SESSION['centro']!=40) and ($_SESSION['centro']!=0) ){
 														$query = "select * from cfg_centro where nome <> 'CRO'  and id = ".$_SESSION['centro']." order by numero";
 													}else{
@@ -153,5 +153,5 @@
 					</div>
 				</div>
 			</div>
-			<?
+			<?php
 	}

@@ -1,4 +1,4 @@
-<?
+<?php
 	/*teste acentuação no report*/
 	session_start();
 

@@ -1,4 +1,4 @@
-<?	
+<?php	
 	class Centro{
 		public $id;		
 		public $nome;
@@ -41,7 +41,7 @@
 						<td><?=$rowCentro['email'];?></td>
 						<td><a href="pesq_centro_pesquisas.php?id=<?=$rowCentro['id'];?>"><center><i class="fa fa-search" aria-hidden="true"></i></center></a></td>
 					</tr>
-				<?
+				<?php
 			}
 		}
 

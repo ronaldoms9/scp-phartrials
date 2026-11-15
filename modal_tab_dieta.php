@@ -33,7 +33,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +42,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="pagina/meddra/dist/themes/default/style.min.css" />
 </head>
-<?
+<?php
 	include_once "class/conexao.class.php";
 ?>
     <body>

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	$tabela = "med_medicamentos";
@@ -53,7 +53,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>	
     <script>
@@ -90,7 +90,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -117,7 +117,7 @@
 											<div class="portlet-body">
 												<div class="scroller" style="height:400px" data-always-visible="1" data-rail-visible="1" data-rail-color="red" data-handle-color="green">
 													<ul id="sidebar-nav" class="sidebar-nav">
-														<?
+														<?php
 															 $query = "select * from $tabela order by nome";
 															 $resUsua = $conexao->pesquisa($query);
 															 while($rowUsua = mysqli_fetch_assoc($resUsua)){
@@ -132,7 +132,7 @@
 											</div>
 										</div>
 									</div>
-									<?
+									<?php
 										if($id>0){
 											$query = "select * from $tabela where id = " . $id;
 											$res   = $conexao->pesquisa($query);
@@ -221,7 +221,7 @@
 			</div>
 		</div>
 	</body>	
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

@@ -132,17 +132,17 @@
 									style="text-align: center"
 								>
 									<option value="N/D">N/D</option>
-									<option value="Aguardando 1 Revisor" <?if($varProjeto->status=="Aguardando 1 Revisor"){ echo " selected ";}?>>Aguardando 1 Revisor</option>
-									<option value="Aguardando 2 Revisor" <?if($varProjeto->status=="Aguardando 2 Revisor"){ echo " selected ";}?>>Aguardando 2 Revisor</option>
-									<option value="centro" <?if($varProjeto->status=="centro"){ echo " selected ";}?>>Aguardando Revisão I - Centro</option>
-									<option value="atcgen2" <?if($varProjeto->status=="atcgen2"){ echo " selected ";}?>>Em Revisão II</option>
-									<option value="centro2" <?if($varProjeto->status=="centro2"){ echo " selected ";}?>>Aguardando Revisão II - Centro</option>
-									<option value="centro3" <?if($varProjeto->status=="centro3"){ echo " selected ";}?>>Aguardando retorno do Centro</option>
-									<option value="agpatrocinador" <?if($varProjeto->status=="agpatrocinador"){ echo " selected ";}?>>Aguardando Patrocinador</option>
-									<option value="patrocinador" <?if($varProjeto->status=="patrocinador"){ echo " selected ";}?>>Aguardando decisão Patrocinador</option>
-									<option value="assinatura" <?if($varProjeto->status=="assinatura"){ echo " selected ";}?>>Aguardando assinatura do patrocinador</option>
-									<option value="cancelado" <?if($varProjeto->status=="cancelado"){ echo " selected ";}?>>Cancelado</option>
-									<option value="finalizado" <?if($varProjeto->status=="finalizado"){ echo " selected ";}?>>Finalizado - Doc assinado - Patrocinador</option>
+									<option value="Aguardando 1 Revisor" <?php if($varProjeto->status=="Aguardando 1 Revisor"){ echo " selected ";}?>>Aguardando 1 Revisor</option>
+									<option value="Aguardando 2 Revisor" <?php if($varProjeto->status=="Aguardando 2 Revisor"){ echo " selected ";}?>>Aguardando 2 Revisor</option>
+									<option value="centro" <?php if($varProjeto->status=="centro"){ echo " selected ";}?>>Aguardando Revisão I - Centro</option>
+									<option value="atcgen2" <?php if($varProjeto->status=="atcgen2"){ echo " selected ";}?>>Em Revisão II</option>
+									<option value="centro2" <?php if($varProjeto->status=="centro2"){ echo " selected ";}?>>Aguardando Revisão II - Centro</option>
+									<option value="centro3" <?php if($varProjeto->status=="centro3"){ echo " selected ";}?>>Aguardando retorno do Centro</option>
+									<option value="agpatrocinador" <?php if($varProjeto->status=="agpatrocinador"){ echo " selected ";}?>>Aguardando Patrocinador</option>
+									<option value="patrocinador" <?php if($varProjeto->status=="patrocinador"){ echo " selected ";}?>>Aguardando decisão Patrocinador</option>
+									<option value="assinatura" <?php if($varProjeto->status=="assinatura"){ echo " selected ";}?>>Aguardando assinatura do patrocinador</option>
+									<option value="cancelado" <?php if($varProjeto->status=="cancelado"){ echo " selected ";}?>>Cancelado</option>
+									<option value="finalizado" <?php if($varProjeto->status=="finalizado"){ echo " selected ";}?>>Finalizado - Doc assinado - Patrocinador</option>
 
 
 								</select>

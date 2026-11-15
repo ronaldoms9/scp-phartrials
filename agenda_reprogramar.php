@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
 	$id = $_GET[base64_encode('codigo')];

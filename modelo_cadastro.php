@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	$CENTRO = $_GET['centro'];
 ?>
@@ -6,7 +6,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
     <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -106,7 +106,7 @@
 </head>
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -139,7 +139,7 @@
 																		<th><?=traduzir("NOME");?></th>
 																	</thead>
 																	<tbody>
-																		<?
+																		<?php
 																			$query = "select
 																						id,
 																						numero,
@@ -152,13 +152,13 @@
 																				<tr onclick='javascript:selecionaEstudo(<?=$row['id'];?>)' class='lista_formularios' style="cursor: pointer";>
 																					<td width="40"><center><b><?=$row['numero'];?></center></b></td>
 																					<td>
-																						<?
+																						<?php
 																							echo $row['nome'];
 
 																						?>
 																					</td>
 																				</tr>
-																		<?
+																		<?php
 																			}
 																		?>
 																	</tbody>
@@ -485,7 +485,7 @@
 				</div>
 			</div>
 		</div>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

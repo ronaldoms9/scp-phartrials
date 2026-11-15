@@ -1,4 +1,4 @@
-<?	
+<?php	
 	header ('Content-type: text/html; charset=UTF-8');
 	session_start();
 	
@@ -352,7 +352,7 @@
 						onclick="" 
 						style="cursor: pointer;font-family: 'Abel';font-size: 22px;">																					
 						<td class="lista_formularios">							
-							<?   								 
+							<?php   								 
 								echo utf8_encode($rowF['nome']);
 							?>
 						</td>
@@ -361,7 +361,7 @@
 							<a href="javascript:enviaEmail(<?=$rowF['id'];?>, <?=$varCentro;?>);"><i class="fa fa-envelope-open-o" aria-hidden="true" alt="Enviar pesquisa por email"></i></a></center>
 						</td>
 					</tr>
-				<?			
+				<?php			
 			}
 		}
 		function listaFormularios($varFormulario, $varCentro){
@@ -382,7 +382,7 @@
 						onclick="" 
 						style="cursor: pointer;font-family: 'Abel';font-size: 22px;">																					
 						<td class="lista_formularios">							
-							<?   								 
+							<?php   								 
 								echo utf8_encode($rowF['nome']);
 							?>
 						</td>
@@ -390,7 +390,7 @@
 							<center><a href="javascript:selecionaForm(<?=$rowF['id'];?>);"><i class="fa fa-arrow-circle-right" aria-hidden="true" alt="Visualizar perguntas/respostas"></i></a>
 						</td>
 					</tr>
-				<?			
+				<?php			
 			}
 		}
 		function listaCampos($idFormulario){

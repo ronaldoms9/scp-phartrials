@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once __DIR__."/seguranca.php";
 	include_once __DIR__."/class/conexao.class.php";
 	include_once __DIR__."/class/agenda.class.php";
@@ -108,7 +108,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<style>
@@ -121,7 +121,7 @@
 	</style>
 	<link rel="shortcut icon" href="favicon.png">
     <script >
-		<?
+		<?php
 			if(isset($msg)){echo $msg;}
 		?>
     	function excluir(entrada){
@@ -161,7 +161,7 @@
 <body>
 
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -193,17 +193,17 @@
 									<div class="col-md-10">
 										<div class="custom-tabs-line tabs-line-bottom">
 											<ul class="nav nav-tabs">
-												<?
+												<?php
 													if(isset($_GET['volta'])){$volta = $_GET['volta'];}else{$volta="";}
 												?>
 												<li
-												 <?if( ($volta=="listagem")||($volta=="") ){echo ' class="active" ';} ?>
+												 <?php if( ($volta=="listagem")||($volta=="") ){echo ' class="active" ';} ?>
 												 ><a href="#tab-top2" role="tab" data-toggle="tab"> <?=traduzir("Listagem de Visitas", $_SESSION['lang']);?></a></li>
-												 <?
+												 <?php
 												 //if( ($_SESSION['tipo_usuario']!=5)&&($_SESSION['seg_edita']=="ON") ){
 												 ?>
 												 <li><a href="#tab-top3" role="tab" data-toggle="tab"> <?=traduzir("Nova visita", $_SESSION['lang']);?></a></li>
-												 <?
+												 <?php
 												 //}
 												 ?>
 											</ul>
@@ -213,7 +213,7 @@
 								<div class="row">
 									<div class="tab-content">
 										<div class="tab-pane
-										<?if(($volta=="listagem")||($volta=="")){echo ' active';} ?>
+										<?php if(($volta=="listagem")||($volta=="")){echo ' active';} ?>
 										" id="tab-top2">
 											<div class="row">
 											<br>
@@ -306,7 +306,7 @@
 																		<div class="col-md-4">
 																			<select required id="form_centro" name="form_centro" class="form-control" onchange="traz_prox_visita(this.value);">
 																				<option value=""></option>
-																			  <?
+																			  <?php
 																				  $query = "select id, nome from cfg_centro where numero <> 'CRO' and projeto = ".$_SESSION['projeto']." order by nome";
 																				  $res = $conexao->pesquisa($query);
 																				  while($row = mysqli_fetch_assoc($res) ){
@@ -329,7 +329,7 @@
 																		<div class="col-md-4">
 																			<select id="form_tipo_monitoria" name="form_tipo_monitoria" class="form-control" onchange="mudou_tipo(this.value)">
 																				<option value=""></option>
-																				<?
+																				<?php
 																				  $query = "select
 																				  				* from cfg_visitas_tipo
 																								where ativo = 1
@@ -364,7 +364,7 @@
 																			<select id="form_periodo" name="form_periodo" class="form-control input-md" required="">
 																				<option value=""></option>
 																				<!--<option value="Inicial">Inicial</option>-->
-																				<?
+																				<?php
 																					for($i=1; $i<=9; $i++){
 																						echo '<option value="'.$i.'">'.$i.'</option>';
 																					}
@@ -403,7 +403,7 @@
 																		<div class="col-md-4">
 																			<select id="form_monitora" name="form_monitora" class="form-control" required="" onchange="escolheDadosMonitor(this.value);">
 																				<option value=""></option>
-																				<?
+																				<?php
 																					$query = "select id, nome from usu_usuario where
 																								tipo_usuario in (1,2,6,11,12)
 																							and registro_valido = 1
@@ -429,7 +429,7 @@
 																		<div class="col-md-4">
 																			<select id="form_revisor" name="form_revisor" class="form-control" required="">
 																				<option value=""></option>
-																				<?
+																				<?php
 																					//$query = "select id, nome from usu_usuario where tipo_usuario = 2 order by nome";
 																					//$query = "select id, nome from usu_usuario order by nome";
 																					$query = "select id, nome from usu_usuario where
@@ -514,7 +514,7 @@
 			</div>
 		</div>
 	</body>
-		<?
+		<?php
 			include "rodape.php";
 			include "global_js.php";
 		?>

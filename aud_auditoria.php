@@ -1,11 +1,11 @@
-<?
+<?php
   include "seguranca.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>	
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -16,7 +16,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -63,7 +63,7 @@
 																<select name="form_tabela" id="form_tabela" class="form-control">
 																	<option value=""></option>
 																	<!<option value="login">LOGIN</option>
-																	<?
+																	<?php
 																		$query 	 = "SELECT distinct tabela FROM log_alteracoes order by tabela";
 																		$res_tab = $conexao->pesquisa($query);
 																		while($row_tab = mysqli_fetch_assoc($res_tab)){
@@ -73,7 +73,7 @@
 																				if($_GET['tabela']==$row_tab['tabela']){ echo " selected "; }
 																			?>
 																			><?=strtoupper($row_tab['tabela']);?></option>
-																			<?
+																			<?php
 																		}
 																	?>
 																</select>
@@ -109,7 +109,7 @@
 															<div class="input-icon right">
 																<select name="form_usuario" id="form_usuario" class="form-control">
 																	<option value=""></option>
-																	<?
+																	<?php
 																		$query 	 = "SELECT distinct log_alteracoes.usuario_nome FROM log_alteracoes inner join usu_usuario on log_alteracoes.usuario = usu_usuario.id order by nome";
 																		$res_tab = $conexao->pesquisa($query);
 																		while($row_tab = mysqli_fetch_assoc($res_tab)){
@@ -119,7 +119,7 @@
 																				if($_GET['usuario']==$row_tab['usuario_nome']){ echo " selected "; }
 																			?>
 																			><?=strtoupper($row_tab['usuario_nome']);?></option>
-																			<?
+																			<?php
 																		}
 																	?>
 																</select>
@@ -187,7 +187,7 @@
 															<tr>
 																<td>
 																	<font size="2px">
-																		<?
+																		<?php
 																			if($tabela=="login"){echo "LOGIN";}else{echo $row['tabela'];}
 																		?>
 																	</font>
@@ -195,7 +195,7 @@
 																<td><font size="2px"><?=$row['nome_usuario'];?></font></td>	
 																<td><font size="2px">
 																	<center>
-																		<?
+																		<?php
 																			if($tabela=="login"){echo "LOGIN";}else{
 																				if($row['acao']=="A"){echo "ATUALIZAÇÃO";}
 																			}
@@ -203,11 +203,11 @@
 																	</center></font>
 																</td>			
 																<td><font size="2px">
-																	<?
+																	<?php
 																		if(($tabela=="login")||($row['campo']=="acesso_web")){echo "LOGIN";}else{echo $row['campo'];}
 																	?>
 																	</font></td>
-																<td><font size="2px"><?
+																<td><font size="2px"><?php
 																		if(($tabela=="login")||($row['campo']=="acesso_web")){echo "";}else{
 																			if($row['campo']!="senha"){
 																				echo $row['antigo'];
@@ -216,7 +216,7 @@
 																			}
 																		}
 																	?></font></td>
-																<td><font size="2px"><?
+																<td><font size="2px"><?php
 																		if(($tabela=="login")||($row['campo']=="acesso_web")){echo "";}else{
 																			if(	$row['campo']!="senha"){
 																				echo $row['novo'];
@@ -226,7 +226,7 @@
 																		}
 																	?></font></td>
 																<td><center><font size="2px">
-																	<? 
+																	<?php 
 																		$data = explode(" ", $row['data_hora']);
 																		$hora = $data[1];
 																		$data = $data[0];
@@ -237,7 +237,7 @@
 																	?>
 																</font></center></td>
 																<td><center><font size="2px">
-																	<? 
+																	<?php 
 																		$data = explode(" ", $row['data_hora']);
 																		$hora = $data[1];
 																		$data = $data[0];
@@ -247,7 +247,7 @@
 																	?>
 																</font></center></td>
 															</tr>
-														<?
+														<?php
 													}
 												
 												}
@@ -263,7 +263,7 @@
 			</div>
 		</div>
 	</body>
-            <?
+            <?php
                 include "rodape.php";
 				include "global_js.php";				
             ?>

@@ -1,4 +1,4 @@
-<?
+<?php
 	class ConexaoMensageiro{
         private $user ;
 		private $host;

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	
 	$campo = $_GET['campo'];
@@ -40,14 +40,14 @@
 							  <th>
 					   </thead>
 					   <tbody>
-					   <?
+					   <?php
 							while($rowHist=mysql_fetch_assoc($resHist)){
 							?>
 								<tr>
 									<td><font style="font-size:9.0pt;"><?=$rowHist['nome'];?></font></td>
 									<td>
 										<font style="font-size:9.0pt;">
-										<?
+										<?php
 										   $data = quebra_linha($rowHist['data_hora']," ", 1);
 										   $hora = quebra_linha($rowHist['data_hora']," ", 2);
 										   $data = explode("-",$data);
@@ -65,7 +65,7 @@
 									</td>
 								</tr>
 								
-								<?
+								<?php
 									 $query = "select UU.nome, CP.pergunta, CP.data_hora from crf_entrada_campos_pergunta CP inner join usu_usuario UU on CP.log_usuario = UU.id where CP.pergunta_id = ".$rowHist['id'];
 									 $resHistR = $conexao->pesquisa($query);
 									 if(mysqli_num_rows($resHistR)>0){
@@ -74,7 +74,7 @@
 									   <tr>
 											<td><font style="font-size:9.0pt;"><?=$rowHistR['nome'];?></font></td>
 											<td><font style="font-size:9.0pt;">
-											<?
+											<?php
 											   $data = quebra_linha($rowHistR['data_hora']," ", 1);
 											   $hora = quebra_linha($rowHistR['data_hora']," ", 2);
 											   $data = explode("-",$data);
@@ -85,7 +85,7 @@
 											</td>
 											<td><b><font style="font-size:9.0pt;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?=$rowHistR['pergunta'];?></font></b></td>
 										</tr>
-									 <?
+									 <?php
 									 }
 							}
 					   ?>					   

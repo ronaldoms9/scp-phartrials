@@ -1,4 +1,4 @@
-<?
+<?php
 	include "seguranca.php";
 
 	if($_GET['opc']=="E"){
@@ -21,7 +21,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<?
+<?php
 	include "global_css.php";
 ?>
 	<style>
@@ -97,7 +97,7 @@
 <body >
 <br>
 <div align="center">
-<?
+<?php
 	if($id>0){
 		$acao = "agendamentos_lista_pendencia.php?act=A&id=".$id;
 	}else{
@@ -132,7 +132,7 @@
 									<td style="vertical-align:middle" >
 										<select id="form_centro" name="form_centro" class="form-control">
 											<option value=""></option>
-											<?
+											<?php
 											$query = "select * from cfg_centro where projeto = ".$_SESSION['projeto']." and numero <> 'CRO'";
 											$res_c = $conexao->pesquisa($query);
 											while($row_c = mysqli_fetch_assoc($res_c) ){
@@ -167,7 +167,7 @@
 									<td style="vertical-align:middle" >
 										<select id="form_monitora" name="form_monitora" class="form-control">
 											<option value=""></option>
-											<?
+											<?php
 												//$query = "select * from usu_usuario where tipo_usuario = 2 order by nome";
 												$query = "select * from usu_usuario where ativo = 'on' order by nome";
 												$resMon = $conexao->pesquisa($query);
@@ -185,10 +185,10 @@
 									<td style="vertical-align:middle" >
 										<select id="form_tipo" name="form_tipo" class="form-control">
 											<option value=""></option>
-												<option value="ACHADO" <?if($row['tipo']=="ACHADO"){echo " selected ";}?>>ACHADO</option>
-												<option value="DESVIO" <?if($row['tipo']=="DESVIO"){echo " selected ";}?>>DESVIO DE PROTOCOLO</option>
-												<option value="DESVIO DE GCP" <?if($row['tipo']=="DESVIO DE GCP"){echo " selected ";}?>>DESVIO DE GCP</option>
-												<option value="NÃO CONFORMIDADE" <?if($row['tipo']=="NÃO CONFORMIDADE"){echo " selected ";}?>>NÃO CONFORMIDADE</option>
+												<option value="ACHADO" <?php if($row['tipo']=="ACHADO"){echo " selected ";}?>>ACHADO</option>
+												<option value="DESVIO" <?php if($row['tipo']=="DESVIO"){echo " selected ";}?>>DESVIO DE PROTOCOLO</option>
+												<option value="DESVIO DE GCP" <?php if($row['tipo']=="DESVIO DE GCP"){echo " selected ";}?>>DESVIO DE GCP</option>
+												<option value="NÃO CONFORMIDADE" <?php if($row['tipo']=="NÃO CONFORMIDADE"){echo " selected ";}?>>NÃO CONFORMIDADE</option>
 										</select>
 									</td>
 								</tr>
@@ -197,13 +197,13 @@
 									<td>
 										<select id="form_categoria" name="form_categoria" class="form-control">
 											<option value=""></option>
-											<option value="TCLE"  <?if($row['categoria']=="TCLE"){echo " selected ";}?>>TCLE</option>
-											<option value="DATA"  <?if($row['categoria']=="DATA"){echo " selected ";}?> >Erros de data</option>
-											<option value="EM BRANCO"  <?if($row['categoria']=="EM BRANCO"){echo " selected ";}?> >Campo em branco</option>
-											<option value="ERRO DE PREENCHIMENTO"  <?if($row['categoria']=="ERRO DE PREENCHIMENTO"){echo " selected ";}?> >Erro de preenchimento</option>
-											<option value="FALTA DE DOCUMENTO"  <?if($row['categoria']=="FALTA DE DOCUMENTO"){echo " selected ";}?> >Falta de Documento</option>
-											<option value="FALTA DE DOCUMENTO FONTE"  <?if($row['categoria']=="FALTA DE DOCUMENTO FONTE"){echo " selected ";}?> >Falta de Documento Fonte</option>
-											<option value="OUTROS"  <?if($row['categoria']=="OUTROS"){echo " selected ";}?> >OUTROS</option>
+											<option value="TCLE"  <?php if($row['categoria']=="TCLE"){echo " selected ";}?>>TCLE</option>
+											<option value="DATA"  <?php if($row['categoria']=="DATA"){echo " selected ";}?> >Erros de data</option>
+											<option value="EM BRANCO"  <?php if($row['categoria']=="EM BRANCO"){echo " selected ";}?> >Campo em branco</option>
+											<option value="ERRO DE PREENCHIMENTO"  <?php if($row['categoria']=="ERRO DE PREENCHIMENTO"){echo " selected ";}?> >Erro de preenchimento</option>
+											<option value="FALTA DE DOCUMENTO"  <?php if($row['categoria']=="FALTA DE DOCUMENTO"){echo " selected ";}?> >Falta de Documento</option>
+											<option value="FALTA DE DOCUMENTO FONTE"  <?php if($row['categoria']=="FALTA DE DOCUMENTO FONTE"){echo " selected ";}?> >Falta de Documento Fonte</option>
+											<option value="OUTROS"  <?php if($row['categoria']=="OUTROS"){echo " selected ";}?> >OUTROS</option>
 										</select>
 									</td>
 								</tr>
@@ -213,8 +213,8 @@
 									<td style="vertical-align:middle" >
 										<select id="form_criticidade" name="form_criticidade" class="form-control">
 											<option value=""></option>
-											<option value="NAO" <?if($row['criticidade']=="NAO"){echo " selected ";}?>>Não crítico</option>
-											<option value="CRITICO" <?if($row['criticidade']=="CRITICO"){echo " selected ";}?>>Crítico</option>
+											<option value="NAO" <?php if($row['criticidade']=="NAO"){echo " selected ";}?>>Não crítico</option>
+											<option value="CRITICO" <?php if($row['criticidade']=="CRITICO"){echo " selected ";}?>>Crítico</option>
 										</select>
 									</td>
 								</tr>
@@ -230,12 +230,12 @@
 									<td style="vertical-align:middle" >
 										<select id="form_responsavel" name="form_responsavel" class="form-control">
 												<option value=""></option>
-												<option value="LABORATÓRIO EXAMES" <?if($row['responsavel']=="LABORATÓRIO EXAMES"){echo " selected ";}?>>LABORATÓRIO EXAMES</option>
-												<option value="CENTRO" <?if($row['responsavel']=="CENTRO"){echo " selected ";}?>>CENTRO</option>
-												<option value="MONITORA" <?if($row['responsavel']=="MONITORA"){echo " selected ";}?>>MONITORA</option>
-												<option value="PATROCINADOR" <?if($row['responsavel']=="PATROCINADOR"){echo " selected ";}?>>PATROCINADOR</option>
-												<option value="LABORATORIO" <?if($row['responsavel']=="LABORATORIO"){echo " selected ";}?>>Laboratório</option>
-												<option value="EDC" <?if($row['responsavel']=="EDC"){echo " selected ";}?>>EDC (Sistema)</option>
+												<option value="LABORATÓRIO EXAMES" <?php if($row['responsavel']=="LABORATÓRIO EXAMES"){echo " selected ";}?>>LABORATÓRIO EXAMES</option>
+												<option value="CENTRO" <?php if($row['responsavel']=="CENTRO"){echo " selected ";}?>>CENTRO</option>
+												<option value="MONITORA" <?php if($row['responsavel']=="MONITORA"){echo " selected ";}?>>MONITORA</option>
+												<option value="PATROCINADOR" <?php if($row['responsavel']=="PATROCINADOR"){echo " selected ";}?>>PATROCINADOR</option>
+												<option value="LABORATORIO" <?php if($row['responsavel']=="LABORATORIO"){echo " selected ";}?>>Laboratório</option>
+												<option value="EDC" <?php if($row['responsavel']=="EDC"){echo " selected ";}?>>EDC (Sistema)</option>
 
 											</select>
 									</td>
@@ -251,8 +251,8 @@
 									<td style="vertical-align:middle" >
 										<select id="form_status" name="form_status" class="form-control">
 											<option value=""></option>
-											<option value="PENDENTE" <?if($row['status']=="PENDENTE"){echo " selected ";}?>>PENDENTE</option>
-											<option value="RESOLVIDO" <?if($row['status']=="RESOLVIDO"){echo " selected ";}?>>RESOLVIDO</option>
+											<option value="PENDENTE" <?php if($row['status']=="PENDENTE"){echo " selected ";}?>>PENDENTE</option>
+											<option value="RESOLVIDO" <?php if($row['status']=="RESOLVIDO"){echo " selected ";}?>>RESOLVIDO</option>
 										</select>
 									</td>
 								</tr>

@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 ?>
 
@@ -32,7 +32,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -78,7 +78,7 @@
                                       <th><center>Tem que ser<br>menor que termo?</center></th>
                                </thead>
                                <tbody>
-                               <?
+                               <?php
                                  $query = "SELECT  CF.ordem, ";
                                  $query .= "                                 	CF.nome, ";
                                  $query .= "                                        CF.texto_crf, ";
@@ -106,16 +106,16 @@
                                  while($rowLista=mysqli_fetch_assoc($resLista)){
                                  ?>
                                  <tr>
-                                     <td><?if($rowLista['nome']!=$ant){echo trim($rowLista['nome']);}?></td>
-                                     <td><?if($rowLista['nome']!=$ant){echo trim($rowLista['texto_crf']);}?></td>
+                                     <td><?php if($rowLista['nome']!=$ant){echo trim($rowLista['nome']);}?></td>
+                                     <td><?php if($rowLista['nome']!=$ant){echo trim($rowLista['texto_crf']);}?></td>
                                      <td><?=$rowLista['texto'];?></td>
-                                     <td><?
+                                     <td><?php
                                            $tipo = $rowLista['tipo'];
                                            if($tipo!="select"){echo strtoupper($tipo);}else{echo "SELEÇÃO";}
                                      ?></td>
                                      
                                      <td>
-                                     <?
+                                     <?php
                                           $opcoes = "";
                                           $opcoes = str_replace("<br />","%",$rowLista['selecao_valores']);
                                           $opcoes = str_replace("\n","",$opcoes);
@@ -142,7 +142,7 @@
                                      <td></td>
                                      <td></td>
                                  </tr>
-                                 <?
+                                 <?php
                                    $ant = $rowLista['nome'];
                                  }
                                ?>

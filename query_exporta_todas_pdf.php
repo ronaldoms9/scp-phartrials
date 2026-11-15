@@ -1,4 +1,4 @@
-<?
+<?php
 	$conexao->pesquisa( "seguranca.php";
 	$conexao->pesquisa( "funcoes.php";
 
@@ -29,7 +29,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
 
@@ -62,7 +62,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -96,7 +96,7 @@
 
 											<div class="col-md-8 col-sm-8 col-xs-8" style="background-color:white">
 
-												<?
+												<?php
 
 													//Apacagar todos os arquivos da pasta QUERY
 													unlinkRecursive( '/home/spc/public_html/dapa/query', false );
@@ -149,7 +149,7 @@
 																	  </div>
 																	</div>
 																</div>
-																<?
+																<?php
 															}
 														}
 														closedir($handle);
@@ -189,6 +189,6 @@
                 </div>
             </div>
         </div>
-        <?include "global_js.php";?>
+        <?php include "global_js.php";?>
 </body>
 </html>

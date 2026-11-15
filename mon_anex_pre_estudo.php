@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 ?>
 <!DOCTYPE html>
@@ -6,7 +6,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta http-equiv="content-type" content="application/vnd.ms-excel; charset=UTF-8">
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
     <link href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -46,7 +46,7 @@
 	
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -81,7 +81,7 @@
 																	<th>ANEXO</th>																	
 																</thead>
 																<tbody>
-																	<?
+																	<?php
 																		$query = "select id, nome from crf_forms where tipo = 2 order by ordem";	
 																		$res   = $conexao->pesquisa($query);
 																		while($row = mysqli_fetch_assoc($res)){
@@ -89,14 +89,14 @@
 																			<tr onclick='javascript:$conexao->pesquisa(<?=$row['id'];?>)' class='lista_formularios' style="cursor: pointer";>
 																				<td width="40"><center><?=$row['ordem'];?></center></td>
 																				<td>
-																					<? 
+																					<?php 
 																						//if($_GET['anexo']==$row['numero']){ echo "<b>";}
 																						echo $row['nome'];
 																						//if($_GET['centro']==$row['numero']){ echo "</b>";} 
 																					?>																						
 																				</td>
 																			</tr>
-																	<?
+																	<?php
 																		}
 																	?>																	
 																</tbody>
@@ -105,7 +105,7 @@
 													</div>
 												</div>
 											</div>
-											<?
+											<?php
 											if($_GET['anexo']!=""){
 												$anexo 		= $_GET['anexo'];
 												$query 		= "select id, nome from crf_forms where id = " . $anexo;	
@@ -142,7 +142,7 @@
 																	<thead class="header_formularios">
 																		<tr>
 																			<th>Participante</th>
-																	<?
+																	<?php
 																		$query 		= "select id, nome, texto from crf_forms_campos where formulario = " . $anexo . " order by ordem";
 																		$resCampos	= $conexao->pesquisa($query);
 																		while($rowCampos = mysqli_fetch_assoc($resCampos)){
@@ -152,7 +152,7 @@
 																		</tr>
 																	</thead>
 																	<tbody class="lista_formularios">
-																		<?
+																		<?php
 																			$query = "select 
 																						crf_paciente_pre_rand.id AS id,
 																						crf_paciente_pre_rand.nro_triagem AS nro_triagem,
@@ -177,7 +177,7 @@
 																				?>
 																					<tr>
 																						<td><center><?=$rowPart['nro_paciente'];?></center></td>
-																						<?
+																						<?php
 																							$query = " SELECT 
 																											crf_entrada_forms.id,
 																											crf_entrada_forms.paciente,
@@ -196,11 +196,11 @@
 																							while($rowCampos = mysqli_fetch_assoc($resCampos)){
 																								?>
 																									<td><?=$rowCampos['valor'];?></td>
-																								<?
+																								<?php
 																							}
 																						?>
 																					</tr>
-																				<?
+																				<?php
 																			}
 																		?>
 																	</tbody>
@@ -209,7 +209,7 @@
 														</div>
 													</div>
 												</div>	
-											<?
+											<?php
 											}											
 											?>
 										</div>
@@ -222,7 +222,7 @@
 				</div>
 			</div>
 		</div>        	
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

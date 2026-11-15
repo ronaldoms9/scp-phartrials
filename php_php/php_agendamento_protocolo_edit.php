@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	header('Content-Type:text/html; charset=ISO-8859-1');
 	include_once "../class/conexao.class.php";

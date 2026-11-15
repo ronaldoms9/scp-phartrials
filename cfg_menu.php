@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
   $id = $_GET[base64_encode('codigo')];
@@ -53,7 +53,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
         <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -61,7 +61,7 @@
         <link href="assets/global/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
     <script>
-    <?
+    <?php
         if($msg==1){ echo "alert('Ítem atualizado com sucesso');"; }
         if($msg==2){ echo "alert('Ítem cadastrado com sucesso');"; }
         if($msg==3){ echo "alert('Ítem deletado com sucesso');"; }
@@ -70,7 +70,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -103,7 +103,7 @@
                                <ul>
                                    <li> Dashboard
                                         <ul>
-                                            <?
+                                            <?php
                                                 $query = " select * from $tabela where pai < 1 order by ordem ";
                                                 $res_lista = $conexao->pesquisa($query);
                                                 $cont = 0;
@@ -119,7 +119,7 @@
                                                 }
                                             ?>
                                                     <a href="<?=$pagina.'?'.gera_parametro("codigo",$row_lista['id']);?>"><?=$row_lista['ordem'];?> - <?=$row_lista['nome'];?></a>
-                                                    <?
+                                                    <?php
                                                          $query = " select * from $tabela where pai = " . $row_lista['id'] . " order by ordem ";
                                                          $res_filho = $conexao->pesquisa($query);
                                                          if(mysqli_num_rows($res_filho)>0){
@@ -127,7 +127,7 @@
                                                              while($row_filho = mysqli_fetch_assoc($res_filho)){
                                                              ?>
                                                                     <li data-jstree='{  }'> <a href="<?=$pagina.'?'.gera_parametro("codigo",$row_filho['id']);?>"><?=$row_filho['ordem'];?> - <?=$row_filho['nome'];?></a>
-                                                                    <?
+                                                                    <?php
                                                                     $query = "select * from $tabela where pai = " . $row_filho['id'] . " order by ordem ";
                                                                     $res_3_nivel = $conexao->pesquisa($query);
                                                                     if(mysqli_num_rows($res_3_nivel)) {
@@ -135,20 +135,20 @@
                                                                     	  while($row_3_nivel=mysqli_fetch_assoc($res_3_nivel)){
 		                                                                 	    ?>
 		                                                                 	    <li data-jstree='{  }'> <a href="<?=$pagina.'?'.gera_parametro("codigo",$row_3_nivel['id']);?>"><?=$row_3_nivel['ordem'];?> - <?=$row_3_nivel['nome'];?></a></li>
-		                                                                 	    <?
+		                                                                 	    <?php
                                                                     	  }
                                                                     	  echo "</ul>";
                                                                     }
                                                                     ?>
                                                                     </li>
-                                                             <?}
+                                                             <?php }
                                                              ?>
-                                                             <?
+                                                             <?php
                                                              echo "</ul>";
                                                             }
                                                     ?>
                                                 </li>
-                                            <?
+                                            <?php
                                                 $cont++;
                                                 }
                                             ?>
@@ -159,7 +159,7 @@
                      </div>
                     </div>
                     <div class="col-md-6">
-						<?
+						<?php
                              if($id>0){                   //Atualizacao
                                  $acao = $pagina."?".gera_parametro("codigo",$id)."&".gera_parametro("act","A");
                              }else{$acao = $pagina."?".gera_parametro("act","I");}
@@ -187,17 +187,17 @@
                                  <div class="col-sm-6">
                                  <select name="form_pai" id="form_pai" class="form-control">
                                          <option value=""></option>
-                                         <?
+                                         <?php
                                              $query = "select * from $tabela order by nome";
                                              $res_pai = $conexao->pesquisa($query);
                                              while($row_pai = mysqli_fetch_assoc($res_pai)){
                                              ?>
                                                  <option value="<?=$row_pai['id'];?>"
-                                                 <?
+                                                 <?php
                                                     if($rowUsu['pai']==$row_pai['id']){ echo " selected "; }
                                                  ?>
                                                  ><?=$row_pai['nome'];?></option>
-                                             <?
+                                             <?php
                                              }
                                          ?>
                                  </select>
@@ -219,7 +219,7 @@
                                  <label class="col-md-2 control-label">Mostra?</label>
                                  <div class="col-sm-4">
                                       <input type="checkbox" id="form_mostra" name="form_mostra" value="1"
-									  <?
+									  <?php
 									  if($rowUsu['mostra']==1){ echo " checked ";}
 									  ?>
 									  >
@@ -227,7 +227,7 @@
 								 <label class="col-md-2 control-label">Nova Janela?</label>
                                  <div class="col-sm-4">
                                       <input type="checkbox" id="form_nova_janela" name="form_nova_janela" value="1"
-									  <?
+									  <?php
 									  if($rowUsu['nova_janela']==1){ echo " checked ";}
 									  ?>
 									  >
@@ -257,12 +257,12 @@
 	<!-- END WRAPPER -->
 	<!-- JAVASCRIPTS -->
 </body>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
         <div class="quick-nav-overlay"></div>
-       <?
+       <?php
 		 include "global_js.php";
 	   ?>
         <!-- BEGIN PAGE LEVEL SCRIPTS -->

@@ -71,7 +71,7 @@
 			}
 			?>
 				<input type="checkbox" <?=$checked;?> value="1" name="check_<?=$campo;?>" onclick="muda_check(<?=$campo;?>, this.checked);"><br><font size="1px"><?=$label;?></font>
-			<?
+			<?php
 
 		}
 	}
@@ -304,34 +304,34 @@
 				<tr style="font-size: 6px !important;">
 					<td style="font-size: 10px !important;"><?=$rowPac['centro'];?></td>
 					<td style="font-size: 10px !important;"><?=$rowPac['randomizado'];?></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['altura']);
 						$spc = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'DC_ALTURA')));
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['peso']);
 						$spc = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'DC_PESO')));
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['grupo']);
 						$spc = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'DC_GRUPO')));
 						if($spc=="N/A"){$spc = "";}
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
 
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_fr']);
 						$spc = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'D1_FR')));
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_fc']);
 						$spc = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'D1_FC')));
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = str_replace("x","",strtoupper($rowMCT['d1_pa']));
 						$mct = str_replace("X","",strtoupper($mct));
 						$mct = str_replace("/","",strtoupper($mct));
@@ -340,7 +340,7 @@
 						$spc = $spc1.$spc2;
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_temperatura']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D1_TEMP'));
 						$spc = explode(",", $spc);
@@ -348,98 +348,98 @@
 						if(intval($spc[1])!="0"){$spc = $spc[0].".".$spc[1];}else{$spc = $spc[0];}
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_swab_data']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D1_SWAB_DATA'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_swab_resultado']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D1_RESULTADO_PCR'));
 						$spc = explode(" ", $spc);
 						$spc = $spc[0];
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_swab_data_laudo']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D1_SWAB_DATA_LAUDO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_saturacao']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D1_SATURACAO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d1_id_ct_vacinas']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D1_CT_VACINAS'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_retornou']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_COMPARECEU'));
 						$spc = explode(" ", $spc);
 						$spc = $spc[0];
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_data_coleta']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_DATA_COLETA_SANGUE'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_hemoglobina']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_HEMOGLOBINA'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_hematocrito']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_HEMATOCRITO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_leucocito']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_LEUCOCITOS'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_linfocito']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_LINFOCITOS'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_neutrofilo']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_NEUTROFILO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_plaqueta']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_PLAQUETAS'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d3_proteina']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D3_PROTEINAS'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_vivo']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_VIVO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
 
 
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_fr']);
 						$spc = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'D8_FR')));
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_fc']);
 						$spc1 = str_replace(",","",strtoupper(busca_valor($nro_triagem, $centro, 'D8_FC')));
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = str_replace("x","",strtoupper($rowMCT['d8_pa']));
 						$mct = str_replace("X","",strtoupper($mct));
 						$mct = str_replace("/","",strtoupper($mct));
@@ -448,19 +448,19 @@
 						$spc = $spc1.$spc2;
 						if($mct==$spc){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_temperatura']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_TEMP'));
 						$spc = explode(",", $spc);
 						if(intval($spc[1])!="0"){$spc = $spc[0].$spc[1];}else{$spc = $spc[0];}
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_swab_data']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_SWAB_DATA'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_swab_resultado']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_SWAB_RESULTADO'));
 						$spc = explode(" ", $spc);
@@ -469,37 +469,37 @@
 					?></center></td>
 
 
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_hemoglobina']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_HEMOGLOBINA'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_hematocrito']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_HEMATOCRITO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_leucocito']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_LEUCOCITO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_linfocito']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_LINFOCITO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_neutrofilo']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_NEUTROFILO'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_plaqueta']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_PLAQUETAS'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
 					?></center></td>
-					<td style="font-size: 10px !important;"><center><?
+					<td style="font-size: 10px !important;"><center><?php
 						$mct = strtoupper($rowMCT['d8_proteina']);
 						$spc = strtoupper(busca_valor($nro_triagem, $centro, 'D8_PROTEINA'));
 						if(intval($mct)==intval($spc)){escreve("<center>OK</center>");}else{escreve("MCT-> " . $mct . "<br>SPC-> ". $spc . "<br>");}
@@ -507,7 +507,7 @@
 
 
 				</tr>
-			<?
+			<?php
 		}
 	}
 
@@ -574,7 +574,7 @@
 					</td>
 					<td style="font-size: 10px !important;"><center><a href="javascript:excluir(<?=$row['id'];?>)";><img src="imagens/ico_excluir.png" width="15"></a></center></td>
 				</tr>
-			<?
+			<?php
 			$ind++;
 		}
 	}
@@ -781,7 +781,7 @@
 			';
 		?>
 		<div id="medicacao" name="medicacao">
-			<?
+			<?php
 				$query = "select * from $tabela where centro = $centro and paciente = $paciente order by id";
 				$res   = $conexao->pesquisa($query);
 				$i=1;
@@ -847,8 +847,8 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_class_gravidade" name="form_class_gravidade">
 										<option value=""></option>
-										<option value="1 - Não Grave" <?if($row['class_gravidade']=='1 - Não Grave'){echo ' selected ';}?>>Não Grave</option>
-										<option value="2 - EA Grave" <?if($row['class_gravidade']=='2 - EA Grave'){echo ' selected ';}?>>EA Grave</option>
+										<option value="1 - Não Grave" <?php if($row['class_gravidade']=='1 - Não Grave'){echo ' selected ';}?>>Não Grave</option>
+										<option value="2 - EA Grave" <?php if($row['class_gravidade']=='2 - EA Grave'){echo ' selected ';}?>>EA Grave</option>
 									</select>
 								</td>
 							</tr>
@@ -863,12 +863,12 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_class_intensidade" name="form_class_intensidade">
 										<option value=""></option>
-										<option value="1 - Leve" <?if($row['class_intensidade']=='1 - Leve'){echo ' selected ';}?>>Leve</option>
-										<option value="2 - Moderada" <?if($row['class_intensidade']=='2 - Moderada'){echo ' selected ';}?>>Moderada</option>
-										<option value="3 - Grave/Severa" <?if($row['class_intensidade']=='3 - Grave/Severa'){echo ' selected ';}?>>Grave/Severa</option>
-										<option value="4 - Comprometimento completo" <?if($row['class_intensidade']=='4 - Comprometimento completo'){echo ' selected ';}?>>Comprometimento completo</option>
-										<option value="5 - Nao especificado" <?if($row['class_intensidade']=='5 - Nao especificado'){echo ' selected ';}?>>Nao especificado</option>
-										<option value="6 - Nao aplicável" <?if($row['class_intensidade']=='6 - Nao aplicável'){echo ' selected ';}?>>Nao aplicável</option>
+										<option value="1 - Leve" <?php if($row['class_intensidade']=='1 - Leve'){echo ' selected ';}?>>Leve</option>
+										<option value="2 - Moderada" <?php if($row['class_intensidade']=='2 - Moderada'){echo ' selected ';}?>>Moderada</option>
+										<option value="3 - Grave/Severa" <?php if($row['class_intensidade']=='3 - Grave/Severa'){echo ' selected ';}?>>Grave/Severa</option>
+										<option value="4 - Comprometimento completo" <?php if($row['class_intensidade']=='4 - Comprometimento completo'){echo ' selected ';}?>>Comprometimento completo</option>
+										<option value="5 - Nao especificado" <?php if($row['class_intensidade']=='5 - Nao especificado'){echo ' selected ';}?>>Nao especificado</option>
+										<option value="6 - Nao aplicável" <?php if($row['class_intensidade']=='6 - Nao aplicável'){echo ' selected ';}?>>Nao aplicável</option>
 									</select>
 								</td>
 							</tr>
@@ -883,9 +883,9 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_class_previsibilidade" name="form_class_previsibilidade">
 										<option value=""></option>
-										<option value="1 - Esperado" <?if($row['class_previsibilidade']=='1 - Esperado'){echo ' selected ';}?>>Esperao</option>
-										<option value="2 - Inesperado" <?if($row['class_previsibilidade']=='2 - Inesperado'){echo ' selected ';}?>>Inesperado</option>
-										<option value="3 - Não avaliável" <?if($row['class_previsibilidade']=='3 - Não avaliável'){echo ' selected ';}?>>Não avaliável</option>
+										<option value="1 - Esperado" <?php if($row['class_previsibilidade']=='1 - Esperado'){echo ' selected ';}?>>Esperao</option>
+										<option value="2 - Inesperado" <?php if($row['class_previsibilidade']=='2 - Inesperado'){echo ' selected ';}?>>Inesperado</option>
+										<option value="3 - Não avaliável" <?php if($row['class_previsibilidade']=='3 - Não avaliável'){echo ' selected ';}?>>Não avaliável</option>
 									</select>
 								</td>
 							</tr>
@@ -900,12 +900,12 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_class_causalidade" name="form_class_causalidade">
 										<option value=""></option>
-										<option value="1 - Definida" <?if($row['class_causalidade']=='1 - Definida'){echo ' selected ';}?>>Definida</option>
-										<option value="2 - Provável" <?if($row['class_causalidade']=='2 - Provável'){echo ' selected ';}?>>Provável</option>
-										<option value="3 - Possível" <?if($row['class_causalidade']=='3 - Possível'){echo ' selected ';}?>>Possível</option>
-										<option value="4 - Improvável" <?if($row['class_causalidade']=='4 - Improvável'){echo ' selected ';}?>>Improvável</option>
-										<option value="5 - Condicional / Não Classificada" <?if($row['class_causalidade']=='5 - Condicional / Não Classificada'){echo ' selected ';}?>>Condicional / Não Classificada</option>
-										<option value="6 - Não Acessível / Não Classificável" <?if($row['class_causalidade']=='6 - Não Acessível / Não Classificável'){echo ' selected ';}?>>Não Acessível / Não Classificável</option>
+										<option value="1 - Definida" <?php if($row['class_causalidade']=='1 - Definida'){echo ' selected ';}?>>Definida</option>
+										<option value="2 - Provável" <?php if($row['class_causalidade']=='2 - Provável'){echo ' selected ';}?>>Provável</option>
+										<option value="3 - Possível" <?php if($row['class_causalidade']=='3 - Possível'){echo ' selected ';}?>>Possível</option>
+										<option value="4 - Improvável" <?php if($row['class_causalidade']=='4 - Improvável'){echo ' selected ';}?>>Improvável</option>
+										<option value="5 - Condicional / Não Classificada" <?php if($row['class_causalidade']=='5 - Condicional / Não Classificada'){echo ' selected ';}?>>Condicional / Não Classificada</option>
+										<option value="6 - Não Acessível / Não Classificável" <?php if($row['class_causalidade']=='6 - Não Acessível / Não Classificável'){echo ' selected ';}?>>Não Acessível / Não Classificável</option>
 									</select>
 								</td>
 							</tr>
@@ -923,10 +923,10 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_cond_acao_psi" name="form_cond_acao_psi">
 										<option value=""></option>
-										<option value="1 - Nenhuma ação" <?if($row['cond_acao_psi']=='1 - Nenhuma ação'){echo ' selected ';}?>>Nenhuma ação</option>
-										<option value="2 - Interrupção temporária" <?if($row['cond_acao_psi']=='2 - Interrupção temporária'){echo ' selected ';}?>>Interrupção temporária</option>
-										<option value="3 - Suspensão" <?if($row['cond_acao_psi']=='3 - Suspensão'){echo ' selected ';}?>>Suspensão</option>
-										<option value="9 - Não Aplicável" <?if($row['cond_acao_psi']=='9 - Não Aplicável'){echo ' selected ';}?>>Não Aplicável</option>
+										<option value="1 - Nenhuma ação" <?php if($row['cond_acao_psi']=='1 - Nenhuma ação'){echo ' selected ';}?>>Nenhuma ação</option>
+										<option value="2 - Interrupção temporária" <?php if($row['cond_acao_psi']=='2 - Interrupção temporária'){echo ' selected ';}?>>Interrupção temporária</option>
+										<option value="3 - Suspensão" <?php if($row['cond_acao_psi']=='3 - Suspensão'){echo ' selected ';}?>>Suspensão</option>
+										<option value="9 - Não Aplicável" <?php if($row['cond_acao_psi']=='9 - Não Aplicável'){echo ' selected ';}?>>Não Aplicável</option>
 									</select>
 								</td>
 							</tr>
@@ -941,11 +941,11 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_cond_tratamento" name="form_cond_tratamento">
 										<option value=""></option>
-										<option value="1 - Tratamento Farmacológico" <?if($row['cond_tratamento']=='1 - Tratamento Farmacológico'){echo ' selected ';}?>>Tratamento Farmacológico</option>
-										<option value="2 - Nenhum/Observação" <?if($row['cond_tratamento']=='2 - Nenhum/Observação'){echo ' selected ';}?>>Nenhum/Observação</option>
-										<option value="3 - Outros" <?if($row['cond_tratamento']=='3 - Outros'){echo ' selected ';}?>>Outros</option>
-										<option value="4 - Retirada do Estudo" <?if($row['cond_tratamento']=='4 - Retirada do Estudo'){echo ' selected ';}?>>Retirada do Estudo</option>
-										<option value="9 - Não Aplicável" <?if($row['cond_tratamento']=='9 - Não Aplicável'){echo ' selected ';}?>>Não Aplicável</option>
+										<option value="1 - Tratamento Farmacológico" <?php if($row['cond_tratamento']=='1 - Tratamento Farmacológico'){echo ' selected ';}?>>Tratamento Farmacológico</option>
+										<option value="2 - Nenhum/Observação" <?php if($row['cond_tratamento']=='2 - Nenhum/Observação'){echo ' selected ';}?>>Nenhum/Observação</option>
+										<option value="3 - Outros" <?php if($row['cond_tratamento']=='3 - Outros'){echo ' selected ';}?>>Outros</option>
+										<option value="4 - Retirada do Estudo" <?php if($row['cond_tratamento']=='4 - Retirada do Estudo'){echo ' selected ';}?>>Retirada do Estudo</option>
+										<option value="9 - Não Aplicável" <?php if($row['cond_tratamento']=='9 - Não Aplicável'){echo ' selected ';}?>>Não Aplicável</option>
 									</select>
 								</td>
 							</tr>
@@ -987,12 +987,12 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_term_desfecho" name="form_term_desfecho">
 										<option value=""></option>
-										<option value="1 - Resolvido" <?if($row['term_desfecho']=='1 - Resolvido'){echo ' selected ';}?>>Resolvido</option>
-										<option value="2 - Resolvido com sequelas" <?if($row['term_desfecho']=='2 - Resolvido com sequelas'){echo ' selected ';}?>>Resolvido com Sequelas</option>
-										<option value="3 - Ainda não resolvido" <?if($row['term_desfecho']=='3 - Ainda não resolvido'){echo ' selected ';}?>>Ainda não resolvido</option>
-										<option value="4 - Não Resolvido" <?if($row['term_desfecho']=='4 - Não Resolvido'){echo ' selected ';}?>>Não Resolvido</option>
-										<option value="5 - Óbito" <?if($row['term_desfecho']=='5 - Óbito'){echo ' selected ';}?>>Óbito</option>
-										<option value="9 - Desconhecido" <?if($row['term_desfecho']=='9 - Desconhecido'){echo ' selected ';}?>>Desconhecido</option>
+										<option value="1 - Resolvido" <?php if($row['term_desfecho']=='1 - Resolvido'){echo ' selected ';}?>>Resolvido</option>
+										<option value="2 - Resolvido com sequelas" <?php if($row['term_desfecho']=='2 - Resolvido com sequelas'){echo ' selected ';}?>>Resolvido com Sequelas</option>
+										<option value="3 - Ainda não resolvido" <?php if($row['term_desfecho']=='3 - Ainda não resolvido'){echo ' selected ';}?>>Ainda não resolvido</option>
+										<option value="4 - Não Resolvido" <?php if($row['term_desfecho']=='4 - Não Resolvido'){echo ' selected ';}?>>Não Resolvido</option>
+										<option value="5 - Óbito" <?php if($row['term_desfecho']=='5 - Óbito'){echo ' selected ';}?>>Óbito</option>
+										<option value="9 - Desconhecido" <?php if($row['term_desfecho']=='9 - Desconhecido'){echo ' selected ';}?>>Desconhecido</option>
 									</select>
 								</td>
 							</tr>
@@ -1021,7 +1021,7 @@
 				</form>
 			</div>
 		</div>
-		<?
+		<?php
 		}
 	}
 	if($act=="ECRF_SUB_HC"){
@@ -1045,7 +1045,7 @@
 					<h5>Nenhuma história cadastrada...</h5>
 				</div>
 			</div>
-		<?
+		<?php
 		}else{
 		?>
 		<div class="portlet light">
@@ -1053,7 +1053,7 @@
 				<div class="caption" style="text-align:center">
 					<div class="btn-toolbar margin-bottom-10" style="text-align:center">
 						<div class="btn-group">
-							<?
+							<?php
 								$indMed = 1;
 								while($row_med = mysqli_fetch_assoc($res_med)){
 									if(($indMed==$nro)){
@@ -1073,7 +1073,7 @@
 				</div>
 			</div>
 			<div class="portlet-body">
-				<?
+				<?php
 					$query = "select * from $sub_tabela where centro = $centro and paciente = $paciente order by id";
 					$res   = $conexao->pesquisa($query);
 					$i=1;
@@ -1124,8 +1124,8 @@
 									<td style="vertical-align:middle" width="22%">
 										<select class="form-control select2_category" id="form_em_tratamento" name="form_em_tratamento">
 											<option value=""></option>
-											<option value="1 - Sim" <?if($row['em_tratamento']=='1 - Sim'){echo ' selected ';}?>>Sim</option>
-											<option value="2 - Não" <?if($row['em_tratamento']=='2 - Não'){echo ' selected ';}?>>Não</option>
+											<option value="1 - Sim" <?php if($row['em_tratamento']=='1 - Sim'){echo ' selected ';}?>>Sim</option>
+											<option value="2 - Não" <?php if($row['em_tratamento']=='2 - Não'){echo ' selected ';}?>>Não</option>
 										</select>
 									</td>
 								</tr>
@@ -1155,7 +1155,7 @@
 				</div>
 			</div>
 		</div>
-		<?
+		<?php
 		}
 	}
 
@@ -1190,7 +1190,7 @@
 			';
 		?>
 		<div id="medicacao" name="medicacao">
-			<?
+			<?php
 				$query = "select * from crf_med_concomitante where centro = $centro and paciente = $paciente order by id";
 				$res   = $conexao->pesquisa($query);
 				$i=1;
@@ -1265,9 +1265,9 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_indicacao" name="form_indicacao">
 										<option value=""></option>
-										<option value="1 - Evento Adverso" <?if($row['indicacao']=='1 - Evento Adverso'){echo ' selected ';}?>>Evento Adverso</option>
-										<option value="2 - História Médica" <?if($row['indicacao']=='2 - História Médica'){echo ' selected ';}?>>História Médica</option>
-										<option value="3 - Outro" <?if($row['indicacao']=='3 - Outro'){echo ' selected ';}?>>Outro</option>
+										<option value="1 - Evento Adverso" <?php if($row['indicacao']=='1 - Evento Adverso'){echo ' selected ';}?>>Evento Adverso</option>
+										<option value="2 - História Médica" <?php if($row['indicacao']=='2 - História Médica'){echo ' selected ';}?>>História Médica</option>
+										<option value="3 - Outro" <?php if($row['indicacao']=='3 - Outro'){echo ' selected ';}?>>Outro</option>
 									</select>
 								</td>
 							<tr>
@@ -1318,8 +1318,8 @@
 								<td style="vertical-align:middle" width="22%">
 									<select class="form-control select2_category" id="form_em_andamento" name="form_em_andamento">
 										<option value=""></option>
-										<option value="1 - Sim" <?if($row['em_andamento']=='1 - Sim'){echo ' selected ';}?>>Sim</option>
-										<option value="2 - Não" <?if($row['em_andamento']=='2 - Não'){echo ' selected ';}?>>Não</option>
+										<option value="1 - Sim" <?php if($row['em_andamento']=='1 - Sim'){echo ' selected ';}?>>Sim</option>
+										<option value="2 - Não" <?php if($row['em_andamento']=='2 - Não'){echo ' selected ';}?>>Não</option>
 									</select>
 								</td>
 							<tr>
@@ -1348,7 +1348,7 @@
 				</form>
 			</div>
 		</div>
-		<?
+		<?php
 		}
 	}
 	if($act=="TRAZ_PROX_VISITA"){   //Mudanças do checkbox dapágina de configuraçao de tipos usuários / menu
@@ -1414,7 +1414,7 @@
 				<tr>
 					<td>
 						<font size="2px">
-							<?
+							<?php
 								if($tabela=="login"){echo "LOGIN";}else{echo $row['tabela'];}
 							?>
 						</font>
@@ -1422,7 +1422,7 @@
 					<td><font size="2px"><?=$row['nome_usuario'];?></font></td>
 					<td><font size="2px">
 						<center>
-							<?
+							<?php
 								if($tabela=="login"){echo "LOGIN";}else{
 									if($row['acao']=="A"){echo "ATUALIZAÇÃO";}
 								}
@@ -1430,11 +1430,11 @@
 						</center></font>
 					</td>
 					<td><font size="2px">
-						<?
+						<?php
 							if(($tabela=="login")||($row['campo']=="acesso_web")){echo "LOGIN";}else{echo $row['campo'];}
 						?>
 						</font></td>
-					<td><font size="2px"><?
+					<td><font size="2px"><?php
 							if(($tabela=="login")||($row['campo']=="acesso_web")){echo "";}else{
 								if($row['campo']!="senha"){
 									echo $row['antigo'];
@@ -1443,7 +1443,7 @@
 								}
 							}
 						?></font></td>
-					<td><font size="2px"><?
+					<td><font size="2px"><?php
 							if(($tabela=="login")||($row['campo']=="acesso_web")){echo "";}else{
 								if(	$row['campo']!="senha"){
 									echo $row['novo'];
@@ -1455,7 +1455,7 @@
 
 
 					<td><center><font size="2px">
-						<?
+						<?php
 							$data = explode(" ", $row['data_hora']);
 							$hora = $data[1];
 							$data = $data[0];
@@ -1469,7 +1469,7 @@
 
 
 				</tr>
-			<?
+			<?php
 		}
 	}
 
@@ -1488,7 +1488,7 @@
 				</div>
 				<div class="portlet-body">
 					<div class="scroller" style="height:400px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
-						<?
+						<?php
 							$query	= "select
 										crf_entrada_campos_query.id,
 										crf_entrada_campos_query.centro,
@@ -1534,7 +1534,7 @@
 															</th>
 															<th width="*" style="text-align:right">
 																<font size="2px">
-																<?
+																<?php
 																	if($row_q['status']=="1"){
 																		echo "PENDENTE";
 																	}
@@ -1556,19 +1556,19 @@
 												</a>
 											</h4>
 										</div>
-										<div id="collapse_<?=$indice;?>" class="panel-collapse <?
+										<div id="collapse_<?=$indice;?>" class="panel-collapse <?php
 										if($indice==1){echo "in";}else{echo "collapse";}
 										?>">
 											<div class="panel-body">
 												<div class="scroller" style="height: 238px;" data-always-visible="1" data-rail-visible1="0" data-handle-color="#D7DCE2">
 													<div class="general-item-list">
 														<div class="item" style="text-align:right">
-															<?
+															<?php
 																if($row_q['status']=="1"){
 															?>
 																<button class="btn green-sharp btn-large" data-toggle="modal" data-target="#myModal"  href="modal_query_nova_resposta.php?id=<?=$row_q['id'];?>"><i class="fa fa-plus"></i> Novo ítem</button>&nbsp;
 																<button class="btn green-sharp btn-large" onclick="javascript:query_fechar(<?=$row_q['id'];?>);">Finalizar</button>
-															<?
+															<?php
 															}
 															?>
 														</div>
@@ -1612,7 +1612,7 @@
 											</div>
 										</div>
 									</div>
-								<?
+								<?php
 									$indice++;
 								}
 							?>
@@ -1625,7 +1625,7 @@
 				</div>
 			</div>
 		</div>
-	<?
+	<?php
 	}
 	if($act == "DASH_SUMARIO"){
 	?>
@@ -1652,7 +1652,7 @@
 						<th></th>
 					</thead>
 					<tbody>
-						<?
+						<?php
 							$query = "select  ";
 							$query .= "	crf_paciente_pre_rand.centro, crf_paciente_pre_rand.nro_participante, crf_paciente_pre_rand.nro_paciente, ";
 							$query .= "	    VW_DASH_SUM_DATA.inicio, VW_DASH_SUM_DATA.fim, VW_DASH_SUM_TRAVADO.travado, VW_DASH_SUM_TOT_DIGITADO.qtd as total, ";
@@ -1678,7 +1678,7 @@
 									<td style="font-size:10px"><center><?=$row['centro'];?></center></td>
 									<td style="font-size:10px"><center><a name="ANCORA_<?=$row['nro_participante'];?>"></a><?=$row['nro_participante'];?></center></td>
 									<td style="font-size:10px"><center>
-									<?
+									<?php
 										//1 Digitaçao
 										$monitorado = $row['qtd_P_dig'];
 										$porc = number_format(($monitorado*100)/$total,2);
@@ -1686,7 +1686,7 @@
 									?>
 									</td>
 									<td style="font-size:10px"><center>
-									<?
+									<?php
 										//2 Digitaçao
 										$monitorado = $row['qtd_S_dig'];
 										$porc = number_format(($monitorado*100)/$total,2);
@@ -1694,7 +1694,7 @@
 									?>
 									</td>
 									<td style="font-size:10px"><center>
-									<?
+									<?php
 										//Monitorado
 										$monitorado = $row['qtd_monitorado'];
 										$porc = number_format(($monitorado*100)/$total,2);
@@ -1702,21 +1702,21 @@
 									?>
 									</center></td>
 									<td style="font-size:10px"><center>
-									<?
+									<?php
 										$total   = $row['qtd_query'];
 										if($total == ""){$total = 0;}
 										echo $total;
 									?>
 									</center></td>
 									<td style="font-size:10px"><center>
-									<?
+									<?php
 										$total   = $row['qtd_query_ab'];
 										if($total == ""){$total = 0;}
 										echo $total;
 									?>
 									</center></td>
 									<td style="font-size:10px"><center>
-									<?
+									<?php
 										$total   = $row['qtd_comentarios'];
 										if($total == ""){$total = 0;}
 										echo $total;
@@ -1732,14 +1732,14 @@
 									<button type="button" class="btn btn-default " alt="Gerar Queries" title="Gerar Queries" onclick="javascript:gera_query(<?=$row['nro_participante'];?>,<?=$row['centro'];?>);;"  ><i class="fa fa-id-card-o"></i></button>
 									</td>
 								</tr>
-							<?
+							<?php
 							}
 						?>
 					</tbody>
 				</table>
 			</div>
 		</div>
-	<?
+	<?php
 	}
 	if($act=="QUERY_GERA"){
 		$tipo = $_GET['tipo'];
@@ -1994,7 +1994,7 @@
 			</tr>
 		  </thead>
 		  <tbody>
-		<?
+		<?php
 		$query = "SELECT id, ordem, texto_crf FROM crf_forms order by ordem";
 		$res1  = $conexao->pesquisa($query);
 		while($row1 = mysqli_fetch_assoc($res1)){
@@ -2020,7 +2020,7 @@
 						<td><font size="1px"><?=$row2['legenda'];?></font></td>
 						<td><font size="1px"><?=$row2['condicional_regra_alerta'];?></font></td>
 					</tr>
-				<?
+				<?php
 			}
 		}
 		echo ' </tbody>';
@@ -2043,7 +2043,7 @@
 		<tr>
 			<td colspan="6">Nenhum dado a exibir...</td>
 		</tr>
-	<?
+	<?php
 	}else{
 		  while($row = mysqli_fetch_assoc($res)){
 				echo '<tr style="font-size: 6px !important;">';
@@ -2102,7 +2102,7 @@
 								</center>
 							</td>
 						</tr>
-				<?
+				<?php
 			}
 		}
 		if($_GET['relatorio']=="2"){ //Campos com digitaçao diferente da 2 digitaçao
@@ -2124,7 +2124,7 @@
 								</center>
 							</td>
 						</tr>
-				<?
+				<?php
 			}
 		}
 		if($_GET['relatorio']=="4"){ //Campos com digitaçao diferente da 2 digitaçao
@@ -2146,7 +2146,7 @@
 								</center>
 							</td>
 						</tr>
-				<?
+				<?php
 			}
 		}
 	}
@@ -2274,7 +2274,7 @@
         					                                                                        <th><center><?=traduzir("Downloads");?></center></th>
         					                                                                        <th><center>% Upload</center></th>
         					                                                                </thead>
-        					                                                                <?
+        					                                                                <?php
         					                                                                    $query = "SELECT  usu_usuario.id, usu_usuario.nome ";
 	      					                                                                 $query .= "FROM usu_usuario ";
         					                                                                    $query .= "  inner join usu_usuario_tipo on usu_usuario.tipo_usuario = usu_usuario_tipo.id ";
@@ -2296,20 +2296,20 @@
 	        					                                                                    <td><?=$row_usu['nome']?></td>
 	        					                                                                    <td><center><?=$tot_upload_usu;?></center></td>
 	        					                                                                    <td><center><?=$tot_download_usu;?></center></td>
-	        					                                                                    <td><center><span class="bold theme-font"><?if($tot_upload_usu>0){
+	        					                                                                    <td><center><span class="bold theme-font"><?php if($tot_upload_usu>0){
 	        					                                                                    	//$conta = $tot_upload/($tot_upload_usu*1);
 	        					                                                                    	$conta = $tot_upload_usu * 100;
 	        					                                                                    	$conta = $conta / $tot_upload;
 	        					                                                                    	echo round ( $conta , 2 );
 	        					                                                                    	}else{echo "0";}?> %</span></center></td>
 	        					                                                                </tr>
-	        					                                                                <?
+	        					                                                                <?php
 	        					                                                                }
 	        					                                                                ?>
         					                                                            </table>
         					                                                        </div>
         					                                                    </div>
-  <?
+  <?php
   }
   if($act=="OPC3"){
 		$pesquisa = strtoupper($_GET['str']);
@@ -2333,7 +2333,7 @@
 							<th></th>
 						</thead>
 						<tbody>
-							<?
+							<?php
 								while($row = mysqli_fetch_assoc($res)){
 								?>
 									<tr>
@@ -2342,12 +2342,12 @@
 										<td style="font-size:12px !important"><?=$row['valor'];?></td>
 										<td><center><i class="fa fa-check" onclick="javascript:seleciona_vol('<?=$row['valor'];?>','<?=$_SESSION['centro'];?>');"></i></center></td>
 									</tr>
-								<?
+								<?php
 								}
 							?>
 						</tbody>
 					</table>
-				<?
+				<?php
 		}else{
 			 echo "Nenhum resultado encontrado com a pesquisa '".$str."'....";
 		}

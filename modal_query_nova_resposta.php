@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";	
 ?>
 <html>
@@ -18,7 +18,7 @@
             </div>
             <div class="modal-body">
 				<!--<div class="te" style="overflow-y: scroll; height:350px !important">						-->
-					<?
+					<?php
 					   $acao = "ecrf_formularios_query.php?".gera_parametro("pac",$paciente)."&".gera_parametro("cam",$formularioP)."&".gera_parametro("act","II")."&".gera_parametro("cod",$cod)."&xxpt=".$xxpt;
 					?>
 					<form class="form-horizontal" role="form" action="<?=$acao;?>" method="post" id="form_info_item" name="form_info_item">

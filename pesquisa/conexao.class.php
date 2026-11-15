@@ -1,4 +1,4 @@
-<?
+<?php
 	class Conexao{
 		private $user ;
 		private $host;

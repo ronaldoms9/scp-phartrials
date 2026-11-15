@@ -1,4 +1,4 @@
-<?
+<?php
 
 	include "definicoes.php";
 	function str_primeira_letra_maiuscula($entrada){

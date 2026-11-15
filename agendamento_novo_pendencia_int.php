@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
 	$agendamentoId = $_GET['id'];
@@ -25,7 +25,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <title>New Page 2</title>
 <meta http-equiv="Content-Language" content="pt-br">
-<?
+<?php
 	include "global_css.php";
 ?>
 </head>
@@ -46,7 +46,7 @@
 		 }
 </script>
 	<div class="page-wrapper">
-	<?
+	<?php
 		$parametro = gera_parametro("cam",$agendamentoId);
 		$agendamento = $agendamentoId;
 		if($id>0){
@@ -61,7 +61,7 @@
 					<div class="portlet-title fixo">
 						<div class="caption font-blue-dark">
 							<span><i class="fa fa-th font-blue-dark" title="Formulários"></i></span>
-							<?
+							<?php
 								if($_GET['id']>0){$label = "Editar Pendência";}else{$label = "Nova Pendência";}
 							?>
 							<span class="caption-subject"><?=$label;?></span>
@@ -76,7 +76,7 @@
 										<td class="tabela-body">Centro</td>
 										<td style="vertical-align:middle" >
 											<select id="form_centro" name="form_centro" class="form-control">
-												<?
+												<?php
 													$query = "select * from cfg_centro where id = " . $row_agendamento['centro'];
 													$res_c = $conexao->pesquisa($query);
 													while($row_c = mysqli_fetch_assoc($res_c) ){
@@ -90,8 +90,8 @@
 									<tr>
 										<td class="tabela-body"># Visita</td>
 										<td style="vertical-align:middle" >
-											<input disabled type="text" class="form-control" <?=$centralizado;?> value="<?if($act!="E"){echo $dataAgendamento;}?>">
-											<input type="hidden" class="form-control" id="form_visita" name="form_visita" <?=$centralizado;?> value="<?if($act!="E"){echo $dataAgendamento;}?>">
+											<input disabled type="text" class="form-control" <?=$centralizado;?> value="<?php if($act!="E"){echo $dataAgendamento;}?>">
+											<input type="hidden" class="form-control" id="form_visita" name="form_visita" <?=$centralizado;?> value="<?php if($act!="E"){echo $dataAgendamento;}?>">
 										</td>
 									</tr>
 									<tr>
@@ -105,14 +105,14 @@
 										<td style="vertical-align:middle" >
 											<select id="form_monitora" name="form_monitora" class="form-control">
 												<option value=""></option>
-												<?
+												<?php
 													//$query 	  = "select id, nome from usu_usuario where tipo_usuario = 2 order by nome";
 													$query 	  = "select id, nome from usu_usuario order by nome";
 													$res_moni = $conexao->pesquisa($query);
 													while($row_moni = mysqli_fetch_assoc($res_moni)){
 													?>
-														<option value="<?=$row_moni['id'];?>" <?if($row['monitora']==$row_moni['id']){echo " selected ";}?>><?=$row_moni['nome'];?></option>
-													<?
+														<option value="<?=$row_moni['id'];?>" <?php if($row['monitora']==$row_moni['id']){echo " selected ";}?>><?=$row_moni['nome'];?></option>
+													<?php
 													}
 												?>
 											</select>
@@ -128,9 +128,9 @@
 										<td class="tabela-body">Tipo</td>
 										<td style="vertical-align:middle" >
 											<select id="form_tipo" name="form_tipo" class="form-control">
-												<option value="ACHADO" <?if($row['tipo']=="ACHADO"){echo " selected ";}?>>ACHADO</option>
-											<option value="DESVIO" <?if($row['tipo']=="DESVIO"){echo " selected ";}?>>DESVIO</option>
-											<option value="DESVIO DE GCP" <?if($row['tipo']=="DESVIO DE GCP"){echo " selected ";}?>>DESVIO DE GCP</option>
+												<option value="ACHADO" <?php if($row['tipo']=="ACHADO"){echo " selected ";}?>>ACHADO</option>
+											<option value="DESVIO" <?php if($row['tipo']=="DESVIO"){echo " selected ";}?>>DESVIO</option>
+											<option value="DESVIO DE GCP" <?php if($row['tipo']=="DESVIO DE GCP"){echo " selected ";}?>>DESVIO DE GCP</option>
 											</select>
 										</td>
 									</tr>
@@ -174,18 +174,18 @@
 										<td style="vertical-align:middle" >
 
 											<select id="form_responsavel" name="form_responsavel" class="form-control">
-												<option value="CENTRO" <?if($row['responsavel']=="CENTRO"){echo " selected ";}?>>Centro</option>
-												<option value="MONITOR" <?if($row['responsavel']=="MONITOR"){echo " selected ";}?>>Monitor</option>
-												<option value="PATROCINADOR" <?if($row['responsavel']=="PATROCINADOR"){echo " selected ";}?>>Patrocinador</option>
-												<option value="LABORATORIO" <?if($row['responsavel']=="LABORATORIO"){echo " selected ";}?>>Laboratório</option>
-												<option value="EDC" <?if($row['responsavel']=="EDC"){echo " selected ";}?>>EDC (Sistema)</option>
+												<option value="CENTRO" <?php if($row['responsavel']=="CENTRO"){echo " selected ";}?>>Centro</option>
+												<option value="MONITOR" <?php if($row['responsavel']=="MONITOR"){echo " selected ";}?>>Monitor</option>
+												<option value="PATROCINADOR" <?php if($row['responsavel']=="PATROCINADOR"){echo " selected ";}?>>Patrocinador</option>
+												<option value="LABORATORIO" <?php if($row['responsavel']=="LABORATORIO"){echo " selected ";}?>>Laboratório</option>
+												<option value="EDC" <?php if($row['responsavel']=="EDC"){echo " selected ";}?>>EDC (Sistema)</option>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<td class="tabela-body">Data de abertura</td>
 										<td style="vertical-align:middle" >
-											<input onkeypress='validate(event)' type="text" class="form-control" id="form_data_abertura" name="form_data_abertura" <?=$centralizado;?> onkeyup="mascara(this, '##/##/####');" value="<?if($row['data_abertura']==""){echo date("d/m/Y");}else{echo $row['data_abertura'];}?>">
+											<input onkeypress='validate(event)' type="text" class="form-control" id="form_data_abertura" name="form_data_abertura" <?=$centralizado;?> onkeyup="mascara(this, '##/##/####');" value="<?php if($row['data_abertura']==""){echo date("d/m/Y");}else{echo $row['data_abertura'];}?>">
 										</td>
 									</tr>
 
@@ -199,8 +199,8 @@
 										<td class="tabela-body">Status</td>
 										<td style="vertical-align:middle" >
 											<select id="form_status" name="form_status" class="form-control" onchange="mudou_status(this.value)">
-												<option value="PENDENTE" <?if($row['status']=="PENDENTE"){echo " selected ";}?>>PENDENTE</option>
-												<option value="RESOLVIDO" <?if($row['status']=="RESOLVIDO"){echo " selected ";}?>>RESOLVIDO</option>
+												<option value="PENDENTE" <?php if($row['status']=="PENDENTE"){echo " selected ";}?>>PENDENTE</option>
+												<option value="RESOLVIDO" <?php if($row['status']=="RESOLVIDO"){echo " selected ";}?>>RESOLVIDO</option>
 											</select>
 										</td>
 									</tr>
@@ -230,7 +230,7 @@
 
 	</div>
 </body>
-	<?
+	<?php
 		include "global_js.php";
 	?>
 <script>

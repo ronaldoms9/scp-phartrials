@@ -20,7 +20,7 @@
 					?>
 					<tr>
 						<td>
-							<?
+							<?php
 								echo $ind . " ";
 								if($ind<$totPend){
 									echo '<a href="javascript:mudaBaixo('.$row_pendencias['id'].', '.$agendamento.');"><i class="fa fa-level-down" aria-hidden="true"></i></a>';
@@ -52,7 +52,7 @@
 							</center>
 						</td>
 					</tr>
-				<?
+				<?php
 					$ind++;
 				}
 			}

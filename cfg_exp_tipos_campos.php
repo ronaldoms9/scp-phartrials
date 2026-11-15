@@ -1,4 +1,4 @@
-<?
+<?php
 	
 	include_once "seguranca.php";
 	include_once "class/conexao.class.php";
@@ -97,7 +97,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>	
     <script>
@@ -118,7 +118,7 @@
                   document.location = pag+"&novo_campo="+resp;
               }
         }
-		<?
+		<?php
 			if($id>0){
 				echo 'window.formulario = '.$id.';';
 			}
@@ -151,7 +151,7 @@
 <div id="mascara"></div>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -186,7 +186,7 @@
                                             <h4><center>Campos</center></h4>
                                             <fieldset style="height: 600px;overflow-y: scroll;">
                                                 <ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-                                                    <?
+                                                    <?php
                                                          $query = "select * from cfg_exportacoes_tipos where projeto = '".$_SESSION['projeto']."' order by ordem, nome";
                                                          $resUsua = $conexao->pesquisa($query);
                                                          while($rowUsua = mysqli_fetch_assoc($resUsua)){
@@ -199,7 +199,7 @@
                         						</ul>
                                            </fieldset>
                     					</div>
-                                            <?
+                                            <?php
                                             if($id>0){
                                             ?>
                         					<div class="col-md-3">
@@ -208,7 +208,7 @@
                                                 <fieldset style="height: 600px;overflow-y: scroll;">
                                                     <ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
 														<div id="retorno_campos" name="retorno_campos">
-															<?
+															<?php
 																 $query = "select * from cfg_exportacoes_tipos_campos where formulario = $id order by id";
 																 $resUsua = $conexao->pesquisa($query);
 																 while($rowUsua = mysqli_fetch_assoc($resUsua)){
@@ -227,7 +227,7 @@
 														
 														<fieldset style="height: 500px;overflow-y: scroll;">
 															<ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-																<?
+																<?php
 																	 $query = "select * from crf_forms where projeto = '".$_SESSION['projeto']."' order by ordem, nome";
 																	 $res = $conexao->pesquisa($query);
 																	 while($row = mysqli_fetch_assoc($res)){
@@ -250,7 +250,7 @@
 													<center>sdfdfed</center>
 												</div>
                         					</div>
-                        					<?
+                        					<?php
                         					} //Fecho o if se tiver formulário selecionado
                         					?>
                 				</div>
@@ -261,7 +261,7 @@
 				</div>
 				</div>
 				</div>
-            	<?
+            	<?php
 					include "rodape.php";
 					include "global_js.php";
 				?>

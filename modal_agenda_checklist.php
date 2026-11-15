@@ -1,4 +1,4 @@
-<?
+<?php
 	include "seguranca.php";
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
 					<!--<ul class="dropdown-menu dropup scrollable-menu">-->
 					<ul>
 					
-						<?
+						<?php
 							$query = "select * from agenda_checklist order by ordem";
 							$resCheck = $conexao->pesquisa($query);
 							while($rowCheck = mysqli_fetch_assoc($resCheck)){	
@@ -75,7 +75,7 @@
 											onclick="muda_check(<?=$rowCheck['id'];?>, this.checked, <?=$_GET['id'];?>);">
 											<font size="1px"><?=$label;?></font>
 									</li>
-								<?
+								<?php
 								
 							
 							}

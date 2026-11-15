@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
 	$id_usuario = $_SESSION['user_id'];
@@ -107,7 +107,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<style>
@@ -205,7 +205,7 @@
     <h4>Formulários</h4>
     <hr>
     <div class="panel-centro" style="overflow-y: scroll;height:500" >
-    <?
+    <?php
          $query = "select * from cfg_visitas where registro_valido = 1 order by tipo, ordem, nome";
 
          $resUsua = $conexao->pesquisa($query);
@@ -219,7 +219,7 @@
 
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -251,7 +251,7 @@
                                             <h4><center>Formulários</center></h4>
                                             <fieldset style="height: 600px;overflow-y: scroll;">
                                                 <ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-                                                    <?
+                                                    <?php
                                                          //$query = "select * from cfg_visitas where registro_valido = 1 order by tipo, cast(ordem as int), nome";
 														 $query = "select cfg_visitas.*
 																	from cfg_visitas
@@ -270,14 +270,14 @@
                         						</ul>
                                            </fieldset>
                     					</div>
-                                            <?
+                                            <?php
                                             if($id>0){
                                             ?>
                         					<div class="col-md-3">
                                                 <h4><center>Campos do formulário</center></h4>
                                                 <fieldset style="height: 600px;overflow-y: scroll;">
                                                     <ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-                                                        <?
+                                                        <?php
                                                              $query = "select * from $tabela where formulario = $id and registro_valido = 1 order by ordem";
                                                              $resUsua = $conexao->pesquisa($query);
                                                              $iCampo = 1;
@@ -298,7 +298,7 @@
                                                </fieldset>
                         					</div><br><br>
                                             <div class="col-md-6" style="background-color:#FFF">
-                        						<?
+                        						<?php
                                                      if($id_campo>0){                   //Atualizacao
                                                          $acao = $pagina."?".gera_parametro("codiga",$id_campo)."&".gera_parametro("act","A");
                                                      }else{$acao = $pagina."?".gera_parametro("codigo",$id)."&".gera_parametro("act","I");}
@@ -320,26 +320,26 @@
                         				                                 <div class="col-sm-3">
                         				                                      <select title="Tipo de campo. A formatação na tela será exibida de acordo com a opção selecionada." class="form-control" name="form_tipo" id="form_tipo" onchange="mudou(this);">
                         				                                              <option value=""></option>
-                                                                                      <option value="botao" <?if($rowUsu['tipo']=="botao"){echo " selected ";}?>>Botão</option>
-                                                                                      <option value="select" <?if($rowUsu['tipo']=="select"){echo " selected ";}?>>Caixa de seleção</option>
-																					  <option value="select_coluna" <?if($rowUsu['tipo']=="select_coluna"){echo " selected ";}?>>Caixa de seleção (Coluna)</option>
-                        												              <option value="select_falso" <?if($rowUsu['tipo']=="select_falso"){echo " selected ";}?>>Select falso</option>
-                        				                                              <option value="caixa" <?if($rowUsu['tipo']=="caixa"){echo " selected ";}?>>Caixa de texto</option>
-                        				                                              <option value="calculo" <?if($rowUsu['tipo']=="calculo"){echo " selected ";}?>>Calculo</option>
-                                                                                      <option value="checkbox" <?if($rowUsu['tipo']=="checkbox"){echo " selected ";}?>>Check-Box</option>
-                                                                                      <option value="data" <?if($rowUsu['tipo']=="data"){echo " selected ";}?>>Data</option>
-                                                                                      <option value="divisao" <?if($rowUsu['tipo']=="divisao"){echo " selected ";}?>>Divisão de campo</option>
-                                                                                      <option value="escondido" <?if($rowUsu['tipo']=="escondido"){echo " selected ";}?>>Escondido</option>
-                                                                                      <option value="fim_agrupamento" <?if($rowUsu['tipo']=="fim_agrupamento"){echo " selected ";}?>>Fim Agrupamento</option>
-                                                                                      <option value="inicio_agrupamento" <?if($rowUsu['tipo']=="inicio_agrupamento"){echo " selected ";}?>>Início Agrupamento</option>
-                                                                                      <option value="numero"  <?if($rowUsu['tipo']=="numero"){echo " selected ";}?>>Número</option>
-                                                                                      <option value="pagina" <?if($rowUsu['tipo']=="pagina"){echo " selected ";}?>>Pagina</option>
-                                                                                      <option value="texto" <?if($rowUsu['tipo']=="texto"){echo " selected ";}?>>Texto</option>
-																					  <option value="textoHTML" <?if($rowUsu['tipo']=="textoHTML"){echo " selected ";}?>>Texto HTML</option>
-																					  <option value="json" <?if($rowUsu['tipo']=="json"){echo " selected ";}?>>JSON</option>
-																					  <option value="json_vertical" <?if($rowUsu['tipo']=="json_vertical"){echo " selected ";}?>>JSON VERTICAL</option>
-																					  <option value="quebra" <?if($rowUsu['tipo']=="quebra"){echo " selected ";}?>>Quebra pagina</option>
-                                                                                      <option value="esp_tratamento" <?if($rowUsu['tipo']=="esp_tratamento"){echo " selected ";}?>>Especial - Tratamento</option>
+                                                                                      <option value="botao" <?php if($rowUsu['tipo']=="botao"){echo " selected ";}?>>Botão</option>
+                                                                                      <option value="select" <?php if($rowUsu['tipo']=="select"){echo " selected ";}?>>Caixa de seleção</option>
+																					  <option value="select_coluna" <?php if($rowUsu['tipo']=="select_coluna"){echo " selected ";}?>>Caixa de seleção (Coluna)</option>
+                        												              <option value="select_falso" <?php if($rowUsu['tipo']=="select_falso"){echo " selected ";}?>>Select falso</option>
+                        				                                              <option value="caixa" <?php if($rowUsu['tipo']=="caixa"){echo " selected ";}?>>Caixa de texto</option>
+                        				                                              <option value="calculo" <?php if($rowUsu['tipo']=="calculo"){echo " selected ";}?>>Calculo</option>
+                                                                                      <option value="checkbox" <?php if($rowUsu['tipo']=="checkbox"){echo " selected ";}?>>Check-Box</option>
+                                                                                      <option value="data" <?php if($rowUsu['tipo']=="data"){echo " selected ";}?>>Data</option>
+                                                                                      <option value="divisao" <?php if($rowUsu['tipo']=="divisao"){echo " selected ";}?>>Divisão de campo</option>
+                                                                                      <option value="escondido" <?php if($rowUsu['tipo']=="escondido"){echo " selected ";}?>>Escondido</option>
+                                                                                      <option value="fim_agrupamento" <?php if($rowUsu['tipo']=="fim_agrupamento"){echo " selected ";}?>>Fim Agrupamento</option>
+                                                                                      <option value="inicio_agrupamento" <?php if($rowUsu['tipo']=="inicio_agrupamento"){echo " selected ";}?>>Início Agrupamento</option>
+                                                                                      <option value="numero"  <?php if($rowUsu['tipo']=="numero"){echo " selected ";}?>>Número</option>
+                                                                                      <option value="pagina" <?php if($rowUsu['tipo']=="pagina"){echo " selected ";}?>>Pagina</option>
+                                                                                      <option value="texto" <?php if($rowUsu['tipo']=="texto"){echo " selected ";}?>>Texto</option>
+																					  <option value="textoHTML" <?php if($rowUsu['tipo']=="textoHTML"){echo " selected ";}?>>Texto HTML</option>
+																					  <option value="json" <?php if($rowUsu['tipo']=="json"){echo " selected ";}?>>JSON</option>
+																					  <option value="json_vertical" <?php if($rowUsu['tipo']=="json_vertical"){echo " selected ";}?>>JSON VERTICAL</option>
+																					  <option value="quebra" <?php if($rowUsu['tipo']=="quebra"){echo " selected ";}?>>Quebra pagina</option>
+                                                                                      <option value="esp_tratamento" <?php if($rowUsu['tipo']=="esp_tratamento"){echo " selected ";}?>>Especial - Tratamento</option>
                         				                                      </select>
                         				                                 </div>
                         											</div>
@@ -395,19 +395,19 @@
                         								<hr>
 														<div class="form-group">
                         									<label class="col-md-2 control-label">
-																<input title="Se o preenchimento é obrigatório. Caso sim, a borda do campo ficará em vermelho" type="checkbox" id="form_obrigatorio" name="form_obrigatorio" <?if(strtoupper($rowUsu['obrigatorio'])=="ON"){ echo " checked "; }?>> Obrigatório?
+																<input title="Se o preenchimento é obrigatório. Caso sim, a borda do campo ficará em vermelho" type="checkbox" id="form_obrigatorio" name="form_obrigatorio" <?php if(strtoupper($rowUsu['obrigatorio'])=="ON"){ echo " checked "; }?>> Obrigatório?
 															</label>
 															<label class="col-md-2 control-label">
-																<input title="Somente irá permitir a entrada de valores numéricos" type="checkbox" id="form_so_numero" name="form_so_numero" <?if(strtoupper($rowUsu['so_numero'])=="ON"){ echo " checked "; }?>> Só número?
+																<input title="Somente irá permitir a entrada de valores numéricos" type="checkbox" id="form_so_numero" name="form_so_numero" <?php if(strtoupper($rowUsu['so_numero'])=="ON"){ echo " checked "; }?>> Só número?
 															</label>
 															<label class="col-md-2 control-label">
-																<input title="Somente irá permitir a entrada de valores alphanuméricos" type="checkbox" id="form_so_letra" name="form_so_letra" <? if(strtoupper($rowUsu['so_letra'])=="ON"){ echo " checked "; }?>> Só letras?
+																<input title="Somente irá permitir a entrada de valores alphanuméricos" type="checkbox" id="form_so_letra" name="form_so_letra" <?php if(strtoupper($rowUsu['so_letra'])=="ON"){ echo " checked "; }?>> Só letras?
 															</label>
 															<label class="col-md-2 control-label">
-																<input title="Campo somente leitura" type="checkbox" id="form_so_leitura" name="form_so_leitura" <? if(strtoupper($rowUsu['so_leitura'])=="ON"){ echo " checked "; }?>> ReadOnly
+																<input title="Campo somente leitura" type="checkbox" id="form_so_leitura" name="form_so_leitura" <?php if(strtoupper($rowUsu['so_leitura'])=="ON"){ echo " checked "; }?>> ReadOnly
 															</label>
                                                             <label class="col-md-2 control-label">
-																<input title="Imprime o campo no relatório?" type="checkbox" id="form_imprime" name="form_imprime" <?if(strtoupper($rowUsu['imprime'])=="ON"){ echo " checked "; }?>> Imprime?
+																<input title="Imprime o campo no relatório?" type="checkbox" id="form_imprime" name="form_imprime" <?php if(strtoupper($rowUsu['imprime'])=="ON"){ echo " checked "; }?>> Imprime?
 															</label>
 														</div>
                         								<hr>
@@ -444,34 +444,34 @@
                                                          <br>
                                                          <label class="col-md-2 control-label"><center>Maior/iguai a Data do Termo?</center></label>
                                                          <div class="col-sm-1" style="vertical-align: middle;valign: middle">
-                                                           <input type="checkbox" id="form_termo" name="form_termo" <?
+                                                           <input type="checkbox" id="form_termo" name="form_termo" <?php
                                                                            if(strtoupper($rowUsu['termo'])=="ON"){ echo " checked "; }
                                                                          ?>>
                                                          </div>
 
                                                          <label class="col-md-2 control-label"><center>ALERTA para Maior/iguai a Data do Termo?</center></label>
                                                          <div class="col-sm-1">
-                                                           <input type="checkbox" id="form_data_menor_termo_alerta" name="form_data_menor_termo_alerta" <?
+                                                           <input type="checkbox" id="form_data_menor_termo_alerta" name="form_data_menor_termo_alerta" <?php
                                                                            if(strtoupper($rowUsu['data_menor_termo_alerta'])=="ON"){ echo " checked "; }
                                                                          ?>>
                                                          </div>
 
                                                          <label class="col-md-2 control-label"><center>Menor que a Data do Termo?</center></label>
                                                          <div class="col-sm-1">
-                                                           <input type="checkbox" id="form_data_menor_termo" name="form_data_menor_termo" <?
+                                                           <input type="checkbox" id="form_data_menor_termo" name="form_data_menor_termo" <?php
                                                                            if(strtoupper($rowUsu['data_menor_termo'])=="ON"){ echo " checked "; }
                                                                          ?>>
                                                          </div>
 
                                                          <label class="col-md-2 control-label"><center>Obrigatório igual/menor que hoje?</center></label>
                                                          <div class="col-sm-1">
-                                                           <input type="checkbox" id="form_data_menor_hoje" name="form_data_menor_hoje" <?
+                                                           <input type="checkbox" id="form_data_menor_hoje" name="form_data_menor_hoje" <?php
                                                                            if(strtoupper($rowUsu['data_menor_hoje'])=="ON"){ echo " checked "; }
                                                                          ?>>
                                                          </div>
                                                          <label class="col-md-2 control-label"><center>Calcula 18 anos?</center></label>
                                                          <div class="col-sm-1">
-                                                           <input type="checkbox" id="form_data_dezoito_anos" name="form_data_dezoito_anos" <?
+                                                           <input type="checkbox" id="form_data_dezoito_anos" name="form_data_dezoito_anos" <?php
                                                                            if(strtoupper($rowUsu['data_dezoito_anos'])=="ON"){ echo " checked "; }
                                                                          ?>>
                                                          </div>
@@ -488,12 +488,12 @@
                                                          <div class="col-sm-3">
                                                               <select class="form-control" name="form_calculo_tipo" id="form_calculo_tipo" onchange="">
                                                                       <option value=""></option>
-                                                                      <option value="+" <?if($rowUsu['calculo_tipo']=="+"){echo " selected ";}?>>+</option>
-                                                                      <option value="-" <?if($rowUsu['calculo_tipo']=="-"){echo " selected ";}?>>-</option>
-                                                                      <option value="%" <?if($rowUsu['calculo_tipo']=="%"){echo " selected ";}?>>%</option>
-                                                                      <option value="Idade" <?if($rowUsu['calculo_tipo']=="Idade"){echo " selected ";}?>>Idade</option>
-                                                                      <option value="IMC" <?if($rowUsu['calculo_tipo']=="IMC"){echo " selected ";}?>>IMC</option>
-                                                                      <option value="LIKERT" <?if($rowUsu['calculo_tipo']=="LIKERT"){echo " selected ";}?>>LIKERT</option>
+                                                                      <option value="+" <?php if($rowUsu['calculo_tipo']=="+"){echo " selected ";}?>>+</option>
+                                                                      <option value="-" <?php if($rowUsu['calculo_tipo']=="-"){echo " selected ";}?>>-</option>
+                                                                      <option value="%" <?php if($rowUsu['calculo_tipo']=="%"){echo " selected ";}?>>%</option>
+                                                                      <option value="Idade" <?php if($rowUsu['calculo_tipo']=="Idade"){echo " selected ";}?>>Idade</option>
+                                                                      <option value="IMC" <?php if($rowUsu['calculo_tipo']=="IMC"){echo " selected ";}?>>IMC</option>
+                                                                      <option value="LIKERT" <?php if($rowUsu['calculo_tipo']=="LIKERT"){echo " selected ";}?>>LIKERT</option>
                                                               </select>
                                                          </div>
                                                          <label class="col-md-1 control-label">Campo1</label>
@@ -588,7 +588,7 @@
                         							</div>
                         						</form>
                         					</div>
-                        					<?
+                        					<?php
                         					} //Fecho o if se tiver formulário selecionado
                         					?>
                 				</div>
@@ -600,7 +600,7 @@
 				</DIV>
 				</DIV>
 				</DIV>
-            	<?
+            	<?php
 					include "rodape.php";
 					include "global_js.php";
 				?>

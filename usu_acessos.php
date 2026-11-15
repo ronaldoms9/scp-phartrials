@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	  
 
@@ -14,7 +14,7 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #3 for " name="description" />
         <meta content="" name="author" />
-        <?
+        <?php
 			include "global_css.php";
 		?>
 
@@ -22,7 +22,7 @@
 </head>
     <body class="page-container-bg-solid">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -52,7 +52,7 @@
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8">
-                        						<?
+                        						<?php
                                                       $query = "select * from $tabela where usuario = '".$_SESSION['user_nome']."' order by id desc";
                                                       $res = $conexao->pesquisa($query);
 
@@ -68,7 +68,7 @@
 															   </thead>
 															   <tbody>
 																	 
-																	  <?
+																	  <?php
 																		   while($row = mysqli_fetch_assoc($res)){
 																			  echo "<tr>";
 																				  echo "<td>".$row['usuario']."</td>";
@@ -92,7 +92,7 @@
                </div>
             </div>
             </div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
@@ -102,7 +102,7 @@
 <script src="assets/global/plugins/excanvas.min.js"></script>
 <script src="assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
-        <?
+        <?php
 		    include "global_js.php";
 		?>
 </body>

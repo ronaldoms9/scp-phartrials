@@ -136,7 +136,7 @@
 						<td><?=$row['atividade'];?></td>
 
 					</tr>
-				<?
+				<?php
 			}
 			return;
 		break;
@@ -175,7 +175,7 @@
 							<a href='javascript:selecionarData(<?=$row['id'];?>)'><img src='imagens/seta_direita.png' alt='Selecionar Data' width='20px'></a>
 						</td>
 					</tr>
-				<?
+				<?php
 			}
 			return;
 		break;
@@ -199,7 +199,7 @@
 							<a href='javascript:excluirAtv(<?=$row['id'];?>)'><img src='imagens/img_x.png' alt='Excluir Atividade' width='15'></a>
 						</td>
 					</tr>
-				<?
+				<?php
 			}
 			return;
 		break;
@@ -371,20 +371,20 @@
 					// if($_SESSION['tipo_usuario']!=5){
 					?>
 					<center>
-						<?
+						<?php
 							$randomico = rand(45,9985547);
 						?>
 						<a data-toggle="modal" data-target="#myModal" href="agenda_edita.php?rand=<?=$randomico;?>&id=<?=$varAgenda->id;?>">
 							<i class="fa fa-edit"></i></a>
 						<br>
 					</center>
-					<?
+					<?php
 					//}
 						//if($_SESSION['user_id']==1){
 						?>
 						<!--<a data-toggle="modal" data-target="#modalDatas" href="agenda_edita_datas.php?rand=<?=$randomico;?>&id=<?=$varAgenda->id;?>">
 							<i class="fa fa-edit"></i></a>-->
-							<?
+							<?php
 						//}
 						?>
 				</td>
@@ -393,7 +393,7 @@
 				<td style="vertical-align: middle;text-align:center"><font size="1pt"><center><b><?="Versão " . $varAgenda->versao;?><br></b><i>[<?=$varAgenda->versao_motivo;?>]</i></center></font></td>
 				<td style="vertical-align: middle;text-align:center"><font size="1pt"><center>Período: <?=$varAgenda->periodo . "<br>Grupo: ".$varAgenda->grupo_periodo;?></center></font></td>
 				<td style="vertical-align: middle;"><font size="1pt"><?=strtoupper($varAgenda->tipo);?></font></td>
-				<td style="vertical-align: middle;text-align:center"><font size="1pt"><center><?
+				<td style="vertical-align: middle;text-align:center"><font size="1pt"><center><?php
 					echo listoDATA($varAgenda->data);
 				?></center></font></td>
 				<td style="vertical-align: middle;">
@@ -406,7 +406,7 @@
 				<td style="vertical-align: middle;text-align:center">
 					<center>
 						<span name="<?=$varAgenda->id;?>_alertado" id="<?=$varAgenda->id;?>_alertado">
-							<input disabled type="checkbox" name="check" id="check" <?if($varAgenda->rel_alertado==1){echo " checked ";}?>></input>
+							<input disabled type="checkbox" name="check" id="check" <?php if($varAgenda->rel_alertado==1){echo " checked ";}?>></input>
 							<font style="font-size:8px"><br><?=$varAgenda->rel_alertado_quem;?><br><?=$varAgenda->rel_alertado_data;?></font>
 
 						</span>
@@ -415,7 +415,7 @@
 				<td style="vertical-align: middle;text-align:center">
 					<center>
 						<span name="<?=$varAgenda->id;?>_revisao_ok" id="<?=$varAgenda->id;?>_revisao_ok">
-							<input disabled type="checkbox" name="check" id="check" <?if($varAgenda->rel_revisado_data!=""){echo " checked ";}?>></input>
+							<input disabled type="checkbox" name="check" id="check" <?php if($varAgenda->rel_revisado_data!=""){echo " checked ";}?>></input>
 							<font style="font-size:8px"><br><?=$varAgenda->rel_revisado_quem;?><br><?=$varAgenda->rel_revisado_data;?></font>
 
 						</span>
@@ -425,10 +425,10 @@
 					<center>
 						<span name="<?=$varAgenda->id;?>_enviado" id="<?=$varAgenda->id;?>_enviado">
 							<input
-							<?
+							<?php
 							if($varAgenda->ativo==0){echo " disabled ";}
 							?>
-							type="checkbox" name="check" id="check" onclick="javascript:enviado(<?=$varAgenda->id?>, this.checked);" <?if($varAgenda->rel_enviado==1){echo " checked ";}?>></input>
+							type="checkbox" name="check" id="check" onclick="javascript:enviado(<?=$varAgenda->id?>, this.checked);" <?php if($varAgenda->rel_enviado==1){echo " checked ";}?>></input>
 							<font style="font-size:8px"><br><?=$varAgenda->rel_enviado_quem;?><br><?=$varAgenda->rel_enviado_data;?></font>
 
 						</span>
@@ -438,10 +438,10 @@
 					<center>
 						<span name="<?=$varAgenda->id;?>_assinado" id="<?=$varAgenda->id;?>_assinado">
 							<input
-							<?
+							<?php
 							if($varAgenda->ativo==0){echo " disabled ";}
 							?>
-							type="checkbox" name="check" id="check" onclick="javascript:assinado(<?=$varAgenda->id?>, this.checked);" <?if($varAgenda->rel_assinado==1){echo " checked ";}?>></input>
+							type="checkbox" name="check" id="check" onclick="javascript:assinado(<?=$varAgenda->id?>, this.checked);" <?php if($varAgenda->rel_assinado==1){echo " checked ";}?>></input>
 							<font style="font-size:8px"><br><?=$varAgenda->rel_assinado_quem;?><br><?=$varAgenda->rel_assinado_data;?></font>
 
 						</span>
@@ -450,7 +450,7 @@
 				<td width="*" style="vertical-align: middle;text-align:right">
 					<a href="agendamentos.php?agendamento=<?=$varAgenda->id;?>" class="btn dark btn-xs btn-outline sbold uppercase" title="Visualizar visita"><i class="fa fa-address-book-o"></i></a>
 
-					<?
+					<?php
 						$botoes = array(
 							"btnPlano"		=> 0,
 							"btnCarta" 		=> 0,
@@ -538,7 +538,7 @@
 						if($botoes['btnBranco']==1){
 							?>
 							<a href="javascript:imprimir_branco(<?=$varAgenda->id;?>);" class="btn dark btn-xs btn-outline sbold uppercase" title="Imprimir relatório em Branco"><i class="fa fa-pencil-square-o"></i></a>
-							<?
+							<?php
 						}
 						if($botoes['btnFup']==1){
 								//Carta de acompanhamento FUP
@@ -564,7 +564,7 @@
 								class="btn dark btn-xs btn-outline sbold uppercase" aria-label="Left Align"
 								href="modal_digita_data.php?rand=<?=$rand;?>&id=<?=$varAgenda->id;?>&volta=<?=$retorno;?>"><i class="fa fa-pencil-square"></i>
 							</a>
-						<?
+						<?php
 						}
 						if($botoes['btnFinal']==1){
 								//Relatório Final FINALMESMO
@@ -578,7 +578,7 @@
 								aria-label="Left Align"
 								href="modal_digita_data.php?rand=<?=$rand;?>&id=<?=$varAgenda->id;?>&volta=<?=$retorno;?>"><i class="fa fa-building"></i>
 							</a>
-							<?
+							<?php
 						}
 						if($botoes['btnRelCompleto']==1){
 							//Relatório preenchido
@@ -646,7 +646,7 @@
 								data-target="#myModal">
 								<i class="fa fa-calendar"></i>
 							</a>
-							<?
+							<?php
 						}
 						if($botoes['btnResumo']==1){
 							?>
@@ -688,7 +688,7 @@
 					?>
 				</td>
 			</tr>
-		<?
+		<?php
 		}
 		?>
 			<!--<tr style="font-size: 1pt !important">
@@ -708,6 +708,6 @@
 
 				</td>
 			</tr>-->
-		<?
+		<?php
 
 	}

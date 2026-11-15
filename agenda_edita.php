@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 	include_once "class/agenda.class.php";
 
@@ -27,7 +27,7 @@
 							<div class="col-md-9">
 								<select id="form_edita_centro" name="form_centro" class="form-control" onchange="traz_prox_visita(this.value);">
 								  <option value=""></option>
-								  <?
+								  <?php
 									  $query = "select id, nome from cfg_centro where numero <> 'CRO' and projeto = ".$_SESSION['projeto']." order by nome";
 									  $res = $conexao->pesquisa($query);
 									  while($row = mysqli_fetch_assoc($res) ){
@@ -70,15 +70,15 @@
 							<div class="col-md-9">
 								<select id="form_edita_periodo" name="form_periodo" class="form-control input-md" required="">
 									<option value=""></option>
-									<option value="Inicial" <?if($varAgenda->periodo=="Inicial"){echo " selected ";};?> >Inicial</option>
-									<option value="Regular" <?if($varAgenda->periodo=="Regular"){echo " selected ";};?> >Regular</option>
-									<option value="1" <?if($varAgenda->periodo=="1"){echo " selected ";};?> >1</option>
-									<option value="2" <?if($varAgenda->periodo=="2"){echo " selected ";};?> >2</option>
-									<option value="3" <?if($varAgenda->periodo=="3"){echo " selected ";};?> >3</option>
-									<option value="4" <?if($varAgenda->periodo=="4"){echo " selected ";};?> >4</option>
-									<option value="5" <?if($varAgenda->periodo=="5"){echo " selected ";};?> >5</option>
-									<option value="6" <?if($varAgenda->periodo=="6"){echo " selected ";};?> >6</option>
-									<option value="Final"  <?if($varAgenda->periodo=="Final"){echo " selected ";};?> >Final</option>
+									<option value="Inicial" <?php if($varAgenda->periodo=="Inicial"){echo " selected ";};?> >Inicial</option>
+									<option value="Regular" <?php if($varAgenda->periodo=="Regular"){echo " selected ";};?> >Regular</option>
+									<option value="1" <?php if($varAgenda->periodo=="1"){echo " selected ";};?> >1</option>
+									<option value="2" <?php if($varAgenda->periodo=="2"){echo " selected ";};?> >2</option>
+									<option value="3" <?php if($varAgenda->periodo=="3"){echo " selected ";};?> >3</option>
+									<option value="4" <?php if($varAgenda->periodo=="4"){echo " selected ";};?> >4</option>
+									<option value="5" <?php if($varAgenda->periodo=="5"){echo " selected ";};?> >5</option>
+									<option value="6" <?php if($varAgenda->periodo=="6"){echo " selected ";};?> >6</option>
+									<option value="Final"  <?php if($varAgenda->periodo=="Final"){echo " selected ";};?> >Final</option>
 								</select>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 							<div class="col-md-8">
 								<select id="form_edita_monitor" name="form_monitor" class="form-control">
 									<option value=""></option>
-									<?
+									<?php
 										//$query = "select id, nome from usu_usuario where tipo_usuario = 2 order by nome";
 										$query = "select id, nome from usu_usuario order by nome";
 										$res_mon = $conexao->pesquisa($query);
@@ -149,7 +149,7 @@
 							<div class="col-md-8">
 								<select id="form_edita_revisor" name="form_revisor" class="form-control">
 									<option value=""></option>
-									<?
+									<?php
 										//$query = "select id, nome from usu_usuario where tipo_usuario = 2 order by nome";
 										$query = "select id, nome from usu_usuario order by nome";
 										$res_mon = $conexao->pesquisa($query);
@@ -164,7 +164,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3">Presentes / Participantes</label>
 								<div class="col-md-9">
-									<?$presentes  = str_replace("<br />", "|", str_replace("\n", '', $varAgenda->presentes));?>
+									<?php $presentes  = str_replace("<br />", "|", str_replace("\n", '', $varAgenda->presentes));?>
 									<textarea
 										name="form_presentes"
 										id="form_edita_presentes"
@@ -177,7 +177,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3">Título no relatório</label>
 								<div class="col-md-9">
-									<? $titulo = str_replace("<br />", "|", str_replace("\n", '', $varAgenda->titulo)); ?>
+									<?php $titulo = str_replace("<br />", "|", str_replace("\n", '', $varAgenda->titulo)); ?>
 									<textarea name="form_edita_titulo" id="form_edita_titulo" class="form-control" rows="6"><?=str_replace('<br />','',$varAgenda->titulo);?></textarea>
 								</div>
 							</div>
@@ -185,7 +185,7 @@
 								<div class="form-group">
 									<label class="control-label col-md-3">Atividades</label>
 									<div class="col-md-9">
-										<? $atividades = str_replace("<br />", "|", str_replace("\n", '', $varAgenda->atividades)); ?>
+										<?php $atividades = str_replace("<br />", "|", str_replace("\n", '', $varAgenda->atividades)); ?>
 										<textarea 	name="form_edita_atividades"
 													id="form_edita_atividades"
 													class="form-control"

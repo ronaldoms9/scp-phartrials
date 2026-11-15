@@ -1,4 +1,4 @@
-<?		
+<?php		
 	include "seguranca.php";	
 ?>
 
@@ -6,7 +6,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>	
     
@@ -33,7 +33,7 @@
 
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -111,11 +111,11 @@
 															<div class="col-sm-3">
 																  <select title="Tipo de campo. A formatação na tela será exibida de acordo com a opção selecionada." class="form-control" name="form_tipo" id="form_tipo" >
 																			<option value=""></option>																			  
-																			<option value="select" <?if($rowUsu['tipo']=="select"){echo " selected ";}?>>Caixa de seleção</option>																			  
-																			<option value="caixa" <?if($rowUsu['tipo']=="caixa"){echo " selected ";}?>>Caixa de texto</option>																			  
-																			<option value="data" <?if($rowUsu['tipo']=="data"){echo " selected ";}?>>Data</option>																			  
-																			<option value="numero"  <?if($rowUsu['tipo']=="numero"){echo " selected ";}?>>Número</option>																			  
-																			<option value="texto" <?if($rowUsu['tipo']=="texto"){echo " selected ";}?>>Texto</option>		
+																			<option value="select" <?php if($rowUsu['tipo']=="select"){echo " selected ";}?>>Caixa de seleção</option>																			  
+																			<option value="caixa" <?php if($rowUsu['tipo']=="caixa"){echo " selected ";}?>>Caixa de texto</option>																			  
+																			<option value="data" <?php if($rowUsu['tipo']=="data"){echo " selected ";}?>>Data</option>																			  
+																			<option value="numero"  <?php if($rowUsu['tipo']=="numero"){echo " selected ";}?>>Número</option>																			  
+																			<option value="texto" <?php if($rowUsu['tipo']=="texto"){echo " selected ";}?>>Texto</option>		
 																			<option value="checkbox" >Check-Box</option>
 																  </select>
 															</div>
@@ -148,16 +148,16 @@
 														</div>
 														<div class="form-group">
 															<label class="col-md-2 control-label">
-																<input title="Se o preenchimento é obrigatório. Caso sim, a borda do campo ficará em vermelho" type="checkbox" id="form_obrigatorio" name="form_obrigatorio" <?if(strtoupper($rowUsu['obrigatorio'])=="ON"){ echo " checked "; }?>> Obrigatório?
+																<input title="Se o preenchimento é obrigatório. Caso sim, a borda do campo ficará em vermelho" type="checkbox" id="form_obrigatorio" name="form_obrigatorio" <?php if(strtoupper($rowUsu['obrigatorio'])=="ON"){ echo " checked "; }?>> Obrigatório?
 															</label>
 															<label class="col-md-2 control-label">
-																<input title="Somente irá permitir a entrada de valores numéricos" type="checkbox" id="form_so_numero" name="form_so_numero" <?if(strtoupper($rowUsu['so_numero'])=="ON"){ echo " checked "; }?>> Só número?
+																<input title="Somente irá permitir a entrada de valores numéricos" type="checkbox" id="form_so_numero" name="form_so_numero" <?php if(strtoupper($rowUsu['so_numero'])=="ON"){ echo " checked "; }?>> Só número?
 															</label>
 															<label class="col-md-2 control-label">															
-																<input title="Somente irá permitir a entrada de valores alphanuméricos" type="checkbox" id="form_so_letra" name="form_so_letra" <? if(strtoupper($rowUsu['so_letra'])=="ON"){ echo " checked "; }?>> Só letras?															
+																<input title="Somente irá permitir a entrada de valores alphanuméricos" type="checkbox" id="form_so_letra" name="form_so_letra" <?php if(strtoupper($rowUsu['so_letra'])=="ON"){ echo " checked "; }?>> Só letras?															
 															</label>
 															<label class="col-md-2 control-label">															
-																<input title="Campo somente leitura" type="checkbox" id="form_so_leitura" name="form_so_leitura" <? if(strtoupper($rowUsu['so_leitura'])=="ON"){ echo " checked "; }?>> ReadOnly															
+																<input title="Campo somente leitura" type="checkbox" id="form_so_leitura" name="form_so_leitura" <?php if(strtoupper($rowUsu['so_leitura'])=="ON"){ echo " checked "; }?>> ReadOnly															
 															<br>
 															</label>
 															
@@ -252,7 +252,7 @@
 		</div>
 	</div>
 </body>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>	

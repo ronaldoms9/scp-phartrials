@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
 	$id = $_GET[base64_encode('codigo')];
@@ -58,7 +58,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
     <script>
@@ -72,7 +72,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -103,7 +103,7 @@
 					<div class="col-md-3">
                         <fieldset style="height: 400px;overflow-y: scroll;">
                             <ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-                                <?
+                                <?php
                                      $query = "select
                                                 $tabela.*
                                                     from $tabela
@@ -120,7 +120,7 @@
                        </fieldset>
 					</div>
                     <div class="col-md-8" style="background-color:#FFF">
-						<?
+						<?php
                              if($id>0){                   //Atualizacao
                                  $acao = $pagina."?".gera_parametro("codigo",$id)."&".gera_parametro("act","A");
                              }else{$acao = $pagina."?".gera_parametro("act","I");}
@@ -163,7 +163,7 @@
                                    <div class="col-sm-3">
                                        <select class="form-control" name="form_tipo" id="form_tipo" onchange="mudou(this);">
                                               <option value=""></option>
-											  <?
+											  <?php
 											  $query = "select * from cfg_visitas_tipo where ativo = 1";
 											  $resTipo   = $conexao->pesquisa($query);
 											  while($rowTipo = mysqli_fetch_assoc($resTipo)){
@@ -177,7 +177,7 @@
 
                                    <label class="col-md-2 control-label">Botão salvar?</label>
                                    <div class="col-sm-2">
-                                       <input type="checkbox" id="form_botao_salvar" name="form_botao_salvar" value="1" <? if($rowUsu['botao_salvar']=="1"){echo " checked ";}?>>
+                                       <input type="checkbox" id="form_botao_salvar" name="form_botao_salvar" value="1" <?php if($rowUsu['botao_salvar']=="1"){echo " checked ";}?>>
                                    </div>
 							</div>
                             <div class="form-group">
@@ -185,11 +185,11 @@
                                    <div class="col-sm-2">
                                        <select class="form-control" name="form_acao" id="form_acao" onchange="mudou(this);">
                                               <option value=""></option>
-                                              <option value="CAMPOS" <?if($rowUsu['acao']=="CAMPOS"){echo " selected ";}?>>CAMPOS</option>
-                                              <option value="PAGINA" <?if($rowUsu['acao']=="PAGINA"){echo " selected ";}?>>PAGINA</option>
-											  <option value="CABECALHO" <?if($rowUsu['acao']=="CABECALHO"){echo " selected ";}?>>CABECALHO</option>
-											  <option value="PAGINA_BRANCO" <?if($rowUsu['acao']=="PAGINA_BRANCO"){echo " selected ";}?>>PAGINA EM BRANCO</option>
-											  <option value="TABELA" <?if($rowUsu['acao']=="TABELA"){echo " selected ";}?>>TABELA</option>
+                                              <option value="CAMPOS" <?php if($rowUsu['acao']=="CAMPOS"){echo " selected ";}?>>CAMPOS</option>
+                                              <option value="PAGINA" <?php if($rowUsu['acao']=="PAGINA"){echo " selected ";}?>>PAGINA</option>
+											  <option value="CABECALHO" <?php if($rowUsu['acao']=="CABECALHO"){echo " selected ";}?>>CABECALHO</option>
+											  <option value="PAGINA_BRANCO" <?php if($rowUsu['acao']=="PAGINA_BRANCO"){echo " selected ";}?>>PAGINA EM BRANCO</option>
+											  <option value="TABELA" <?php if($rowUsu['acao']=="TABELA"){echo " selected ";}?>>TABELA</option>
                                       </select>
                                    </div>
                                    <div class="form-group">
@@ -216,11 +216,11 @@
 			</div>
 		</div>
 		</div></div></div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
-       <?
+       <?php
 		  include "global_js.php";
 	   ?>
 </body>

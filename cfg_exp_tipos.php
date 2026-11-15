@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
 	$id = $_GET[base64_encode('codigo')];
@@ -57,7 +57,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
     <script>
@@ -71,7 +71,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -102,7 +102,7 @@
 					<div class="col-md-3">
                         <fieldset style="height: 400px;overflow-y: scroll;">
                             <ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-                                <?
+                                <?php
                                      $query = "select * from $tabela where projeto = ".$_SESSION['projeto']." and registro_valido = 1 order by ordem, nome";
                                      $resUsua = $conexao->pesquisa($query);
                                      while($rowUsua = mysqli_fetch_assoc($resUsua)){
@@ -113,7 +113,7 @@
                        </fieldset>
 					</div>
                     <div class="col-md-8" style="background-color:#FFF">
-						<?
+						<?php
                              if($id>0){                   //Atualizacao
                                  $acao = $pagina."?".gera_parametro("codigo",$id)."&".gera_parametro("act","A");
                              }else{$acao = $pagina."?".gera_parametro("act","I");}
@@ -145,7 +145,7 @@
 								<div class="col-sm-8">
 									<select  class="form-control" id="form_tipo" name="form_tipo" >
 										<option value="">CAMPOS</option>
-										<option value="MULT" <?if ($rowUsu['tipo']=="MULT"){echo " selected ";}?>>MULTILINHAS</option>
+										<option value="MULT" <?php if ($rowUsu['tipo']=="MULT"){echo " selected ";}?>>MULTILINHAS</option>
 									</select>
 								</div>
 							</div>
@@ -155,7 +155,7 @@
 								<div class="col-sm-8">
 									<select  class="form-control" id="form_formulario" name="form_formulario" >
 										<option value=""></option>
-										<?
+										<?php
 											$query   = "select * from crf_forms where projeto = " . $_SESSION['projeto'] . " order by ordem ";
 											$resForm = $conexao->pesquisa($query);
 											while($rowForm = mysqli_fetch_assoc($resForm)){
@@ -184,11 +184,11 @@
 			</div>
 		</div>
 		</div></div></div>
-            <?
+            <?php
                 include "rodape.php";
             ?>
         </div>
-       <?
+       <?php
 		  include "global_js.php";
 	   ?>
 </body>

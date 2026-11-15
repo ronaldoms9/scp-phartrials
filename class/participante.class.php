@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once __DIR__ . "/../seguranca.php";
 	include_once __DIR__ . "/pesq_centro.class.php";
 	include_once __DIR__ . "/usuario.class.php";

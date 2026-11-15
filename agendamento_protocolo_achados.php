@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";	
 	include_once "php_php/php_agendamento_protocolo_achados.php";
 	
@@ -8,7 +8,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>	
 	<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans" rel="stylesheet">
@@ -77,7 +77,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
             ?>
             <div class="page-wrapper-row full-height">
                 <div class="page-wrapper-middle">
@@ -151,7 +151,7 @@
 		</div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div>
-	<?		
+	<?php		
 		include "global_js.php";				
 	?>
 	<script src="js/moment.min.js"></script>	

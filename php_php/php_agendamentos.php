@@ -34,7 +34,7 @@
 		?>
 			<table width="100%" class="table table-hover table-condensed" style="background-color:white !important">
 				<tbody>
-					<?
+					<?php
 						//Monto a lista de Formulários
 						$query = "select
 									crf_agenda_forms.id,
@@ -57,7 +57,7 @@
 										style="cursor: pointer;font-family: 'Abel';font-size: 22px;">
 										<td class="lista_formularios">
 												<a name="ANCORA_<?=$rowUsua['id'];?>"></a>
-											<?
+											<?php
 											if($rowUsua['id']==$formularioP){ echo "<b>"; }
 											if(($rowUsua['ordem']!="Z")&&($rowUsua['ordem']!="99999")){
 												echo $rowUsua['ordem'] . " - ";
@@ -85,12 +85,12 @@
 		$PAGedita		=	true;
 		?>
 			<div id="TOPO"></div>
-		<?
+		<?php
 		if($varFormulario->classFormulario->acao=="PAGINA"){
 			?>
 			<div class="col-md-12">
 				 <h4 align="left">
-						<?
+						<?php
 						if($formTEXTO_CRF!=""){
 							echo "<b>&nbsp;&nbsp;&nbsp;" .$formTEXTO_CRF . "</b>";
 						}
@@ -98,7 +98,7 @@
 						</h4>
 				 <iframe style="width: 100%;height:600px" height="500px" frameborder="0"  src="<?=$varFormulario->classFormulario->pagina."?agendamento=".$varFormulario->agendamento."&".gera_parametro("pac",$paciente)."&".gera_parametro("cam",$formularioP)."&luis=teste";?>" ></iframe>
 			</div>
-			<?
+			<?php
 		}else{
 			?>
 			<div class="col-md-12 fundo_branco">
@@ -113,7 +113,7 @@
 						</div>
 					</div>
 					<div class="portlet-body" >
-				<?
+				<?php
 				   $acao = "agendamentos.php?agendamento=$varAgendamento->id&".gera_parametro("cam",$varFormulario->id)."&".gera_parametro("act","I");
 				?><br>
 				<form class="form-horizontal" role="form" action="<?=$acao;?>" method="post" id="form_info" name="form_info">
@@ -125,7 +125,7 @@
 						<th class="tabela-head" width="150"><center>Ações</center></th>
 					</thead>
 				   <tbody id="divRetorno">
-				   <?
+				   <?php
 						$query = "select
 										crf_agenda_campos.id
 									from crf_agenda_campos
@@ -146,52 +146,52 @@
 									{
 							  ?>
 							  <tr>
-								<?
+								<?php
 								if(($varCampo->classTipoCampo->tipo=="json")||($varCampo->classTipoCampo->tipo=="json_vertical")){
 								?>
 									<td colspan="4" width="100%">
-										<?
+										<?php
 											//$pagina_agen = "agendamentos_json.php?id=".$varCampo->id."&tipo=" . $varCampo->id."&tabela=crf_agenda_campos";
 											$pagina_agen = "agendamentos_json.php?id=".$varCampo->id."&tipo=" . $varCampo->campo_id."&tabela=crf_agenda_campos";
 										?>
 										<iframe frameborder="0"  src="<?=$pagina_agen;?>" style="width: 100%;height:500px !important"></iframe>
 									</td>
-								<?
+								<?php
 								}else{
 									$varOrdem = $varOrdem +1;
 								?>
 								  <td width="*">
 									  <table width="100%">
 										 <tr>
-											<?
+											<?php
 											if($varCampo->classTipoCampo->ordem!="999"){
 											?>
 										   <td class="tabela-body">
 											<span style="font-size: 0.9em"><?="[".$varOrdem . "] - " . $varCampo->classTipoCampo->texto;?></span>
-											<?
+											<?php
 												if($_SESSION['lang']=="i"){
 													echo "<br><span class='texto_en'>[" . $varCampo->classTipoCampo->texto_en . "]</span>";
 												}
 											?>
 											</td>
-										   <?
+										   <?php
 											}else{
 											?>
 											<td class=".text-muted"><span style="font-size: 0.9em"><?=$varCampo->classTipoCampo->texto;?></span>
-											<?
+											<?php
 												if($_SESSION['lang']=="i"){
 													echo "<br><span class='texto_en'>[" . $varCampo->classTipoCampo->texto_en . "]</span>";
 												}
 											?>
 											</td>
-											<?
+											<?php
 											}
 										   ?>
 										 </tr>
 									  </table>
 								  </td>
 								  <td style="vertical-align:middle">
-								  <?
+								  <?php
 									$mascara = "";
 									$campoID = $varCampo->id;
 									$mascara = trim($varCampo->classTipoCampo->formato);
@@ -323,7 +323,7 @@
 										   echo "</left>";
 										   echo "<center></center>";
 									   }
-								  ?><center><span class="legenda"><i><?if($varCampo->classTipoCampo->legenda!=""){ echo "(".$varCampo->classTipoCampo->legenda.")";}?></i></class></center>
+								  ?><center><span class="legenda"><i><?php if($varCampo->classTipoCampo->legenda!=""){ echo "(".$varCampo->classTipoCampo->legenda.")";}?></i></class></center>
 								  </span>
 								  </td>
 								  <td width="50"><center>
@@ -333,7 +333,7 @@
 										</div></center>
 								  </td>
 								  <td style="vertical-align:middle;align:center" class="cssColunaBotao"><center>
-										<?
+										<?php
 											$acao_mon = "javascript:monitora(".$varCampo->id.");";
 											$acao_his = "javascript:muda_pagina('ecrf_formularios_historico.php?".gera_parametro("pac",$paciente)."&".gera_parametro("cam",$formularioP)."&".gera_parametro("act","M")."&".gera_parametro("cod",$varCampo->id)."');";
 											$acao_com = "javascript:muda_pagina('ecrf_formularios_comentarios.php?".gera_parametro("pac",$paciente)."&".gera_parametro("cam",$formularioP)."&".gera_parametro("act","M")."&".gera_parametro("cod",$varCampo->id)."');";
@@ -342,7 +342,7 @@
 											<div class="btn-group">
 
 												<button type="button" class="btn btn-default btn-sm"
-												<?
+												<?php
 													if(($_SESSION['user_tipo']==2)||($_SESSION['user_tipo']==1)){ echo 'onclick="'.$acao_mon.'" ';};
 													echo " >";
 													echo '<span id="retorno'.$varCampo->id.'" name="retorno'.$varCampo->id.'">';
@@ -357,7 +357,7 @@
 												<!--BOTAO HISTORICO-->
 												<button  type="button" class="btn btn-default btn-sm"
 													data-toggle="modal" data-target="#modalHistorico" href="modal_agenda_historico.php?id=<?=$varCampo->id;?>"
-													<?
+													<?php
 														echo " >";
 														echo '<i class="fa fa-history fa-sm" title="Histórico"></i>';
 													?>
@@ -367,7 +367,7 @@
 													data-toggle="modal"
 													data-target="#modalHistorico"
 													href="modal_agenda_comentario.php?id=<?=$varCampo->id;?>"
-													<?
+													<?php
 														echo " >";
 														echo '<span id="btnComentario'.$varCampo->id.'" name="btnComentario'.$varCampo->id.'">';
 														if(trim($varCampo->comentario)==""){
@@ -381,7 +381,7 @@
 												<br>
 												<!--BOTAO SE TEM ERRO-->
 												<button  type="button" class="btn btn-default btn-sm"
-													<?
+													<?php
 
 														if(($_SESSION['user_tipo']==2)||($_SESSION['user_tipo']==1)){ echo 'onclick="'.$acao_err.'" ';};
 														echo " >";
@@ -398,7 +398,7 @@
 												<button  type="button" class="btn btn-default btn-sm"
 													data-toggle="modal" data-target="#modalHistorico"
 													href="modal_pendencia_nova.php?id=<?=$varCampo->id;?>"
-													<?
+													<?php
 														echo " >";
 														echo '<i class="fa fa-medkit fa-sm" title="Abrir pendência"></i>';
 													?>
@@ -409,7 +409,7 @@
 													data-toggle="modal"
 													data-target="#modalHistorico"
 													href="modal_agenda_comentario_revisor.php?id=<?=$varCampo->id;?>"
-													<?
+													<?php
 														echo " >";
 														echo '<span id="btnComentarioRevisor'.$varCampo->id.'" name="btnComentarioRevisor'.$varCampo->id.'">';
 														if(trim($varCampo->comentario_revisor)==""){
@@ -425,21 +425,21 @@
 													?><br>
 													<button  type="button" class="btn btn-default btn-sm"
 													onclick="javascript:deleta_campo(<?=$varCampo->id;?>);"
-													<?
+													<?php
 														echo " >";
 														echo '<i class="fa fa-trash fa-sm" title="Deletar campo"></i>';
 													?>
-													<?
+													<?php
 												}
 												?>
 											</div>
 									</td>
-								  <?
+								  <?php
 									   }
 								}
 								  ?>
 							  </tr>
-							  <?
+							  <?php
 							  }else{
 								  if($varCampo->classTipoCampo->tipo=="escondido"){
 											   $acao_botao = $varCampo->classTipoCampo->botao_acao;
@@ -453,7 +453,7 @@
 								  <tr>
 									   <td style="height:0.1px !important;background-color:#EEEEEE !important;" colspan="4"><span style="font-size: 1.1em"><b><?=$varCampo->classTipoCampo->texto;?></b></span></td>
 								  </tr>
-								  <?
+								  <?php
 								  }
 								  if($varCampo->classTipoCampo->tipo=="pagina"){    //SE o tipo for página
 								  ?>
@@ -462,7 +462,7 @@
 										  <iframe frameborder="0"  src="<?=$varCampo->classTipoCampo->pagina."?".gera_parametro("pac",$paciente)."&".gera_parametro("cam",$formularioP);?>" style="width: 100%;height:<?=$varCampo->classTipoCampo->pagina_altura?>px"></iframe>
 									  <td>
 								  </tr>
-								  <?
+								  <?php
 								  }
 								  if($varCampo->classTipoCampo->tipo=="botao"){
 								  ?>
@@ -471,7 +471,7 @@
 										  <button type="button" <?="id='form_".$varCampo->id."' name='form_".$varCampo->id."' "; ?> class="btn btn-default" onclick="javascript:<?=$varCampo->classTipoCampo->botao_acao;?>;"><?=$varCampo->classTipoCampo->texto;?></button>
 									  <td>
 									</tr>
-								  <?
+								  <?php
 								  }
 							  }
 						}
@@ -479,7 +479,7 @@
 						<td colspan="4">
 						   <br>
 						   <center>
-								<?if($varAgendamento->ativo==1){?><button type="button" class="btn btn-default" onclick="javascript:valida_dados();">  Salvar informações </button><?}?>
+								<?php if($varAgendamento->ativo==1){?><button type="button" class="btn btn-default" onclick="javascript:valida_dados();">  Salvar informações </button><?php }?>
 						   </center>
 						</td>
 				   </tr>
@@ -487,6 +487,6 @@
 				</table>
 				</form>
 			</div>
-			<?
+			<?php
 		}//End tipo de formulario
 	}

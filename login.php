@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	include_once "class/conexao.class.php";
 	include "funcoes.php";
@@ -55,7 +55,7 @@
 					</div>
 
 				</form>
-				<?$valor=base64_encode("reset");?>
+				<?php $valor=base64_encode("reset");?>
 				<form class="forget-form" action="act_login.php?<?=$variavel."=".$valor;?>" method="post">
 					<h3 class="font-green"><?=traduzir("Esqueceu a sua senha?", $_SESSION['lang']);?> ?</h3>
 					<p>
@@ -69,7 +69,7 @@
 						<button type="submit" class="btn btn-success uppercase pull-right"><?=traduzir("Resetar a senha", $_SESSION['lang']);?></button>
 					</div>
 				</form>
-				<?$valor=base64_encode("solicitacao");?>
+				<?php $valor=base64_encode("solicitacao");?>
 				<form class="register-form" action="act_login.php?<?=$variavel."=".$valor;?>" method="post">
 					<h3 class="font-green"><?=traduzir("Solicitar acesso", $_SESSION['lang']);?></h3>
 					<p class="hint"> <?=traduzir("Digite as informações abaixo", $_SESSION['lang']);?>: </p>
@@ -131,7 +131,7 @@
 					document.formulario.submit();
 				}
 			</script>
-			<?
+			<?php
 				if(isset($_GET['erro'])){
 				if($_GET['erro']>0){
 			?>
@@ -153,7 +153,7 @@
 						alert("<?=traduzir("Solicitação de acesso recebida com sucesso. Em breve seu acesso será enviado para seu email.", $_SESSION['lang']);?>!");
 					}
 				</script>
-				<?
+				<?php
 				}
 				}
 			?>

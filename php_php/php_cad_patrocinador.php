@@ -128,7 +128,7 @@
                      class='lista_formularios'
                      style="cursor: pointer";>
                     <td>
-                        <?
+                        <?php
                             echo $row['nome'];
                         ?>
                     </td>

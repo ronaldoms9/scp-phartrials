@@ -1,4 +1,4 @@
-<?
+<?php
 	/*Acentuação no report*/
 
 	include_once "seguranca.php";

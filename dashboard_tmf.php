@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
 
   $id = $_GET[base64_encode('codigo')];
@@ -69,7 +69,7 @@
                                                            <div class="row">
                                                                 <div class="col-md-3"></div>
                                                                 <div class="col-md-6">
-                                                                <?
+                                                                <?php
                                                                    //totais
                                                                    echo "LUIS" . date("Y-m-d");
                                                                    $query = "select count(id) as QTD from arq_arquivos where data >= 2017-06-10 and data <= 2017-06-10";

@@ -1,4 +1,4 @@
-<?
+<?php
 	include "seguranca.php";
 	$act = $_GET['act'];
 	$id_usuario = $_SESSION['user_id'];
@@ -51,7 +51,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<!--<link href="css/fullcalendar.min.css" rel="stylesheet" type="text/css">-->
@@ -126,7 +126,7 @@
 </head>
 <body>
        <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -155,12 +155,12 @@
 																			<table width="100%">
 																				<tr>
 																					<td align="right">
-																						<?
+																						<?php
 																						//if($_GET['visita']!=""){
 																						?>
 																							<a href="javascript:document.location='novo_pendencia.php?id=<?=$agendamentoId;?>&visita=<?=$_GET['visita'];?>';" class="btn btn-circle btn-default btn-sm">
 																							<i class="fa fa-plus"></i> Nova pendência </a>
-																						<?
+																						<?php
 																						//}
 																						?>
 																					</td>
@@ -176,7 +176,7 @@
 																						<div class="table-filters">
 																							<select id="filter-city" data-filter-col="0" style="min-width:60px" class="label">
 																								<option value="">TODOS</option>
-																								<?
+																								<?php
 																									$query = "select nome from cfg_centro order by nome";
 																									$res_c = pesquisa($query);
 																									while($row_c=mysqli_fetch_assoc($res_c)){
@@ -216,7 +216,7 @@
 																				</div>
 																			</thead>
 																			<tbody style="overflow-y: scroll; height:800px !important">
-																				<?
+																				<?php
 
 																					$query = "SELECT
 																						agenda.id as agendamento_id,
@@ -252,7 +252,7 @@
 																							<td><?=$row_pendencias['data_fechamento'];?></td>
 																							<td><?=$row_pendencias['resolvido_por'];?></td>
 																						</tr>
-																					<?
+																					<?php
 																						}
 																					}
 																					?>
@@ -282,7 +282,7 @@
 			</div>
 		</div>
 	</body>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>

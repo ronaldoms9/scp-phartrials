@@ -1,4 +1,4 @@
-<?
+<?php
 	include_once "seguranca.php";
   
 
@@ -76,7 +76,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-        <?
+        <?php
 			include "global_css.php";
 		?>
         <!-- BEGIN PAGE LEVEL PLUGINS -->
@@ -85,7 +85,7 @@
         <!-- END PAGE LEVEL PLUGINS -->
 
     <script>
-    <?
+    <?php
         if($msg==1){ echo "alert('Ítem atualizado com sucesso');"; }
         if($msg==2){ echo "alert('Ítem cadastrado com sucesso');"; }
         if($msg==3){ echo "alert('Ítem deletado com sucesso');"; }
@@ -103,14 +103,14 @@
     }
 </script>
 </head>
-    <body class="page-container-bg-solid page-footer-fixed" onload="<?
+    <body class="page-container-bg-solid page-footer-fixed" onload="<?php
   if(($act=="R")||($act=="I")){
      echo "document.location = '".$acao."'";
   }
 ?>
 ">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -128,7 +128,7 @@
                                 <div class="container-fluid">                                   
 									<div class="row">
 										<div class="col-md-12">										
-											<?
+											<?php
 											   $acao = "query_nova.php?act=I";
 											?>
 											<form class="form-horizontal" role="form" action="<?=$acao;?>" method="post" id="form_info" name="form_info">
@@ -144,13 +144,13 @@
 													<div class="col-sm-2">
 														<select name="form_centro" id="form_centro"class="form-control" >
 															<option value=""></option>
-															<?
+															<?php
 																$query = "select * from cfg_centro where numero <> 'CRO' order by numero";
 																$res = mysql_query($query, $conexao);																		
 																while($row = mysql_fetch_assoc($res)){
 																	?>
 																		<option value="<?=$row['numero'];?>"><?=$row['numero'] . " - " . $row['nome'];?></option>
-																	<?
+																	<?php
 																}
 															?>
 														</select> 
@@ -169,13 +169,13 @@
 													<div class="col-sm-5">
 														<select name="form_formulario" id="form_formulario"class="form-control" onchange="filtro(this.value);">
 															<option value=""></option>
-															<?
+															<?php
 																$query = "select * from crf_forms order by ordem";
 																$res = mysql_query($query, $conexao);																		
 																while($row = mysql_fetch_assoc($res)){
 																	?>
 																		<option value="<?=$row['id'];?>"><?=$row['ordem'] . " - " . $row['texto_crf'];?></option>
-																	<?
+																	<?php
 																}
 															?>
 														</select> 
@@ -236,12 +236,12 @@
 	<!-- JAVASCRIPTS -->
 
 </body>
-		<?
+		<?php
 			include "rodape.php";
 		?>
         </div>
         <div class="quick-nav-overlay"></div>
-       <?
+       <?php
 		 include "global_js.php";
 	   ?>
 

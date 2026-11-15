@@ -1,5 +1,5 @@
 <?php
-<?
+<?php
 	include_once "seguranca.php";	
 	include_once "php_php/cfg_projeto.php";
 			
@@ -10,7 +10,7 @@
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-	<?
+	<?php
 		include "global_css.php";
 	?>
 	<link href="assets/global/css/plugins.min.css" rel="stylesheet" type="text/css" />		
@@ -18,7 +18,7 @@
 </head>
     <body class="page-container-bg-solid page-footer-fixed">
         <div class="page-wrapper">
-            <?
+            <?php
                include "menu_principal.php";
             ?>
             <div class="page-wrapper-row full-height">
@@ -48,7 +48,7 @@
 									<div class="col-md-3" style="background-color:white">
 										<fieldset style="height: 510px;overflow-y: scroll;">
 											<ul id="sidebar-nav" class="sidebar-nav margin-bottom-30px">
-												<?
+												<?php
 													 $query = "select * from proj_projeto where registro_valido = 1 order by numero";
 													 $resUsua = $conexao->pesquisa($query);
 													 while($rowUsua = mysqli_fetch_assoc($resUsua)){
@@ -58,7 +58,7 @@
 											</ul>
 									   </fieldset>
 									</div>
-									<?
+									<?php
 									//if($_GET['id']>0){
 									?>
 									<div class="col-md-9">
@@ -170,13 +170,13 @@
 														<button class="btn btn-default" onclick="javascript:novo();">Novo Estudo</button>
 														<button class="btn btn-default" onclick="javascript:limpaCampos();">Limpar campos</button>
 														<button class="btn btn-default" onclick="javascript:salvar();">Salvar</button>	
-														<?
+														<?php
 														if($_SESSION['user_id']=="1"){
 														?>
 															<button class="btn btn-default"><a href="javascript:gerarTmf();">Gerar TMF</a></button>
 															<button class="btn btn-default"><a href="javascript:gerarTmfResumido();">TMF Prot/Rep</a></button>
 															<button class="btn btn-default"><a href="javascript:gerarTmfBio();">TMF BIO</a></button> -->
-														<?
+														<?php
 														}
 														?>
 														<!--<button class="btn btn-default"><a href="javascript:zerar();">ZERAR CRF</a></button>-->
@@ -194,7 +194,7 @@
 			</div>
 		</div>
 	</body>
-	<?
+	<?php
 		include "rodape.php";
 		include "global_js.php";
 	?>        

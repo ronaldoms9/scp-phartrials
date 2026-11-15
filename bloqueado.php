@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();		
 	$_SESSION['valido'] = 0;
 ?>
@@ -85,7 +85,7 @@
 <script src="assets/global/plugins/excanvas.min.js"></script>
 <script src="assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
-        <?
+        <?php
 			include "global_js.php";
 		?>
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

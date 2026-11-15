@@ -1,4 +1,4 @@
-<?
+<?php
 	function ordenaDados(array $matriz): array{
 		// Faz uma cópia para não alterar o array original
 		$resultado = $matriz;

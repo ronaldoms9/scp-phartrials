@@ -1,4 +1,4 @@
-<?
+<?php
   include_once "seguranca.php";
 
   $paciente    = $_GET[base64_encode('pac')];
@@ -29,7 +29,7 @@
 	<link href="assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<head>
-			<?
+			<?php
 				include "global_css.php";
 			?>
 		<style>
@@ -121,9 +121,9 @@
 		</script>
 	</head>
 	<body<?=$modal ? ' style="background:#fff;"' : '';?>>
-		   <? if(!$modal){ ?>
+		   <?php if(!$modal){ ?>
 		   <div class="page-wrapper">
-				<?
+				<?php
 				   include "menu_principal.php";
 				?>
 				<div class="page-wrapper-row full-height">
@@ -149,13 +149,13 @@
 											</li>
 										</ul>
 									</div>
-		   <? } else { ?>
+		   <?php } else { ?>
 		   <div class="container-fluid" style="padding:15px;">
-		   <? } ?>
+		   <?php } ?>
 									<div class="row">
-										<? if(!$modal){ ?><div class="col-md-1"></div><? } ?>
+										<?php if(!$modal){ ?><div class="col-md-1"></div><?php } ?>
 										<div class="<?=$modal ? 'col-md-12' : 'col-md-10';?>">
-											  <?
+											  <?php
 												 if(($_GET['id']>0)&&($opc=="E")){
 													$query = "select * from $tabela where id = " . $_GET['id'];
 													$res_med = $conexao->pesquisa($query);
@@ -189,7 +189,7 @@
 																<div class="col-md-9">
 																	<select class="form-control" name="form_centro" id="form_centro">
 																	  <option value=""></option>
-																	  <?
+																	  <?php
 																		$query = "select * from cfg_centro where projeto = " . $_SESSION['projeto'];
 																		$resCentro = $conexao->pesquisa($query);
 																		while($rowCentro = mysqli_fetch_assoc($resCentro)){
@@ -236,13 +236,13 @@
 																<div class="col-md-5">
 																	<select class="form-control" name="form_periodo" id="form_periodo">
 																		<option value=""></option>
-																		<option value="1" <?if($row_med['periodo']=="1"){echo " selected ";}?>>1</option>
-																		<option value="2" <?if($row_med['periodo']=="2"){echo " selected ";}?>>2</option>
-																		<option value="3" <?if($row_med['periodo']=="3"){echo " selected ";}?>>3</option>
-																		<option value="4" <?if($row_med['periodo']=="4"){echo " selected ";}?>>4</option>
-																		<option value="5" <?if($row_med['periodo']=="5"){echo " selected ";}?>>5</option>
-																		<option value="6" <?if($row_med['periodo']=="6"){echo " selected ";}?>>6</option>
-																		<option value="Pós Estudo" <?if($row_med['periodo']=="Pós Estudo"){echo " selected ";}?>>Pós Estudo</option>
+																		<option value="1" <?php if($row_med['periodo']=="1"){echo " selected ";}?>>1</option>
+																		<option value="2" <?php if($row_med['periodo']=="2"){echo " selected ";}?>>2</option>
+																		<option value="3" <?php if($row_med['periodo']=="3"){echo " selected ";}?>>3</option>
+																		<option value="4" <?php if($row_med['periodo']=="4"){echo " selected ";}?>>4</option>
+																		<option value="5" <?php if($row_med['periodo']=="5"){echo " selected ";}?>>5</option>
+																		<option value="6" <?php if($row_med['periodo']=="6"){echo " selected ";}?>>6</option>
+																		<option value="Pós Estudo" <?php if($row_med['periodo']=="Pós Estudo"){echo " selected ";}?>>Pós Estudo</option>
 																		</select>
 																</div>
 															</div>
@@ -328,7 +328,7 @@
 																		class="form-control"
 																		onkeyup="mascara(this,'##/##/####');"
 																		id="form_data_termino"
-																		<?if($row_med['desfecho']=="1 - Em curso"){echo " disabled ";}?>
+																		<?php if($row_med['desfecho']=="1 - Em curso"){echo " disabled ";}?>
 																		name="form_data_termino"
 																		value="<?=$row_med['data_termino'];?>">
 																</div>
@@ -355,8 +355,8 @@
 																		id="form_classificado_grave"
 																		onchange="mudou(this);">
 																			<option value=""></option>
-																			<option value="1 - Sim" <?if($row_med['classificado_grave']=="1 - Sim"){echo " selected ";}?> >1 - Sim</option>
-																			<option value="2 - Não" <?if($row_med['classificado_grave']=="2 - Não"){echo " selected ";}?> >2 - Não</option>
+																			<option value="1 - Sim" <?php if($row_med['classificado_grave']=="1 - Sim"){echo " selected ";}?> >1 - Sim</option>
+																			<option value="2 - Não" <?php if($row_med['classificado_grave']=="2 - Não"){echo " selected ";}?> >2 - Não</option>
 																	</select>
 																</div>
 															</div>
@@ -365,9 +365,9 @@
 																<div class="col-md-5">
 																	<select class="form-control" name="form_relatado_patrocinador" id="form_relatado_patrocinador">
 																		<option value=""></option>
-																		<option value="Sim" <?if($row_med['relatado_patrocinador']=="Sim"){echo " selected ";}?>>Sim</option>
-																		<option value="Não" <?if($row_med['relatado_patrocinador']=="Não"){echo " selected ";}?>>Não</option>
-																		<option value="NA" <?if($row_med['relatado_patrocinador']=="NA"){echo " selected ";}?>>Não aplicável</option>
+																		<option value="Sim" <?php if($row_med['relatado_patrocinador']=="Sim"){echo " selected ";}?>>Sim</option>
+																		<option value="Não" <?php if($row_med['relatado_patrocinador']=="Não"){echo " selected ";}?>>Não</option>
+																		<option value="NA" <?php if($row_med['relatado_patrocinador']=="NA"){echo " selected ";}?>>Não aplicável</option>
 																	</select>
 																</div>
 															</div>
@@ -378,9 +378,9 @@
 																			name="form_relatado_cep"
 																			id="form_relatado_cep">
 																		<option value=""></option>
-																		<option value="Sim" <?if($row_med['relatado_cep']=="Sim"){echo " selected ";}?>>Sim</option>
-																		<option value="Não" <?if($row_med['relatado_cep']=="Não"){echo " selected ";}?>>Não</option>
-																		<option value="NA" <?if($row_med['relatado_cep']=="NA"){echo " selected ";}?>>Não aplicável</option>
+																		<option value="Sim" <?php if($row_med['relatado_cep']=="Sim"){echo " selected ";}?>>Sim</option>
+																		<option value="Não" <?php if($row_med['relatado_cep']=="Não"){echo " selected ";}?>>Não</option>
+																		<option value="NA" <?php if($row_med['relatado_cep']=="NA"){echo " selected ";}?>>Não aplicável</option>
 																	</select>
 																</div>
 															</div>
@@ -391,8 +391,8 @@
 																			name="form_previsibilidade"
 																			id="form_previsibilidade">
 																		<option value=""></option>
-																		<option value="Esperado" <?if($row_med['previsibilidade']=="Esperado"){echo " selected ";}?>>Esperado</option>
-																		<option value="Inesperado" <?if($row_med['previsibilidade']=="Inesperado"){echo " selected ";}?>>Inesperado</option>
+																		<option value="Esperado" <?php if($row_med['previsibilidade']=="Esperado"){echo " selected ";}?>>Esperado</option>
+																		<option value="Inesperado" <?php if($row_med['previsibilidade']=="Inesperado"){echo " selected ";}?>>Inesperado</option>
 																	</select>
 																</div>
 															</div>
@@ -401,11 +401,11 @@
 																<div class="col-md-5">
 																	<select class="form-control" name="form_grau" id="form_grau">
 																		<option value=""></option>
-																		<option value="0 - N/A" <?if($row_med['grau']=="0 - N/A"){echo " selected ";}?>>Não especificado</option>
-																		<option value="1 - Leve" <?if($row_med['grau']=="1 - Leve"){echo " selected ";}?>>1 - Leve</option>
-																		<option value="2 - Moderado" <?if($row_med['grau']=="2 - Moderado"){echo " selected ";}?>>2 - Moderado</option>
-																		<option value="3 - Intenso"  <?if($row_med['grau']=="3 - Intenso"){echo " selected ";}?>>3 - Severo</option>
-																		<option value="4 - Fatal"  <?if($row_med['grau']=="4 - Fatal"){echo " selected ";}?>>4 - Comprometimento completo/Fatal</option>
+																		<option value="0 - N/A" <?php if($row_med['grau']=="0 - N/A"){echo " selected ";}?>>Não especificado</option>
+																		<option value="1 - Leve" <?php if($row_med['grau']=="1 - Leve"){echo " selected ";}?>>1 - Leve</option>
+																		<option value="2 - Moderado" <?php if($row_med['grau']=="2 - Moderado"){echo " selected ";}?>>2 - Moderado</option>
+																		<option value="3 - Intenso"  <?php if($row_med['grau']=="3 - Intenso"){echo " selected ";}?>>3 - Severo</option>
+																		<option value="4 - Fatal"  <?php if($row_med['grau']=="4 - Fatal"){echo " selected ";}?>>4 - Comprometimento completo/Fatal</option>
 																	</select>
 																</div>
 															</div>
@@ -414,13 +414,13 @@
 																<div class="col-md-5">
 																	<select class="form-control" name="form_relacao" id="form_relacao" >
 																		<option value=""></option>
-																		<option value="1 - Definida" <?if($row_med['relacao']=="1 - Definida"){echo " selected ";}?>>1 - Definida</option>
-																		<option value="2 - Provável" <?if($row_med['relacao']=="2 - Provável"){echo " selected ";}?>>2 - Provável</option>
-																		<option value="3 - Possível" <?if($row_med['relacao']=="3 - Possível"){echo " selected ";}?>>3 - Possível</option>
-																		<option value="4 - Improvável" <?if($row_med['relacao']=="4 - Improvável"){echo " selected ";}?>>4 - Improvável</option>
-																		<option value="5 - Condicional" <?if($row_med['relacao']=="5 - Condicional / Não classificada"){echo " selected ";}?>>5 - Condicional / Não classificada</option>
-																		<option value="6 - Não relacionada" <?if($row_med['relacao']=="6 - Não relacionada"){echo " selected ";}?>>6 - Não relacionada</option>
-																		<option value="7 - Relacionado" <?if($row_med['relacao']=="7 - Relacionado"){echo " selected ";}?>>7 - Relacionado</option>
+																		<option value="1 - Definida" <?php if($row_med['relacao']=="1 - Definida"){echo " selected ";}?>>1 - Definida</option>
+																		<option value="2 - Provável" <?php if($row_med['relacao']=="2 - Provável"){echo " selected ";}?>>2 - Provável</option>
+																		<option value="3 - Possível" <?php if($row_med['relacao']=="3 - Possível"){echo " selected ";}?>>3 - Possível</option>
+																		<option value="4 - Improvável" <?php if($row_med['relacao']=="4 - Improvável"){echo " selected ";}?>>4 - Improvável</option>
+																		<option value="5 - Condicional" <?php if($row_med['relacao']=="5 - Condicional / Não classificada"){echo " selected ";}?>>5 - Condicional / Não classificada</option>
+																		<option value="6 - Não relacionada" <?php if($row_med['relacao']=="6 - Não relacionada"){echo " selected ";}?>>6 - Não relacionada</option>
+																		<option value="7 - Relacionado" <?php if($row_med['relacao']=="7 - Relacionado"){echo " selected ";}?>>7 - Relacionado</option>
 																	</select>
 																</div>
 															</div>
@@ -429,13 +429,13 @@
 																<div class="col-md-5">
 																	<select class="form-control" name="form_acao_tomada" id="form_acao_tomada">
 																		<option value=""></option>
-																		<option value="1 - Nenhuma ação tomada" <?if($row_med['acao_tomada']=="1 - Nenhuma ação tomada"){echo " selected ";}?> >1 - Nenhuma ação tomada</option>
-																		<option value="2 - Dosagem da medicação do estudo ajustada/interrupção temporária da medicação estudo" <?if($row_med['acao_tomada']=="2 - Dosagem da medicação do estudo ajustada/interrupção temporária da medicação estudo"){echo " selected ";}?> >2 - Dosagem da medicação do estudo ajustada/interrupção temporária da medicação estudo</option>
-																		<option value="3 - Administração de medicação concomitante" <?if($row_med['acao_tomada']=="3 - Administração de medicação concomitante"){echo " selected ";}?> >3 - Administração de medicação concomitante</option>
-																		<option value="4 - Terapia sem uso de medicação" <?if($row_med['acao_tomada']=="4 - Terapia sem uso de medicação"){echo " selected ";}?> >4 - Terapia sem uso de medicação</option>
-																		<option value="5 - Hospitalização / prolongamento da hospitalização" <?if($row_med['acao_tomada']=="5 - Hospitalização / prolongamento da hospitalização"){echo " selected ";}?> >5 - Hospitalização / prolongamento da hospitalização</option>
-																		<option value="6 - Vide comentário" <?if($row_med['acao_tomada']=="6 - Vide comentário"){echo " selected ";}?> >6 - Vide comentário</option>
-																		<option value="7 - Avaliação Clínica" <?if($row_med['acao_tomada']=="7 - Avaliação Clínica"){echo " selected ";}?> >7 - Avaliação Clínica</option>
+																		<option value="1 - Nenhuma ação tomada" <?php if($row_med['acao_tomada']=="1 - Nenhuma ação tomada"){echo " selected ";}?> >1 - Nenhuma ação tomada</option>
+																		<option value="2 - Dosagem da medicação do estudo ajustada/interrupção temporária da medicação estudo" <?php if($row_med['acao_tomada']=="2 - Dosagem da medicação do estudo ajustada/interrupção temporária da medicação estudo"){echo " selected ";}?> >2 - Dosagem da medicação do estudo ajustada/interrupção temporária da medicação estudo</option>
+																		<option value="3 - Administração de medicação concomitante" <?php if($row_med['acao_tomada']=="3 - Administração de medicação concomitante"){echo " selected ";}?> >3 - Administração de medicação concomitante</option>
+																		<option value="4 - Terapia sem uso de medicação" <?php if($row_med['acao_tomada']=="4 - Terapia sem uso de medicação"){echo " selected ";}?> >4 - Terapia sem uso de medicação</option>
+																		<option value="5 - Hospitalização / prolongamento da hospitalização" <?php if($row_med['acao_tomada']=="5 - Hospitalização / prolongamento da hospitalização"){echo " selected ";}?> >5 - Hospitalização / prolongamento da hospitalização</option>
+																		<option value="6 - Vide comentário" <?php if($row_med['acao_tomada']=="6 - Vide comentário"){echo " selected ";}?> >6 - Vide comentário</option>
+																		<option value="7 - Avaliação Clínica" <?php if($row_med['acao_tomada']=="7 - Avaliação Clínica"){echo " selected ";}?> >7 - Avaliação Clínica</option>
 																	</select>
 																</div>
 															</div>
@@ -454,12 +454,12 @@
 																<div class="col-md-5">
 																	<select class="form-control" name="form_desfecho" id="form_desfecho" onchange="mudou(this);">
 																		<option value=""></option>
-																		<option value="1 - Em recuperação" <?if($row_med['desfecho']=="1 - Em recuperação"){echo " selected ";}?> >1 - Em recuperação</option>
-																		<option value="2 - Recuperado" <?if($row_med['desfecho']=="2 - Recuperado"){echo " selected ";}?> >2 - Recuperado</option>
-																		<option value="3 - Recuperado com sequela" <?if($row_med['desfecho']=="3 - Recuperado com sequela"){echo " selected ";}?> >3 - Recuperado com sequela</option>
-																		<option value="4 - Não recuperado" <?if($row_med['desfecho']=="4 - Não recuperado"){echo " selected ";}?> >4 - Não recuperado</option>
-																		<option value="5 - Óbito" <?if($row_med['desfecho']=="5 - Óbito"){echo " selected ";}?> >5 - Óbito</option>
-																		<option value="6 - Outros" <?if($row_med['desfecho']=="6 - Outros"){echo " selected ";}?> >6 - Outros</option>
+																		<option value="1 - Em recuperação" <?php if($row_med['desfecho']=="1 - Em recuperação"){echo " selected ";}?> >1 - Em recuperação</option>
+																		<option value="2 - Recuperado" <?php if($row_med['desfecho']=="2 - Recuperado"){echo " selected ";}?> >2 - Recuperado</option>
+																		<option value="3 - Recuperado com sequela" <?php if($row_med['desfecho']=="3 - Recuperado com sequela"){echo " selected ";}?> >3 - Recuperado com sequela</option>
+																		<option value="4 - Não recuperado" <?php if($row_med['desfecho']=="4 - Não recuperado"){echo " selected ";}?> >4 - Não recuperado</option>
+																		<option value="5 - Óbito" <?php if($row_med['desfecho']=="5 - Óbito"){echo " selected ";}?> >5 - Óbito</option>
+																		<option value="6 - Outros" <?php if($row_med['desfecho']=="6 - Outros"){echo " selected ";}?> >6 - Outros</option>
 																	</select>
 																</div>
 															</div>
@@ -478,19 +478,19 @@
 														<div class="form-actions">
 															<div class="row">
 																<div class="col-md-offset-3 col-md-9">
-																	<?
+																	<?php
 																		if($_GET['opc']!="E"){
 																			?>
 																			<button type="button" class="btn green" onclick="valida(1);">
 																				Incluir e Continuar</button>
-																			<?
+																			<?php
 																		}
 
 																		 if($_SESSION['tipo_usuario']!=5){
 																		 ?>
 																		 <button type="button" class="btn green" onclick="valida(0);">
-																			<?if($_GET['opc']!="E"){echo "  Incluir e fechar ";}else{echo "   Salvar modificações   ";}?></button>
-																	<?
+																			<?php if($_GET['opc']!="E"){echo "  Incluir e fechar ";}else{echo "   Salvar modificações   ";}?></button>
+																	<?php
 																		 }
 
 																	?>
@@ -506,18 +506,18 @@
 												</div>
 										</div>
 									</div>
-		   <? if(!$modal){ ?>
+		   <?php if(!$modal){ ?>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		   <? } else { ?>
+		   <?php } else { ?>
 		   </div>
-		   <? } ?>
+		   <?php } ?>
 	</body>
-<?
+<?php
 	if(!$modal){
 		include "rodape.php";
 	}

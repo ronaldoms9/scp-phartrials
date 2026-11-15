@@ -1,4 +1,4 @@
-<?
+<?php
 	$encoding = 'UTF-8';
 
 	include_once __DIR__."/seguranca.php";

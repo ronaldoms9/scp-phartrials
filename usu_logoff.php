@@ -1,0 +1,11 @@
+<?
+	session_start();
+	unset($_SESSION['user_nome']);
+    unset($_SESSION['user_id']);
+    unset($_SESSION['user_tipo']);
+    unset($_SESSION['valido']);
+    session_destroy();
+    $volta = "Location: index.php";
+	header($volta);
+	
+?>

@@ -1,0 +1,1390 @@
+<?
+	$encoding = 'UTF-8';
+
+	include_once __DIR__."/seguranca.php";
+	include_once __DIR__."/class/agenda.class.php";
+	include_once __DIR__."/class/projeto.class.php";
+	require_once __DIR__ . '/vendor/autoload.php';
+
+	$varProjeto = new Projeto($_SESSION['projeto']);
+
+	function str_primeira_letra_maiuscula($entrada){
+		$temp_entrada = $entrada;
+		$entrada = strtolower($entrada);
+		$entrada = explode(" ", $entrada);
+		for($i=0;$i<count($entrada);$i++){
+			if(substr($entrada[$i],0,1)!="("){
+				$entrada[$i] = strtoupper(substr($entrada[$i],0,1)) . substr($entrada[$i],1,strlen($entrada[$i]));
+			}else{
+				$entrada[$i] = strtoupper(substr($entrada[$i],0,2)) . substr($entrada[$i],2,strlen($entrada[$i]));
+			}
+		}
+		$saida = "";
+		for($i=0;$i<count($entrada);$i++){
+			$saida .= $entrada[$i] . " ";
+		}
+		//return trim($saida);
+		return $temp_entrada;
+	}
+	function tirarAcentos($string){
+		return preg_replace(array("/(ÃƒÂ¡|ÃƒÂ |ÃƒÂ£|ÃƒÂ¢|ÃƒÂ¤)/","/(Ãƒï¿½|Ãƒâ‚¬|ÃƒÆ’|Ãƒâ€š|Ãƒâ€ž)/","/(ÃƒÂ©|ÃƒÂ¨|ÃƒÂª|ÃƒÂ«)/","/(Ãƒâ€°|ÃƒË†|ÃƒÅ |Ãƒâ€¹)/","/(ÃƒÂ­|ÃƒÂ¬|ÃƒÂ®|ÃƒÂ¯)/","/(Ãƒï¿½|ÃƒÅ’|ÃƒÅ½|Ãƒï¿½)/","/(ÃƒÂ³|ÃƒÂ²|ÃƒÂµ|ÃƒÂ´|ÃƒÂ¶)/","/(Ãƒâ€œ|Ãƒâ€™|Ãƒâ€¢|Ãƒâ€�|Ãƒâ€“)/","/(ÃƒÂº|ÃƒÂ¹|ÃƒÂ»|ÃƒÂ¼)/","/(ÃƒÅ¡|Ãƒâ„¢|Ãƒâ€º|ÃƒÅ“)/","/(ÃƒÂ±)/","/(Ãƒâ€˜)/"),explode(" ","a A e E i I o O u U n N"),$string);
+	}
+	function traduzirREL($texto_entrada){
+		global $conexao;
+		$texto = "";
+		//if(($texto_entrada!="NÃƒÂ£o")||($texto_entrada!="NÃƒÆ’O")){
+		if(strtoupper(tirarAcentos($texto_entrada))!="NAO"){
+			$query_tr = "select * from traducao where upper(portugues) = '".strtoupper($texto_entrada)."';";
+			$res_tr = $conexao->pesquisa($query_tr);
+			$lang = $_SESSION['lang'];
+			if(mysqli_num_rows($res_tr)==0){$texto = $texto;}else{
+				$row_tr = mysqli_fetch_assoc($res_tr);
+				if($lang == "p"){$texto = $texto;}
+				if($lang == "i"){$texto = $row_tr['ingles'];}
+				if($lang == "e"){$texto = $row_tr['espanhol'];}
+				if($lang == ""){$texto = $row_tr['ingles'];}
+			}
+		}else{
+			$texto = "No";
+		}
+
+		if($texto == ""){$texto = $texto_entrada;}
+		return $texto;
+	}
+	function formatar_texto_bd($entrada){
+		return utf8_encode($entrada);
+	}
+	function formatar_texto($entrada){
+		return utf8_encode($entrada);
+	}
+
+
+
+
+	$varData = $_GET['data'];
+	$varAgendamento = $_GET['id'];
+	$varAgenda		= new Agenda($_GET['id']);
+
+
+	$query = "select  ";
+	$query .= " agenda.*,
+			cfg_centro.numero as centro_numero,
+			cfg_centro.nome as centro_nome,
+			cfg_centro.investigador  as centro_investigador,
+			cfg_centro.coordenador as centro_coordenador
+				from agenda
+				inner join cfg_centro on agenda.centro = cfg_centro.id
+			where agenda.id = " . $_GET['id'];
+
+	$res_agenda = $conexao->pesquisa($query);
+	$row_agenda = mysqli_fetch_assoc($res_agenda);
+
+	$query 			= "select * from proj_projeto where id = " . $_SESSION['projeto'];
+	$res_projeto	= $conexao->pesquisa($query);
+	$row_projeto    = mysqli_fetch_assoc($res_projeto);
+
+	$query = "select * from proj_projeto where id = " . $_SESSION['projeto'];
+	$res_proj = $conexao->pesquisa($query);
+	$row_proj = mysqli_fetch_assoc($res_proj);
+
+	$stylesheet = "
+		.direita {
+		  text-align: right;
+		  margin-right: 1em;
+		}
+		.class_item{
+			height: 22.85pt;
+			border-left: 1.0pt solid black;
+			border-right: 1.0pt solid black;
+			border-top: 1.0pt solid black;
+			border-bottom: 1.0pt solid black;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			padding-top: 1.5pt;
+			padding-bottom: 3.5pt;
+			text-align:left;
+			//position:relative;
+		}
+		.class_item_coluna{
+			height: 22.85pt;
+			border-left: medium none;
+			border-right: 1.0pt solid black;
+			border-top: 1.0pt solid black;
+			border-bottom: 1.0pt solid black;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			padding-top: 1.5pt;
+			padding-bottom: 3.5pt;
+			text-align:center;
+			//position:relative;
+		}
+		.texto{
+			font-size:8.0pt;
+			font-weight: bold;
+		}
+		.texto_check{
+			font-size:7.0pt;
+		}
+		.texto_ordem{
+			font-size:8.0pt;
+			font-weight: bold;
+		}
+		/*.texto_en{
+			font-size:6.0pt;
+		}*/
+		.rodape{
+			font-size:5.0pt;
+			font-weight: normal;
+		}
+		.paginacao{
+			font-size:6.0pt;
+		}
+		.fonte_caption{
+			font-size: 10pt;
+			font-weight: bold;
+		}
+		.texto_conteudo{
+			font-size: 10pt;
+		}
+		.texto_comentario{
+			font-size: 10.0pt;
+			font-weight: italic;
+		}
+		.texto_header_assinatura{
+			font-size: 8pt;
+		}
+		.texto_assinatura{
+			font-size: 9pt;
+			font-weight: bold;
+		}
+		.assinatura_imagem{
+			width:100%;
+			max-width:150px;
+		}
+		/*.texto_formulario{
+			font-size: 10pt;
+		}*/
+
+		.texto_formulario_en{
+			font-size: 6.5pt;
+			font-style: italic;
+		}
+		.texto_formulario_nro{
+			font-size: 9.0pt;
+		}
+		.header_formulario{
+			padding-top: 4pt;
+			padding-bottom: 3pt;
+			border-left: 1.0pt solid black;
+			border-right: 1.0pt solid black;
+			border-top: 1.0pt solid black;
+			border-bottom: 1.0pt solid black;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			background: #D9D9D9
+		}
+		.header_pagina_em_branco{
+			padding-top: 4pt;
+			padding-bottom: 3pt;
+			border-left: 1.0pt solid black;
+			border-right: 1.0pt solid black;
+			border-top: 1.0pt solid black;
+			border-bottom: 1.0pt solid black;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			background: white;
+		}
+		.cabecalho{
+			background: white;
+			border-left: 0.0pt solid black;
+			border-right: 0.0pt solid black;
+			border-top: 0.0pt solid black;
+			border-bottom: 0.0pt solid black;
+		}
+		.cabecalho_1{
+			padding-top: 4pt;
+			padding-bottom: 3pt;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			background: white;
+			font-size: 7.0pt;
+		}
+		.cabecalho_2{
+			padding-top: -2.0pt;
+			padding-bottom: 0pt;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			background: white;
+			margin-top: -5pt;
+			vertical-align: top;
+			font-family: Tahoma, Verdana, Segoe, sans-serif;
+			font-size: 7.0pt;
+		}
+		.divisao{
+			border-left: 1.0pt solid black;
+			border-right: 1.0pt solid black;
+			border-top: 1.0pt solid black;
+			border-bottom: 1.0pt solid black;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			padding-top: 4pt;
+			padding-bottom: 3pt;
+			/*background: #D9D9D9*/
+			background: #DBE5F1;
+		}
+		.header_json{
+			border: 1.0pt solid windowtext;
+			padding-left: 5.4pt;
+			padding-right: 5.4pt;
+			padding-top: 4pt;
+			padding-bottom: 3pt;
+			/*background: #F2F2F2*/
+			background: #DBE5F1;
+		}
+		.header_json_pt{
+			height: 22.85pt;
+			padding-left: 3.5pt;
+			padding-right: 3.5pt;
+			padding-top: 1.5pt;
+			padding-bottom: 3.5pt;
+			text-align:left;
+			font-size: 9.0pt;
+			font-weight: bold;
+		}
+		.header_json_en{
+			font-size:4.5pt;
+			font-style: italic;
+			font-weight: normal;
+		}
+		.header_json_lg{
+			font-size:4.0pt;
+			font-style: italic;
+		}
+		.linha_json{
+			text-align:center !important;
+			border: 1px solid #000000;
+			padding-left: 4px;
+			padding-right: 4px;
+			padding-top: 6px;
+			padding-bottom: 3px;
+			white-space:nowrap
+		}
+		.linha_json_legenda{
+			font-style: italic;
+			text-align : center !important;
+			font-size  : 6.0pt;
+			font-weight: normal;
+		}
+		.linha_json_preenchido{
+			text-align:center !important;
+			padding-left: 4px;
+			padding-right: 4px;
+			padding-top: 6px;
+			padding-bottom: 3px;
+			white-space:nowrap
+		}
+		.coluna_valor{
+			text-align:center;
+			font-size:6.0pt;
+		}
+		.justificado{
+			text-align: justify !important;
+			letter-spacing: 0;
+		}
+		.centralizado{
+			text-align: center;
+			letter-spacing: 0;
+		}
+		.ptHeaderTitulo{
+			font-size: 20.0pt;
+			font-weight: bold;
+		}
+		.ptHeaderDestaque{
+			font-size: 16.0pt;
+			font-weight: bold;
+		}
+		.ptHeaderNormal{
+			font-size: 19.0pt;
+			font-weight: normal;
+		}
+		.ptFooterDestaque{
+			font-size: 10.0pt;
+			font-weight: bold;
+		}
+		.ptFooterNormal{
+			font-size: 10.0pt;
+			font-weight: normal;
+		}
+		.ptTexto{
+			font-size: 11.0pt;
+			font-weight: normal;
+		}
+		.texto{
+			font-size: 10.0pt;
+			font-weight: normal;
+		}
+		.texto_formulario_divisao{
+			font-size: 9.0pt;
+			font-weight: bold;
+		}
+		.ptTextoFormulario{
+			font-size: 6.5pt;
+			font-weight: normal;
+		}
+		.ptTabelaAzul{
+			font-size       : 10.0pt;
+			font-weight     : bold;
+			background-color: #DBE5F1;
+			color           : black;
+			padding-left    : 4.5pt;
+			padding-right   : 4.5pt;
+			padding-top     : 4.5pt;
+			padding-bottom  : 4.5pt
+		}
+		.ptTabelaBranca{
+			font-size       : 10.0pt;
+			font-weight     : normal;
+			background-color: white;
+			color           : black;
+			padding-left    : 4.5pt;
+			padding-right   : 4.5pt;
+			padding-top     : 4.5pt;
+			padding-bottom  : 4.5pt
+			text-align      : center !important;
+		}
+		.ptTabelaAzulEscuro{
+			font-size: 11.0pt;
+			font-weight: bold;
+			background-color: #8DB3E2;
+			color           : black;
+			padding-left    : 4.5pt;
+			padding-right   : 4.5pt;
+			padding-top     : 4.5pt;
+			padding-bottom  : 4.5pt
+		}
+		.vertical-lr {
+			writing-mode: vertical-lr;
+			transform: rotate(180deg);
+		}
+	";
+
+	$defaultConfig = (new Mpdf\Config\ConfigVariables())->getDefaults();
+    $fontDirs = $defaultConfig['fontDir'];
+    $defaultFontConfig = (new Mpdf\Config\FontVariables())->getDefaults();
+    $fontData = $defaultFontConfig['fontdata'];
+    $customFontDir = __DIR__ . '/fonts';
+	$mpdf = new \Mpdf\Mpdf([
+        'fontDir' => array_merge($fontDirs, [
+        $customFontDir,
+        ]),
+        'fontdata' => $fontData + [
+            'calibri' => [
+                'R' => 'calibri-regular.ttf',
+                'I' => 'calibri-italic.ttf',
+                'B' => 'calibri-bold.ttf',
+                'BI' => 'calibri-bold-italic.ttf',
+            ],
+        ],
+        'default_font' => 'calibri',
+        'tempDir' => __DIR__ . '/temp',
+        'debug' => true,
+        'mode' => 'utf-8',
+        'margin-top' => 100,
+        'margin-header' => 200,
+        'margin_bottom' => 30
+    ]);
+
+
+	$mpdf->shrink_tables_to_fit = 0;
+	//$mpdf->autoPageBreak = false;
+	$mpdf->setAutoTopMargin = 'stretch';
+	//$mpdf->setAutoBottomMargin = 'stretch';
+	$mpdf->allow_charset_conversion=true;
+	$mpdf->WriteHTML($stylesheet,1);
+
+	$cabecalho = '<table border="0" height="100%" width="100%"  cellspacing="0" cellpadding="0" bordercolor="#000000" style="border-collapse: collapse;">
+		<tr>
+			<td style="padding: 13px;" >
+                <center><br><img src="imagens/header_documento.png"></center>
+            </td>
+		</tr>
+		</table>
+	';
+	$rodape = '<table border="0" height="100%" width="100%"  cellspacing="0" cellpadding="0" bordercolor="#000000" style="border-collapse: collapse;">
+		<tr>
+			<td style="padding: 3px; text-align: right;"><span class="ptFooterNormal">Página <b>{PAGENO}</b> de <b>{nbpg}</b></span></td>
+		</tr>
+		</table>
+	';
+
+	$mpdf->SetHTMLFooter($rodape);
+	$mpdf->SetHTMLHeader($cabecalho);
+
+	$tabela_ini = '
+			<table border="1" cellspacing="0" cellpadding="0" width="100%">
+			<tr >
+				<td width="100%" colspan="5" class="ptTabelaAzul">'.traduzir('Relatório de Visita de Monitoria').'</td>
+			</tr>
+			<tr style="page-break-inside: avoid; height: 42.95pt">
+				<td width="206" class="ptTabelaAzul">'.traduzir('Código da Monitoria').'</td>
+				<td class="ptTabelaBranca" colspan="4">'.$varProjeto->numero.'</td>
+			</tr>
+			<tr style="page-break-inside: avoid; height: 42.95pt">
+				<td width="206" class="ptTabelaAzul">'.traduzir('Visita Número').'</td>
+				<td class="ptTabelaBranca"><center>'.$varAgenda->nro_visita.'</center></td>
+				<td width="70" class="ptTabelaAzul">'.traduzir('Data').'</td>
+				<td class="ptTabelaBranca" colspan="2"><center>'.$varAgenda->getDataInicialDATA().'</center></td>
+			</tr>
+			<tr style="page-break-inside: avoid; height: 42.95pt">
+				<td width="206" class="ptTabelaAzul">'.traduzir('Código do Protocolo').'</td>
+				<td class="ptTabelaBranca"><center>'.$varProjeto->codigo.'</center></td>
+				<td width="70" class="ptTabelaAzul">'.traduzir('Versão e data do protocolo').'</td>
+				<td class="ptTabelaBranca" colspan="2"><center>Versão '.$varProjeto->versao.' - '.$varProjeto->data_protocolo.'</center></td>
+			</tr>
+			<tr style="page-break-inside: avoid; height: 42.95pt">
+				<td width="206" class="ptTabelaAzul">'.traduzir('Grupo').'</td>
+				<td class="ptTabelaBranca"><center>'.$varAgenda->grupo_periodo.'</center></td>
+				<td width="70" class="ptTabelaAzul">'.traduzir('Período').'</td>
+				<td class="ptTabelaBranca" colspan="2"><center>'.$varAgenda->periodo.'</center></td>
+			</tr>
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Protocolo').'</td>
+				<td colspan="4" valign="top"
+					class="justificado ptTabelaBranca" style="text-align: justify !important">'.formatar_texto_bd($varProjeto->descricao).'</td>
+			</tr>
+
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Tipo de Visita').'</td>
+				<td class="ptTabelaBranca" colspan="4">'. formatar_texto_bd($varAgenda->getTipoVisita()).'</td>
+			</tr>
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Nome Produto Investigacional').'</td>
+				<td class="ptTabelaBranca" colspan="4">'. formatar_texto_bd($varProjeto->nome).'</td>
+			</tr>
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Patrocinador').'</td>
+				<td class="ptTabelaBranca" colspan="4">'.formatar_texto($varProjeto->patrocinador->nome).'</td>
+			</tr>
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Centro de Pesquisa').'</td>
+				<td class="ptTabelaBranca" colspan="4">'.formatar_texto($varAgenda->centro->nome).'</td>
+			</tr>
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Investigador Principal').'</td>
+				<td class="ptTabelaBranca" colspan="4">'.formatar_texto_bd($varAgenda->centro->investigador).'</td>
+			</tr>
+			<tr>
+				<td class="ptTabelaAzul">'.traduzir('Monitores participantes da pesquisa').'</td>
+				<td class="ptTabelaBranca" colspan="4">'.formatar_texto(nl2br($varAgenda->presentes)).'</td>
+			</tr>
+		</table>
+	';
+	$mpdf->WriteHTML($tabela_ini);
+
+	//Começo loop nos formulários
+	$query = "
+		SELECT crf_agenda_forms.id,
+				cfg_visitas.acao,
+				crf_agenda_forms.agendamento,
+				crf_agenda_forms.form_id,
+				cfg_visitas.nome,
+				cfg_visitas.texto_crf,
+				cfg_visitas.texto_crf_en,
+				cfg_visitas.ordem
+					FROM crf_agenda_forms
+						inner join cfg_visitas on crf_agenda_forms.form_id = cfg_visitas.id
+						WHERE
+							cfg_visitas.ordem <> ''
+							and cfg_visitas.registro_valido = 1
+							and crf_agenda_forms.agendamento = " . $_GET['id'] . "
+								order by cast(cfg_visitas.ordem as DECIMAL)
+	";
+
+	$res_form = $conexao->pesquisa($query);
+
+	$countForm = 0;
+
+	while($row_form = mysqli_fetch_assoc($res_form)){
+		$countField = 0;
+		if($row_form['acao']=="PAGINA_BRANCO"){
+			$html = "
+				<table autosize='1'
+						class='MsoNormalTable'
+						border='0'
+						cellspacing='0'
+						cellpadding='0'
+						width='100%'
+						style='width: 100.0%; border-collapse: collapse; border: medium none' >
+					<tr>
+						<td width='100%' class='header_pagina_em_branco' >
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br>
+						</td>
+					</tr>
+				</table>
+			";
+		}else{
+			$countForm++;
+			$html = "
+				<br><div>
+					<table
+						autosize='1'
+						class='MsoNormalTable'
+						border='0'
+						cellspacing='0'
+						cellpadding='0'
+						width='100%' style='width: 100.0%; border-collapse: collapse; border: medium none' >
+						<thead>
+			";
+			if($row_form['acao']!="CABECALHO"){
+				if($row_form['ordem']!="9999"){
+					$html .= "
+									<tr>
+										<td width='23%' class='ptTabelaAzul' style='border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black;'>
+										<b>
+										<span class='texto_formulario_nro'>";
+												$html .= $countForm.". ";
+					$html .=			"</span>
+										<span class='texto_formulario'>
+											";
+											$temmp = trim(mb_strtoupper(utf8_encode($row_form['texto_crf']." ")));
+											if(substr(strtolower($temmp),0,6)=="farmac"){
+												$temmp = "FARMACÅUTICOSX ";
+											}
+					$html .= 			$temmp;
+					$html .= 			"
+										</span>
+										</b>
+										<span class='texto_formulario_en'>
+										".
+										$temp .= "</span></td>
+									</tr>
+					";
+				}
+			}else{
+				$html .= "
+								<tr>
+									<td class='ptTabelaAzul'>
+									<span class='ptTabelaAzul'>
+										<b>";
+										$temmp = trim(mb_strtoupper(utf8_encode($row_form['texto_crf'])));
+				$html .= 	$temmp .	"</b>
+									</span>
+									";
+							$temp .="		</td>
+								</tr>
+				";
+			}
+		}
+		$html .= "
+					</thead>
+				</table>
+		";
+		$mpdf->WriteHTML($html);
+		$html = "";
+
+
+
+		if($row_form['ordem']=="99999"){
+			if($_SESSION['projeto']=="7"){
+				$query_t = "select * from agenda_lista_pendencia where visita = ".$row_agenda['id']." and centro = ".$row_agenda['centro']." and status = 'PENDENTE' order by id";
+			}else{
+				$dataVis = $row_agenda['data'];
+				$dataVis = substr($dataVis, 6,2) . "/" . substr($dataVis, 4,2) . "/" .substr($dataVis, 0,4);
+				$query_t = "select
+								*
+									from agenda_lista_pendencia
+										where visita = '".$row_agenda['nro_visita']."'
+											and projeto = ".$_SESSION['projeto']."
+												order by id";
+				$resPend = $conexao->pesquisa($query_t);
+
+				if(mysqli_num_rows($resPend)==0){
+					$html = "<table
+								autosize='1'
+								class='MsoNormalTable'
+								border='1'
+								cellspacing='0'
+								cellpadding='0'
+								width='100%'
+								style='width: 100.0%; border-collapse: collapse; border: medium none'>
+								<tr>
+									<td width='100%' class='class_item'  valign='top'>Nenhuma pendência cadastrada para essa visita</td>
+								</tr>
+							</table>
+					";
+					$html = "";
+				}else{
+					$html = '
+						<table autosize="1" width="100%" class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none">
+							<tr>
+								<td width="110" valign="top" style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; 	padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+									<p class="MsoNormal" align="center" style="text-align:center"><b>
+									<span lang="EN-GB" style="font-size:11.0pt;  font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Participante</span></b>
+								</td>
+								<td width="120" valign="top" style="border: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+									<p class="MsoNormal" align="left" style="text-align:center"><b>
+									<span lang="EN-GB" style="font-size:11.0pt;  font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Tipo</span></b>
+								</td>
+								<td width="40%" valign="top" style="border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+									<p class="MsoNormal" align="center" style="text-align:center"><b>
+									<span lang="EN-GB" style="font-size:11.0pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Descrição</span></b>
+								</td>
+								<td width="40%" valign="top" style="border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+									<p class="MsoNormal" align="center" style="text-align:center"><b>
+									<span lang="EN-GB" style="font-size:11.0pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Ação</span></b>
+								</td>
+								<td width="100" valign="top" style="border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+									<p class="MsoNormal" align="center" style="text-align:center"><b>
+									<span lang="EN-GB" style="font-size:11.0pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Status</span></b>
+								</td>
+							</tr>
+
+					';
+					while($row_p = mysqli_fetch_assoc($resPend)){
+						$html .= '<tr>
+									<td style="border-left: medium none; border-right: 1.0pt solid black;  border-left: 1.0pt solid black;border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+										<p class="MsoNormal" align="center" style="text-align:center">
+											<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+											<center>';
+											$paciente = formatar_texto_bd($row_p['paciente']);
+											if($paciente==""){$paciente = "N/A";}
+											$html .= $paciente.'</center>
+											</span>
+										</p>
+									</td>
+									<td style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+										<p class="MsoNormal" align="center" style="text-align:center">
+											<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+											'.formatar_texto_bd($row_p['tipo']).'
+											</span>
+										</p>
+									</td>
+									<td style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+										<p class="MsoNormal" align="center" style="text-align:center">
+											<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+											'.nl2br(formatar_texto_bd($row_p['achado'])).'
+											</span>
+										</p>
+									</td>
+									<td style="border-left: medium none; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+										<p class="MsoNormal" align="center" style="text-align:center">
+											<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+											'.nl2br(formatar_texto_bd($row_p['acao'])).'
+											</span>
+										</p>
+									</td>
+									<td valign="center" style="border-left: medium none; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+										<p class="MsoNormal" style="text-align:justify;">
+											<span style="font-size: 9.0pt;  font-family: Verdana,sans-serif;">
+											'.formatar_texto_bd($row_p['status']).'
+											</span>
+										</p>
+									</td>
+								</tr>';
+
+					}
+					$html .= "</table>";
+					$mpdf->WriteHTML($html);
+					$html = "";
+				}
+			}
+		}else{
+
+			//Pegar campo a campo
+			$query = "SELECT cfg_visitas_campos.tipo,
+							crf_agenda_campos.id,
+							crf_agenda_campos.valor,
+							cfg_visitas_campos.legenda,
+							crf_agenda_campos.comentario,
+							cfg_visitas_campos.numeracao,
+							cfg_visitas_campos.nome,
+							cfg_visitas_campos.texto,
+							cfg_visitas_campos.texto_en,
+							cfg_visitas_campos.texto_es,
+							cfg_visitas_campos.ordem,
+							cfg_visitas_campos.selecao_valores
+					from crf_agenda_campos
+						inner join cfg_visitas_campos on crf_agenda_campos.campo_id = cfg_visitas_campos.id
+						where crf_agenda_campos.form_id = ".$row_form['id']."
+								ORDER BY cfg_visitas_campos.ordem
+			";
+			//echo $query;
+			$res_campo = $conexao->pesquisa($query);
+
+
+			$mpdf->WriteHTML($html);
+			$html = "";
+			while($row_campo = mysqli_fetch_assoc($res_campo)){
+
+				if($row_campo['tipo']=="divisao"){
+					$html = "
+						<table autosize='1'
+							class='MsoNormalTable'
+							border='1'
+							cellspacing='0'
+							cellpadding='0'
+							width='100%'
+							style='width: 100.0%; border-collapse: collapse; border: medium none'>
+							<tr>
+								<td width='23%' class='ptTabelaAzul'>
+									<span class='texto_formulario_divisao'>&nbsp;".trim(mb_strtoupper(formatar_texto_bd($row_campo['texto'])))."</span>";
+					$html .= "
+								</td>
+							</tr>
+						</table>
+					";
+					$mpdf->WriteHTML($html);
+				}else{
+					$countField++;
+					if(($row_campo['tipo']!="json")&&($row_campo['tipo']!="json_vertical")){
+						if($row_campo['tipo']=="quebra"){
+							$mpdf->WriteHTML($html);
+							$html = "";
+							$mpdf->AddPage();
+						}else{
+
+								if($row_campo['tipo']!="select_coluna"){
+									$largura_1 = '45% !important';
+									$largura_2 = '55%';
+								}else{
+									if($row_campo['ordem']!=""){
+										$largura_1 = '70% !important';
+										$largura_2 = '';
+										$opcoes = "";
+										$opcoes = str_replace("<br />","%",$row_campo['selecao_valores']);
+										$opcoes = str_replace("\n","",$opcoes);
+										$combo = "";
+										$temp  = "";
+										$qtd_col = 0;
+										for($z=0;$z<strlen($opcoes);$z++){
+										   if(substr($opcoes,$z,1)=="%"){
+												$qtd_col++;
+										   }
+										}
+										if($row_campo['legenda']!=""){
+											$qtd_col++;
+										}
+										if($qtd_col>0){
+											$largura2 = intval(30 / $qtd_col);
+										}else{
+											$largura2 = intval(30);
+										}
+									}else{
+										$largura_1 = '30% !important';
+										$largura_2 = '70% !important';
+									}
+								}
+
+								if($row_campo['tipo']!="caixa"){
+									$html = "
+											<table autosize='1'
+												class='MsoNormalTable'
+												border='1'
+												cellspacing='0'
+												cellpadding='0'
+												width='100%'
+												style='
+												important; width: 100.0%;
+												border-collapse: collapse;
+												border: medium none'>
+												<tr>
+													<td width='".$largura_1."' class='class_item'  valign='top'>
+											";
+											if($row_campo['ordem']!=999){
+												$html .=	"<span class='texto_ordem'>".$countForm . "." . $countField.".&nbsp;&nbsp;</span>";
+											}
+											$html .="	<span class='texto'>".formatar_texto_bd($row_campo['texto'])."</span>";
+											$html .= "
+													</td>";
+									if(($row_campo['tipo']=="texto")||($row_campo['tipo']=="numero")||($row_campo['tipo']=="data")||($row_campo['tipo']=="calculo")){
+										$html .= "<td width='".$largura_2."' class='class_item'><center><span class='texto_conteudo'>".formatar_texto_bd("")."</span>";
+										$html .= "</center>";
+									}
+
+
+									if($row_campo['tipo']=="select"){
+										$html .= "<td width='".$largura_2."' class='class_item'>";
+										$opcoes = "";
+										$opcoes = str_replace("<br />","%",$row_campo['selecao_valores']);
+										$opcoes = str_replace("\n","",$opcoes);
+
+										$combo = "";
+										$temp  = "";
+										for($z=0;$z<strlen($opcoes);$z++){
+										   if(substr($opcoes,$z,1)!="%"){$temp.=substr($opcoes,$z,1);}
+										   else{
+												$temp=trim($temp);
+												$temp_selected = "";
+												if(trim("")==$temp){ $temp_selected = " selected "; }
+												$html .= $tamanho."<p><img src='imagens/check.png' width='10'><span valign='middle' class='texto'>&nbsp;&nbsp;<b>".formatar_texto_bd($temp)."</b></span></p>";
+												$temp="";
+										   }
+										}
+										if(strlen($temp)>0){
+												$temp=trim($temp);
+												$temp_selected = "";
+												if(trim("")==$temp){ $temp_selected = " selected "; }
+												$html .= $tamanho."<p><img src='imagens/check.png' width='10'><span valign='middle' class='texto'>&nbsp;&nbsp;<b>".formatar_texto_bd($temp)."</b></span></p>";
+												$temp="";
+										}
+									}
+									if($row_campo['tipo']=="select_coluna"){
+										$opcoes = "";
+										$opcoes = str_replace("<br />","%",$row_campo['selecao_valores']);
+										$opcoes = str_replace("\n","",$opcoes);
+										$combo = "";
+										$temp  = "";
+										for($z=0;$z<strlen($opcoes);$z++){
+										   if(substr($opcoes,$z,1)!="%"){$temp.=substr($opcoes,$z,1);}
+										   else{
+												$temp=trim($temp);
+												$temp_selected = "";
+												if(trim("")==$temp){ $temp_selected = " selected "; }
+												$html .= $tamanho."<td width='".$largura_2."' class='class_item_coluna'>
+														<p>
+												";
+														if($temp==""){
+															$html .= "<img src='imagens/checked.png' width='13'>";
+														}else{
+															$html .= "<img src='imagens/check.png' width='13'>";
+														}
+
+												$html .="<br><span valign='middle' class='texto'>
+														".formatar_texto_bd(str_replace(" - ", "<br>", $temp))."</p>";
+														$html .= "</td>";
+												$temp="";
+										   }
+										}
+										if(strlen($temp)>0){
+												$temp=trim($temp);
+												$temp_selected = "";
+												if(trim("")==$temp){ $temp_selected = " selected "; }
+												$html .= $tamanho."<td width='".$largura_2."' class='class_item_coluna' valign='middle'><p valign='middle'>
+															";
+														if($temp==""){
+															$html .= "<img src='imagens/checked.png' width='13'>";
+														}else{
+															$html .= "<img src='imagens/check.png' width='13'>";
+														}
+												$html .= "			<span valign='middle' class='texto'><br>".formatar_texto_bd(str_replace(" - ", "<br>", $temp))."</p>";
+														$html .= "</td>";
+												$temp="";
+										}
+
+									}
+								$html .="			</td>
+												</tr>
+											</table>
+								";
+								$mpdf->WriteHTML($html);
+								}else{
+									//if($row_campo['tipo']!="select_coluna"){
+
+
+										$html = "<table autosize='1'
+												class='MsoNormalTable'
+												border='1'
+												cellspacing='0'
+												cellpadding='0'
+												width='100%'
+												style='
+												important; width: 100.0%;
+												border-collapse: collapse;
+												border: medium none'>
+												<tr>
+													<td width='".$largura_1."' class='class_item'  valign='top'>
+											";
+											if($row_campo['ordem']!=999){
+												$html .=	"<span class='texto_ordem'>".$countForm . "." . $countField.".&nbsp;&nbsp;</span>";
+											}
+											$html .="	<span class='texto'>".formatar_texto_bd($row_campo['texto'])."</span>";
+											$html .= "
+													</td>";
+											$html .= "<td width='".$largura_2."' class='class_item'>
+													<span class='texto_conteudo'>". formatar_texto_bd("")."</span>
+												";
+										$html .= "</tr></table>";
+										$mpdf->WriteHTML($html);
+								}
+
+						}
+					}else{
+						if($row_campo['tipo']=='json'){
+							//AQUI Ãƒâ€° JASON
+							if(""!=""){
+								$html = "
+								<table autosize='1' border='1' cellspacing='0' cellpadding='0' width='649' style='width: 100%; border-collapse: collapse; border: medium none'>
+									<tr><td width='100%'><span class='texto'>Nenhum ítem cadastrado</span></td></tr>
+								</table>
+								";
+								$mpdf->WriteHTML($html);
+
+							}else{
+								$json = formatar_texto_bd($row_campo['selecao_valores']);
+								$json = str_replace("<br />","",$json);
+								$obj = json_decode($json);	//Puxando do objeto JSON do tipo do campo
+
+								$tempCol = explode("|", formatar_texto_bd(""));
+								$qtd  = count($tempCol);	//Quantidade de registros que vai ter
+								for($i=0;$i<$qtd;$i++){
+									if(trim($tempCol[$i]!="")){
+										$colunas = $obj->colunas;
+										$html = "
+											<table autosize='1' class='MsoNormalTable' border='1' cellspacing='0' cellpadding='0' width='100%' style='width: 100.0%; border-collapse: collapse; border: medium none'>
+												<tr>
+													<td width='23%' class='divisao'>
+														<span class='texto_formulario_divisao'>&nbsp;Registro ".($i + 1) ."</span>
+														";
+										$html .= "
+													</td>
+												</tr>
+											</table>
+										";
+										$html .= "
+											<table autosize='1'
+												autosize='0'
+												border='1'
+												cellspacing='0'
+												cellpadding='0
+												' style='width: 100%; border-collapse: collapse; border: medium none'>
+										";
+										for($col=0;$col<count($colunas);$col++){
+											$itemCol = explode("§", $tempCol[$i]);
+											$itemCol = $itemCol[$col];
+											$itemCol = explode("=", $itemCol);
+											$itemCol = $itemCol[1];
+											//$itemCol = "";
+											$html .= "
+												<tr>
+													<td
+														class='class_item'
+														valign='middle'
+														width='330'><span style='font-size:8.0pt;font-weight: bold;'>".$colunas[$col]->titulo_br."</span>";
+													$html .= "
+
+													</td>
+													<td class='linha_json' style='white-space: pre-wrap; !important'><center>";
+													$html .= "<span class='texto_conteudo'>".$itemCol."</span>";
+													$html .= "</center>
+													</td>
+												</tr>";
+										}
+										$html .="
+											</table>
+										";
+										//echo $html . "<br>";
+										$mpdf->WriteHTML($html);
+									}
+								}
+
+							}
+						}else{  //JSON VERTICAL
+							//Colocar o label do campo
+							$html_div = "
+								<table autosize='1'
+									class='MsoNormalTable'
+									border='1'
+									cellspacing='0'
+									cellpadding='0'
+									width='100%'
+									style='width: 100.0%; border-collapse: collapse; border: medium none'>
+									<tr>
+										<td width='23%' class='class_item'>
+											<span class='texto_ordem'>&nbsp;". $countForm.".".$countField.".&nbsp;&nbsp;".trim(mb_strtoupper(formatar_texto_bd($row_campo['texto'])))."</span>
+										</td>
+									</tr>
+								</table>
+							";
+							//$mpdf->WriteHTML($html_div);
+
+
+
+
+							$json = formatar_texto_bd($row_campo['selecao_valores']);
+							$json = str_replace("<br />","",$json);
+							$obj = json_decode($json);
+
+							$linhas = $obj->linhas;
+							$colunas = $obj->colunas;
+
+							$html .= "
+									<table autosize='1' border='1' cellspacing='0' cellpadding='0' width='649' style='width: 100%; border-collapse: collapse; border: medium none'>
+										<thead>
+											<tr>
+							";
+							$largura_col = intval(100/count($colunas));
+							for($col=0;$col<count($colunas);$col++){
+								$html .= "
+									<th style='".$largura_col."% !important' class='header_json'>
+										<span class='header_json_pt'>".$colunas[$col]->titulo_br."</span><br>
+										<span class='header_json_lg'></span>
+									</th>
+								";
+							}
+							$html .= "
+											</tr>
+										</thead>
+										<tbody>
+							";
+
+										$valor = trim(formatar_texto_bd(""));
+										if($valor==""){
+											for($row = 1;$row<=$linhas;$row++){
+												if($row>100){ break; }
+												$html .= "<tr>
+												";
+												for($col=0;$col<count($colunas);$col++){
+													$html .= "<td style='".$largura_col."% !important' class='linha_json'>";
+													if($colunas[$col]->tipo=="select"){
+														$html .= "<table autosize='1' border='0' width='100%' cellspacing='0' cellpadding='0'><tr>";
+
+														$largura_tabela_valores = intval(100/count($colunas[$col]->valores));
+														for($col_valores=0;$col_valores<count($colunas[$col]->valores);$col_valores++){
+															$html .= "<td class='coluna_valor'>
+																		<img src='imagens/check.png' width='10'>
+																		<br><b>".$colunas[$col]->valores[$col_valores]->titulo_br."</b><br>
+																		<span style='font-size: 6pt'>(".$colunas[$col]->valores[$col_valores]->tituto_en.")</span></td>";
+														}
+														$html .= "</tr>
+														</table>";
+													}else{
+														$html .= "<span style='color: white'>______________________</span>";
+													}
+													if($colunas[$col]->formato!=""){
+														$html .= "<span class='linha_json_legenda'><br><br>(".$colunas[$col]->formato.")</span>";
+													}
+													$html .= "</td>";
+												}
+												$html .="		  </tr>
+														";
+											}
+										}else{
+											//1;1=FERNANDA SOBRENOME_2=FARMACEUTICA|2;1=ROGERIO SOBRENOME3_2=PI|
+											$jsonLinhas = explode("|", $valor);
+											for($row=0;$row<count($jsonLinhas)-1;$row++){
+												$html .= "<tr>";
+												$jsonLinha = $jsonLinhas[$row];
+												$jsonColunas = explode("§", $jsonLinha);
+												for($col=0;$col<count($colunas);$col++){
+													$html .= "<td style='word-wrap: break-word; white-space: normal;' class='linha_json_preenchido'>";
+													$jsonColuna = $jsonColunas[$col];
+													$jsonColuna = explode("=", $jsonColuna);
+													$jsonValor  = $jsonColuna[1];
+													if($colunas[$col]->tipo=="select"){
+														/*$html .= "<table autosize='1' border='0' width='100%' cellspacing='0' cellpadding='0'><tr>";
+														$largura_tabela_valores = intval(100/count($colunas[$col]->valores));
+														for($col_valores=0;$col_valores<count($colunas[$col]->valores);$col_valores++){
+															$html .= "<td class='coluna_valor'>";
+															if($colunas[$col]->valores[$col_valores]->titulo_br!=$jsonValor){
+																$html .= "<img src='imagens/opc_unchecked.png' width='9'>";
+															}else{
+																$html .= "<img src='imagens/opc_checked.png' width='9'>";
+															}
+															$html .= "<br><b>".$colunas[$col]->valores[$col_valores]->titulo_br."</b></td>";
+														}
+														$html .= "</tr></table>";*/
+														$html .= "<span style='font-size: 8.0pt;'>".$jsonValor."</span>";
+													}else{
+														$html .= "<span style='font-size: 8.0pt;'>".$jsonValor."</span>";
+													}
+													if($colunas[$col]->formato!=""){
+														//$html .= "<span class='linha_json_legenda'><br>(".$colunas[$col]->formato.")</span>";
+														$html .= "<span class='linha_json_legenda'></span>";
+													}
+
+
+													$html .= "</td>";
+												}
+												$html .= "</tr>";
+											}
+
+										}
+
+
+
+							$html .="	</tbody>
+									</table>
+							";
+
+							$mpdf->WriteHTML($html);
+
+
+						}
+					}
+
+				}
+				if(trim($row_campo['comentario']!="")){	//Tem comentÃƒÂ¡rio
+					$html = "
+
+					";
+					$mpdf->WriteHTML($html);
+				}
+
+				$html = '';
+			}
+		}
+
+
+
+		$html .= "
+			</div>
+
+		";
+		$mpdf->WriteHTML($html);
+
+	}
+
+
+
+			$html = '		<br>
+			<table autosize="1" class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" width="100%" style="width: 100.0%; border-collapse: collapse; border: medium none" >
+					<tr height="15"><td colspan="5" height="15"><br></td></tr>
+					<tr>
+						<td class="ptTabelaAzul" style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black;">
+							<b>
+							<span class="texto_formulario_nro">';
+								$html .= $countForm+1 .'.
+							</span>
+							<span class="texto_formulario">
+								 LISTA DE ACHADOS/PENDÊNCIAS/DESVIOS DE PROTOCOLO/NÃO CONFORMIDADES';
+								$html .= '
+							</span>
+							</b>
+						</td>
+					</tr>
+			</table>
+			<table autosize="1" width="100%" class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none">
+				<tr>
+					<td width="110" valign="top" style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; 	padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" class="ptTabelaAzul">
+						<p class="MsoNormal" align="center" style="text-align:center"><b>
+						<span lang="EN-GB" style="font-size:11.0pt;  font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Participante';
+						$html .= '
+						</span></b>
+					</td>
+					<td width="120" valign="top" style="border: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" class="ptTabelaAzul">
+						<p class="MsoNormal" align="left" style="text-align:center"><b>
+						<span lang="EN-GB" style="font-size:11.0pt;  font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Tipo';
+						$html .= '
+						</span></b>
+					</td>
+					<td width="40%" valign="top" style="border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" class="ptTabelaAzul">
+						<p class="MsoNormal" align="center" style="text-align:center"><b>
+						<span lang="EN-GB" style="font-size:11.0pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Descrição';
+						$html .= '
+						</span></b>
+					</td>
+					<td width="40%" valign="top" style="border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" class="ptTabelaAzul">
+						<p class="MsoNormal" align="center" style="text-align:center"><b>
+						<span lang="EN-GB" style="font-size:11.0pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Ação';
+						$html .= '
+						</span></b>
+					</td>
+					<td width="100" valign="top" style="border-left: medium none; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm" class="ptTabelaAzul">
+						<p class="MsoNormal" align="center" style="text-align:center"><b>
+						<span lang="EN-GB" style="font-size:11.0pt;font-family:&quot;Verdana&quot;,&quot;sans-serif&quot;">Status';
+						$html .= '
+						</span></b>
+					</td>
+				</tr>
+				';
+		$mpdf->WriteHTML($html);
+
+		if(strtoupper($row_agenda['tipo_monitoria'])!="VISITA FINAL"){
+			$dataVis = $row_agenda['data'];
+			$dataVis = substr($dataVis, 6,2) . "/" . substr($dataVis, 4,2) . "/" .substr($dataVis, 0,4);
+			$query_t = "select * from agenda_lista_pendencia
+							where   visita = '".$row_agenda['nro_visita']."'
+									and projeto = ".$_SESSION['projeto']."
+										order by paciente";
+		}else{
+			$dataVis = $row_agenda['data'];
+			$dataVis = substr($dataVis, 6,2) . "/" . substr($dataVis, 4,2) . "/" .substr($dataVis, 0,4);
+			$query_t = "select * from agenda_lista_pendencia
+							where  projeto = ".$_SESSION['projeto']."
+								order by paciente";
+		}
+        //echo $query_t;
+
+
+			$html = "";
+							$res_p = $conexao->pesquisa($query_t);
+							if(mysqli_num_rows($res_p)!=0){
+								while($row_p = mysqli_fetch_assoc($res_p)){
+
+									$html = '<tr>
+										<td style="border-left: medium none; border-right: 1.0pt solid black;  border-left: 1.0pt solid black;border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+											<p class="MsoNormal" align="center" style="text-align:center">
+												<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+												<center>';
+									$paciente = formatar_texto_bd($row_p['paciente']);
+									if($paciente==""){$paciente = "N/A";}
+									$html .= $paciente.'</center>
+												</span>
+											</p>
+										</td>
+
+										<td style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+											<p class="MsoNormal" align="center" style="text-align:center">
+												<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+												'.formatar_texto_bd($row_p['tipo']);
+												$html .= '
+												</span>
+											</p>
+										</td>
+										<td style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+											<p class="MsoNormal" align="center" style="text-align:center">
+												<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+												'.formatar_texto_bd(nl2br($row_p['achado'])).'
+												</span>
+											</p>
+										</td>
+										<td style="border-left: medium none; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+											<p class="MsoNormal" align="center" style="text-align:center">
+												<span lang="EN-GB" style="font-size: 9.0pt; font-family: Verdana,sans-serif; ">
+												'.formatar_texto_bd(nl2br($row_p['acao'])).'
+												</span>
+											</p>
+										</td>
+										<td valign="center" style="border-left: medium none; border-right: 1.0pt solid black; border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
+											<p class="MsoNormal" style="text-align:justify;">
+												<span style="font-size: 9.0pt;  font-family: Verdana,sans-serif;">
+												'.formatar_texto_bd($row_p['status']);
+												$html .= '
+												</span>
+											</p>
+										</td>
+									</tr>';
+								$mpdf->WriteHTML($html);
+								}
+							}else{
+								$html = '<tr><td colspan=5> Nenhuma pendência encontrada';
+								$html .= '.</td></tr>';
+								$mpdf->WriteHTML($html);
+							}
+			$html 	= '
+						</table>
+				';
+			$mpdf->WriteHTML($html);
+			$countForm++;
+
+		$countForm++;
+		//Assinatura!
+		$query = "SELECT agenda.id, agenda.data, agenda.monitora, agenda.revisor, agenda.tipo_monitoria,
+			monitor.nome as nome_monitor, monitor.assinatura as ass_monitor, monitor.tipo_usuario as tipo_monitor,
+			revisor.nome as nome_revisor, revisor.assinatura as ass_revisor
+			FROM agenda
+				left join usu_usuario as monitor on agenda.monitora = monitor.id
+				left join usu_usuario as revisor on agenda.revisor = revisor.id
+
+				where agenda.id = " . $_GET['id'];
+		$resAss = $conexao->pesquisa($query);
+		$rowAss = mysqli_fetch_assoc($resAss);
+		$html = "<br><br><br>
+		<div align='center'>
+			<table autosize='1' border='0' width='100%' cellspacing='0'>
+				<tr>
+					<td class='ptTabelaAzul' colspan='4' style='padding-left: 4pt; padding-top: 4pt' style='border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black;'>
+						<span class='texto_formulario_pt'><b>".$countForm.". ASSINATURAS</b>";
+						$html .= "
+					</td>
+				</tr>
+				<tr>
+					<td class='ptTabelaAzul' colspan='4' style='padding-left: 4pt; padding-top: 4pt' style='border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black;'>
+						<span class='texto_header_assinatura'><b>ELABORADO POR</b>";
+						$html .= "
+					</td>
+				</tr>
+				<tr>
+					<td style='border-left:1px solid' valign='bottom'><span class='texto_assinatura'>".formatar_texto_bd($varAgenda->monitor->nome)."</span></td>
+					<td valign='bottom'><span class='texto_assinatura'><center><br><br><br><br><br></span></td>
+					<td valign='bottom'><span class='texto_assinatura'>".formatar_texto_bd($varAgenda->monitor->funcao_nome)."</span></td>
+					<td valign='bottom' style='border-right:1px solid;'><span class='texto_assinatura'><center>".$varAgenda->getDataInicialDATA()."</center></span></td>
+				</tr>
+				<tr>
+					<td style='padding-bottom: 15.5pt; border-left:1px solid; border-top:1px solid'><span class='texto_header_assinatura'>Nome</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-top:1px solid'><center><span class='texto_header_assinatura'>Assinatura</span>";
+						$html .= "
+					</td>
+						<td style='padding-bottom: 15.5pt; border-top:1px solid'><span class='texto_header_assinatura'>Função</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-right:1px solid; border-top:1px solid' width='20%'><span class='texto_header_assinatura'><center>Data</center></span>";
+						$html .= "
+					</td>
+				</tr>
+
+				<tr>
+					<td class='ptTabelaAzul' colspan='4' style='padding-left: 4pt; padding-top: 4pt' style='border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black;'>
+						<span class='texto_header_assinatura'><b>REVISADO POR</b>";
+						$html .= "
+					</td>
+				</tr>
+				<tr>
+					<td style='border-left:1px solid' valign='bottom'><span class='texto_assinatura'>".formatar_texto_bd($varAgenda->revisor->nome)."</span></td>
+					<td valign='bottom'><span class='texto_assinatura'><center><br><br><br><br><br></span></td>
+					<td valign='bottom'><span class='texto_assinatura'>".formatar_texto_bd($varAgenda->revisor->funcao_nome)."</span></td>
+					<td valign='bottom' style='border-right:1px solid;'><span class='texto_assinatura'><center>".$varAgenda->getDataInicialDATA()."</center></span></td>
+				</tr>
+				<tr>
+					<td style='padding-bottom: 15.5pt; border-left:1px solid; border-top:1px solid'><span class='texto_header_assinatura'>Nome</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-top:1px solid'><center><span class='texto_header_assinatura'>Assinatura</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-top:1px solid'><span class='texto_header_assinatura'>Função</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-right:1px solid; border-top:1px solid' width='20%'><span class='texto_header_assinatura'><center>Data</center></span>";
+						$html .= "
+					</td>
+				</tr>
+
+				<tr>
+					<td class='ptTabelaAzul' colspan='4' style='padding-left: 4pt; padding-top: 4pt' style='border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-top: 1.0pt solid black; border-bottom: 1.0pt solid black;'>
+						<span class='texto_header_assinatura'><b>APROVAÇÃO PATROCINADOR</b>";
+						$html .= "
+					</td>
+				</tr>
+				<tr>
+					<td style='border-left:1px solid' valign='bottom'><span class='texto_assinatura'><br><br><br><br><br></span></td>
+					<td valign='bottom'><span class='texto_assinatura'><center></center></span></td>
+					<td valign='bottom'><span class='texto_assinatura'></span></td>
+					<td valign='bottom' style='border-right:1px solid;'><span class='texto_assinatura'><center></center></span></td>
+				</tr>
+				<tr>
+					<td style='padding-bottom: 15.5pt; border-left:1px solid; border-bottom:1px solid;border-top:1px solid'><span class='texto_header_assinatura'>Nome</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-bottom:1px solid;border-top:1px solid'><center><span class='texto_header_assinatura'>Assinatura</span>";
+						$html .= "
+					</td>
+					<td style='padding-bottom: 15.5pt; border-bottom:1px solid;border-top:1px solid'><span class='texto_header_assinatura'>Função</span>";
+						$html .= "
+					</td>
+						<td style='padding-bottom: 15.5pt; border-right:1px solid; border-bottom:1px solid;border-top:1px solid' width='20%'><span class='texto_header_assinatura'><center>Data</center></span>";
+						$html .= "
+					</td>
+				</tr>
+			</table>
+		</div>
+		";
+		$mpdf->WriteHTML($html);
+
+	$mpdf->Output();
+	$mpdf->charset_in='UTF-8';
+?>

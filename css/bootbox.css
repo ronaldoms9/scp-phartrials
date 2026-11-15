@@ -1,0 +1,6 @@
+	box.css({
+	  'top': '50%',
+	  'margin-top': function () {
+		return -(box.height() / 2);
+	  }
+	});

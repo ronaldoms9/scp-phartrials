@@ -1,0 +1,275 @@
+<table border='2px'><tr bgcolor='#87AFC6'><th class="tabela-head"><center># Centro</center></th>
+																<th class="tabela-head"><center># EA</center></th>
+																<th class="tabela-head"><center># VOL</center></th>
+																<th class="tabela-head"><center>Estudo <br>ou Voluntário?</center></th>
+																<th class="tabela-head">Nome do evento</th>
+																<th class="tabela-head">Intensidade</th>
+																<th class="tabela-head">EA Grave?</th>
+																<th class="tabela-head"><center>Data de início</center></th>
+																<th class="tabela-head"><center>Relação com a medicação</center></th>
+																<th class="tabela-head">Ação tomada</th>
+																<th class="tabela-head">Desfecho</th>
+																<th class="tabela-head"><center>Data do término</center></th>
+																<th class="tabela-head"><center>Comentários</center></th>
+																<th class="tabela-head"></th>
+															</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Exame Laboratorial alterado - Urina 1 Leucócitos</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto"></td>
+																			  <td class="tabela-texto"><center>27/02/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">6 - Vide comentário</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>12/03/2024</center></td>
+																			  <td class="tabela-texto">Conduta: Em observação/ Outros Procedimentos<br>
+U1: pH: 7_CNS e Leucócitos Urina: 40000 /mL_CS. <br>
+Repetição: 12/03/2024 U1: pH: 7_CNS e Leucócitos Urina: 500 /mL_DPN<br>
+<br>
+Evolução: Recuperado<br>
+</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4983"></a> |
+
+																				 																				 <a href="javascript:excluir(4983,'Exame Laboratorial alterado - Urina 1 Leucócitos');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>02</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">2 - Provável</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">18/02/24 às 10:06 Administrado Dipriona, 1g, VO, 1 Cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4651"></a> |
+
+																				 																				 <a href="javascript:excluir(4651,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>03</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Dispepsia</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">3 - Possível</td>
+																			  <td class="tabela-texto">6 - Vide comentário</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">N/A</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4990"></a> |
+
+																				 																				 <a href="javascript:excluir(4990,'Dispepsia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>02</b></center></td>
+																			  <td class="tabela-texto"><center><b>03</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Exame Laboratorial alterado - Hematócrito</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>27/02/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">6 - Vide comentário</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>12/03/2024</center></td>
+																			  <td class="tabela-texto">Conduta: Em observação<br>
+Hemograma: Hemácias: 3,29 milh./mm3_CNS, Hemoglobina: 10,3 g/dL_CNS, Hematócrito: 30,8%_CS<br>
+Repetição: 12/03/2024 Hemograma: Hemácias: 3,59 milh./mm3_CNS, Hematócrito: 34,8%_CNS, VCM: 97 u3)CNS e Leucócitos: 3820 /mm3_CNS<br>
+<br>
+Evolução: Recuperado<br>
+<br>
+</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4991"></a> |
+
+																				 																				 <a href="javascript:excluir(4991,'Exame Laboratorial alterado - Hematócrito');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>04</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">3 - Possível</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">28/01/24 às 14:35 Administrado Dipriona, 1g, VO, 1 Cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4638"></a> |
+
+																				 																				 <a href="javascript:excluir(4638,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>05</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">3 - Possível</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">18/02/24 às 18:05 Administrado Dipriona, 1g, VO, 1 Cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4998"></a> |
+
+																				 																				 <a href="javascript:excluir(4998,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>06</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Exame Laboratorial alterado - Urina 1 - Hemácias</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>28/02/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">6 - Vide comentário</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>12/03/2024</center></td>
+																			  <td class="tabela-texto">Conduta: Em observação/ Outros Procedimentos<br>
+U1: Sangue Oculto: Positivo_CNS, Nitrito: Positivo_CNS e Hemácias: 20000 /mL_CS<br>
+Repetição: 12/03/2024 U1: Nitrito: Positivo_CNS e Hemácias: 2000 /mL_DPN<br>
+<br>
+Evolução: Recuperado<br>
+</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4999"></a> |
+
+																				 																				 <a href="javascript:excluir(4999,'Exame Laboratorial alterado - Urina 1 - Hemácias');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>08</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>17/02/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">18/02/24 às 10:09 Administrado Dipriona, 1g, VO, 1 Cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4652"></a> |
+
+																				 																				 <a href="javascript:excluir(4652,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>15</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">3 - Possível</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">28/01/24 às 13:12 Administrado Dipriona, 1g, VO, 1 Cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4607"></a> |
+
+																				 																				 <a href="javascript:excluir(4607,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>16</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">3 - Possível</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">28/01/24 às 13:12 Administrado, Dipirona, 1g, VO, 1 cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4608"></a> |
+
+																				 																				 <a href="javascript:excluir(4608,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>02</b></center></td>
+																			  <td class="tabela-texto"><center><b>16</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Exame Laboratorial alterado - Hematócrito</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>27/02/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">6 - Vide comentário</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>12/04/2024</center></td>
+																			  <td class="tabela-texto">Conduta: Em observação<br>
+Hemograma: Hemácias: 3,85 milh./mm3_CNS, Hemoglobina: 10,6 g/dL_CNS e Hematócrito: 32%_CS. <br>
+Repetição: 12/04/2024 Hemograma: Hematócrito: 35, 8%_DPN<br>
+<br>
+Evolução: Recuperado</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=5002"></a> |
+
+																				 																				 <a href="javascript:excluir(5002,'Exame Laboratorial alterado - Hematócrito');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>23</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">3 - Possível</td>
+																			  <td class="tabela-texto">7 - Avaliação Clínica</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>28/01/2024</center></td>
+																			  <td class="tabela-texto">Conduta: em observação</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4606"></a> |
+
+																				 																				 <a href="javascript:excluir(4606,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>02</b></center></td>
+																			  <td class="tabela-texto"><center><b>23</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Cefaleia</td>
+																			  <td class="tabela-texto">2 - Moderado</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">3 - Administração de medicação concomitante</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>18/02/2024</center></td>
+																			  <td class="tabela-texto">18/02/24 às 10:11 Administrado Dipriona, 1g, VO, 1 Cp<br>
+18/02/24 às 17:50 Administrado Paracetamol 750 mg, VO, 1 Cp</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=4653"></a> |
+
+																				 																				 <a href="javascript:excluir(4653,'Cefaleia');"></a>																				</td>
+																			</tr>
+																			  <td class="tabela-texto"><center><b>460</b></center></td>
+																			  <td class="tabela-texto"><center><b>01</b></center></td>
+																			  <td class="tabela-texto"><center><b>35</b></center></td>
+																			  <td class="tabela-texto"><center>Paciente</center></td>
+																			  <td class="tabela-texto">Exame Laboratorial Alterado HTT 33,3%</td>
+																			  <td class="tabela-texto">1 - Leve</td>
+																			  <td class="tabela-texto">2 - Não</td>
+																			  <td class="tabela-texto"><center>08/03/2024</center></td>
+																			  <td class="tabela-texto">6 - Não relacionada</td>
+																			  <td class="tabela-texto">7 - Avaliação Clínica</td>
+																			  <td class="tabela-texto" nowrap="">2 - Resolvido</td>
+																			  <td class="tabela-texto"><center>12/03/2024</center></td>
+																			  <td class="tabela-texto">08/03/2024<br>
+Hemograma: Hematócrito: 33,3%_CS. Repetição de exames 12/03/2024: Hematócrito: 35,4%_DPN.</td>
+																			  <td class="tabela-texto" nowrap=""><a href="novo_ea.php?opc=E&amp;id=5001"></a> |
+
+																				 																				 <a href="javascript:excluir(5001,'Exame Laboratorial Alterado HTT 33,3%');"></a>																				</td>
+																			</tr></table>

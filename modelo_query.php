@@ -1,0 +1,169 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+	<!--<link href='https://fonts.googleapis.com/css?family=Libre Barcode 39' rel='stylesheet'>-->
+<style>
+@font-face {
+  font-family: 'Libre Barcode 39';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Libre Barcode 39 Regular'), local('LibreBarcode39-Regular'), url(https://fonts.gstatic.com/s/librebarcode39/v8/-nFnOHM08vwC6h8Li1eQnP_AHzI2G_Bx0g.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<!--[if !mso]>
+<style>
+v\:*         { behavior: url(#default#VML) }
+o\:*         { behavior: url(#default#VML) }
+.shape       { behavior: url(#default#VML) }
+</style>
+<![endif]-->
+<link rel="File-List" href="new_page_1_files/filelist.xml">
+<!--[if gte mso 9]>
+<xml><o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]-->
+</head>
+<body>
+<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none">
+	<tr>
+		<td width="168" rowspan="2" valign="top" style="width: 125.8pt; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoHeader"><img border=0 width=154 height=92 src="logo_qsbsoft.png" >
+		</td>
+		<td width="529" colspan="3" valign="top" style="width: 397.0pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoHeader" align="center" style="text-align:center"><b>
+		<span style="font-family:&quot;Arial Black&quot;,&quot;sans-serif&quot;align:center">
+		FORMULÁRIO DE ESCLARECIMENTO DE DADOS</span></b> (<i>Query</i>)</td>
+	</tr>
+	<tr>
+		<td width="122" valign="bottom" style="width: 98.95pt; border-left: medium none; border-right: medium none; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoHeader" align="center" style="margin-bottom:2.0pt;text-align:center">
+			<span style="font-size: 7.0pt; font-family: Garamond,serif">Questionamento Automático</span>
+		</td>
+		<td width="154" style="width: 118.0pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoHeader" align="right" style="text-align:right">Questionamento Nº
+		</td>
+		<td width="253" style="width: 180.05pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoHeader" align="center" style="text-align:center" valign="center">
+			<center>
+				<span style="font-size:32.0pt;"><barcode code="123456" type="C39" size="0.5" height="2.0" /></span><br>	 			
+				<span style="font-size:42.0pt;font-family:'Arial'; font-size: 14px"><b>%QUERY_NRO%</b></span>
+			</center>
+		</td>
+	</tr>
+</table>
+<br>
+
+<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none">
+	<tr>
+		<td width="83" valign="top" style="border:1.0pt solid windowtext; width: 62.2pt; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 3pt; padding-bottom: 3pt; position:relative" align="right">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal"><font size="3">CENTRO:</font></p></td>
+		<td valign="top" style="border:1.0pt solid windowtext; width: 270px; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 3pt; padding-bottom: 3pt; position:relative">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal" align="center"><font size="4">%QUERY_CENTRO%</font></td>
+		<td valign="top" style="border:1.0pt solid windowtext; width: 114px;  padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 3pt; padding-bottom: 3pt; position:relative" align="right">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal"><font size="3">PARTICIPANTE:</font></td>
+		<td valign="top" style="width: 254px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 3pt; padding-bottom: 3pt; position:relative">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal" align="center"><font size="4"><b>%QUERY_PARTICIPANTE%</b></font></td>
+	</tr>
+	<tr>
+		<td style="position: relative; border: 1px solid #000000; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px" align="right">
+		<font size="3">PÁGINA DO CRF:</font></td>
+		<td style="position: relative; border: 1px solid #000000; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px">
+		%QUERY_FORMULARIO_NOME%</td>
+		<td style="position: relative; border: 1px solid #000000; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px" align="right">
+		<font size="3">CAMPO:</font></td>
+		<td style="position: relative; border: 1px solid #000000; padding-left: 4px; padding-right: 4px; padding-top: 1px; padding-bottom: 1px">
+		%QUERY_TEXTO_CAMPO%</td>
+	</tr>
+</table>
+
+<p class="MsoNormal" style="line-height: normal; margin-bottom: .0001pt">&nbsp;</p>
+<table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none;">
+	<tr>
+		<td width="697" colspan="2" valign="top" style="width: 522.8pt; height:170pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal"><b><u>QUESTIONAMENTO</u></b>:&nbsp;&nbsp;&nbsp; <span style="font-size: 8.0pt">( 
+			Descrição do Achado / Problema &nbsp;&nbsp;<b>E</b> &nbsp;&nbsp;Questionamento / Solicitação 
+			de Esclarecimento decorrente )</span></p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal">&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal"><font face="tahoma" size="3"><i>%QUERY_PERGUNTA%</i></font></p>		
+		</td>
+	</tr>
+	<tr>
+		<td width="366" valign="top" style="width: 274.25pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</td>
+		<td width="331" valign="top" style="width: 248.55pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal">Responsável pelo Questionamento:</p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal"><span style="font-size: 8.0pt">(Nome/Rubrica, Data)</span></p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal">&nbsp;</p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal"><centeR><b>%QUERY_QUESTIONAMENTO%</b><br>%QUERY_DATA%</center></p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal">&nbsp;
+		</td>
+	</tr>
+	<tr>
+		<td width="697" colspan="2" valign="top" style="width: 522.8pt; height:170pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal"><b><u>RESPOSTA</u></b>:&nbsp;&nbsp;&nbsp; <span style="font-size: 8.0pt">(Correção, &nbsp;Esclarecimento ou Justificativa fornecida pelo Investigador ou  Responsável)</span></p>
+			<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:normal">&nbsp;</p>
+		</td>
+	</tr>
+	<tr>
+		<td width="366" valign="top" style="width: 274.25pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+		<p class="MsoNormal" align="center" style="margin-bottom:2.0pt;text-align:center;
+  line-height:normal">
+		<span style="font-size: 8.0pt; font-family: Garamond,serif">Se o espaço 
+		for insuficiente, utilize o verso deste formulário.</span></td>
+		<td width="331" valign="top" style="width: 248.55pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">Responsável pela Resposta:</p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal"><span style="font-size: 8.0pt">(Nome/Rubrica, Data)</span></p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</p>
+		<p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
+  normal">&nbsp;</td>
+	</tr>
+</table>
+<p class="MsoNormal" style="line-height: normal; margin-bottom: .0001pt">&nbsp;</p>
+<table class="MsoTableGrid" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border: medium none; margin-left: -.25pt">
+	<tr>
+		<td width="366" colspan="2" valign="top" style="width: 274.5pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoFooter">Reservado <span style="font-size:8.0pt">(Controle)</span></td>
+		<td width="331" colspan="2" valign="top" style="width: 248.3pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoFooter">Resposta Implementada por</td>
+	</tr>
+	<tr>
+		<td width="366" colspan="2" valign="top" style="width: 274.5pt; border-left: 1.0pt solid windowtext; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		
+		<p class="MsoFooter"><span style="font-size: 8.0pt">&nbsp;</span></p>
+		<p class="MsoFooter"><span style="font-size: 8.0pt">&nbsp;</span></p>
+		<p class="MsoFooter">&nbsp;</td>
+		<td width="331" colspan="2" valign="top" style="width: 248.3pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoFooter"><span style="font-size: 8.0pt">(Nome/Rubrica, Data)</span></td>
+	</tr>
+	<tr>
+		<td width="144" style="width: 108.0pt; border: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoFooter">
+		<span style="font-size: 9.0pt; font-family: 'Times New Roman',serif">
+		Estudo GDN 018-16</span></td>
+		<td width="444" colspan="2" style="width: 333.0pt; border: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoFooter" align="center" style="text-align:center">
+		<span style="font-size: 8.0pt; font-family: 'Arial Narrow',sans-serif">
+		Formulário&nbsp; v1.0 </span></td>
+		<td width="109" style="width: 81.8pt; border: medium none; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoFooter" align="right" style="text-align:right">Página 1/1</td>
+	</tr>
+</table>
+
+</body>

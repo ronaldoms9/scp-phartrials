@@ -1,4 +1,5 @@
 <?php
+	require_once __DIR__ . '/env.php';
 	error_reporting(~E_ALL);
 	ini_set('display_errors', 0);
 	header('Content-Type:text/html; charset=ISO-8859-1');
@@ -11,15 +12,15 @@
 		private $teste = 0;	//1 = Banco remoto, testando....   0 = Localhost, produção
 
 		public function __construct($banco){
-			$this->user = "root";
+			$this->user = env('DB_ROOT_USER', 'root');
 			if($this->teste==1){
-				$this->host = "www.qsbsoft.com.br";
+				$this->host = env('DB_REMOTE_HOST');
 				$this->db = $banco;
 			}else{
-				$this->host = "localhost";
+				$this->host = env('DB_HOST', 'localhost');
 				$this->db = $banco;
 			}
-			$this->pass = "senha123";
+			$this->pass = env('DB_ROOT_PASS');
 		}
 		public function conecta(){
 			$link = new mysqli($this->host, $this->user, $this->pass, $this->db);

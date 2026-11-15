@@ -1,15 +1,15 @@
 <?php
+	require_once __DIR__ . '/env.php';
 	class ConexaoMensageiro{
         private $user ;
 		private $host;
 		private $pass ;
 		private $db;
 		public function __construct(){
-			//$this->user = "butantan";
-			$this->user = "pt";
-            $this->host = "localhost";
-            $this->db = "mensageiro";
-			$this->pass = "UDPRVSKVvp8zJgrL";
+			$this->user = env('DB_USER');
+            $this->host = env('DB_HOST', 'localhost');
+            $this->db = env('MSG_DB_NAME', 'mensageiro');
+			$this->pass = env('DB_PASS');
 		}
 		public function conecta(){
 			$link = new mysqli($this->host, $this->user, $this->pass, $this->db);

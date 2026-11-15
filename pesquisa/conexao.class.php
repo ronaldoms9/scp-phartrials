@@ -1,4 +1,5 @@
 <?php
+	require_once __DIR__ . '/../class/env.php';
 	class Conexao{
 		private $user ;
 		private $host;
@@ -6,14 +7,14 @@
 		private $db;
 
 		public function __construct(){
-			$this->user = "root";
-			$this->host = "localhost";
-			$this->pass = "senha123";
+			$this->user = env('DB_ROOT_USER', 'root');
+			$this->host = env('DB_HOST', 'localhost');
+			$this->pass = env('DB_ROOT_PASS');
 			$this->db = "atcgen_monitoria_novo";
 
 		}
 		public function conecta(){
-			$link = new mysqli("localhost", "root", "senha123", "atcgen_monitoria_novo");
+			$link = new mysqli($this->host, $this->user, $this->pass, $this->db);
 			return $link;
 		}
 		public function pesquisa($query){

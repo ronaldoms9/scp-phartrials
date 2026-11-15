@@ -1,4 +1,5 @@
 <?php
+	require_once __DIR__ . '/env.php';
 	error_reporting(~E_ALL);
 	ini_set('display_errors', 0);
 
@@ -24,18 +25,17 @@
 		private $teste = 0;	//1 = Banco remoto, testando....   0 = Localhost, produção
 
 		public function __construct(){
-			$this->user = "pt";
+			$this->user = env('DB_USER');
 			if($this->teste==1){
-				$this->host = "monitoria.phartrials.com.br";
+				$this->host = env('DB_REMOTE_HOST');
 				//$this->host = "localhost";
-				$this->db = "pt_monitoria";
+				$this->db = env('DB_NAME');
 			}else{
-				$this->host = "localhost";
+				$this->host = env('DB_HOST', 'localhost');
 				//$this->host = "172.168.13.110";
-				$this->db = "pt_monitoria";
+				$this->db = env('DB_NAME');
 			}
-			$this->pass = "UDPRVSKVvp8zJgrL";
-			//$this->pass = "s2KH7m1NsatP";
+			$this->pass = env('DB_PASS');
 		}
 		public function conecta(){
 			$link = new mysqli($this->host, $this->user, $this->pass, $this->db);

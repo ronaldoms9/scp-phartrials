@@ -35,8 +35,9 @@
 	if($_SESSION['valido']<1){echo "<script>window.location.replace('expirado.php');</script>";};
 
 	require_once __DIR__ . '/vendor/autoload.php';
-	$servidor = "localhost";
-	$conexao = new mysqli($servidor, "root", "senha123", "pt_monitoria");
+	require_once __DIR__ . '/class/env.php';
+	$servidor = env('DB_HOST', 'localhost');
+	$conexao = new mysqli($servidor, env('DB_ROOT_USER', 'root'), env('DB_ROOT_PASS'), "pt_monitoria");
 
 
 	function traduzir($texto_entrada){

@@ -11,7 +11,7 @@
 
 	error_reporting(1);
 	require_once __DIR__ . '/vendor/autoload.php';
-	$conexao = new mysqli($servidor, "root", "senha123", "pt_monitoria");
+	$conexao = new mysqli($servidor, env('DB_ROOT_USER', 'root'), env('DB_ROOT_PASS'), "pt_monitoria");
 	function pesquisa($query){
 	  global $conexao;
 	  $result = $conexao->query($query);

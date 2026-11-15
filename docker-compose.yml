@@ -13,10 +13,10 @@ services:
   db:
     image: mariadb:10.5
     environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MARIADB_DATABASE: pt_monitoria
-      MARIADB_USER: pt
-      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASS}
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASS}
       TZ: America/Sao_Paulo
     command: ["--character-set-server=latin1", "--collation-server=latin1_swedish_ci", "--sql_mode="]
     ports:

@@ -77,7 +77,7 @@
 																		and cfg_visitas_campos.tipo <> 'json'
 																		and cfg_visitas_campos.tipo <> 'json_vertical' ";
 											$resQtd = $conexao->pesquisa($query);
-											$rowQtd = mysqli_fetch_assoc($resQtd);
+											$rowQtd = fetch_assoc_seguro($resQtd);
 											$qtdTot  = $rowQtd['qtd'];
 
 											$query = "SELECT
@@ -93,7 +93,7 @@
 																		and cfg_visitas_campos.tipo <> 'json_vertical'";
 											//echo $query;
 											$resQtd = $conexao->pesquisa($query);
-											$rowQtd = mysqli_fetch_assoc($resQtd);
+											$rowQtd = fetch_assoc_seguro($resQtd);
 											$qtdBranco  = $rowQtd['qtd'];
 
 											$query = "SELECT
@@ -104,7 +104,7 @@
 																WHERE agenda.projeto = " . $_SESSION['projeto'] . "
 																		and crf_agenda_campos.monitoria_status = 1";
 											$resQtd = $conexao->pesquisa($query);
-											$rowQtd = mysqli_fetch_assoc($resQtd);
+											$rowQtd = fetch_assoc_seguro($resQtd);
 											$qtdMon  = $rowQtd['qtd'];
 
 											$query = "SELECT
@@ -115,7 +115,7 @@
 																WHERE agenda.projeto = " . $_SESSION['projeto'] . "
 																		and crf_agenda_campos.erro_status = 1";
 											$resQtd = $conexao->pesquisa($query);
-											$rowQtd = mysqli_fetch_assoc($resQtd);
+											$rowQtd = fetch_assoc_seguro($resQtd);
 											$qtdErr  = $rowQtd['qtd'];
 
 											$query = "SELECT
@@ -126,7 +126,7 @@
 																WHERE agenda.projeto = " . $_SESSION['projeto'] . "
 																		and crf_agenda_campos.comentario_revisor_status = 'ABERTO'";
 											$resQtd = $conexao->pesquisa($query);
-											$rowQtd = mysqli_fetch_assoc($resQtd);
+											$rowQtd = fetch_assoc_seguro($resQtd);
 											$qtdRevAberto  = $rowQtd['qtd'];
 
 
@@ -294,7 +294,7 @@
 																		where comentario_revisor_status in ('1','2')
 																		and projeto_id = " . $_SESSION['projeto'];
 														$res = $varConexao->pesquisa($query);
-														$rowTMF = mysqli_fetch_assoc($res);
+														$rowTMF = fetch_assoc_seguro($res);
 														$qtdRevAberto = $rowTMF['qtd'];
 													?>
 													<!--<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -382,7 +382,7 @@
 																								 	order by id";
 																				$resNvl1 = $varConexao->pesquisa($query);
 																				$indNvl1 = 1;
-																				while($rowNvl1 = mysqli_fetch_assoc($resNvl1)){
+																				while($rowNvl1 = fetch_assoc_seguro($resNvl1)){
 																					$varNodeNvl1 = new Node($rowNvl1['id']);
 																			?>
 																					<tr>
@@ -396,7 +396,7 @@
 																						$query = "select * from arq_tmf where pai = '".$rowNvl1['id']."' order by ordem";
 																						$resNvl2 = $varConexao->pesquisa($query);
 																						$indNvl2 = 1;
-																						while($rowNvl2 = mysqli_fetch_assoc($resNvl2)){
+																						while($rowNvl2 = fetch_assoc_seguro($resNvl2)){
 																							$varNodeNvl2 = new Node($rowNvl2['id']);
 																							?>
 																								<tr>
@@ -410,7 +410,7 @@
 																									$query = "select * from arq_tmf where pai = '".$rowNvl2['id']."' order by ordem";
 																									$resNvl3 = $varConexao->pesquisa($query);
 																									$indNvl3 = 1;
-																									while($rowNvl3 = mysqli_fetch_assoc($resNvl3)){
+																									while($rowNvl3 = fetch_assoc_seguro($resNvl3)){
 																										$varNodeNvl3 = new Node($rowNvl3['id']);
 																										?>
 																											<tr>
@@ -423,7 +423,7 @@
 																													$query = "select * from arq_tmf where pai = '".$rowNvl3['id']."' order by ordem";
 																													$resNvl4 = $varConexao->pesquisa($query);
 																													$indNvl4 = 1;
-																													while($rowNvl4 = mysqli_fetch_assoc($resNvl4)){
+																													while($rowNvl4 = fetch_assoc_seguro($resNvl4)){
 																														$varNodeNvl4 = new Node($rowNvl4['id']);
 																														?>
 																															<tr>
@@ -504,7 +504,7 @@
 
 
 
-																			while($rowCentro = mysqli_fetch_assoc($resCentro)){
+																			while($rowCentro = fetch_assoc_seguro($resCentro)){
 																		?>
 																				<tr>
 																					<td rowspan="4"><span class="conteudo"><?=$rowCentro['nome'];?></span></td>
@@ -521,7 +521,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								echo $rowQtd['qtd'];
 																								$totGer = $totGer + intval($rowQtd['qtd']);
 																							?>
@@ -540,7 +540,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								echo $rowQtd['qtd'];
 
 																								$totAbe = $totAbe + intval($rowQtd['qtd']);
@@ -561,7 +561,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								echo $rowQtd['qtd'];
 																								$totRes = $totRes + intval($rowQtd['qtd']);
 
@@ -584,7 +584,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								if(isset($totNeg)){
 																									$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								}else{
@@ -608,7 +608,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 
@@ -630,7 +630,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totRes =$totRes + intval($rowQtd['qtd']);
@@ -653,7 +653,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totGer = $totGer + intval($rowQtd['qtd']);
@@ -673,7 +673,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totAbe = $totAbe + intval($rowQtd['qtd']);
@@ -693,7 +693,7 @@
 																											and agenda_lista_pendencia.projeto = " . $_SESSION['projeto'] . "
 																								";
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totRes = $totRes + intval($rowQtd['qtd']);
@@ -715,7 +715,7 @@
 																														and adv_evento.projeto = " . $_SESSION['projeto'];
 
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totGer = $totGer + intval($rowQtd['qtd']);
@@ -734,7 +734,7 @@
 																													and adv_evento.projeto = " . $_SESSION['projeto'];
 
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totAbe = $totAbe + intval($rowQtd['qtd']);
@@ -754,7 +754,7 @@
 																														and adv_evento.projeto = " . $_SESSION['projeto'];
 
 																								$resQtd = $conexao->pesquisa($query);
-																								$rowQtd = mysqli_fetch_assoc($resQtd);
+																								$rowQtd = fetch_assoc_seguro($resQtd);
 																								$totNeg = $totNeg + intval($rowQtd['qtd']);
 																								echo $rowQtd['qtd'];
 																								$totRes = $totRes + intval($rowQtd['qtd']);
@@ -897,7 +897,7 @@
 				order by substring(log_alteracoes.data_hora, 1, 10)";
 			//$resDatas = pesquisa($query);
 			$ind = 0;
-			while($rowDatas = mysqli_fetch_assoc($resDatas)){
+			while($rowDatas = fetch_assoc_seguro($resDatas)){
 				if($ind>0){echo ",";}
 				echo '{
 					  "dia": "'.$rowDatas['data'].'",
@@ -951,7 +951,7 @@
 		<?php
 	    	$query = "select * from usu_pagina_atual where sessao = " . $_SESSION['sessao'];
 	    	$res_se = $conexao->pesquisa($query);
-	    	if(mysqli_num_rows($res_se)<1) {
+	    	if(num_rows_seguro($res_se)<1) {
 	    		$query = "insert into usu_pagina_atual (sessao, pagina) values (".$_SESSION['sessao'].",'".str_replace("/", "",$_SERVER['REQUEST_URI'])."')";
 	    	}else{
 				$query = "update usu_pagina_atual set pagina = '".str_replace("/", "",$_SERVER['REQUEST_URI'])."' where sessao = " . $_SESSION['sessao'];

@@ -13,6 +13,18 @@ if (function_exists('mysqli_report')) {
 	mysqli_report(MYSQLI_REPORT_OFF);
 }
 
+/**
+ * PHP 8: mysqli_fetch_assoc/num_rows(false) lancam TypeError (no 7.4 era so um aviso).
+ * Quando a query falha (tabela/coluna inexistente, SQL invalido) mantemos o comportamento
+ * antigo: null / 0. Uso: fetch_assoc_seguro($res), num_rows_seguro($res).
+ */
+if (!function_exists('fetch_assoc_seguro')) {
+	function fetch_assoc_seguro($res) { return ($res instanceof mysqli_result) ? mysqli_fetch_assoc($res) : null; }
+}
+if (!function_exists('num_rows_seguro')) {
+	function num_rows_seguro($res) { return ($res instanceof mysqli_result) ? mysqli_num_rows($res) : 0; }
+}
+
 if (!function_exists('env')) {
 	function env($key, $default = null) {
 		static $vars = null;

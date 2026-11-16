@@ -81,6 +81,7 @@
 		}
 		public function salvar(){
 			$conexao = new Conexao();
+			$query = "";
 			if(($this->valor!=$this->valorAnterior)&&($this->alterado==0)){	//O campo nunca tinha sido alterado, era virgem
 				$query = "update crf_entrada_campos set
 							valor = '".utf8_decode($this->valor)."',
@@ -104,7 +105,7 @@
 							where id = " . $this->id;
 
 			}
-			$conexao->pesquisa($query);
+			if($query != ""){ $conexao->pesquisa($query); }
 			$varFormulario = new Formulario($this->form_id);
 			$varFormulario->registraDigitado();
 		}

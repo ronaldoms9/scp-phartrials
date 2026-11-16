@@ -655,6 +655,7 @@
 		}
 		public function salvar(){
 			$conexao = new Conexao();
+			$query = "";
 			if(($this->valor!=$this->valorAnterior)&&($this->alterado==0)){	//O campo nunca tinha sido alterado, era virgem
 				$query = "update crf_agenda_campos set
 							motivo_alteracao = '".utf8_decode($this->motivoAlteracao)."',
@@ -700,6 +701,6 @@
 					//$varEmail->enviar("Alteração de campo", $message);
 				}*/
 			}
-			$conexao->pesquisa($query);
+			if($query != ""){ $conexao->pesquisa($query); }
 		}
 	}

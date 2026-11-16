@@ -5,10 +5,10 @@
 	error_reporting(~E_ERROR);
     ini_set('display_errors', 0);
 
-	include_once $urlProjeto . "class/conexao.class.php";
+	include_once __DIR__ . "/class/conexao.class.php";
 	require_once __DIR__ . '/vendor/autoload.php';
-	include_once $urlProjeto . "class/agenda.class.php";
-	include_once $urlProjeto . "class/projeto.class.php";
+	include_once __DIR__ . "/class/agenda.class.php";
+	include_once __DIR__ . "/class/projeto.class.php";
 
 
 	$varConexao = new Conexao();
@@ -884,8 +884,8 @@
 										if($colunas[$col]->tipo=="select"){
 											$html .= "<table border='0' width='100%' cellspacing='0' cellpadding='0'><tr>";
 
-											$largura_tabela_valores = intval(100/count($colunas[$col]->valores));
-											for($col_valores=0;$col_valores<count($colunas[$col]->valores);$col_valores++){
+											$largura_tabela_valores = intval(100/max(1, is_countable($colunas[$col]->valores ?? null) ? count($colunas[$col]->valores) : 0));
+											for($col_valores=0;$col_valores<(is_countable($colunas[$col]->valores ?? null) ? count($colunas[$col]->valores) : 0);$col_valores++){
 												$html .= "<td class='coluna_valor'><img src='imagens/check.png' width='10'><br><b>".$colunas[$col]->valores[$col_valores]->titulo_br."</b><br><span style='font-size: 6pt'>(".$colunas[$col]->valores[$col_valores]->tituto_en.")</span></td>";
 											}
 											$html .= "</tr></table>";

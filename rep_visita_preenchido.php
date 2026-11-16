@@ -1,6 +1,12 @@
 <?php
 	error_reporting(E_ERROR);
     ini_set('display_errors', 1);
+	// Sessao e conexao precisam existir ANTES de definicoes.php: ele chama traduzir() (que usa pesquisa()/$conexao) ao ser incluido
+	session_start();
+	require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/class/env.php';
+	$servidor = env('DB_HOST', 'localhost');
+	$conexao = new mysqli($servidor, env('DB_ROOT_USER', 'root'), env('DB_ROOT_PASS'), "pt_monitoria");
 	include "definicoes.php";
 	function deixa_bonito($entrada){
 		$temp = strtoupper(substr($entrada, 0,1));
@@ -31,13 +37,8 @@
 		return preg_replace(array("/(á|à|ã|â|ä)/","/(Ý|À|Ã|Â|Ä)/","/(é|è|ê|ë)/","/(É|È|Ê|Ë)/","/(í|ì|î|ï)/","/(Ý|Ì|Î|Ý)/","/(ó|ò|õ|ô|ö)/","/(Ó|Ò|Õ|Ô|Ö)/","/(ú|ù|û|ü)/","/(Ú|Ù|Û|Ü)/","/(ñ)/","/(Ñ)/"),explode(" ","a A e E i I o O u U n N"),$string);
 	}
 
-	session_start();
 	if($_SESSION['valido']<1){echo "<script>window.location.replace('expirado.php');</script>";};
 
-	require_once __DIR__ . '/vendor/autoload.php';
-	require_once __DIR__ . '/class/env.php';
-	$servidor = env('DB_HOST', 'localhost');
-	$conexao = new mysqli($servidor, env('DB_ROOT_USER', 'root'), env('DB_ROOT_PASS'), "pt_monitoria");
 
 
 	function traduzir($texto_entrada){

@@ -4,7 +4,7 @@
 		echo "<script>window.location.replace('expirado.php');</script>";
 		exit();
 	};
-	include "class/conexao.class.php";
+	include_once "class/conexao.class.php";
 	include "class/crf.class.php";
 
 	$varCRF = new CRF();

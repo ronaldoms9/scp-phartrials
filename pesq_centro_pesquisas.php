@@ -4,7 +4,7 @@
 	
 	//grupo_periodo
 	include "seguranca.php";
-	include "class/conexao.class.php";
+	include_once "class/conexao.class.php";
 	include "class/pesq_centro.class.php";
 	
 	$varCentro = new Centro($_GET['id']);

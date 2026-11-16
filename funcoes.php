@@ -115,26 +115,28 @@
 		}
 		return;
 	}
-	function traduzir($texto_entrada){
-		include_once "class/conexao.class.php";
-		$conexao = new Conexao();
-		$texto = "";
-		$query_tr = "select * from traducao where portugues = '$texto_entrada';";
-		$res_tr = $conexao->pesquisa($query_tr);
-		$lang = $_SESSION['lang'];
+	if (!function_exists('traduzir')) { // relatorios (rep_*) definem uma versao propria
+		function traduzir($texto_entrada){
+			include_once "class/conexao.class.php";
+			$conexao = new Conexao();
+			$texto = "";
+			$query_tr = "select * from traducao where portugues = '$texto_entrada';";
+			$res_tr = $conexao->pesquisa($query_tr);
+			$lang = $_SESSION['lang'];
 
-		if(mysqli_num_rows($res_tr)==0){
-				$texto = $texto;
-				$query = "insert into traducao (portugues) values ('$texto_entrada')";
-				$conexao->pesquisa($query);
-		}else{
-			$row_tr = mysqli_fetch_assoc($res_tr);
-			if($lang == "p"){$texto = $texto;}
-			if($lang == "i"){$texto = $row_tr['ingles'];}
-			if($lang == "e"){$texto = $row_tr['espanhol'];}
+			if(mysqli_num_rows($res_tr)==0){
+					$texto = $texto;
+					$query = "insert into traducao (portugues) values ('$texto_entrada')";
+					$conexao->pesquisa($query);
+			}else{
+				$row_tr = mysqli_fetch_assoc($res_tr);
+				if($lang == "p"){$texto = $texto;}
+				if($lang == "i"){$texto = $row_tr['ingles'];}
+				if($lang == "e"){$texto = $row_tr['espanhol'];}
+			}
+			if($texto == ""){$texto = $texto_entrada;}
+			return $texto;
 		}
-		if($texto == ""){$texto = $texto_entrada;}
-		return $texto;
 	}
 	function retorna_caminho_completo($grupo,$espaco){
 		include_once "class/conexao.class.php";

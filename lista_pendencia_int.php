@@ -17,12 +17,12 @@
           $sql_campos .= $campos[$i] . " = '" . $_POST['form_'.$campos[$i]] . "'";
       }
       $query .= $sql_campos . " where id = ".$id;
-      pesquisa($query);
+      $conexao->pesquisa($query);
       $msg=1;
 	}
 	if($act=='X'){
       $query = "delete from $tabela where id = " . $_GET['id'];
-      pesquisa($query);
+      $conexao->pesquisa($query);
 	}
 	if($act=='I'){
       $sql_campos = "";
@@ -34,7 +34,7 @@
           $sql_valores .= "'".$_POST['form_'.$campos[$i]]."'";
       }
       $query = "insert into $tabela ($sql_campos, projeto) values ($sql_valores, ".$_SESSION['projeto'].");";
-      pesquisa($query);
+      $conexao->pesquisa($query);
 	}
 
 ?>
@@ -165,7 +165,7 @@
 																	<?php
 																		//Pego a data dessa visita
 																		$query = "select agenda.*, cfg_centro.nome as nome_centro from agenda inner join cfg_centro on agenda.centro = cfg_centro.id where agenda.id = " . $_GET['agendamento'];
-																		$resAgenda = pesquisa($query);
+																		$resAgenda = $conexao->pesquisa($query);
 																		$rowAgenda = mysqli_fetch_assoc($resAgenda);
 																		$dataAgendamento = $rowAgenda['data'];
 																		$dataAgendamento = substr($dataAgendamento,6,2) . "/" . substr($dataAgendamento,4,2) . "/" . substr($dataAgendamento,0,4);
@@ -177,7 +177,7 @@
 																						and agenda_lista_pendencia.centro = '".$centroAgendamento."'
 																					order by cast(paciente as int)";
 																		//echo $query;
-																		$res_pend = pesquisa($query);
+																		$res_pend = $conexao->pesquisa($query);
 																		if(mysqli_num_rows($res_pend)==0){
 																			echo "<tr><td colspan='7'>Nenhuma pend&ecirc;ncia encontrada....</td></tr>";
 																		}else{

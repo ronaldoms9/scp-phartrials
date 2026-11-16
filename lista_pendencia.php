@@ -15,12 +15,12 @@
           $sql_campos .= $campos[$i] . " = '" . $_POST['form_'.$campos[$i]] . "'";
       }
       $query .= $sql_campos . " where id = ".$id;
-      pesquisa($query);
+      $conexao->pesquisa($query);
       $msg=1;
 	}
 	if($act=='X'){
       $query = "delete from $tabela where id = " . $_GET['id'];
-      pesquisa($query);
+      $conexao->pesquisa($query);
 	}
 	if($act=='I'){
       $sql_campos = "";
@@ -29,7 +29,7 @@
 
 	  $varVisita = $_POST['form_visita'];
 	  $query = "select * from agenda where nro_visita = " . $varVisita;
-	  $resVi = pesquisa($query);
+	  $resVi = $conexao->pesquisa($query);
 	  $rowVi = mysqli_fetch_assoc($resVi);
 	  $varVisita = $rowVi['id'];
 
@@ -40,7 +40,7 @@
       }
       $query = "insert into $tabela ($sql_campos, projeto, visita) values ($sql_valores, ".$_SESSION['projeto'].", '$varVisita');";
       //echo $query;
-	  pesquisa($query);
+	  $conexao->pesquisa($query);
 	}
 
 ?>
@@ -178,7 +178,7 @@
 																								<option value="">TODOS</option>
 																								<?php
 																									$query = "select nome from cfg_centro order by nome";
-																									$res_c = pesquisa($query);
+																									$res_c = $conexao->pesquisa($query);
 																									while($row_c=mysqli_fetch_assoc($res_c)){
 																										echo '<option value="'.$row_c['nome'].'">'.$row_c['nome'].'</option>';
 																									}
@@ -231,7 +231,7 @@
 																					if($_GET['visita']!=""){
 																						$query .= " and agenda.id = " . $_GET['visita'];
 																					}
-																					$res_pend = pesquisa($query);
+																					$res_pend = $conexao->pesquisa($query);
 																					//echo $query;
 																					if(mysqli_num_rows($res_pend)==0){
 																						echo "<tr><td colspan='7'>Nenhuma pendência encontrada....</td></tr>";

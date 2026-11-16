@@ -8,6 +8,14 @@
 	include_once __DIR__."/class/projeto.class.php";
 	require_once __DIR__ . '/vendor/autoload.php';
 	require_once __DIR__."/funcoes.php";
+	// PHP 8: mysqli_fetch_assoc/num_rows(false) lancam TypeError (no 7.4 era so aviso).
+	// Quando a query falha (ex.: projeto sem "Visita Final"), mantemos o comportamento antigo: null / 0.
+	if(!function_exists("fetch_assoc_seguro")){
+		function fetch_assoc_seguro($res){ return ($res instanceof mysqli_result) ? mysqli_fetch_assoc($res) : null; }
+	}
+	if(!function_exists("num_rows_seguro")){
+		function num_rows_seguro($res){ return ($res instanceof mysqli_result) ? mysqli_num_rows($res) : 0; }
+	}
 
 	$separadorRegistro     = "|";
 	$separadorCampo        = "§";
@@ -32,7 +40,7 @@
 							where form_id = " . $formulario . "
 							and campo_id = " . $idCampo;
 		$res = $varConexao->pesquisa($query);
-		$row = mysqli_fetch_assoc($res);
+		$row = fetch_assoc_seguro($res);
 		return formata_utf8_encode($row['valor']);
 	}
 
@@ -40,21 +48,21 @@
 		include_once __DIR__."/class/conexao.class.php";
 		$conexao = new Conexao();
 		if($fase == "inicial"){
-			$query = "select id, tipo_monitoria from agenda where projeto = " . $_SESSION['projeto'] . " and tipo_monitoria in ('Visita Inicial', 'Inicial') order by id descc";
+			$query = "select id, tipo_monitoria from agenda where projeto = " . $_SESSION['projeto'] . " and tipo_monitoria in ('Visita Inicial', 'Inicial') order by id desc";
 			$res = $conexao->pesquisa($query);
-			if(mysqli_num_rows($res)>0){
-				$row = mysqli_fetch_assoc($res);
+			if(num_rows_seguro($res)>0){
+				$row = fetch_assoc_seguro($res);
 				if($row['tipo_monitoria'] == "Visita Inicial"){ //Modelo antigo
 					$id_agenda = $row['id'];
 					//Pegar o formulário do produto investigacional para depois pegar o campo
 					$query = "select id from crf_agenda_forms where agendamento = " . $id_agenda . " and form_id = (select id from cfg_visitas where nome = 'PRODUTO INVESTIGACIONAL' and tipo = 'Visita Inicial')";
 					$res_form = $conexao->pesquisa($query);
-					$row_form = mysqli_fetch_assoc($res_form);
+					$row_form = fetch_assoc_seguro($res_form);
 					$id_form = $row_form['id'];
 					//Pegar o campo do produto investigacional
 					$query = "select id, valor from crf_agenda_campos where form_id = " . $id_form . " and campo_id = " . $campo;
 					$res_campo = $conexao->pesquisa($query);
-					$row_campo = mysqli_fetch_assoc($res_campo);
+					$row_campo = fetch_assoc_seguro($res_campo);
 					return formata_utf8_encode($row_campo['valor']);
 				}
 				if($row['tipo_monitoria'] == "Inicial"){ //Modelo novo (JSON)
@@ -71,27 +79,27 @@
 			$query = "select id, tipo_monitoria from agenda where projeto = " . $_SESSION['projeto'] . " and tipo_monitoria in ('Visita Final')";
 
 			$resVisita = $conexao->pesquisa($query);
-			$rowVisita = mysqli_fetch_assoc($resVisita);
-			$id_agenda = $rowVisita['id'];
+			$rowVisita = fetch_assoc_seguro($resVisita);
+			$id_agenda = $rowVisita['id'] ?? null;
 			$query = "select id from crf_agenda_forms where agendamento = " . $id_agenda . " and form_id = (select id from cfg_visitas where nome = 'PRODUTO INVESTIGACIONAL' and tipo = 'Visita Final')";
 			$res_form = $conexao->pesquisa($query);
-			$row_form = mysqli_fetch_assoc($res_form);
-			$id_form = $row_form['id'];
+			$row_form = fetch_assoc_seguro($res_form);
+			$id_form = $row_form['id'] ?? null;
 			$query = "select id, valor from crf_agenda_campos where form_id = " . $id_form . " and campo_id = 1475";
 			$res_campo = $conexao->pesquisa($query);
-			$row_campo = mysqli_fetch_assoc($res_campo);
+			$row_campo = fetch_assoc_seguro($res_campo);
 
-			$varArr = explode("|", formata_utf8_encode($row_campo['valor']));
+			$varArr = explode("|", (string)formata_utf8_encode($row_campo['valor'] ?? ''));
 
-			$comparador = $varArr[0];
-			$teste      = $varArr[1];
+			$comparador = $varArr[0] ?? '';
+			$teste      = $varArr[1] ?? '';
 			$comparador = explode($separadorCampo, $comparador);
 			$teste      = explode($separadorCampo, $teste);
 
 			if($tipo==0){
-				$temp = $comparador[$campo];
+				$temp = $comparador[$campo] ?? null;
 			}else{
-				$temp = $teste[$campo];
+				$temp = $teste[$campo] ?? null;
 			}
 
 			return formata_utf8_encode($temp);
@@ -125,8 +133,8 @@
 			$query_tr = "select * from traducao where upper(portugues) = '".strtoupper($texto_entrada)."';";
 			$res_tr = $conexao->pesquisa($query_tr);
 			$lang = $_SESSION['lang'];
-			if(mysqli_num_rows($res_tr)==0){$texto = $texto;}else{
-				$row_tr = mysqli_fetch_assoc($res_tr);
+			if(num_rows_seguro($res_tr)==0){$texto = $texto;}else{
+				$row_tr = fetch_assoc_seguro($res_tr);
 				if($lang == "p"){$texto = $texto;}
 				if($lang == "i"){$texto = $row_tr['ingles'];}
 				if($lang == "e"){$texto = $row_tr['espanhol'];}
@@ -163,15 +171,15 @@
 			where agenda.id = " . $_GET['id'];
 
 	$res_agenda = $conexao->pesquisa($query);
-	$row_agenda = mysqli_fetch_assoc($res_agenda);
+	$row_agenda = fetch_assoc_seguro($res_agenda);
 
 	$query 			= "select * from proj_projeto where id = " . $_SESSION['projeto'];
 	$res_projeto	= $conexao->pesquisa($query);
-	$row_projeto    = mysqli_fetch_assoc($res_projeto);
+	$row_projeto    = fetch_assoc_seguro($res_projeto);
 
 	$query = "select * from proj_projeto where id = " . $_SESSION['projeto'];
 	$res_proj = $conexao->pesquisa($query);
-	$row_proj = mysqli_fetch_assoc($res_proj);
+	$row_proj = fetch_assoc_seguro($res_proj);
 
 	$stylesheet = "
 		table {
@@ -740,7 +748,7 @@
 
 	$countForm = 0;
 
-	while($row_form = mysqli_fetch_assoc($res_form)){
+	while($row_form = fetch_assoc_seguro($res_form)){
 		$countField = 0;
 		if($row_form['acao']=="PAGINA_BRANCO"){
 			$html = "
@@ -846,7 +854,7 @@
 												order by id";
 				$resPend = $conexao->pesquisa($query_t);
 
-				if(mysqli_num_rows($resPend)==0){
+				if(num_rows_seguro($resPend)==0){
 					$html = "<table
 								autosize='1'
 								class='MsoNormalTable'
@@ -888,7 +896,7 @@
 							</tr>
 
 					';
-					while($row_p = mysqli_fetch_assoc($resPend)){
+					while($row_p = fetch_assoc_seguro($resPend)){
 						$html .= '<tr>
 									<td style="border-left: medium none; border-right: 1.0pt solid black;  border-left: 1.0pt solid black;border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
 										<p class="MsoNormal" align="center" style="text-align:center">
@@ -962,7 +970,7 @@
 
 			$mpdf->WriteHTML($html);
 			$html = "";
-			while($row_campo = mysqli_fetch_assoc($res_campo)){
+			while($row_campo = fetch_assoc_seguro($res_campo)){
 				if($row_campo['tipo']=="divisao"){
 					$html = "
 						<table autosize='1'
@@ -1027,8 +1035,8 @@
 										//Descobrir o tipo de visita inicial do paciente
 										$query = "select id, tipo_monitoria from agenda where projeto = " . $_SESSION['projeto'] . " and tipo_monitoria in ('Visita Inicial', 'Inicial') order by id desc limit 1";
 										$res = $conexao->pesquisa($query);
-										if(mysqli_num_rows($res)>0){
-											$row = mysqli_fetch_assoc($res);
+										if(num_rows_seguro($res)>0){
+											$row = fetch_assoc_seguro($res);
 											$tipo_visita = $row['tipo_monitoria'];
 											$id_agenda   = $row['id'];
 										}else{
@@ -1038,8 +1046,8 @@
 											if($varAgenda->projeto!=441){
 												$query       = "select id from crf_agenda_forms where agendamento = " . $id_agenda . " and form_id = 111";
 												$res_agendaESP = $conexao->pesquisa($query);
-												if(mysqli_num_rows($res_agenda)>0){
-													$row_agendaESP = mysqli_fetch_assoc($res_agendaESP);
+												if(num_rows_seguro($res_agenda)>0){
+													$row_agendaESP = fetch_assoc_seguro($res_agendaESP);
 													$id_visita = $row_agendaESP['id'];
 												}
 												$varIniNomeGenericoRef        = getValorCampoNovo($id_visita, 3330);
@@ -1462,8 +1470,8 @@
 											}else{
 												$query       = "select id from crf_agenda_forms where agendamento = " . $id_agenda . " and form_id = 111";
 												$res_agendaESP = $conexao->pesquisa($query);
-												if(mysqli_num_rows($res_agenda)>0){
-													$row_agendaESP = mysqli_fetch_assoc($res_agendaESP);
+												if(num_rows_seguro($res_agenda)>0){
+													$row_agendaESP = fetch_assoc_seguro($res_agendaESP);
 													$id_visita = $row_agendaESP['id'];
 												}
 												$varIniNomeGenericoRef        = getValorCampoNovo($id_visita, 3330);
@@ -1835,15 +1843,15 @@
 											if($varAgenda->projeto!=441){
 												$query       = "select id from crf_agenda_forms where agendamento = " . $id_agenda . " and form_id = 180";
 												$res_agenda = $conexao->pesquisa($query);
-												if(mysqli_num_rows($res_agenda)>0){
-													$row_agenda = mysqli_fetch_assoc($res_agenda);
+												if(num_rows_seguro($res_agenda)>0){
+													$row_agenda = fetch_assoc_seguro($res_agenda);
 													$id_visita = $row_agenda['id'];
 												}
 												$campoJsonINICIAL = getValorCampoNovo($id_visita, 3607);
 												$query       = "select id from crf_agenda_forms where agendamento = " . $_GET['id'] . " and form_id = 54";
 												$res_agenda = $conexao->pesquisa($query);
-												if(mysqli_num_rows($res_agenda)>0){
-													$row_agenda = mysqli_fetch_assoc($res_agenda);
+												if(num_rows_seguro($res_agenda)>0){
+													$row_agenda = fetch_assoc_seguro($res_agenda);
 													$id_visita = $row_agenda['id'];
 												}
 												$campoJsonFINAL = getValorCampoNovo($id_visita, 1475);
@@ -1855,15 +1863,15 @@
 
 												$query       = "select id from crf_agenda_forms where agendamento = " . $id_agenda . " and form_id = 180";
 												$res_agenda = $conexao->pesquisa($query);
-												if(mysqli_num_rows($res_agenda)>0){
-													$row_agenda = mysqli_fetch_assoc($res_agenda);
+												if(num_rows_seguro($res_agenda)>0){
+													$row_agenda = fetch_assoc_seguro($res_agenda);
 													$id_visita = $row_agenda['id'];
 												}
 												$campoJsonINICIAL = getValorCampoNovo($id_visita, 3607);
 												$query       = "select id from crf_agenda_forms where agendamento = " . $_GET['id'] . " and form_id = 54";
 												$res_agenda = $conexao->pesquisa($query);
-												if(mysqli_num_rows($res_agenda)>0){
-													$row_agenda = mysqli_fetch_assoc($res_agenda);
+												if(num_rows_seguro($res_agenda)>0){
+													$row_agenda = fetch_assoc_seguro($res_agenda);
 													$id_visita = $row_agenda['id'];
 												}
 												$campoJsonFINAL = getValorCampoNovo($id_visita, 1475);
@@ -2819,8 +2827,8 @@
 		}
 			$html = "";
 							$res_p = $conexao->pesquisa($query_t);
-							if(mysqli_num_rows($res_p)!=0){
-								while($row_p = mysqli_fetch_assoc($res_p)){
+							if(num_rows_seguro($res_p)!=0){
+								while($row_p = fetch_assoc_seguro($res_p)){
 
 									$html = '<tr>
 										<td style="border-left: medium none; border-right: 1.0pt solid black;  border-left: 1.0pt solid black;border-top: medium none; border-bottom: 1.0pt solid black; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: white">
@@ -2866,7 +2874,7 @@
 
 				where agenda.id = " . $_GET['id'];
 		$resAss = $conexao->pesquisa($query);
-		$rowAss = mysqli_fetch_assoc($resAss);
+		$rowAss = fetch_assoc_seguro($resAss);
 		$html = "<br><br><br>
 		<div align='center'>
 			<table autosize='1' border='0' width='100%' cellspacing='0'>
@@ -2993,7 +3001,7 @@
 										and nro_visita = ".$varAgenda->nro_visita."
 										order by nro_visita, versao ";
 		$resVersao = $conexao->pesquisa($query);
-		while($rowVersao = mysqli_fetch_assoc($resVersao)){
+		while($rowVersao = fetch_assoc_seguro($resVersao)){
 			$html .= '<tr>
 						<td class="texto_conteudo justificado" style="border-left: 1.0pt solid black; border-right: 1.0pt solid black; border-bottom: 1.0pt solid black;"><center>'.formata_utf8_encode($rowVersao['versao']).'</center></td>
 						<td class="texto_conteudo justificado" style="border-right: 1.0pt solid black; border-bottom: 1.0pt solid black;"><center>'.formata_utf8_encode($rowVersao['versao_motivo']).'</center></td>

@@ -1,12 +1,15 @@
-# Réplica da produção: EL8 (AlmaLinux, sucessor do CentOS) + Apache + PHP 7.4 (Remi)
-FROM almalinux:8
+# Réplica da produção: EL9 (AlmaLinux, equivalente ao CentOS Stream 9) + Apache + PHP (Remi)
+# Versão do PHP via build-arg: docker compose build --build-arg PHP_VERSION=8.5
+FROM almalinux:9
+ARG PHP_VERSION=7.4
 
 RUN dnf -y install epel-release \
- && dnf -y install https://rpms.remirepo.net/enterprise/remi-release-8.rpm \
+ && dnf -y install https://rpms.remirepo.net/enterprise/remi-release-9.rpm \
  && dnf -y module reset php \
- && dnf -y module enable php:remi-7.4 \
+ && dnf -y module enable php:remi-${PHP_VERSION} \
  && dnf -y install httpd php php-fpm php-cli php-mysqlnd php-gd php-mbstring php-xml \
-      php-zip php-json php-intl php-soap php-opcache php-bcmath unzip \
+      php-zip php-intl php-soap php-opcache php-bcmath unzip \
+ && if [ "${PHP_VERSION}" = "7.4" ]; then dnf -y install php-json; fi \
  && dnf clean all
 
 COPY docker/php-overrides.ini /etc/php.d/99-overrides.ini

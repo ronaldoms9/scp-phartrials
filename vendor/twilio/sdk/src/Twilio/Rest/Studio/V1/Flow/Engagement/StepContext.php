@@ -19,8 +19,11 @@ namespace Twilio\Rest\Studio\V1\Flow\Engagement;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Values;
 use Twilio\Version;
 use Twilio\InstanceContext;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
 use Twilio\Rest\Studio\V1\Flow\Engagement\Step\StepContextList;
 
 
@@ -65,22 +68,67 @@ class StepContext extends InstanceContext
     }
 
     /**
+     * Helper function for Fetch
+     *
+     
+     
+     
+     * @return Response Fetched Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _fetch(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('GET', $this->uri, [], [], $headers, "fetch");
+    }
+
+    /**
      * Fetch the StepInstance
      *
+     
+     
+     
      * @return StepInstance Fetched StepInstance
      * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch(): StepInstance
     {
-
-        $payload = $this->version->fetch('GET', $this->uri, [], []);
-
+        $response = $this->_fetch();
         return new StepInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['flowSid'],
             $this->solution['engagementSid'],
             $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Fetch the StepInstance with Metadata
+     *
+     
+     
+     
+     * @return ResourceMetadata The Fetched Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetchWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_fetch();
+        $resource = new StepInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['flowSid'],
+                        $this->solution['engagementSid'],
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 

@@ -4,6 +4,15 @@
  * Uso: env('DB_HOST'), env('DB_PORT', '3306')
  * Ordem de busca: .env  ->  variavel de ambiente real (getenv)  ->  $default
  */
+/**
+ * PHP >= 8.1 passou a lancar mysqli_sql_exception por padrao (MYSQLI_REPORT_ERROR|STRICT).
+ * O codigo legado foi escrito para o modo antigo (erro => retorna false), entao restauramos
+ * o comportamento do PHP 7.4 para nao derrubar paginas por qualquer falha de query.
+ */
+if (function_exists('mysqli_report')) {
+	mysqli_report(MYSQLI_REPORT_OFF);
+}
+
 if (!function_exists('env')) {
 	function env($key, $default = null) {
 		static $vars = null;

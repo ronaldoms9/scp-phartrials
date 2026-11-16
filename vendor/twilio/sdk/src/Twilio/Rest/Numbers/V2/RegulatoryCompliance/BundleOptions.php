@@ -25,7 +25,8 @@ abstract class BundleOptions
      * @param string $regulationSid The unique string of a regulation that is associated to the Bundle resource.
      * @param string $isoCountry The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Bundle's phone number country ownership request.
      * @param string $endUserType
-     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll free`.
+     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
+     * @param bool $isTest Indicates that Bundle is a Test Bundle and will be Auto-Rejected
      * @return CreateBundleOptions Options builder
      */
     public static function create(
@@ -34,7 +35,8 @@ abstract class BundleOptions
         string $regulationSid = Values::NONE,
         string $isoCountry = Values::NONE,
         string $endUserType = Values::NONE,
-        string $numberType = Values::NONE
+        string $numberType = Values::NONE,
+        bool $isTest = Values::BOOL_NONE
 
     ): CreateBundleOptions
     {
@@ -43,7 +45,8 @@ abstract class BundleOptions
             $regulationSid,
             $isoCountry,
             $endUserType,
-            $numberType
+            $numberType,
+            $isTest
         );
     }
 
@@ -51,10 +54,12 @@ abstract class BundleOptions
 
     /**
      * @param string $status The verification status of the Bundle resource. Please refer to [Bundle Statuses](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles#bundle-statuses) for more details.
+     * @param string $bundleSids A comma-separated list of Bundle SIDs to filter the results (maximum 20). Each Bundle SID must match `^BU[0-9a-fA-F]{32}$`.
      * @param string $friendlyName The string that you assigned to describe the resource. The column can contain 255 variable characters.
      * @param string $regulationSid The unique string of a [Regulation resource](https://www.twilio.com/docs/phone-numbers/regulatory/api/regulations) that is associated to the Bundle resource.
      * @param string $isoCountry The 2-digit [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Bundle's phone number country ownership request.
-     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `tollfree`.
+     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
+     * @param string $endUserType The end user type of the regulation of the Bundle. Can be `business` or `individual`.
      * @param bool $hasValidUntilDate Indicates that the Bundle is a valid Bundle until a specified expiration date.
      * @param string $sortBy Can be `valid-until` or `date-updated`. Defaults to `date-created`.
      * @param string $sortDirection Default is `DESC`. Can be `ASC` or `DESC`.
@@ -66,25 +71,29 @@ abstract class BundleOptions
     public static function read(
         
         string $status = Values::NONE,
+        string $bundleSids = Values::NONE,
         string $friendlyName = Values::NONE,
         string $regulationSid = Values::NONE,
         string $isoCountry = Values::NONE,
         string $numberType = Values::NONE,
+        string $endUserType = Values::NONE,
         bool $hasValidUntilDate = Values::BOOL_NONE,
         string $sortBy = Values::NONE,
         string $sortDirection = Values::NONE,
-        string $validUntilDateBefore = null,
-        string $validUntilDate = null,
-        string $validUntilDateAfter = null
+        ?string $validUntilDateBefore = null,
+        ?string $validUntilDate = null,
+        ?string $validUntilDateAfter = null
 
     ): ReadBundleOptions
     {
         return new ReadBundleOptions(
             $status,
+            $bundleSids,
             $friendlyName,
             $regulationSid,
             $isoCountry,
             $numberType,
+            $endUserType,
             $hasValidUntilDate,
             $sortBy,
             $sortDirection,
@@ -127,7 +136,8 @@ class CreateBundleOptions extends Options
      * @param string $regulationSid The unique string of a regulation that is associated to the Bundle resource.
      * @param string $isoCountry The [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Bundle's phone number country ownership request.
      * @param string $endUserType
-     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll free`.
+     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
+     * @param bool $isTest Indicates that Bundle is a Test Bundle and will be Auto-Rejected
      */
     public function __construct(
         
@@ -135,7 +145,8 @@ class CreateBundleOptions extends Options
         string $regulationSid = Values::NONE,
         string $isoCountry = Values::NONE,
         string $endUserType = Values::NONE,
-        string $numberType = Values::NONE
+        string $numberType = Values::NONE,
+        bool $isTest = Values::BOOL_NONE
 
     ) {
         $this->options['statusCallback'] = $statusCallback;
@@ -143,6 +154,7 @@ class CreateBundleOptions extends Options
         $this->options['isoCountry'] = $isoCountry;
         $this->options['endUserType'] = $endUserType;
         $this->options['numberType'] = $numberType;
+        $this->options['isTest'] = $isTest;
     }
 
     /**
@@ -192,14 +204,26 @@ class CreateBundleOptions extends Options
     }
 
     /**
-     * The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll free`.
+     * The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
      *
-     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll free`.
+     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
      * @return $this Fluent Builder
      */
     public function setNumberType(string $numberType): self
     {
         $this->options['numberType'] = $numberType;
+        return $this;
+    }
+
+    /**
+     * Indicates that Bundle is a Test Bundle and will be Auto-Rejected
+     *
+     * @param bool $isTest Indicates that Bundle is a Test Bundle and will be Auto-Rejected
+     * @return $this Fluent Builder
+     */
+    public function setIsTest(bool $isTest): self
+    {
+        $this->options['isTest'] = $isTest;
         return $this;
     }
 
@@ -221,10 +245,12 @@ class ReadBundleOptions extends Options
     {
     /**
      * @param string $status The verification status of the Bundle resource. Please refer to [Bundle Statuses](https://www.twilio.com/docs/phone-numbers/regulatory/api/bundles#bundle-statuses) for more details.
+     * @param string $bundleSids A comma-separated list of Bundle SIDs to filter the results (maximum 20). Each Bundle SID must match `^BU[0-9a-fA-F]{32}$`.
      * @param string $friendlyName The string that you assigned to describe the resource. The column can contain 255 variable characters.
      * @param string $regulationSid The unique string of a [Regulation resource](https://www.twilio.com/docs/phone-numbers/regulatory/api/regulations) that is associated to the Bundle resource.
      * @param string $isoCountry The 2-digit [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the Bundle's phone number country ownership request.
-     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `tollfree`.
+     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
+     * @param string $endUserType The end user type of the regulation of the Bundle. Can be `business` or `individual`.
      * @param bool $hasValidUntilDate Indicates that the Bundle is a valid Bundle until a specified expiration date.
      * @param string $sortBy Can be `valid-until` or `date-updated`. Defaults to `date-created`.
      * @param string $sortDirection Default is `DESC`. Can be `ASC` or `DESC`.
@@ -235,23 +261,27 @@ class ReadBundleOptions extends Options
     public function __construct(
         
         string $status = Values::NONE,
+        string $bundleSids = Values::NONE,
         string $friendlyName = Values::NONE,
         string $regulationSid = Values::NONE,
         string $isoCountry = Values::NONE,
         string $numberType = Values::NONE,
+        string $endUserType = Values::NONE,
         bool $hasValidUntilDate = Values::BOOL_NONE,
         string $sortBy = Values::NONE,
         string $sortDirection = Values::NONE,
-        string $validUntilDateBefore = null,
-        string $validUntilDate = null,
-        string $validUntilDateAfter = null
+        ?string $validUntilDateBefore = null,
+        ?string $validUntilDate = null,
+        ?string $validUntilDateAfter = null
 
     ) {
         $this->options['status'] = $status;
+        $this->options['bundleSids'] = $bundleSids;
         $this->options['friendlyName'] = $friendlyName;
         $this->options['regulationSid'] = $regulationSid;
         $this->options['isoCountry'] = $isoCountry;
         $this->options['numberType'] = $numberType;
+        $this->options['endUserType'] = $endUserType;
         $this->options['hasValidUntilDate'] = $hasValidUntilDate;
         $this->options['sortBy'] = $sortBy;
         $this->options['sortDirection'] = $sortDirection;
@@ -269,6 +299,18 @@ class ReadBundleOptions extends Options
     public function setStatus(string $status): self
     {
         $this->options['status'] = $status;
+        return $this;
+    }
+
+    /**
+     * A comma-separated list of Bundle SIDs to filter the results (maximum 20). Each Bundle SID must match `^BU[0-9a-fA-F]{32}$`.
+     *
+     * @param string $bundleSids A comma-separated list of Bundle SIDs to filter the results (maximum 20). Each Bundle SID must match `^BU[0-9a-fA-F]{32}$`.
+     * @return $this Fluent Builder
+     */
+    public function setBundleSids(string $bundleSids): self
+    {
+        $this->options['bundleSids'] = $bundleSids;
         return $this;
     }
 
@@ -309,14 +351,26 @@ class ReadBundleOptions extends Options
     }
 
     /**
-     * The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `tollfree`.
+     * The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
      *
-     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `tollfree`.
+     * @param string $numberType The type of phone number of the Bundle's ownership request. Can be `local`, `mobile`, `national`, or `toll-free`.
      * @return $this Fluent Builder
      */
     public function setNumberType(string $numberType): self
     {
         $this->options['numberType'] = $numberType;
+        return $this;
+    }
+
+    /**
+     * The end user type of the regulation of the Bundle. Can be `business` or `individual`.
+     *
+     * @param string $endUserType The end user type of the regulation of the Bundle. Can be `business` or `individual`.
+     * @return $this Fluent Builder
+     */
+    public function setEndUserType(string $endUserType): self
+    {
+        $this->options['endUserType'] = $endUserType;
         return $this;
     }
 

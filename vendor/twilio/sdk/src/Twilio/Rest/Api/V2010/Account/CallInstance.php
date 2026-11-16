@@ -23,6 +23,7 @@ use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 use Twilio\Deserialize;
+use Twilio\Rest\Api\V2010\Account\Call\TranscriptionList;
 use Twilio\Rest\Api\V2010\Account\Call\RecordingList;
 use Twilio\Rest\Api\V2010\Account\Call\UserDefinedMessageSubscriptionList;
 use Twilio\Rest\Api\V2010\Account\Call\EventList;
@@ -57,12 +58,14 @@ use Twilio\Rest\Api\V2010\Account\Call\PaymentList;
  * @property string|null $groupSid
  * @property string|null $callerName
  * @property string|null $queueTime
+ * @property string|null $stirVerstat
  * @property string|null $trunkSid
  * @property string|null $uri
  * @property array|null $subresourceUris
  */
 class CallInstance extends InstanceResource
 {
+    protected $_transcriptions;
     protected $_recordings;
     protected $_userDefinedMessageSubscriptions;
     protected $_events;
@@ -80,7 +83,7 @@ class CallInstance extends InstanceResource
      * @param string $accountSid The SID of the [Account](https://www.twilio.com/docs/iam/api/account) that will create the resource.
      * @param string $sid The Twilio-provided Call SID that uniquely identifies the Call resource to delete
      */
-    public function __construct(Version $version, array $payload, string $accountSid, string $sid = null)
+    public function __construct(Version $version, array $payload, string $accountSid, ?string $sid = null)
     {
         parent::__construct($version);
 
@@ -109,6 +112,7 @@ class CallInstance extends InstanceResource
             'groupSid' => Values::array_get($payload, 'group_sid'),
             'callerName' => Values::array_get($payload, 'caller_name'),
             'queueTime' => Values::array_get($payload, 'queue_time'),
+            'stirVerstat' => Values::array_get($payload, 'stir_verstat'),
             'trunkSid' => Values::array_get($payload, 'trunk_sid'),
             'uri' => Values::array_get($payload, 'uri'),
             'subresourceUris' => Values::array_get($payload, 'subresource_uris'),
@@ -171,6 +175,14 @@ class CallInstance extends InstanceResource
     {
 
         return $this->proxy()->update($options);
+    }
+
+    /**
+     * Access the transcriptions
+     */
+    protected function getTranscriptions(): TranscriptionList
+    {
+        return $this->proxy()->transcriptions;
     }
 
     /**

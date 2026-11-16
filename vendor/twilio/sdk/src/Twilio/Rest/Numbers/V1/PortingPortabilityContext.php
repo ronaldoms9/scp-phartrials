@@ -22,6 +22,8 @@ use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 use Twilio\InstanceContext;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
 
 
 class PortingPortabilityContext extends InstanceContext
@@ -30,7 +32,7 @@ class PortingPortabilityContext extends InstanceContext
      * Initialize the PortingPortabilityContext
      *
      * @param Version $version Version that contains the resource
-     * @param string $phoneNumber The phone number which portability is to be checked. Phone numbers are in E.164 format (e.g. +16175551212).
+     * @param string $phoneNumber Phone number to check portability in e164 format.
      */
     public function __construct(
         Version $version,
@@ -49,28 +51,69 @@ class PortingPortabilityContext extends InstanceContext
     }
 
     /**
+     * Helper function for Fetch
+     *
+     
+     * @param array|Options $options Optional Arguments
+     * @return Response Fetched Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _fetch(array $options = []): Response
+    {
+        
+        $options = new Values($options);
+
+        $params = Values::of([
+            'TargetAccountSid' =>
+                $options['targetAccountSid'],
+            'AddressSid' =>
+                $options['addressSid'],
+        ]);
+
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('GET', $this->uri, $params, [], $headers, "fetch");
+    }
+
+    /**
      * Fetch the PortingPortabilityInstance
      *
+     
      * @param array|Options $options Optional Arguments
      * @return PortingPortabilityInstance Fetched PortingPortabilityInstance
      * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch(array $options = []): PortingPortabilityInstance
     {
-
-        $options = new Values($options);
-
-        $params = Values::of([
-            'TargetAccountSid' =>
-                $options['targetAccountSid'],
-        ]);
-
-        $payload = $this->version->fetch('GET', $this->uri, $params, []);
-
+        $response = $this->_fetch($options);
         return new PortingPortabilityInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['phoneNumber']
+        );
+        
+    }
+
+    /**
+     * Fetch the PortingPortabilityInstance with Metadata
+     *
+     
+     * @param array|Options $options Optional Arguments
+     * @return ResourceMetadata The Fetched Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetchWithMetadata(array $options = []): ResourceMetadata
+    {
+        $response = $this->_fetch($options);
+        $resource = new PortingPortabilityInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['phoneNumber']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 

@@ -22,6 +22,8 @@ use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 use Twilio\InstanceContext;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
 use Twilio\Serialize;
 
 
@@ -55,48 +57,129 @@ class OriginationUrlContext extends InstanceContext
     }
 
     /**
+     * Helper function for Delete
+     *
+     
+     
+     * @return Response Deleted Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _delete(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded' ]);
+        return $this->version->handleRequest('DELETE', $this->uri, [], [], $headers, "delete");
+    }
+
+    /**
      * Delete the OriginationUrlInstance
      *
+     
+     
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
     public function delete(): bool
     {
-
-        return $this->version->delete('DELETE', $this->uri);
+        $response = $this->_delete();
+        
+        return true;
     }
 
-
     /**
-     * Fetch the OriginationUrlInstance
+     * Delete the OriginationUrlInstance with Metadata
      *
-     * @return OriginationUrlInstance Fetched OriginationUrlInstance
+     
+     
+     * @return ResourceMetadata The Deleted Resource with Metadata
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch(): OriginationUrlInstance
+    public function deleteWithMetadata(): ResourceMetadata
     {
-
-        $payload = $this->version->fetch('GET', $this->uri, [], []);
-
-        return new OriginationUrlInstance(
-            $this->version,
-            $payload,
-            $this->solution['trunkSid'],
-            $this->solution['sid']
+        $response = $this->_delete();
+        
+        
+        return new ResourceMetadata(
+            null,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 
 
     /**
-     * Update the OriginationUrlInstance
+     * Helper function for Fetch
      *
-     * @param array|Options $options Optional Arguments
-     * @return OriginationUrlInstance Updated OriginationUrlInstance
+     
+     
+     * @return Response Fetched Response
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update(array $options = []): OriginationUrlInstance
+    private function _fetch(): Response
     {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('GET', $this->uri, [], [], $headers, "fetch");
+    }
 
+    /**
+     * Fetch the OriginationUrlInstance
+     *
+     
+     
+     * @return OriginationUrlInstance Fetched OriginationUrlInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetch(): OriginationUrlInstance
+    {
+        $response = $this->_fetch();
+        return new OriginationUrlInstance(
+            $this->version,
+            $response->getContent(),
+            $this->solution['trunkSid'],
+            $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Fetch the OriginationUrlInstance with Metadata
+     *
+     
+     
+     * @return ResourceMetadata The Fetched Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetchWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_fetch();
+        $resource = new OriginationUrlInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['trunkSid'],
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
+        );
+    }
+
+
+    /**
+     * Helper function for Update
+     *
+     
+     
+     * @param array|Options $options Optional Arguments
+     * @return Response Updated Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _update(array $options = []): Response
+    {
+        
         $options = new Values($options);
 
         $data = Values::of([
@@ -112,13 +195,54 @@ class OriginationUrlContext extends InstanceContext
                 $options['sipUrl'],
         ]);
 
-        $payload = $this->version->update('POST', $this->uri, [], $data);
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('POST', $this->uri, [], $data, $headers, "update");
+    }
 
+    /**
+     * Update the OriginationUrlInstance
+     *
+     
+     
+     * @param array|Options $options Optional Arguments
+     * @return OriginationUrlInstance Updated OriginationUrlInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update(array $options = []): OriginationUrlInstance
+    {
+        $response = $this->_update($options);
         return new OriginationUrlInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['trunkSid'],
             $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Update the OriginationUrlInstance with Metadata
+     *
+     
+     
+     * @param array|Options $options Optional Arguments
+     * @return ResourceMetadata The Updated Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function updateWithMetadata(array $options = []): ResourceMetadata
+    {
+        $response = $this->_update($options);
+        $resource = new OriginationUrlInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['trunkSid'],
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 

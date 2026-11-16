@@ -19,34 +19,40 @@ namespace Twilio\Rest\Conversations\V1;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Values;
 use Twilio\Version;
 use Twilio\InstanceContext;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
+use Twilio\Rest\Conversations\V1\Service\ParticipantConversationList;
 use Twilio\Rest\Conversations\V1\Service\UserList;
 use Twilio\Rest\Conversations\V1\Service\BindingList;
-use Twilio\Rest\Conversations\V1\Service\ParticipantConversationList;
+use Twilio\Rest\Conversations\V1\Service\ConversationWithParticipantsList;
 use Twilio\Rest\Conversations\V1\Service\ConversationList;
 use Twilio\Rest\Conversations\V1\Service\RoleList;
 use Twilio\Rest\Conversations\V1\Service\ConfigurationList;
 
 
 /**
+ * @property ParticipantConversationList $participantConversations
  * @property UserList $users
  * @property BindingList $bindings
- * @property ParticipantConversationList $participantConversations
+ * @property ConversationWithParticipantsList $conversationWithParticipants
  * @property ConversationList $conversations
  * @property RoleList $roles
  * @property ConfigurationList $configuration
+ * @method \Twilio\Rest\Conversations\V1\Service\ConfigurationContext configuration()
  * @method \Twilio\Rest\Conversations\V1\Service\UserContext users(string $sid)
  * @method \Twilio\Rest\Conversations\V1\Service\RoleContext roles(string $sid)
- * @method \Twilio\Rest\Conversations\V1\Service\ConfigurationContext configuration()
  * @method \Twilio\Rest\Conversations\V1\Service\BindingContext bindings(string $sid)
  * @method \Twilio\Rest\Conversations\V1\Service\ConversationContext conversations(string $sid)
  */
 class ServiceContext extends InstanceContext
     {
+    protected $_participantConversations;
     protected $_users;
     protected $_bindings;
-    protected $_participantConversations;
+    protected $_conversationWithParticipants;
     protected $_conversations;
     protected $_roles;
     protected $_configuration;
@@ -74,36 +80,123 @@ class ServiceContext extends InstanceContext
     }
 
     /**
+     * Helper function for Delete
+     *
+     
+     * @return Response Deleted Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _delete(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded' ]);
+        return $this->version->handleRequest('DELETE', $this->uri, [], [], $headers, "delete");
+    }
+
+    /**
      * Delete the ServiceInstance
      *
+     
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
     public function delete(): bool
     {
+        $response = $this->_delete();
+        
+        return true;
+    }
 
-        return $this->version->delete('DELETE', $this->uri);
+    /**
+     * Delete the ServiceInstance with Metadata
+     *
+     
+     * @return ResourceMetadata The Deleted Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function deleteWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_delete();
+        
+        
+        return new ResourceMetadata(
+            null,
+            $response->getStatusCode(),
+            $response->getHeaders()
+        );
     }
 
 
     /**
+     * Helper function for Fetch
+     *
+     
+     * @return Response Fetched Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _fetch(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('GET', $this->uri, [], [], $headers, "fetch");
+    }
+
+    /**
      * Fetch the ServiceInstance
      *
+     
      * @return ServiceInstance Fetched ServiceInstance
      * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch(): ServiceInstance
     {
-
-        $payload = $this->version->fetch('GET', $this->uri, [], []);
-
+        $response = $this->_fetch();
         return new ServiceInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Fetch the ServiceInstance with Metadata
+     *
+     
+     * @return ResourceMetadata The Fetched Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetchWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_fetch();
+        $resource = new ServiceInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 
+
+    /**
+     * Access the participantConversations
+     */
+    protected function getParticipantConversations(): ParticipantConversationList
+    {
+        if (!$this->_participantConversations) {
+            $this->_participantConversations = new ParticipantConversationList(
+                $this->version,
+                $this->solution['sid']
+            );
+        }
+
+        return $this->_participantConversations;
+    }
 
     /**
      * Access the users
@@ -136,18 +229,18 @@ class ServiceContext extends InstanceContext
     }
 
     /**
-     * Access the participantConversations
+     * Access the conversationWithParticipants
      */
-    protected function getParticipantConversations(): ParticipantConversationList
+    protected function getConversationWithParticipants(): ConversationWithParticipantsList
     {
-        if (!$this->_participantConversations) {
-            $this->_participantConversations = new ParticipantConversationList(
+        if (!$this->_conversationWithParticipants) {
+            $this->_conversationWithParticipants = new ConversationWithParticipantsList(
                 $this->version,
                 $this->solution['sid']
             );
         }
 
-        return $this->_participantConversations;
+        return $this->_conversationWithParticipants;
     }
 
     /**

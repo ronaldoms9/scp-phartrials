@@ -18,8 +18,11 @@
 namespace Twilio\Rest\Numbers\V2\RegulatoryCompliance\Bundle;
 
 use Twilio\Exceptions\TwilioException;
+use Twilio\Values;
 use Twilio\Version;
 use Twilio\InstanceContext;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
 
 
 class EvaluationContext extends InstanceContext
@@ -52,21 +55,62 @@ class EvaluationContext extends InstanceContext
     }
 
     /**
+     * Helper function for Fetch
+     *
+     
+     
+     * @return Response Fetched Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _fetch(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('GET', $this->uri, [], [], $headers, "fetch");
+    }
+
+    /**
      * Fetch the EvaluationInstance
      *
+     
+     
      * @return EvaluationInstance Fetched EvaluationInstance
      * @throws TwilioException When an HTTP error occurs.
      */
     public function fetch(): EvaluationInstance
     {
-
-        $payload = $this->version->fetch('GET', $this->uri, [], []);
-
+        $response = $this->_fetch();
         return new EvaluationInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['bundleSid'],
             $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Fetch the EvaluationInstance with Metadata
+     *
+     
+     
+     * @return ResourceMetadata The Fetched Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetchWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_fetch();
+        $resource = new EvaluationInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['bundleSid'],
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 

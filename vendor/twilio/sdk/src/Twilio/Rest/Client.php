@@ -27,13 +27,16 @@ use Twilio\Base\BaseClient as BaseClient;
  * @property Events $events
  * @property FlexApi $flexApi
  * @property FrontlineApi $frontlineApi
+ * @property PreviewIam $previewIam
+ * @property Iam $iam
  * @property Insights $insights
  * @property Intelligence $intelligence
  * @property IpMessaging $ipMessaging
+ * @property Knowledge $knowledge
  * @property Lookups $lookups
- * @property PreviewMessaging $previewMessaging
+ * @property Marketplace $marketplace
+ * @property Memory $memory
  * @property Messaging $messaging
- * @property Microvisor $microvisor
  * @property Monitor $monitor
  * @property Notify $notify
  * @property Numbers $numbers
@@ -52,6 +55,7 @@ use Twilio\Base\BaseClient as BaseClient;
  * @property Verify $verify
  * @property Video $video
  * @property Voice $voice
+ * @property Webhooks $webhooks
  * @property Wireless $wireless
  * @property \Twilio\Rest\Api\V2010\Account\AddressList $addresses
  * @property \Twilio\Rest\Api\V2010\Account\ApplicationList $applications
@@ -106,13 +110,16 @@ class Client extends BaseClient {
     protected $_events;
     protected $_flexApi;
     protected $_frontlineApi;
+    protected $_previewIam;
+    protected $_iam;
     protected $_insights;
     protected $_intelligence;
     protected $_ipMessaging;
+    protected $_knowledge;
     protected $_lookups;
-    protected $_previewMessaging;
+    protected $_marketplace;
+    protected $_memory;
     protected $_messaging;
-    protected $_microvisor;
     protected $_monitor;
     protected $_notify;
     protected $_numbers;
@@ -131,6 +138,7 @@ class Client extends BaseClient {
     protected $_verify;
     protected $_video;
     protected $_voice;
+    protected $_webhooks;
     protected $_wireless;
 
     /**
@@ -233,6 +241,28 @@ class Client extends BaseClient {
         return $this->_frontlineApi;
     }
     /**
+     * Access the PreviewIam Twilio Domain
+     *
+     * @return PreviewIam PreviewIam Twilio Domain
+     */
+    protected function getPreviewIam(): PreviewIam {
+        if (!$this->_previewIam) {
+            $this->_previewIam = new PreviewIam($this);
+        }
+        return $this->_previewIam;
+    }
+    /**
+     * Access the Iam Twilio Domain
+     *
+     * @return Iam Iam Twilio Domain
+     */
+    protected function getIam(): Iam {
+        if (!$this->_iam) {
+            $this->_iam = new Iam($this);
+        }
+        return $this->_iam;
+    }
+    /**
      * Access the Insights Twilio Domain
      *
      * @return Insights Insights Twilio Domain
@@ -266,6 +296,17 @@ class Client extends BaseClient {
         return $this->_ipMessaging;
     }
     /**
+     * Access the Knowledge Twilio Domain
+     *
+     * @return Knowledge Knowledge Twilio Domain
+     */
+    protected function getKnowledge(): Knowledge {
+        if (!$this->_knowledge) {
+            $this->_knowledge = new Knowledge($this);
+        }
+        return $this->_knowledge;
+    }
+    /**
      * Access the Lookups Twilio Domain
      *
      * @return Lookups Lookups Twilio Domain
@@ -277,15 +318,26 @@ class Client extends BaseClient {
         return $this->_lookups;
     }
     /**
-     * Access the PreviewMessaging Twilio Domain
+     * Access the Marketplace Twilio Domain
      *
-     * @return PreviewMessaging PreviewMessaging Twilio Domain
+     * @return Marketplace Marketplace Twilio Domain
      */
-    protected function getPreviewMessaging(): PreviewMessaging {
-        if (!$this->_previewMessaging) {
-            $this->_previewMessaging = new PreviewMessaging($this);
+    protected function getMarketplace(): Marketplace {
+        if (!$this->_marketplace) {
+            $this->_marketplace = new Marketplace($this);
         }
-        return $this->_previewMessaging;
+        return $this->_marketplace;
+    }
+    /**
+     * Access the Memory Twilio Domain
+     *
+     * @return Memory Memory Twilio Domain
+     */
+    protected function getMemory(): Memory {
+        if (!$this->_memory) {
+            $this->_memory = new Memory($this);
+        }
+        return $this->_memory;
     }
     /**
      * Access the Messaging Twilio Domain
@@ -297,17 +349,6 @@ class Client extends BaseClient {
             $this->_messaging = new Messaging($this);
         }
         return $this->_messaging;
-    }
-    /**
-     * Access the Microvisor Twilio Domain
-     *
-     * @return Microvisor Microvisor Twilio Domain
-     */
-    protected function getMicrovisor(): Microvisor {
-        if (!$this->_microvisor) {
-            $this->_microvisor = new Microvisor($this);
-        }
-        return $this->_microvisor;
     }
     /**
      * Access the Monitor Twilio Domain
@@ -506,6 +547,17 @@ class Client extends BaseClient {
             $this->_voice = new Voice($this);
         }
         return $this->_voice;
+    }
+    /**
+     * Access the Webhooks Twilio Domain
+     *
+     * @return Webhooks Webhooks Twilio Domain
+     */
+    protected function getWebhooks(): Webhooks {
+        if (!$this->_webhooks) {
+            $this->_webhooks = new Webhooks($this);
+        }
+        return $this->_webhooks;
     }
     /**
      * Access the Wireless Twilio Domain

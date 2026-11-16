@@ -23,6 +23,9 @@ use Twilio\Options;
 use Twilio\Values;
 use Twilio\Version;
 use Twilio\InstanceContext;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
+use Twilio\Rest\Api\V2010\Account\Call\TranscriptionList;
 use Twilio\Rest\Api\V2010\Account\Call\RecordingList;
 use Twilio\Rest\Api\V2010\Account\Call\UserDefinedMessageSubscriptionList;
 use Twilio\Rest\Api\V2010\Account\Call\EventList;
@@ -34,6 +37,7 @@ use Twilio\Rest\Api\V2010\Account\Call\PaymentList;
 
 
 /**
+ * @property TranscriptionList $transcriptions
  * @property RecordingList $recordings
  * @property UserDefinedMessageSubscriptionList $userDefinedMessageSubscriptions
  * @property EventList $events
@@ -42,6 +46,7 @@ use Twilio\Rest\Api\V2010\Account\Call\PaymentList;
  * @property SiprecList $siprec
  * @property StreamList $streams
  * @property PaymentList $payments
+ * @method \Twilio\Rest\Api\V2010\Account\Call\TranscriptionContext transcriptions(string $sid)
  * @method \Twilio\Rest\Api\V2010\Account\Call\SiprecContext siprec(string $sid)
  * @method \Twilio\Rest\Api\V2010\Account\Call\UserDefinedMessageSubscriptionContext userDefinedMessageSubscriptions(string $sid)
  * @method \Twilio\Rest\Api\V2010\Account\Call\PaymentContext payments(string $sid)
@@ -51,6 +56,7 @@ use Twilio\Rest\Api\V2010\Account\Call\PaymentList;
  */
 class CallContext extends InstanceContext
     {
+    protected $_transcriptions;
     protected $_recordings;
     protected $_userDefinedMessageSubscriptions;
     protected $_events;
@@ -88,48 +94,122 @@ class CallContext extends InstanceContext
     }
 
     /**
+     * Helper function for Delete
+     *
+     
+     * @return Response Deleted Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _delete(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded' ]);
+        return $this->version->handleRequest('DELETE', $this->uri, [], [], $headers, "delete");
+    }
+
+    /**
      * Delete the CallInstance
      *
+     
      * @return bool True if delete succeeds, false otherwise
      * @throws TwilioException When an HTTP error occurs.
      */
     public function delete(): bool
     {
-
-        return $this->version->delete('DELETE', $this->uri);
+        $response = $this->_delete();
+        
+        return true;
     }
 
-
     /**
-     * Fetch the CallInstance
+     * Delete the CallInstance with Metadata
      *
-     * @return CallInstance Fetched CallInstance
+     
+     * @return ResourceMetadata The Deleted Resource with Metadata
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function fetch(): CallInstance
+    public function deleteWithMetadata(): ResourceMetadata
     {
-
-        $payload = $this->version->fetch('GET', $this->uri, [], []);
-
-        return new CallInstance(
-            $this->version,
-            $payload,
-            $this->solution['accountSid'],
-            $this->solution['sid']
+        $response = $this->_delete();
+        
+        
+        return new ResourceMetadata(
+            null,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 
 
     /**
-     * Update the CallInstance
+     * Helper function for Fetch
      *
-     * @param array|Options $options Optional Arguments
-     * @return CallInstance Updated CallInstance
+     
+     * @return Response Fetched Response
      * @throws TwilioException When an HTTP error occurs.
      */
-    public function update(array $options = []): CallInstance
+    private function _fetch(): Response
     {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('GET', $this->uri, [], [], $headers, "fetch");
+    }
 
+    /**
+     * Fetch the CallInstance
+     *
+     
+     * @return CallInstance Fetched CallInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetch(): CallInstance
+    {
+        $response = $this->_fetch();
+        return new CallInstance(
+            $this->version,
+            $response->getContent(),
+            $this->solution['accountSid'],
+            $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Fetch the CallInstance with Metadata
+     *
+     
+     * @return ResourceMetadata The Fetched Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function fetchWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_fetch();
+        $resource = new CallInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['accountSid'],
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
+        );
+    }
+
+
+    /**
+     * Helper function for Update
+     *
+     
+     * @param array|Options $options Optional Arguments
+     * @return Response Updated Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _update(array $options = []): Response
+    {
+        
         $options = new Values($options);
 
         $data = Values::of([
@@ -153,16 +233,71 @@ class CallContext extends InstanceContext
                 $options['timeLimit'],
         ]);
 
-        $payload = $this->version->update('POST', $this->uri, [], $data);
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('POST', $this->uri, [], $data, $headers, "update");
+    }
 
+    /**
+     * Update the CallInstance
+     *
+     
+     * @param array|Options $options Optional Arguments
+     * @return CallInstance Updated CallInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update(array $options = []): CallInstance
+    {
+        $response = $this->_update($options);
         return new CallInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['accountSid'],
             $this->solution['sid']
         );
+        
     }
 
+    /**
+     * Update the CallInstance with Metadata
+     *
+     
+     * @param array|Options $options Optional Arguments
+     * @return ResourceMetadata The Updated Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function updateWithMetadata(array $options = []): ResourceMetadata
+    {
+        $response = $this->_update($options);
+        $resource = new CallInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['accountSid'],
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
+        );
+    }
+
+
+    /**
+     * Access the transcriptions
+     */
+    protected function getTranscriptions(): TranscriptionList
+    {
+        if (!$this->_transcriptions) {
+            $this->_transcriptions = new TranscriptionList(
+                $this->version,
+                $this->solution['accountSid'],
+                $this->solution['sid']
+            );
+        }
+
+        return $this->_transcriptions;
+    }
 
     /**
      * Access the recordings

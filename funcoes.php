@@ -162,20 +162,20 @@
 	function duplica_arvore($id, $novo){
 		global $conexao;
 		$query = "select * from arq_tipos_arquivos where pai = ".$id;
-		$res = mysql_query($query, $conexao);
-		if(mysql_num_rows($res)>0){
-			while($row = mysql_fetch_assoc($res)){
+		$res = $conexao->pesquisa($query);
+		if($res->num_rows>0){
+			while($row = $res->fetch_assoc()){
 				$query = "insert into arq_tipos_arquivos (nome, pai, ordem, patrocinador, site) values (";
 				$query .= "'".$row['nome']."',";
 				$query .= "'".$novo."',";
 				$query .= "'".$row['ordem']."',";
 				$query .= "'".$row['patrocinador']."',";
 				$query .= "'".$row['site']."')";
-				mysql_query($query, $conexao);
+				$conexao->pesquisa($query);
 				$query = "select id from arq_tipos_arquivos where nome = '".$row['nome']."' and pai = '".$novo."'";
-				$res_no   = mysql_query($query, $conexao);
-				if(mysql_num_rows($res_no)>0){
-					$row_novo = mysql_fetch_assoc($res_no);
+				$res_no   = $conexao->pesquisa($query);
+				if($res_no->num_rows>0){
+					$row_novo = $res_no->fetch_assoc();
 					$id_novo = $row_novo['id'];
 					duplica_arvore($row['id'],$id_novo);
 				}
@@ -215,10 +215,10 @@ function qtd_uploads_isf($id){
 function qtd_filhos($id){
 	global $conexao;
 	$query = "select id from arq_tipos_arquivos where pai = " . $id;
-	$res   = mysql_query($query, $conexao);
-	$tot = mysql_num_rows($res);
+	$res   = $conexao->pesquisa($query);
+	$tot = $res->num_rows;
 	$tot_sub = 0;
-	while($row = mysql_fetch_assoc($res)){
+	while($row = $res->fetch_assoc()){
 		$tot_sub = $tot_sub + qtd_filhos($row['id']);
 	}
 	return $tot + $tot_sub;
@@ -226,13 +226,13 @@ function qtd_filhos($id){
 function qtd_filhos_ok($id){
 	global $conexao;
 	$query = "select id from arq_arquivos where grupo_id = " . $id . " and status_id = 1";
-	$res   = mysql_query($query, $conexao);
-	$tot = mysql_num_rows($res);
+	$res   = $conexao->pesquisa($query);
+	$tot = $res->num_rows;
 	if($tot>0){$tot_atual = 1;}
 	$tot_sub = 0;
 	$query = "select id from arq_tipos_arquivos where pai = " . $id;
-	$res   = mysql_query($query, $conexao);
-	while($row = mysql_fetch_assoc($res)){
+	$res   = $conexao->pesquisa($query);
+	while($row = $res->fetch_assoc()){
 		$tot_sub = $tot_sub + qtd_filhos_ok($row['id']);
 	}
 	return $tot_atual + $tot_sub;

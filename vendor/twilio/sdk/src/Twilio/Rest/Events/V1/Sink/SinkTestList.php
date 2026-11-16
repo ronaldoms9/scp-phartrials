@@ -18,7 +18,10 @@ namespace Twilio\Rest\Events\V1\Sink;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Values;
 use Twilio\Version;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
 
 
 class SinkTestList extends ListResource
@@ -41,26 +44,62 @@ class SinkTestList extends ListResource
             $sid,
         
         ];
-
         $this->uri = '/Sinks/' . \rawurlencode($sid)
         .'/Test';
     }
 
     /**
+     * Helper function for Create
+     *
+     
+     * @return Response Created Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _create(): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/x-www-form-urlencoded', 'Accept' => 'application/json' ]);
+        return $this->version->handleRequest('POST', $this->uri, [], [], $headers, "create");
+    }
+
+    /**
      * Create the SinkTestInstance
      *
+     
      * @return SinkTestInstance Created SinkTestInstance
      * @throws TwilioException When an HTTP error occurs.
      */
     public function create(): SinkTestInstance
     {
-
-        $payload = $this->version->create('POST', $this->uri, [], []);
-
+        $response = $this->_create();
         return new SinkTestInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['sid']
+        );
+        
+    }
+
+    /**
+     * Create the SinkTestInstance with Metadata
+     *
+     
+     * @return ResourceMetadata The Created Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function createWithMetadata(): ResourceMetadata
+    {
+        $response = $this->_create();
+        $resource = new SinkTestInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['sid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 

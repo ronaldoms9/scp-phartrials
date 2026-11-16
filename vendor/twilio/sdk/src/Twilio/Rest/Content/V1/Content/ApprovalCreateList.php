@@ -18,7 +18,10 @@ namespace Twilio\Rest\Content\V1\Content;
 
 use Twilio\Exceptions\TwilioException;
 use Twilio\ListResource;
+use Twilio\Values;
 use Twilio\Version;
+use Twilio\Http\Response;
+use Twilio\Metadata\ResourceMetadata;
 
 
 class ApprovalCreateList extends ListResource
@@ -41,29 +44,132 @@ class ApprovalCreateList extends ListResource
             $contentSid,
         
         ];
-
         $this->uri = '/Content/' . \rawurlencode($contentSid)
         .'/ApprovalRequests/whatsapp';
     }
 
     /**
+     * Helper function for Create
+     *
+     
+     * @param ContentApprovalRequest $contentApprovalRequest
+     
+     * @return Response Created Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _create(ContentApprovalRequest $contentApprovalRequest): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/json', 'Accept' => 'application/json' ]);
+        $data = $contentApprovalRequest->toArray();
+        return $this->version->handleRequest('POST', $this->uri, [], $data, $headers, "create");
+    }
+
+    /**
      * Create the ApprovalCreateInstance
      *
+     
      * @param ContentApprovalRequest $contentApprovalRequest
+     
      * @return ApprovalCreateInstance Created ApprovalCreateInstance
      * @throws TwilioException When an HTTP error occurs.
      */
     public function create(ContentApprovalRequest $contentApprovalRequest): ApprovalCreateInstance
     {
-
-        $data = $contentApprovalRequest->toArray();
-        $headers['Content-Type'] = 'application/json';
-        $payload = $this->version->create('POST', $this->uri, [], $data, $headers);
-
+        $response = $this->_create( $contentApprovalRequest);
         return new ApprovalCreateInstance(
             $this->version,
-            $payload,
+            $response->getContent(),
             $this->solution['contentSid']
+        );
+        
+    }
+
+    /**
+     * Create the ApprovalCreateInstance with Metadata
+     *
+     
+     * @param ContentApprovalRequest $contentApprovalRequest
+     
+     * @return ResourceMetadata The Created Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function createWithMetadata(ContentApprovalRequest $contentApprovalRequest): ResourceMetadata
+    {
+        $response = $this->_create( $contentApprovalRequest);
+        $resource = new ApprovalCreateInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['contentSid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
+        );
+    }
+
+
+    /**
+     * Helper function for Update
+     *
+     
+     * @param ContentApprovalUpdateRequest $contentApprovalUpdateRequest
+     
+     * @return Response Updated Response
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    private function _update(ContentApprovalUpdateRequest $contentApprovalUpdateRequest): Response
+    {
+        
+        $headers = Values::of(['Content-Type' => 'application/json', 'Accept' => 'application/json' ]);
+        $data = $contentApprovalUpdateRequest->toArray();
+        return $this->version->handleRequest('PATCH', $this->uri, [], $data, $headers, "update");
+    }
+
+    /**
+     * Update the ApprovalCreateInstance
+     *
+     
+     * @param ContentApprovalUpdateRequest $contentApprovalUpdateRequest
+     
+     * @return ApprovalCreateInstance Updated ApprovalCreateInstance
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function update(ContentApprovalUpdateRequest $contentApprovalUpdateRequest): ApprovalCreateInstance
+    {
+        $response = $this->_update( $contentApprovalUpdateRequest);
+        return new ApprovalCreateInstance(
+            $this->version,
+            $response->getContent(),
+            $this->solution['contentSid']
+        );
+        
+    }
+
+    /**
+     * Update the ApprovalCreateInstance with Metadata
+     *
+     
+     * @param ContentApprovalUpdateRequest $contentApprovalUpdateRequest
+     
+     * @return ResourceMetadata The Updated Resource with Metadata
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function updateWithMetadata(ContentApprovalUpdateRequest $contentApprovalUpdateRequest): ResourceMetadata
+    {
+        $response = $this->_update( $contentApprovalUpdateRequest);
+        $resource = new ApprovalCreateInstance(
+                        $this->version,
+                        $response->getContent(),
+                        $this->solution['contentSid']
+                    );
+        
+        return new ResourceMetadata(
+            $resource,
+            $response->getStatusCode(),
+            $response->getHeaders()
         );
     }
 

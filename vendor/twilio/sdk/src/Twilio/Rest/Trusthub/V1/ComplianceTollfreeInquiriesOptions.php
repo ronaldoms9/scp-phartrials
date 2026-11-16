@@ -21,6 +21,7 @@ use Twilio\Values;
 abstract class ComplianceTollfreeInquiriesOptions
 {
     /**
+     * @param string $customerProfileSid The Customer Profile Sid associated with the Account.
      * @param string $businessName The name of the business or organization using the Tollfree number.
      * @param string $businessWebsite The website of the business or organization using the Tollfree number.
      * @param string[] $useCaseCategories The category of the use case for the Tollfree Number. List as many are applicable..
@@ -40,10 +41,27 @@ abstract class ComplianceTollfreeInquiriesOptions
      * @param string $businessContactLastName The last name of the contact for the business or organization using the Tollfree number.
      * @param string $businessContactEmail The email address of the contact for the business or organization using the Tollfree number.
      * @param string $businessContactPhone The phone number of the contact for the business or organization using the Tollfree number.
+     * @param string $themeSetId Theme id for styling the inquiry form.
+     * @param bool $skipMessagingUseCase Skip the messaging use case screen of the inquiry form.
+     * @param string $businessRegistrationNumber The Business Registration Number of the business or organization.
+     * @param string $businessRegistrationAuthority The Business Registration Authority of the business or organization.
+     * @param string $businessRegistrationCountry The Business Registration Country of the business or organization.
+     * @param string $businessType
+     * @param string $doingBusinessAs Trade name, sub entity, or downstream business name of business being submitted for verification.
+     * @param string $optInConfirmationMessage The confirmation message sent to users when they opt in to receive messages.
+     * @param string $helpMessageSample A sample help message provided to users.
+     * @param string $privacyPolicyUrl The URL to the privacy policy for the business or organization.
+     * @param string $termsAndConditionsUrl The URL to the terms and conditions for the business or organization.
+     * @param bool $ageGatedContent Indicates if the content is age gated.
+     * @param string $externalReferenceId A legally recognized business registration number.
+     * @param string[] $optInKeywords List of keywords that users can text in to opt in to receive messages.
+     * @param string $vettingId Unique identifier for the created Vetting .
+     * @param string $vettingProvider Name of the vetting provider.
      * @return CreateComplianceTollfreeInquiriesOptions Options builder
      */
     public static function create(
         
+        string $customerProfileSid = Values::NONE,
         string $businessName = Values::NONE,
         string $businessWebsite = Values::NONE,
         array $useCaseCategories = Values::ARRAY_NONE,
@@ -62,11 +80,28 @@ abstract class ComplianceTollfreeInquiriesOptions
         string $businessContactFirstName = Values::NONE,
         string $businessContactLastName = Values::NONE,
         string $businessContactEmail = Values::NONE,
-        string $businessContactPhone = Values::NONE
+        string $businessContactPhone = Values::NONE,
+        string $themeSetId = Values::NONE,
+        bool $skipMessagingUseCase = Values::BOOL_NONE,
+        string $businessRegistrationNumber = Values::NONE,
+        string $businessRegistrationAuthority = Values::NONE,
+        string $businessRegistrationCountry = Values::NONE,
+        string $businessType = Values::NONE,
+        string $doingBusinessAs = Values::NONE,
+        string $optInConfirmationMessage = Values::NONE,
+        string $helpMessageSample = Values::NONE,
+        string $privacyPolicyUrl = Values::NONE,
+        string $termsAndConditionsUrl = Values::NONE,
+        bool $ageGatedContent = Values::BOOL_NONE,
+        string $externalReferenceId = Values::NONE,
+        array $optInKeywords = Values::ARRAY_NONE,
+        string $vettingId = Values::NONE,
+        string $vettingProvider = Values::NONE
 
     ): CreateComplianceTollfreeInquiriesOptions
     {
         return new CreateComplianceTollfreeInquiriesOptions(
+            $customerProfileSid,
             $businessName,
             $businessWebsite,
             $useCaseCategories,
@@ -85,7 +120,23 @@ abstract class ComplianceTollfreeInquiriesOptions
             $businessContactFirstName,
             $businessContactLastName,
             $businessContactEmail,
-            $businessContactPhone
+            $businessContactPhone,
+            $themeSetId,
+            $skipMessagingUseCase,
+            $businessRegistrationNumber,
+            $businessRegistrationAuthority,
+            $businessRegistrationCountry,
+            $businessType,
+            $doingBusinessAs,
+            $optInConfirmationMessage,
+            $helpMessageSample,
+            $privacyPolicyUrl,
+            $termsAndConditionsUrl,
+            $ageGatedContent,
+            $externalReferenceId,
+            $optInKeywords,
+            $vettingId,
+            $vettingProvider
         );
     }
 
@@ -94,6 +145,7 @@ abstract class ComplianceTollfreeInquiriesOptions
 class CreateComplianceTollfreeInquiriesOptions extends Options
     {
     /**
+     * @param string $customerProfileSid The Customer Profile Sid associated with the Account.
      * @param string $businessName The name of the business or organization using the Tollfree number.
      * @param string $businessWebsite The website of the business or organization using the Tollfree number.
      * @param string[] $useCaseCategories The category of the use case for the Tollfree Number. List as many are applicable..
@@ -113,9 +165,26 @@ class CreateComplianceTollfreeInquiriesOptions extends Options
      * @param string $businessContactLastName The last name of the contact for the business or organization using the Tollfree number.
      * @param string $businessContactEmail The email address of the contact for the business or organization using the Tollfree number.
      * @param string $businessContactPhone The phone number of the contact for the business or organization using the Tollfree number.
+     * @param string $themeSetId Theme id for styling the inquiry form.
+     * @param bool $skipMessagingUseCase Skip the messaging use case screen of the inquiry form.
+     * @param string $businessRegistrationNumber The Business Registration Number of the business or organization.
+     * @param string $businessRegistrationAuthority The Business Registration Authority of the business or organization.
+     * @param string $businessRegistrationCountry The Business Registration Country of the business or organization.
+     * @param string $businessType
+     * @param string $doingBusinessAs Trade name, sub entity, or downstream business name of business being submitted for verification.
+     * @param string $optInConfirmationMessage The confirmation message sent to users when they opt in to receive messages.
+     * @param string $helpMessageSample A sample help message provided to users.
+     * @param string $privacyPolicyUrl The URL to the privacy policy for the business or organization.
+     * @param string $termsAndConditionsUrl The URL to the terms and conditions for the business or organization.
+     * @param bool $ageGatedContent Indicates if the content is age gated.
+     * @param string $externalReferenceId A legally recognized business registration number.
+     * @param string[] $optInKeywords List of keywords that users can text in to opt in to receive messages.
+     * @param string $vettingId Unique identifier for the created Vetting .
+     * @param string $vettingProvider Name of the vetting provider.
      */
     public function __construct(
         
+        string $customerProfileSid = Values::NONE,
         string $businessName = Values::NONE,
         string $businessWebsite = Values::NONE,
         array $useCaseCategories = Values::ARRAY_NONE,
@@ -134,9 +203,26 @@ class CreateComplianceTollfreeInquiriesOptions extends Options
         string $businessContactFirstName = Values::NONE,
         string $businessContactLastName = Values::NONE,
         string $businessContactEmail = Values::NONE,
-        string $businessContactPhone = Values::NONE
+        string $businessContactPhone = Values::NONE,
+        string $themeSetId = Values::NONE,
+        bool $skipMessagingUseCase = Values::BOOL_NONE,
+        string $businessRegistrationNumber = Values::NONE,
+        string $businessRegistrationAuthority = Values::NONE,
+        string $businessRegistrationCountry = Values::NONE,
+        string $businessType = Values::NONE,
+        string $doingBusinessAs = Values::NONE,
+        string $optInConfirmationMessage = Values::NONE,
+        string $helpMessageSample = Values::NONE,
+        string $privacyPolicyUrl = Values::NONE,
+        string $termsAndConditionsUrl = Values::NONE,
+        bool $ageGatedContent = Values::BOOL_NONE,
+        string $externalReferenceId = Values::NONE,
+        array $optInKeywords = Values::ARRAY_NONE,
+        string $vettingId = Values::NONE,
+        string $vettingProvider = Values::NONE
 
     ) {
+        $this->options['customerProfileSid'] = $customerProfileSid;
         $this->options['businessName'] = $businessName;
         $this->options['businessWebsite'] = $businessWebsite;
         $this->options['useCaseCategories'] = $useCaseCategories;
@@ -156,6 +242,34 @@ class CreateComplianceTollfreeInquiriesOptions extends Options
         $this->options['businessContactLastName'] = $businessContactLastName;
         $this->options['businessContactEmail'] = $businessContactEmail;
         $this->options['businessContactPhone'] = $businessContactPhone;
+        $this->options['themeSetId'] = $themeSetId;
+        $this->options['skipMessagingUseCase'] = $skipMessagingUseCase;
+        $this->options['businessRegistrationNumber'] = $businessRegistrationNumber;
+        $this->options['businessRegistrationAuthority'] = $businessRegistrationAuthority;
+        $this->options['businessRegistrationCountry'] = $businessRegistrationCountry;
+        $this->options['businessType'] = $businessType;
+        $this->options['doingBusinessAs'] = $doingBusinessAs;
+        $this->options['optInConfirmationMessage'] = $optInConfirmationMessage;
+        $this->options['helpMessageSample'] = $helpMessageSample;
+        $this->options['privacyPolicyUrl'] = $privacyPolicyUrl;
+        $this->options['termsAndConditionsUrl'] = $termsAndConditionsUrl;
+        $this->options['ageGatedContent'] = $ageGatedContent;
+        $this->options['externalReferenceId'] = $externalReferenceId;
+        $this->options['optInKeywords'] = $optInKeywords;
+        $this->options['vettingId'] = $vettingId;
+        $this->options['vettingProvider'] = $vettingProvider;
+    }
+
+    /**
+     * The Customer Profile Sid associated with the Account.
+     *
+     * @param string $customerProfileSid The Customer Profile Sid associated with the Account.
+     * @return $this Fluent Builder
+     */
+    public function setCustomerProfileSid(string $customerProfileSid): self
+    {
+        $this->options['customerProfileSid'] = $customerProfileSid;
+        return $this;
     }
 
     /**
@@ -381,6 +495,196 @@ class CreateComplianceTollfreeInquiriesOptions extends Options
     public function setBusinessContactPhone(string $businessContactPhone): self
     {
         $this->options['businessContactPhone'] = $businessContactPhone;
+        return $this;
+    }
+
+    /**
+     * Theme id for styling the inquiry form.
+     *
+     * @param string $themeSetId Theme id for styling the inquiry form.
+     * @return $this Fluent Builder
+     */
+    public function setThemeSetId(string $themeSetId): self
+    {
+        $this->options['themeSetId'] = $themeSetId;
+        return $this;
+    }
+
+    /**
+     * Skip the messaging use case screen of the inquiry form.
+     *
+     * @param bool $skipMessagingUseCase Skip the messaging use case screen of the inquiry form.
+     * @return $this Fluent Builder
+     */
+    public function setSkipMessagingUseCase(bool $skipMessagingUseCase): self
+    {
+        $this->options['skipMessagingUseCase'] = $skipMessagingUseCase;
+        return $this;
+    }
+
+    /**
+     * The Business Registration Number of the business or organization.
+     *
+     * @param string $businessRegistrationNumber The Business Registration Number of the business or organization.
+     * @return $this Fluent Builder
+     */
+    public function setBusinessRegistrationNumber(string $businessRegistrationNumber): self
+    {
+        $this->options['businessRegistrationNumber'] = $businessRegistrationNumber;
+        return $this;
+    }
+
+    /**
+     * The Business Registration Authority of the business or organization.
+     *
+     * @param string $businessRegistrationAuthority The Business Registration Authority of the business or organization.
+     * @return $this Fluent Builder
+     */
+    public function setBusinessRegistrationAuthority(string $businessRegistrationAuthority): self
+    {
+        $this->options['businessRegistrationAuthority'] = $businessRegistrationAuthority;
+        return $this;
+    }
+
+    /**
+     * The Business Registration Country of the business or organization.
+     *
+     * @param string $businessRegistrationCountry The Business Registration Country of the business or organization.
+     * @return $this Fluent Builder
+     */
+    public function setBusinessRegistrationCountry(string $businessRegistrationCountry): self
+    {
+        $this->options['businessRegistrationCountry'] = $businessRegistrationCountry;
+        return $this;
+    }
+
+    /**
+     * @param string $businessType
+     * @return $this Fluent Builder
+     */
+    public function setBusinessType(string $businessType): self
+    {
+        $this->options['businessType'] = $businessType;
+        return $this;
+    }
+
+    /**
+     * Trade name, sub entity, or downstream business name of business being submitted for verification.
+     *
+     * @param string $doingBusinessAs Trade name, sub entity, or downstream business name of business being submitted for verification.
+     * @return $this Fluent Builder
+     */
+    public function setDoingBusinessAs(string $doingBusinessAs): self
+    {
+        $this->options['doingBusinessAs'] = $doingBusinessAs;
+        return $this;
+    }
+
+    /**
+     * The confirmation message sent to users when they opt in to receive messages.
+     *
+     * @param string $optInConfirmationMessage The confirmation message sent to users when they opt in to receive messages.
+     * @return $this Fluent Builder
+     */
+    public function setOptInConfirmationMessage(string $optInConfirmationMessage): self
+    {
+        $this->options['optInConfirmationMessage'] = $optInConfirmationMessage;
+        return $this;
+    }
+
+    /**
+     * A sample help message provided to users.
+     *
+     * @param string $helpMessageSample A sample help message provided to users.
+     * @return $this Fluent Builder
+     */
+    public function setHelpMessageSample(string $helpMessageSample): self
+    {
+        $this->options['helpMessageSample'] = $helpMessageSample;
+        return $this;
+    }
+
+    /**
+     * The URL to the privacy policy for the business or organization.
+     *
+     * @param string $privacyPolicyUrl The URL to the privacy policy for the business or organization.
+     * @return $this Fluent Builder
+     */
+    public function setPrivacyPolicyUrl(string $privacyPolicyUrl): self
+    {
+        $this->options['privacyPolicyUrl'] = $privacyPolicyUrl;
+        return $this;
+    }
+
+    /**
+     * The URL to the terms and conditions for the business or organization.
+     *
+     * @param string $termsAndConditionsUrl The URL to the terms and conditions for the business or organization.
+     * @return $this Fluent Builder
+     */
+    public function setTermsAndConditionsUrl(string $termsAndConditionsUrl): self
+    {
+        $this->options['termsAndConditionsUrl'] = $termsAndConditionsUrl;
+        return $this;
+    }
+
+    /**
+     * Indicates if the content is age gated.
+     *
+     * @param bool $ageGatedContent Indicates if the content is age gated.
+     * @return $this Fluent Builder
+     */
+    public function setAgeGatedContent(bool $ageGatedContent): self
+    {
+        $this->options['ageGatedContent'] = $ageGatedContent;
+        return $this;
+    }
+
+    /**
+     * A legally recognized business registration number.
+     *
+     * @param string $externalReferenceId A legally recognized business registration number.
+     * @return $this Fluent Builder
+     */
+    public function setExternalReferenceId(string $externalReferenceId): self
+    {
+        $this->options['externalReferenceId'] = $externalReferenceId;
+        return $this;
+    }
+
+    /**
+     * List of keywords that users can text in to opt in to receive messages.
+     *
+     * @param string[] $optInKeywords List of keywords that users can text in to opt in to receive messages.
+     * @return $this Fluent Builder
+     */
+    public function setOptInKeywords(array $optInKeywords): self
+    {
+        $this->options['optInKeywords'] = $optInKeywords;
+        return $this;
+    }
+
+    /**
+     * Unique identifier for the created Vetting .
+     *
+     * @param string $vettingId Unique identifier for the created Vetting .
+     * @return $this Fluent Builder
+     */
+    public function setVettingId(string $vettingId): self
+    {
+        $this->options['vettingId'] = $vettingId;
+        return $this;
+    }
+
+    /**
+     * Name of the vetting provider.
+     *
+     * @param string $vettingProvider Name of the vetting provider.
+     * @return $this Fluent Builder
+     */
+    public function setVettingProvider(string $vettingProvider): self
+    {
+        $this->options['vettingProvider'] = $vettingProvider;
         return $this;
     }
 

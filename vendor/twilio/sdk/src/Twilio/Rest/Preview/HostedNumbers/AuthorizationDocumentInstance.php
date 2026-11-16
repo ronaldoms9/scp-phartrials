@@ -46,9 +46,9 @@ class AuthorizationDocumentInstance extends InstanceResource
      *
      * @param Version $version Version that contains the resource
      * @param mixed[] $payload The response payload
-     * @param string $sid A 34 character string that uniquely identifies this AuthorizationDocument.
+     * @param string $sid The SID of the AuthorizationDocument resource to delete.
      */
-    public function __construct(Version $version, array $payload, string $sid = null)
+    public function __construct(Version $version, array $payload, ?string $sid = null)
     {
         parent::__construct($version);
 
@@ -84,6 +84,18 @@ class AuthorizationDocumentInstance extends InstanceResource
         }
 
         return $this->context;
+    }
+
+    /**
+     * Delete the AuthorizationDocumentInstance
+     *
+     * @return bool True if delete succeeds, false otherwise
+     * @throws TwilioException When an HTTP error occurs.
+     */
+    public function delete(): bool
+    {
+
+        return $this->proxy()->delete();
     }
 
     /**

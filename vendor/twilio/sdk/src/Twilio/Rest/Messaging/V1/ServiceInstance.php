@@ -25,6 +25,7 @@ use Twilio\Version;
 use Twilio\Deserialize;
 use Twilio\Rest\Messaging\V1\Service\AlphaSenderList;
 use Twilio\Rest\Messaging\V1\Service\PhoneNumberList;
+use Twilio\Rest\Messaging\V1\Service\DestinationAlphaSenderList;
 use Twilio\Rest\Messaging\V1\Service\UsAppToPersonUsecaseList;
 use Twilio\Rest\Messaging\V1\Service\ChannelSenderList;
 use Twilio\Rest\Messaging\V1\Service\ShortCodeList;
@@ -49,18 +50,18 @@ use Twilio\Rest\Messaging\V1\Service\UsAppToPersonList;
  * @property bool|null $fallbackToLongCode
  * @property bool|null $areaCodeGeomatch
  * @property bool|null $synchronousValidation
- * @property int|null $validityPeriod
+ * @property int $validityPeriod
  * @property string|null $url
  * @property array|null $links
  * @property string|null $usecase
  * @property bool|null $usAppToPersonRegistered
  * @property bool|null $useInboundWebhookOnNumber
- * @property array|null $sendingWindows
  */
 class ServiceInstance extends InstanceResource
 {
     protected $_alphaSenders;
     protected $_phoneNumbers;
+    protected $_destinationAlphaSenders;
     protected $_usAppToPersonUsecases;
     protected $_channelSenders;
     protected $_shortCodes;
@@ -73,7 +74,7 @@ class ServiceInstance extends InstanceResource
      * @param mixed[] $payload The response payload
      * @param string $sid The SID of the Service resource to delete.
      */
-    public function __construct(Version $version, array $payload, string $sid = null)
+    public function __construct(Version $version, array $payload, ?string $sid = null)
     {
         parent::__construct($version);
 
@@ -102,7 +103,6 @@ class ServiceInstance extends InstanceResource
             'usecase' => Values::array_get($payload, 'usecase'),
             'usAppToPersonRegistered' => Values::array_get($payload, 'us_app_to_person_registered'),
             'useInboundWebhookOnNumber' => Values::array_get($payload, 'use_inbound_webhook_on_number'),
-            'sendingWindows' => Values::array_get($payload, 'sending_windows'),
         ];
 
         $this->solution = ['sid' => $sid ?: $this->properties['sid'], ];
@@ -177,6 +177,14 @@ class ServiceInstance extends InstanceResource
     protected function getPhoneNumbers(): PhoneNumberList
     {
         return $this->proxy()->phoneNumbers;
+    }
+
+    /**
+     * Access the destinationAlphaSenders
+     */
+    protected function getDestinationAlphaSenders(): DestinationAlphaSenderList
+    {
+        return $this->proxy()->destinationAlphaSenders;
     }
 
     /**

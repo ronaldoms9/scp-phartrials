@@ -29,17 +29,17 @@ abstract class ConferenceOptions
      * @param string $dateUpdated Only include conferences that were last updated on this date. Specify a date as `YYYY-MM-DD` in UTC, for example: `2009-07-06`, to read only conferences that were last updated on this date. You can also specify an inequality, such as `DateUpdated<=YYYY-MM-DD`, to read conferences that were last updated on or before midnight of this date, and `DateUpdated>=YYYY-MM-DD` to read conferences that were last updated on or after midnight of this date.
      * @param string $dateUpdatedAfter Only include conferences that were last updated on this date. Specify a date as `YYYY-MM-DD` in UTC, for example: `2009-07-06`, to read only conferences that were last updated on this date. You can also specify an inequality, such as `DateUpdated<=YYYY-MM-DD`, to read conferences that were last updated on or before midnight of this date, and `DateUpdated>=YYYY-MM-DD` to read conferences that were last updated on or after midnight of this date.
      * @param string $friendlyName The string that identifies the Conference resources to read.
-     * @param string $status The status of the resources to read. Can be: `init`, `in-progress`, or `completed`.
+     * @param string $status The status of the resources to read. Can be: `init`, `in-progress`, or `completed`. Starting from September 30th, 2026, the default is `in-progress`. To read completed conferences, set `Status` to `completed`.
      * @return ReadConferenceOptions Options builder
      */
     public static function read(
         
-        string $dateCreatedBefore = null,
-        string $dateCreated = null,
-        string $dateCreatedAfter = null,
-        string $dateUpdatedBefore = null,
-        string $dateUpdated = null,
-        string $dateUpdatedAfter = null,
+        ?string $dateCreatedBefore = null,
+        ?string $dateCreated = null,
+        ?string $dateCreatedAfter = null,
+        ?string $dateUpdatedBefore = null,
+        ?string $dateUpdated = null,
+        ?string $dateUpdatedAfter = null,
         string $friendlyName = Values::NONE,
         string $status = Values::NONE
 
@@ -91,16 +91,16 @@ class ReadConferenceOptions extends Options
      * @param string $dateUpdated Only include conferences that were last updated on this date. Specify a date as `YYYY-MM-DD` in UTC, for example: `2009-07-06`, to read only conferences that were last updated on this date. You can also specify an inequality, such as `DateUpdated<=YYYY-MM-DD`, to read conferences that were last updated on or before midnight of this date, and `DateUpdated>=YYYY-MM-DD` to read conferences that were last updated on or after midnight of this date.
      * @param string $dateUpdatedAfter Only include conferences that were last updated on this date. Specify a date as `YYYY-MM-DD` in UTC, for example: `2009-07-06`, to read only conferences that were last updated on this date. You can also specify an inequality, such as `DateUpdated<=YYYY-MM-DD`, to read conferences that were last updated on or before midnight of this date, and `DateUpdated>=YYYY-MM-DD` to read conferences that were last updated on or after midnight of this date.
      * @param string $friendlyName The string that identifies the Conference resources to read.
-     * @param string $status The status of the resources to read. Can be: `init`, `in-progress`, or `completed`.
+     * @param string $status The status of the resources to read. Can be: `init`, `in-progress`, or `completed`. Starting from September 30th, 2026, the default is `in-progress`. To read completed conferences, set `Status` to `completed`.
      */
     public function __construct(
         
-        string $dateCreatedBefore = null,
-        string $dateCreated = null,
-        string $dateCreatedAfter = null,
-        string $dateUpdatedBefore = null,
-        string $dateUpdated = null,
-        string $dateUpdatedAfter = null,
+        ?string $dateCreatedBefore = null,
+        ?string $dateCreated = null,
+        ?string $dateCreatedAfter = null,
+        ?string $dateUpdatedBefore = null,
+        ?string $dateUpdated = null,
+        ?string $dateUpdatedAfter = null,
         string $friendlyName = Values::NONE,
         string $status = Values::NONE
 
@@ -200,9 +200,9 @@ class ReadConferenceOptions extends Options
     }
 
     /**
-     * The status of the resources to read. Can be: `init`, `in-progress`, or `completed`.
+     * The status of the resources to read. Can be: `init`, `in-progress`, or `completed`. Starting from September 30th, 2026, the default is `in-progress`. To read completed conferences, set `Status` to `completed`.
      *
-     * @param string $status The status of the resources to read. Can be: `init`, `in-progress`, or `completed`.
+     * @param string $status The status of the resources to read. Can be: `init`, `in-progress`, or `completed`. Starting from September 30th, 2026, the default is `in-progress`. To read completed conferences, set `Status` to `completed`.
      * @return $this Fluent Builder
      */
     public function setStatus(string $status): self

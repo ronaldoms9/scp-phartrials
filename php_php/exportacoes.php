@@ -39,7 +39,7 @@
 							order by agenda_check_fase.id, periodo, ordem";
 		echo "Query->".$query."<br>";
 		$resPer = $varConexao->pesquisa($query);
-		while($rowPer = mysqli_fetch_assoc($resPer)){		//LOOP em todos os campos de cada participante do loop acima
+		while($rowPer = fetch_assoc_seguro($resPer)){		//LOOP em todos os campos de cada participante do loop acima
 			/*$varCampo = new CheckListCampoParticipante();
 			$varCampo->inicializaParticipante($participante, $rowPer['id']);
 			if($varCampo->valor!=""){
@@ -59,7 +59,7 @@
 			";
 			echo "Query->**** ".$query."<br>";
 			$resCampo = $varConexao->pesquisa($query);
-			$rowCampo = mysqli_fetch_assoc($resCampo);
+			$rowCampo = fetch_assoc_seguro($resCampo);
 			$varCampo = $rowCampo['valor'];
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colInicial, $linha, utf8_encode($varCampo));
 			$colInicial++;
@@ -74,7 +74,7 @@
 
 	if($opcAct=='EXCEL_NOVO'){
 		$arquivoNomeXLS = "check_list_export.xlsx";
-		include("../vendor/phpexcel/Classes/PHPExcel/IOFactory.php");
+		require_once __DIR__."/phpexcel_compat.php";
 
 		$dadosJson = isset($_POST['dados']) ? $_POST['dados'] : '';
 		$dados = json_decode($dadosJson, true);
@@ -172,7 +172,7 @@
 		$arquivoNome    = "tempCSV.csv";
         $arquivoNomeXLS = date("Ymd")."_resumo_ea.xlsx";
         // Converte para XLS
-        include("../vendor/phpexcel/Classes/PHPExcel/IOFactory.php");
+        require_once __DIR__."/phpexcel_compat.php";
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         $rowCount = 1;
@@ -223,7 +223,7 @@
 		$ind = 1;
 		$linha = 2;
 		//echo $query;
-		while($rowPart = mysqli_fetch_assoc($res)){
+		while($rowPart = fetch_assoc_seguro($res)){
 
 			$amarelo = "#e9ff00; ";
 
@@ -256,7 +256,7 @@
 		$arquivoNome    = "tempCSV.csv";
         $arquivoNomeXLS = date("Ymd")."_pendencias.xlsx";
         // Converte para XLS
-        include("../vendor/phpexcel/Classes/PHPExcel/IOFactory.php");
+        require_once __DIR__."/phpexcel_compat.php";
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
         $rowCount = 1;
@@ -307,7 +307,7 @@
 		$ind = 1;
 		$linha = 2;
 		//echo $query;
-		while($rowPart = mysqli_fetch_assoc($res)){
+		while($rowPart = fetch_assoc_seguro($res)){
 
 			$amarelo = "#e9ff00; ";
 
@@ -347,7 +347,7 @@
 
 
         // Converte para XLS
-        include("../vendor/phpexcel/Classes/PHPExcel/IOFactory.php");
+        require_once __DIR__."/phpexcel_compat.php";
 
 		if($tipoRelatorio==999){
 			//Aqui é a exportação completa, de todos os dados, separados por abas
@@ -366,7 +366,7 @@
 			}
 			echo "QUERY->".$query."<br>";
 			$resQtd = $varConexao->pesquisa($query);
-			while($rowQtd = mysqli_fetch_assoc($resQtd)){
+			while($rowQtd = fetch_assoc_seguro($resQtd)){
 				//Crio a aba nova e nomeio
 				$sheetCount = $objPHPExcel->getSheetCount();
 				$objPHPExcel->createSheet();
@@ -411,7 +411,7 @@
 
 				$colNumber = 5;
 
-				while($rowPer = mysqli_fetch_assoc($resPer)){
+				while($rowPer = fetch_assoc_seguro($resPer)){
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,formata_utf8_encode($rowPer['nome']));
 					$colNumber++;
 				}
@@ -435,7 +435,7 @@
 				$linha = 2;
 
 
-				while($rowPart = mysqli_fetch_assoc($resPart)){
+				while($rowPart = fetch_assoc_seguro($resPart)){
 					$amarelo = "#e9ff00; ";
 
 
@@ -446,18 +446,18 @@
 						if($varCheckList->temEspecifico()==1){
 							$query = "SELECT id FROM `agenda_check` where nome = 'Sexo' and projeto = ".$varProjeto->id;
 							$resSexo = $varConexao->pesquisa($query);
-							$rowSexo = mysqli_fetch_assoc($resSexo);
+							$rowSexo = fetch_assoc_seguro($resSexo);
 							$varIdexo = $rowSexo['id'];
 
 						}else{
 							$query = "SELECT id FROM `agenda_check` where nome = 'Sexo' and projeto = 0";
 							$resSexo = $varConexao->pesquisa($query);
-							$rowSexo = mysqli_fetch_assoc($resSexo);
+							$rowSexo = fetch_assoc_seguro($resSexo);
 							$varIdexo = $rowSexo['id'];
 						}
 						$query = "SELECT valor FROM `agenda_check_participante_campo` where participante = ".$idParticipante." and campo = ".$varIdexo;
 						$resValor = $varConexao->pesquisa($query);
-						$rowValor = mysqli_fetch_assoc($resValor);
+						$rowValor = fetch_assoc_seguro($resValor);
 						$valorSexo = $rowValor['valor'];
 						if($valorSexo!=$varSexo){
 							continue;
@@ -482,7 +482,7 @@
 
 					$resPer = $varConexao->pesquisa($queryPer);
 					$colNumber = 5;
-					while($rowPer = mysqli_fetch_assoc($resPer)){
+					while($rowPer = fetch_assoc_seguro($resPer)){
 						$query = "SELECT agenda_check_participante_campo.id as campo_id,
 									agenda_check_participante_campo.participante,
 									agenda_check_participante_campo.campo,
@@ -497,7 +497,7 @@
 												and agenda_check.exporta = 1
 											and agenda_check_participante_campo.campo = '".$rowPer['id']."';";
 						$resCampo = $varConexao->pesquisa($query);
-						$rowCampo = mysqli_fetch_assoc($resCampo);
+						$rowCampo = fetch_assoc_seguro($resCampo);
 						$valor      = $rowCampo['valor'];
 						if($rowCampo['observacoes']!=""){
 							$valor .= "\n[" . $rowCampo['observacoes'] . "]";
@@ -534,7 +534,7 @@
 									where projeto = " . $projeto . "
 										order by agenda_check_fase.id, periodo, ordem";
 			$resQtd		= $varConexao->pesquisa($query);
-			if(mysqli_num_rows($resQtd)==0){$projetoEspecifico = false;}else{$projetoEspecifico=true;}
+			if(num_rows_seguro($resQtd)==0){$projetoEspecifico = false;}else{$projetoEspecifico=true;}
 
 
 			$varFase         = $_POST['fase'];
@@ -581,7 +581,7 @@
 
 			$resPer = $varConexao->pesquisa($query);
 			$colNumber = 5;
-			while($rowPer = mysqli_fetch_assoc($resPer)){
+			while($rowPer = fetch_assoc_seguro($resPer)){
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,utf8_encode($rowPer['nome']));
 				$colNumber++;
 			}
@@ -598,7 +598,7 @@
 
 
 			$linhaCSV = "";
-			while($rowPart = mysqli_fetch_assoc($resPart)){
+			while($rowPart = fetch_assoc_seguro($resPart)){
 				$amarelo = "#e9ff00; ";
 
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0,$linha,utf8_encode($rowPart['numero']));
@@ -642,7 +642,7 @@
 
 				$resPer = $varConexao->pesquisa($query);
 				$colNumber = 5;
-				while($rowPer = mysqli_fetch_assoc($resPer)){
+				while($rowPer = fetch_assoc_seguro($resPer)){
 					$query = "SELECT agenda_check_participante_campo.id as campo_id,
 								agenda_check_participante_campo.participante,
 								agenda_check_participante_campo.campo,
@@ -656,14 +656,14 @@
 										and agenda_check_participante_campo.campo = '".$rowPer['id']."';";
 
 					$resCampo = $varConexao->pesquisa($query);
-					$rowCampo = mysqli_fetch_assoc($resCampo);
+					$rowCampo = fetch_assoc_seguro($resCampo);
 					$valor      = $rowCampo['valor'];
 					if($varTipo==1){
 						//Pegar ultima atualizacao do campo
 						$query  = "SELECT * FROM `log_alteracoes` where tabela = 'agenda_check_participante_campo' and id_campo = ".$rowCampo['campo_id']." order by id desc limit 1; ";
 						$resLog = $varConexao->pesquisa($query);
-						if(mysqli_num_rows($resLog)>0){
-							$rowLog = mysqli_fetch_assoc($resLog);
+						if(num_rows_seguro($resLog)>0){
+							$rowLog = fetch_assoc_seguro($resLog);
 							$valor .= "\n" . $rowLog['usuario_nome']. "\n" . $rowLog['data_hora'];
 						}
 					}
@@ -689,7 +689,7 @@
 		$projeto 	= $_SESSION['projeto'];
 		$query 		= "select id from agenda_check_fase where projeto = " . $projeto;
 		$resQtd		= $varConexao->pesquisa($query);
-		if(mysqli_num_rows($resQtd)==0){$projetoEspecifico = false;}else{$projetoEspecifico=true;}
+		if(num_rows_seguro($resQtd)==0){$projetoEspecifico = false;}else{$projetoEspecifico=true;}
 
 		$varGrupo        = $_POST['grupo'];
 		$varParticipante = $_POST['participante'];
@@ -700,11 +700,11 @@
 		$varStatus       = $_POST['status'];
 
 
-		$arquivoNomeXLS = date("YmdHis")."_check_list_".$varProjeto->numero.".xlsx";
+		$arquivoNomeXLS = date("YmdHis")."_check_list_".str_replace(array("/", "\\"), "-", $varProjeto->numero).".xlsx"; // "/" no numero (ex.: MON058/2026) virava subpasta inexistente
 
 		$fases = array("Inicial", "Follow-up", "Dieta", "Pós");
 
-        include("../vendor/phpexcel/Classes/PHPExcel/IOFactory.php");
+        require_once __DIR__."/phpexcel_compat.php";
 		$objPHPExcel = new PHPExcel();
 		//Removo todas as abas existentes
 		$sheetCount = $objPHPExcel->getSheetCount();
@@ -729,7 +729,7 @@
 								item = 'Inicial'
 								and projeto = " . $projeto;
 		$resFase    = $varConexao->pesquisa($query);
-		$rowFase    = mysqli_fetch_assoc($resFase);
+		$rowFase    = fetch_assoc_seguro($resFase);
 		$varFase    = $rowFase['id'];
 
 		$linha     = 1;
@@ -745,7 +745,7 @@
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2,$linha,utf8_encode('Status'));
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3,$linha,utf8_encode('Grupo'));
 		$colNumber = 4;
-		while($rowPer = mysqli_fetch_assoc($resPer)){
+		while($rowPer = fetch_assoc_seguro($resPer)){
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,$linha,utf8_encode($rowPer['nome']));
 			$colNumber++;
 		}
@@ -758,7 +758,7 @@
 									item = 'Follow-up'
 									and projeto = " . $projeto;
 			$resFase    = $varConexao->pesquisa($query);
-			$rowFase    = mysqli_fetch_assoc($resFase);
+			$rowFase    = fetch_assoc_seguro($resFase);
 			$varFase    = $rowFase['id'];
 
 			$query = "select agenda_check.*
@@ -782,7 +782,7 @@
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2,$linha,utf8_encode('Status'));
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3,$linha,utf8_encode('Grupo'));
 			$colNumber = 4;
-			while($rowPer = mysqli_fetch_assoc($resPer)){
+			while($rowPer = fetch_assoc_seguro($resPer)){
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,$linha,utf8_encode($rowPer['nome']));
 				$objPHPExcel->getActiveSheet()->getStyle('a1')->getAlignment()->setWrapText(true);
 				$colNumber++;
@@ -794,7 +794,7 @@
 									item = 'Dieta'
 									and projeto = " . $projeto;
 			$resFase    = $varConexao->pesquisa($query);
-			$rowFase    = mysqli_fetch_assoc($resFase);
+			$rowFase    = fetch_assoc_seguro($resFase);
 			$varFase    = $rowFase['id'];
 
 			$query = "select agenda_check.*
@@ -818,7 +818,7 @@
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3,$linha,utf8_encode('Grupo'));
 			$colNumber = 4;
 			$linha     = 1;
-			while($rowPer = mysqli_fetch_assoc($resPer)){
+			while($rowPer = fetch_assoc_seguro($resPer)){
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,$linha,utf8_encode($rowPer['nome']));
 				$objPHPExcel->getActiveSheet()->getStyle('a1')->getAlignment()->setWrapText(true);
 				$colNumber++;
@@ -832,7 +832,7 @@
 								item = 'Pós'
 								and projeto = " . $projeto;
 		$resFase    = $varConexao->pesquisa($query);
-		$rowFase    = mysqli_fetch_assoc($resFase);
+		$rowFase    = fetch_assoc_seguro($resFase);
 		$varFase    = $rowFase['id'];
 
 		$query = "select agenda_check.*
@@ -856,7 +856,7 @@
 		$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3,$linha,utf8_encode('Grupo'));
 		$colNumber = 4;
 		$linha     = 1;
-		while($rowPer = mysqli_fetch_assoc($resPer)){
+		while($rowPer = fetch_assoc_seguro($resPer)){
 			$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,$linha,utf8_encode($rowPer['nome']));
 			$objPHPExcel->getActiveSheet()->getStyle('a1')->getAlignment()->setWrapText(true);
 			$colNumber++;
@@ -898,7 +898,7 @@
 
 
 
-		while($rowPart = mysqli_fetch_assoc($resPart)){		//LOOP em todos os participantes
+		while($rowPart = fetch_assoc_seguro($resPart)){		//LOOP em todos os participantes
 			$indiceSheet = 0;
 
 			$varIdParticipante = $rowPart['id'];
@@ -929,7 +929,7 @@
 				$query = "select * from agenda_check_participante where projeto = " . $projeto . " and periodo = " . $i . " and hash = '$varHash' and codigo <> ''order by cast(numero as INTEGER) ";
 				$resParticipante = $varConexao->pesquisa($query);
 				mysqli_data_seek($resParticipante, $i);
-				$rowParticipante = mysqli_fetch_assoc($resParticipante);
+				$rowParticipante = fetch_assoc_seguro($resParticipante);
 				$idParticipante = "";
 				$idParticipante = $rowParticipante['id'];
 
@@ -960,7 +960,7 @@
 			$query = "select * from agenda_check_participante where projeto = " . $projeto . " and periodo = ".$varProjeto->periodos." and hash = '$varHash' and codigo = '$varCodigo' order by cast(numero as INTEGER) ";
 
 			$resParticipante = $varConexao->pesquisa($query);
-			$rowParticipante = mysqli_fetch_assoc($resParticipante);
+			$rowParticipante = fetch_assoc_seguro($resParticipante);
 			$idParticipante = $rowParticipante['id'];
 			$objPHPExcel->setActiveSheetIndex(5);
 			$objPHPExcel->getActiveSheet();
@@ -1021,7 +1021,7 @@
         $arquivoNomeXLS = "export.xlsx";
 
         // Converte para XLS
-        include("../vendor/phpexcel/Classes/PHPExcel/IOFactory.php");
+        require_once __DIR__."/phpexcel_compat.php";
 
 		if($tipoRelatorio==999){
 			//Aqui é a exportação completa, de todos os dados, separados por abas
@@ -1067,7 +1067,7 @@
 			//Pegar ID da fase Inicial para pegar os campos
 			$queryFase = "select id from agenda_check_fase where projeto = " . $_SESSION['projeto'] . " and item = 'Inicial'";
 			$resFase = $varConexao->pesquisa($queryFase);
-			$rowFase = mysqli_fetch_assoc($resFase);
+			$rowFase = fetch_assoc_seguro($resFase);
 			$varFase = $rowFase['id'];
 
 			$queryCampos = "select agenda_check.*
@@ -1083,13 +1083,13 @@
 			$colNumber = 5;
 			$linha     = 2;
 
-			while($rowCampo = mysqli_fetch_assoc($resCampos)){
+			while($rowCampo = fetch_assoc_seguro($resCampos)){
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,utf8_encode($rowCampo['nome']));
 				$colNumber++;
 			}
 
 			$resPart = $varConexao->pesquisa($queryParticipantes_INI." " . $queryParticipantes . " " . $queryParticipantesFinal);
-			while($rowPart = mysqli_fetch_assoc($resPart)){
+			while($rowPart = fetch_assoc_seguro($resPart)){
 				$amarelo = "#e9ff00; ";
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0,$linha,utf8_encode($rowPart['numero']));
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1,$linha,utf8_encode($rowPart['codigo']));
@@ -1100,7 +1100,7 @@
 				//campos
 				$colNumber = 5;
 				$resCampos = $varConexao->pesquisa($queryCampos);
-				while($rowCampo = mysqli_fetch_assoc($resCampos)){
+				while($rowCampo = fetch_assoc_seguro($resCampos)){
 					$query = "SELECT
 								agenda_check_participante_campo.valor,
 								agenda_check_participante_campo.observacoes
@@ -1110,7 +1110,7 @@
 											and agenda_check.exporta = 1
 										and agenda_check_participante_campo.campo = '".$rowCampo['id']."';";
 					$resCampo = $varConexao->pesquisa($query);
-					$rowCampo = mysqli_fetch_assoc($resCampo);
+					$rowCampo = fetch_assoc_seguro($resCampo);
 					$valor      = $rowCampo['valor'];
 					if($rowCampo['observacoes']!=""){
 						$valor .= "\n[" . $rowCampo['observacoes'] . "]";
@@ -1144,7 +1144,7 @@
 				//Pegar ID da fase Inicial para pegar os campos
 				$queryFase = "select id from agenda_check_fase where projeto = " . $_SESSION['projeto'] . " and item = 'Follow-up'";
 				$resFase = $varConexao->pesquisa($queryFase);
-				$rowFase = mysqli_fetch_assoc($resFase);
+				$rowFase = fetch_assoc_seguro($resFase);
 				$varFase = $rowFase['id'];
 
 				$queryCampos = "select agenda_check.*
@@ -1160,7 +1160,7 @@
 				$colNumber = 5;
 				$linha     = 2;
 
-				while($rowCampo = mysqli_fetch_assoc($resCampos)){
+				while($rowCampo = fetch_assoc_seguro($resCampos)){
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,utf8_encode($rowCampo['nome']));
 					$colNumber++;
 				}
@@ -1168,7 +1168,7 @@
 				$queryParticipantesFinal = " and periodo = ".$iPeriodo;
 				$queryParticipantesFinal .= " order by cast(numero as INTEGER) ";
 				$resPart = $varConexao->pesquisa($queryParticipantes_INI." " . $queryParticipantes . " " . $queryParticipantesFinal);
-				while($rowPart = mysqli_fetch_assoc($resPart)){
+				while($rowPart = fetch_assoc_seguro($resPart)){
 					$amarelo = "#e9ff00; ";
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0,$linha,utf8_encode($rowPart['numero']));
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1,$linha,utf8_encode($rowPart['codigo']));
@@ -1179,7 +1179,7 @@
 					//campos
 					$colNumber = 5;
 					$resCampos = $varConexao->pesquisa($queryCampos);
-					while($rowCampo = mysqli_fetch_assoc($resCampos)){
+					while($rowCampo = fetch_assoc_seguro($resCampos)){
 						$query = "SELECT
 									agenda_check_participante_campo.valor,
 									agenda_check_participante_campo.observacoes
@@ -1189,7 +1189,7 @@
 												and agenda_check.exporta = 1
 											and agenda_check_participante_campo.campo = '".$rowCampo['id']."';";
 						$resCampo = $varConexao->pesquisa($query);
-						$rowCampo = mysqli_fetch_assoc($resCampo);
+						$rowCampo = fetch_assoc_seguro($resCampo);
 						$valor      = $rowCampo['valor'];
 						if($rowCampo['observacoes']!=""){
 							$valor .= "\n[" . $rowCampo['observacoes'] . "]";
@@ -1223,7 +1223,7 @@
 				//Pegar ID da fase Inicial para pegar os campos
 				$queryFase = "select id from agenda_check_fase where projeto = " . $_SESSION['projeto'] . " and item = 'Dieta'";
 				$resFase = $varConexao->pesquisa($queryFase);
-				$rowFase = mysqli_fetch_assoc($resFase);
+				$rowFase = fetch_assoc_seguro($resFase);
 				$varFase = $rowFase['id'];
 
 				$queryCampos = "select agenda_check.*
@@ -1239,7 +1239,7 @@
 				$colNumber = 5;
 				$linha     = 2;
 
-				while($rowCampo = mysqli_fetch_assoc($resCampos)){
+				while($rowCampo = fetch_assoc_seguro($resCampos)){
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,utf8_encode($rowCampo['nome']));
 					$colNumber++;
 				}
@@ -1247,7 +1247,7 @@
 				$queryParticipantesFinal = " and periodo = ".$iPeriodo;
 				$queryParticipantesFinal .= " order by cast(numero as INTEGER) ";
 				$resPart = $varConexao->pesquisa($queryParticipantes_INI." " . $queryParticipantes . " " . $queryParticipantesFinal);
-				while($rowPart = mysqli_fetch_assoc($resPart)){
+				while($rowPart = fetch_assoc_seguro($resPart)){
 					$amarelo = "#e9ff00; ";
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0,$linha,utf8_encode($rowPart['numero']));
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1,$linha,utf8_encode($rowPart['codigo']));
@@ -1258,7 +1258,7 @@
 					//campos
 					$colNumber = 5;
 					$resCampos = $varConexao->pesquisa($queryCampos);
-					while($rowCampo = mysqli_fetch_assoc($resCampos)){
+					while($rowCampo = fetch_assoc_seguro($resCampos)){
 						$query = "SELECT
 									agenda_check_participante_campo.valor,
 									agenda_check_participante_campo.observacoes
@@ -1268,7 +1268,7 @@
 												and agenda_check.exporta = 1
 											and agenda_check_participante_campo.campo = '".$rowCampo['id']."';";
 						$resCampo = $varConexao->pesquisa($query);
-						$rowCampo = mysqli_fetch_assoc($resCampo);
+						$rowCampo = fetch_assoc_seguro($resCampo);
 						$valor      = $rowCampo['valor'];
 						if($rowCampo['observacoes']!=""){
 							$valor .= "\n[" . $rowCampo['observacoes'] . "]";
@@ -1302,7 +1302,7 @@
 			//Pegar ID da fase Inicial para pegar os campos
 			$queryFase = "select id from agenda_check_fase where projeto = " . $_SESSION['projeto'] . " and item = 'Pós'";
 			$resFase = $varConexao->pesquisa($queryFase);
-			$rowFase = mysqli_fetch_assoc($resFase);
+			$rowFase = fetch_assoc_seguro($resFase);
 			$varFase = $rowFase['id'];
 
 			$queryCampos = "select agenda_check.*
@@ -1318,13 +1318,13 @@
 			$colNumber = 5;
 			$linha     = 2;
 
-			while($rowCampo = mysqli_fetch_assoc($resCampos)){
+			while($rowCampo = fetch_assoc_seguro($resCampos)){
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,utf8_encode($rowCampo['nome']));
 				$colNumber++;
 			}
 			$queryParticipantesFinal = " and periodo = ".$varProjeto->periodos." order by cast(numero as INTEGER) ";
 			$resPart = $varConexao->pesquisa($queryParticipantes_INI." " . $queryParticipantes . " " . $queryParticipantesFinal);
-			while($rowPart = mysqli_fetch_assoc($resPart)){
+			while($rowPart = fetch_assoc_seguro($resPart)){
 				$amarelo = "#e9ff00; ";
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0,$linha,utf8_encode($rowPart['numero']));
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1,$linha,utf8_encode($rowPart['codigo']));
@@ -1335,7 +1335,7 @@
 				//campos
 				$colNumber = 5;
 				$resCampos = $varConexao->pesquisa($queryCampos);
-				while($rowCampo = mysqli_fetch_assoc($resCampos)){
+				while($rowCampo = fetch_assoc_seguro($resCampos)){
 					$query = "SELECT
 								agenda_check_participante_campo.valor,
 								agenda_check_participante_campo.observacoes
@@ -1345,7 +1345,7 @@
 											and agenda_check.exporta = 1
 										and agenda_check_participante_campo.campo = '".$rowCampo['id']."';";
 					$resCampo = $varConexao->pesquisa($query);
-					$rowCampo = mysqli_fetch_assoc($resCampo);
+					$rowCampo = fetch_assoc_seguro($resCampo);
 					$valor      = $rowCampo['valor'];
 					if($rowCampo['observacoes']!=""){
 						$valor .= "\n[" . $rowCampo['observacoes'] . "]";
@@ -1386,7 +1386,7 @@
 			}
 			echo "QUERY->".$query."<br>";
 			$resQtd = $varConexao->pesquisa($query);
-			while($rowQtd = mysqli_fetch_assoc($resQtd)){
+			while($rowQtd = fetch_assoc_seguro($resQtd)){
 				//Crio a aba nova e nomeio
 				$sheetCount = $objPHPExcel->getSheetCount();
 				$objPHPExcel->createSheet();
@@ -1432,7 +1432,7 @@
 
 				$colNumber = 5;
 
-				while($rowPer = mysqli_fetch_assoc($resPer)){
+				while($rowPer = fetch_assoc_seguro($resPer)){
 					$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,formata_utf8_encode($rowPer['nome']));
 					$colNumber++;
 				}
@@ -1453,7 +1453,7 @@
 				$linha = 2;
 
 
-				while($rowPart = mysqli_fetch_assoc($resPart)){
+				while($rowPart = fetch_assoc_seguro($resPart)){
 					$amarelo = "#e9ff00; ";
 
 
@@ -1464,18 +1464,18 @@
 						if($varCheckList->temEspecifico()==1){
 							$query = "SELECT id FROM `agenda_check` where nome = 'Sexo' and projeto = ".$varProjeto->id;
 							$resSexo = $varConexao->pesquisa($query);
-							$rowSexo = mysqli_fetch_assoc($resSexo);
+							$rowSexo = fetch_assoc_seguro($resSexo);
 							$varIdexo = $rowSexo['id'];
 
 						}else{
 							$query = "SELECT id FROM `agenda_check` where nome = 'Sexo' and projeto = 0";
 							$resSexo = $varConexao->pesquisa($query);
-							$rowSexo = mysqli_fetch_assoc($resSexo);
+							$rowSexo = fetch_assoc_seguro($resSexo);
 							$varIdexo = $rowSexo['id'];
 						}
 						$query = "SELECT valor FROM `agenda_check_participante_campo` where participante = ".$idParticipante." and campo = ".$varIdexo;
 						$resValor = $varConexao->pesquisa($query);
-						$rowValor = mysqli_fetch_assoc($resValor);
+						$rowValor = fetch_assoc_seguro($resValor);
 						$valorSexo = $rowValor['valor'];
 						if($valorSexo!=$varSexo){
 							continue;
@@ -1500,7 +1500,7 @@
 
 					$resPer = $varConexao->pesquisa($queryPer);
 					$colNumber = 5;
-					while($rowPer = mysqli_fetch_assoc($resPer)){
+					while($rowPer = fetch_assoc_seguro($resPer)){
 						$query = "SELECT agenda_check_participante_campo.id as campo_id,
 									agenda_check_participante_campo.participante,
 									agenda_check_participante_campo.campo,
@@ -1515,7 +1515,7 @@
 												and agenda_check.exporta = 1
 											and agenda_check_participante_campo.campo = '".$rowPer['id']."';";
 						$resCampo = $varConexao->pesquisa($query);
-						$rowCampo = mysqli_fetch_assoc($resCampo);
+						$rowCampo = fetch_assoc_seguro($resCampo);
 						$valor      = $rowCampo['valor'];
 						if($rowCampo['observacoes']!=""){
 							$valor .= "\n[" . $rowCampo['observacoes'] . "]";
@@ -1552,7 +1552,7 @@
 									where projeto = " . $projeto . "
 										order by agenda_check_fase.id, periodo, ordem";
 			$resQtd		= $varConexao->pesquisa($query);
-			if(mysqli_num_rows($resQtd)==0){$projetoEspecifico = false;}else{$projetoEspecifico=true;}
+			if(num_rows_seguro($resQtd)==0){$projetoEspecifico = false;}else{$projetoEspecifico=true;}
 
 
 			$varFase         = $_POST['fase'];
@@ -1599,7 +1599,7 @@
 
 			$resPer = $varConexao->pesquisa($query);
 			$colNumber = 5;
-			while($rowPer = mysqli_fetch_assoc($resPer)){
+			while($rowPer = fetch_assoc_seguro($resPer)){
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($colNumber,1,utf8_encode($rowPer['nome']));
 				$colNumber++;
 			}
@@ -1616,7 +1616,7 @@
 
 
 			$linhaCSV = "";
-			while($rowPart = mysqli_fetch_assoc($resPart)){
+			while($rowPart = fetch_assoc_seguro($resPart)){
 				$amarelo = "#e9ff00; ";
 
 				$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0,$linha,utf8_encode($rowPart['numero']));
@@ -1660,7 +1660,7 @@
 
 				$resPer = $varConexao->pesquisa($query);
 				$colNumber = 5;
-				while($rowPer = mysqli_fetch_assoc($resPer)){
+				while($rowPer = fetch_assoc_seguro($resPer)){
 					$query = "SELECT agenda_check_participante_campo.id as campo_id,
 								agenda_check_participante_campo.participante,
 								agenda_check_participante_campo.campo,
@@ -1674,14 +1674,14 @@
 										and agenda_check_participante_campo.campo = '".$rowPer['id']."';";
 
 					$resCampo = $varConexao->pesquisa($query);
-					$rowCampo = mysqli_fetch_assoc($resCampo);
+					$rowCampo = fetch_assoc_seguro($resCampo);
 					$valor      = $rowCampo['valor'];
 					if($varTipo==1){
 						//Pegar ultima atualizacao do campo
 						$query  = "SELECT * FROM `log_alteracoes` where tabela = 'agenda_check_participante_campo' and id_campo = ".$rowCampo['campo_id']." order by id desc limit 1; ";
 						$resLog = $varConexao->pesquisa($query);
-						if(mysqli_num_rows($resLog)>0){
-							$rowLog = mysqli_fetch_assoc($resLog);
+						if(num_rows_seguro($resLog)>0){
+							$rowLog = fetch_assoc_seguro($resLog);
 							$valor .= "\n" . $rowLog['usuario_nome']. "\n" . $rowLog['data_hora'];
 						}
 					}

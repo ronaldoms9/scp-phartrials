@@ -93,7 +93,7 @@
 		function populaCampo($query){
 			$varConexao  = new Conexao();
 			$resPesquisa = $varConexao->pesquisa($query);
-			if(num_rows_seguro($resPesquisa)>0){
+			if(mysqli_num_rows($resPesquisa)>0){
 				$row 		 				= mysqli_fetch_assoc($resPesquisa);
 				$this->id					= $row['id'];
 				$this->participante			= $row['participante'];
@@ -117,11 +117,6 @@
 			}
 		}
 		function inicializaParticipante($participante, $campo){
-			// Participante sem registro no periodo (id vazio): antes gerava query invalida e, no PHP 8,
-			// derrubava a pagina. Sem participante nao ha o que criar/popular.
-			if($participante === null || $participante === "" || $participante === 0 || $participante === "0"){
-				return;
-			}
 			if($this->criaCampo($participante, $campo)==true){
 				$query 		= "select * from agenda_check_participante_campo where participante = $participante and campo = $campo";
 				$this->populaCampo($query);
@@ -135,7 +130,7 @@
 							where participante = '".$participante."'
 								and campo = '".$campo."';";
 			$resCampo = $varConexao->pesquisa($query);
-			if(num_rows_seguro($resCampo)==0){
+			if(mysqli_num_rows($resCampo)==0){
 				$query = "insert into agenda_check_participante_campo (participante, campo) values ('".$participante."', '".$campo."');";
 				$varConexao->pesquisa($query);
 			}

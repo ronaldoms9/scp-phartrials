@@ -1391,6 +1391,8 @@ if ($_GET['act'] == "SALVA") {
 		}
 	}
 }
+
+die('tá caindo aqui');
 /*if($_GET['act']=="SALVA_DIRE"){
 	$varConexao = new Conexao();
 

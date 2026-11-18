@@ -38,12 +38,22 @@
 		}
 		public function conecta(){
 			$link = new mysqli($this->host, $this->user, $this->pass, $this->db);
+			if($link->connect_errno){
+				error_log("MYSQL CONEXAO (" . $link->connect_errno . "): " . $link->connect_error
+					. " | URI: " . ($_SERVER['REQUEST_URI'] ?? '-'));
+			}
 			return $link;
 		}
 		public function pesquisa($query){
 			$conexaoN = $this->conecta();
 			$conexaoN->query("SET GLOBAL time_zone = '-3:00';");
 			$result = $conexaoN->query($query);
+			if($result === false){
+				// mysqli_report esta OFF (env.php): sem isso, erro de SQL nao aparece em lugar nenhum
+				error_log("MYSQL QUERY (" . $conexaoN->errno . "): " . $conexaoN->error
+					. " | URI: " . ($_SERVER['REQUEST_URI'] ?? '-')
+					. " | SQL: " . substr(preg_replace('/\s+/', ' ', $query), 0, 500));
+			}
 			return $result;
 		}
 		public function retornaNomeBanco(){

@@ -15,16 +15,6 @@ $varProjeto = new Projeto($_SESSION['projeto']);
 set_time_limit(0);
 ini_set('memory_limit', '4095M'); // 4 GBs minus 1 MB
 
-// DIAGNOSTICO TEMPORARIO: se aparecer INICIO sem FIM no log, o processo foi morto (memoria/timeout/crash)
-$__t0 = microtime(true);
-error_log('CHECKLIST INICIO act=' . ($_GET['act'] ?? '-') . ' | pid=' . getmypid());
-register_shutdown_function(function () use ($__t0) {
-	$e = error_get_last();
-	error_log('CHECKLIST FIM act=' . ($_GET['act'] ?? '-')
-		. ' | ' . round(microtime(true) - $__t0, 2) . 's'
-		. ' | pico_mem=' . round(memory_get_peak_usage(true) / 1048576) . 'MB'
-		. ' | ultimo_erro=' . ($e ? $e['message'] . ' em ' . $e['file'] . ':' . $e['line'] : 'nenhum'));
-});
 
 
 function montaFase($fase, $periodo, $linha, $participante)

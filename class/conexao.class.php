@@ -1,7 +1,6 @@
 <?php
 	require_once __DIR__ . '/env.php';
-	error_reporting(~E_ALL);
-	ini_set('display_errors', 0);
+	require_once __DIR__ . '/error_log.php';
 
 	header('Content-Type:text/html; charset=ISO-8859-1');
 	$titulo = utf8_decode("SPC - Sistema de Pesquisa Clínica");

@@ -606,6 +606,12 @@
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					removeCarregando();
+					// Mostra o erro na tela (antes ficava silencioso)
+					var detalhe = (jqXHR.responseText || "").replace(/<[^>]*>/g, " ").substring(0, 400);
+					console.error("PESQUISA_V2 falhou", jqXHR.status, textStatus, errorThrown, jqXHR.responseText);
+					document.getElementById("tabela").innerHTML =
+						"<tr><td style='color:#b00;padding:10px'><b>Erro ao buscar a monitoria</b><br>HTTP " + jqXHR.status +
+						" - " + textStatus + (errorThrown ? " (" + errorThrown + ")" : "") + "<br><small>" + detalhe + "</small></td></tr>";
 				}
 			});
 		}

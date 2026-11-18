@@ -1,8 +1,5 @@
 <?php
 
-ini_set('display_errors', '1');
-ini_set('html_errors', '0');
-error_reporting(E_ALL);
 
 if (!isset($_SESSION)) {
 	session_start();
@@ -17,6 +14,7 @@ $varProjeto = new Projeto($_SESSION['projeto']);
 
 set_time_limit(0);
 ini_set('memory_limit', '4095M'); // 4 GBs minus 1 MB
+ini_set('max_execution_time', 0);
 
 
 function montaFase($fase, $periodo, $linha, $participante)

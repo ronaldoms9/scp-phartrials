@@ -1,5 +1,6 @@
 <?php
 
+die('aqui');
 
 if (!isset($_SESSION)) {
 	session_start();

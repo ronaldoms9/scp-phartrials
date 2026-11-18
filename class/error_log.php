@@ -1,6 +1,7 @@
 <?php
 // Log global de erros: grava em arquivo, sem exibir na tela
-error_reporting(E_ALL);
+// Sem E_DEPRECATED/E_NOTICE: o legado gera muito ruido no PHP 8.5. Para ver tudo, use E_ALL.
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 ini_set('display_errors', 0);          // nunca mostrar ao usuario
 ini_set('log_errors', 1);
 ini_set('error_log', dirname(__DIR__) . '/logs/php-errors.log');
